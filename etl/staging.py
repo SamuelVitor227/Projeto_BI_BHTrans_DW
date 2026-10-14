@@ -27,7 +27,7 @@ log = logging.getLogger("staging")
 
 TABELAS_STG = ["manifesto_raw", "si_bol", "si_log", "si_veic", "si_env", "regional_limite",
                "ibge_sidra_valor", "ibge_localidade", "ibge_setor2010_malha",
-               "ibge_setor2010_variavel", "inmet_horario"]
+               "ibge_setor2010_variavel", "inmet_horario", "map_dominio", "map_regional"]
 
 COLUNA_IGNORADA = "(ignorar)"
 
@@ -164,6 +164,19 @@ def carregar_setores_2010(conn) -> None:
             log.info("stg.ibge_setor2010_variavel <- %s: %d valores", caminho.name, len(saida))
 
 
+def carregar_mapeamentos(conn) -> None:
+    """Seeds: de-paras de domínio e de regionais (etl/mapeamentos/*.csv) -> stg.map_*."""
+    for arquivo, tabela in (("dominios.csv", "map_dominio"), ("regionais.csv", "map_regional")):
+        caminho = config.DIR_MAPEAMENTOS / arquivo
+        with open(caminho, newline="", encoding="utf-8") as f:
+            leitor = csv.DictReader(f, delimiter=";")
+            campos = leitor.fieldnames
+            linhas = [[(l[c] if l[c] != "" else None) for c in campos] + [f"etl/mapeamentos/{arquivo}", i]
+                      for i, l in enumerate(leitor, start=2)]
+        n = _copiar(conn, tabela, campos + ["arquivo_origem", "linha_arquivo"], linhas)
+        log.info("stg.%s <- %s: %d linhas", tabela, arquivo, n)
+
+
 def carregar_inmet(conn, anos: list[int] | None) -> None:
     de_para = leitura.carregar_de_para()
     for l in leitura.arquivos_manifesto("inmet"):
@@ -198,6 +211,7 @@ def executar(conn, anos: list[int] | None = None) -> dict[str, int]:
     carregar_ibge(conn)
     carregar_setores_2010(conn)
     carregar_inmet(conn, anos)
+    carregar_mapeamentos(conn)
     conn.commit()
     contagens = {t: conn.execute(f"SELECT count(*) FROM stg.{t}").fetchone()[0] for t in TABELAS_STG}
     for t, n in contagens.items():

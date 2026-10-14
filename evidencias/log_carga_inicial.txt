@@ -1,0 +1,227 @@
+22:06:26 INFO    carga_inicial: Execução 20261013220626 — anos=todos; forcar_download=False; sem_download=True; recriar=False
+22:06:26 INFO    carga_inicial: ========== ETAPA: 0-ddl ==========
+22:06:26 INFO    etl.banco: SQL ddl_data_warehouse.sql executado em 0.0s
+22:06:26 INFO    carga_inicial: Etapa 0-ddl concluída em 0.0s
+22:06:26 INFO    carga_inicial: ========== ETAPA: 1-extrair ==========
+22:06:26 INFO    carga_inicial: Etapa 1-extrair concluída em 0.0s
+22:06:26 INFO    carga_inicial: ========== ETAPA: 2-staging ==========
+22:06:26 INFO    staging: stg.manifesto_raw: 116 linhas
+22:06:27 INFO    staging: stg.si_bol <- si-bol-2011.csv (latin-1): 16294 linhas
+22:06:27 INFO    staging: stg.si_bol <- si-bol_2012.csv (latin-1): 15261 linhas
+22:06:27 INFO    staging: stg.si_bol <- si-bol_2013.csv (latin-1): 14145 linhas
+22:06:27 INFO    staging: stg.si_bol <- si-bol_2014.csv (latin-1): 14965 linhas
+22:06:27 INFO    staging: stg.si_bol <- si-bol_2015.csv (latin-1): 13299 linhas
+22:06:27 INFO    staging: stg.si_bol <- si-bol-2016.csv (latin-1): 12477 linhas
+22:06:27 INFO    staging: stg.si_bol <- si-bol-2017.csv (latin-1): 12243 linhas
+22:06:27 INFO    staging: stg.si_bol <- si-bol-2018.csv (latin-1): 11656 linhas
+22:06:27 INFO    staging: stg.si_bol <- si-bol-2019.csv (latin-1): 13342 linhas
+22:06:27 INFO    staging: stg.si_bol <- si-bol-2020.csv (latin-1): 10624 linhas
+22:06:28 INFO    staging: stg.si_bol <- si-bol-2021.csv (latin-1): 11122 linhas
+22:06:28 INFO    staging: stg.si_bol <- si-bol-2022.csv (latin-1): 12148 linhas
+22:06:28 INFO    staging: stg.si_bol <- si-bol-2023.csv (latin-1): 13886 linhas
+22:06:28 INFO    staging: stg.si_bol <- si-bol-2024.csv (latin-1): 13266 linhas
+22:06:28 INFO    staging: stg.si_log <- si-log-2011.csv (latin-1): 20540 linhas
+22:06:28 INFO    staging: stg.si_log <- si-log-2012.csv (latin-1): 19909 linhas
+22:06:28 INFO    staging: stg.si_log <- si-log-2013.csv (latin-1): 19446 linhas
+22:06:28 INFO    staging: stg.si_log <- si-log-2014.csv (latin-1): 20600 linhas
+22:06:29 INFO    staging: stg.si_log <- si-log-2015.csv (latin-1): 17644 linhas
+22:06:29 INFO    staging: stg.si_log <- si-log-2016.csv (latin-1): 16392 linhas
+22:06:29 INFO    staging: stg.si_log <- si-log-2017.csv (latin-1): 16072 linhas
+22:06:29 INFO    staging: stg.si_log <- si-log-2018.csv (latin-1): 15253 linhas
+22:06:29 INFO    staging: stg.si_log <- si-log-2019.csv (latin-1): 17576 linhas
+22:06:29 INFO    staging: stg.si_log <- si-log-2020.csv (latin-1): 14181 linhas
+22:06:29 INFO    staging: stg.si_log <- si-log-2021.csv (latin-1): 14437 linhas
+22:06:29 INFO    staging: stg.si_log <- si-log-2022.csv (latin-1): 15550 linhas
+22:06:30 INFO    staging: stg.si_log <- si-log-2023.csv (latin-1): 17418 linhas
+22:06:30 INFO    staging: stg.si_log <- si-log-2024.csv (latin-1): 18570 linhas
+22:06:30 INFO    staging: stg.si_veic <- si-veic-2011.csv (latin-1): 28301 linhas
+22:06:30 INFO    staging: stg.si_veic <- si-veic-2012.csv (latin-1): 26660 linhas
+22:06:30 INFO    staging: stg.si_veic <- si-veic-2013.csv (latin-1): 25367 linhas
+22:06:30 INFO    staging: stg.si_veic <- si-veic-2014.csv (latin-1): 26840 linhas
+22:06:30 INFO    staging: stg.si_veic <- si-veic-2015.csv (latin-1): 23398 linhas
+22:06:30 INFO    staging: stg.si_veic <- si-veic-2016.csv (latin-1): 22212 linhas
+22:06:31 INFO    staging: stg.si_veic <- si-veic-2017.csv (latin-1): 22012 linhas
+22:06:31 INFO    staging: stg.si_veic <- si-veic-2018.csv (latin-1): 21133 linhas
+22:06:31 INFO    staging: stg.si_veic <- si-veic-2019.csv (latin-1): 24469 linhas
+22:06:31 INFO    staging: stg.si_veic <- si-veic-2020.csv (latin-1): 19494 linhas
+22:06:31 INFO    staging: stg.si_veic <- si-veic-2021.csv (latin-1): 20506 linhas
+22:06:31 INFO    staging: stg.si_veic <- si-veic-2022.csv (latin-1): 22310 linhas
+22:06:31 INFO    staging: stg.si_veic <- si-veic-2023.csv (cp850): 25569 linhas
+22:06:31 INFO    staging: stg.si_veic <- si-veic-2024.csv (latin-1): 24840 linhas
+22:06:32 INFO    staging: stg.si_env <- si_env-2011.csv (latin-1): 36084 linhas
+22:06:32 INFO    staging: stg.si_env <- si_env-2012.csv (latin-1): 33745 linhas
+22:06:32 INFO    staging: stg.si_env <- si_env-2013.csv (latin-1): 32152 linhas
+22:06:32 INFO    staging: stg.si_env <- si_env-2014.csv (latin-1): 33588 linhas
+22:06:32 INFO    staging: stg.si_env <- si_env-2015.csv (latin-1): 29131 linhas
+22:06:32 INFO    staging: stg.si_env <- si_env-2016.csv (latin-1): 27216 linhas
+22:06:33 INFO    staging: stg.si_env <- si_env-2017.csv (latin-1): 26622 linhas
+22:06:33 INFO    staging: stg.si_env <- si_env-2018.csv (latin-1): 25524 linhas
+22:06:33 INFO    staging: stg.si_env <- si_env-2019.csv (latin-1): 28972 linhas
+22:06:33 INFO    staging: stg.si_env <- si_env-2020.csv (latin-1): 22643 linhas
+22:06:33 INFO    staging: stg.si_env <- si_env-2021.csv (latin-1): 23736 linhas
+22:06:33 INFO    staging: stg.si_env <- si_env-2022.csv (latin-1): 26094 linhas
+22:06:34 INFO    staging: stg.si_env <- si_env-2023.csv (latin-1): 30170 linhas
+22:06:34 INFO    staging: stg.si_env <- si_env-2024.csv (latin-1): 29280 linhas
+22:06:34 INFO    staging: stg.regional_limite <- 20220601_regional.csv: 9 regionais
+22:06:34 INFO    staging: stg.regional_limite <- 20250204_regional.csv: 10 regionais
+22:06:34 INFO    staging: stg.ibge_localidade: 18 | stg.ibge_sidra_valor: 54
+22:06:34 INFO    staging: stg.ibge_setor2010_variavel <- Basico_MG.csv: 7790 valores
+22:06:34 INFO    staging: stg.ibge_setor2010_variavel <- Domicilio02_MG.csv: 3895 valores
+22:06:35 INFO    staging: stg.ibge_setor2010_variavel <- Pessoa13_MG.csv: 3895 valores
+22:06:36 INFO    staging: stg.ibge_setor2010_malha <- 31SEE250GC_SIR.shp: 3936 setores de BH
+22:06:36 INFO    staging: stg.inmet_horario <- INMET_SE_MG_A521_PAMPULHA_01-01-2011_A_31-12-2011.CSV (A521): 8760 horas
+22:06:36 INFO    staging: stg.inmet_horario <- INMET_SE_MG_A521_PAMPULHA_01-01-2012_A_31-12-2012.CSV (A521): 8784 horas
+22:06:37 INFO    staging: stg.inmet_horario <- INMET_SE_MG_A521_PAMPULHA_01-01-2013_A_31-12-2013.CSV (A521): 8760 horas
+22:06:37 INFO    staging: stg.inmet_horario <- INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_27-12-2013_A_31-12-2013.CSV (F501): 120 horas
+22:06:37 INFO    staging: stg.inmet_horario <- INMET_SE_MG_A521_PAMPULHA_01-01-2014_A_31-12-2014.CSV (A521): 8760 horas
+22:06:37 INFO    staging: stg.inmet_horario <- INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2014_A_31-12-2014.CSV (F501): 8760 horas
+22:06:37 INFO    staging: stg.inmet_horario <- INMET_SE_MG_A521_PAMPULHA_01-01-2015_A_31-12-2015.CSV (A521): 8760 horas
+22:06:37 INFO    staging: stg.inmet_horario <- INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2015_A_31-12-2015.CSV (F501): 8760 horas
+22:06:37 INFO    staging: stg.inmet_horario <- INMET_SE_MG_A521_PAMPULHA_01-01-2016_A_31-12-2016.CSV (A521): 8784 horas
+22:06:37 INFO    staging: stg.inmet_horario <- INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2016_A_31-12-2016.CSV (F501): 8784 horas
+22:06:37 INFO    staging: stg.inmet_horario <- INMET_SE_MG_A521_PAMPULHA_01-01-2017_A_31-12-2017.CSV (A521): 8760 horas
+22:06:37 INFO    staging: stg.inmet_horario <- INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2017_A_31-12-2017.CSV (F501): 8760 horas
+22:06:38 INFO    staging: stg.inmet_horario <- INMET_SE_MG_A521_PAMPULHA_01-01-2018_A_31-12-2018.CSV (A521): 8760 horas
+22:06:38 INFO    staging: stg.inmet_horario <- INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2018_A_31-12-2018.CSV (F501): 8760 horas
+22:06:38 INFO    staging: stg.inmet_horario <- INMET_SE_MG_A521_PAMPULHA_01-01-2019_A_31-12-2019.CSV (A521): 8760 horas
+22:06:38 INFO    staging: stg.inmet_horario <- INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2019_A_31-12-2019.CSV (F501): 8760 horas
+22:06:38 INFO    staging: stg.inmet_horario <- INMET_SE_MG_A521_PAMPULHA_01-01-2020_A_31-12-2020.CSV (A521): 8784 horas
+22:06:38 INFO    staging: stg.inmet_horario <- INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2020_A_31-12-2020.CSV (F501): 8784 horas
+22:06:38 INFO    staging: stg.inmet_horario <- INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2021_A_31-12-2021.CSV (A521): 8760 horas
+22:06:38 INFO    staging: stg.inmet_horario <- INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2021_A_31-12-2021.CSV (F501): 8760 horas
+22:06:38 INFO    staging: stg.inmet_horario <- INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2022_A_31-12-2022.CSV (A521): 8760 horas
+22:06:39 INFO    staging: stg.inmet_horario <- INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2022_A_31-12-2022.CSV (F501): 8760 horas
+22:06:39 INFO    staging: stg.inmet_horario <- INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2023_A_31-12-2023.CSV (A521): 8760 horas
+22:06:39 INFO    staging: stg.inmet_horario <- INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2023_A_31-12-2023.CSV (F501): 8760 horas
+22:06:39 INFO    staging: stg.inmet_horario <- INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2024_A_31-12-2024.CSV (A521): 8784 horas
+22:06:39 INFO    staging: stg.inmet_horario <- INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2024_A_31-12-2024.CSV (F501): 8784 horas
+22:06:39 INFO    staging: stg.map_dominio <- dominios.csv: 91 linhas
+22:06:39 INFO    staging: stg.map_regional <- regionais.csv: 11 linhas
+22:06:39 INFO    staging:   stg.manifesto_raw                     116 linhas
+22:06:39 INFO    staging:   stg.si_bol                         184728 linhas
+22:06:39 INFO    staging:   stg.si_log                         243588 linhas
+22:06:39 INFO    staging:   stg.si_veic                        333111 linhas
+22:06:39 INFO    staging:   stg.si_env                         404957 linhas
+22:06:39 INFO    staging:   stg.regional_limite                    19 linhas
+22:06:39 INFO    staging:   stg.ibge_sidra_valor                   54 linhas
+22:06:39 INFO    staging:   stg.ibge_localidade                    18 linhas
+22:06:39 INFO    staging:   stg.ibge_setor2010_malha             3936 linhas
+22:06:39 INFO    staging:   stg.ibge_setor2010_variavel         15580 linhas
+22:06:39 INFO    staging:   stg.inmet_horario                  219288 linhas
+22:06:39 INFO    staging:   stg.map_dominio                        91 linhas
+22:06:39 INFO    staging:   stg.map_regional                       11 linhas
+22:06:39 INFO    carga_inicial: Etapa 2-staging concluída em 12.7s
+22:06:39 INFO    carga_inicial: ========== ETAPA: 3-transformar ==========
+22:06:39 INFO    transformar: -- transformar: boletins (SQL 10)
+22:06:41 INFO    etl.banco: SQL 10_trf_boletim.sql executado em 2.3s
+22:06:41 INFO    transformar: -- transformar: coordenadas (pyproj)
+22:06:41 INFO    transformar: pyproj: SAD69 -> SIRGAS 2000 em BH desloca dx=-44.7 m, dy=-45.1 m
+22:06:43 INFO    transformar: Coordenadas: 184728 boletins; formatos/situações: {'ESCALA_ANTIGA': 63300, 'ZERADA': 20430, 'NORMAL': 100998}
+22:06:43 INFO    transformar: -- transformar: geolocalização (SQL 11)
+22:06:46 INFO    etl.banco: SQL 11_trf_geolocalizacao.sql executado em 3.6s
+22:06:46 INFO    transformar: -- transformar: veículos (SQL 12)
+22:06:48 INFO    etl.banco: SQL 12_trf_veiculo.sql executado em 2.3s
+22:06:48 INFO    transformar: -- transformar: envolvidos (SQL 13)
+22:06:53 INFO    etl.banco: SQL 13_trf_envolvido.sql executado em 4.5s
+22:06:53 INFO    transformar: -- transformar: clima INMET (zoneinfo)
+22:06:55 INFO    transformar: INMET: 219273 horas (com precipitação válida: 218078; horas repetidas do horário de verão: 15)
+22:06:55 INFO    transformar: -- transformar: clima do sinistro (SQL 15)
+22:06:59 INFO    etl.banco: SQL 15_trf_clima.sql executado em 4.2s
+22:06:59 INFO    transformar: -- transformar: setores 2010 x regionais (SQL 14)
+22:07:01 INFO    etl.banco: SQL 14_trf_setor2010_regional.sql executado em 2.0s
+22:07:01 INFO    transformar: -- transformar: população por regional
+22:07:01 INFO    transformar: População 2023 interpolada geometricamente entre 2022 (2315560) e 2024 (2416339): 2365413
+22:07:01 INFO    transformar:   regional 18: 2010 setores  282552 (0.1190) | 2010 subdistritos IBGE  282552 | 2022  278144 (0.1201)
+22:07:01 INFO    transformar:   regional 19: 2010 setores  284326 (0.1197) | 2010 subdistritos IBGE  272285 | 2022  272016 (0.1175)
+22:07:01 INFO    transformar:   regional 20: 2010 setores  238057 (0.1002) | 2010 subdistritos IBGE  249273 | 2022  220694 (0.0953)
+22:07:01 INFO    transformar:   regional 21: 2010 setores  290353 (0.1222) | 2010 subdistritos IBGE  291110 | 2022  293612 (0.1268)
+22:07:01 INFO    transformar:   regional 22: 2010 setores  267042 (0.1124) | 2010 subdistritos IBGE  331362 | 2022  233656 (0.1009)
+22:07:01 INFO    transformar:   regional 23: 2010 setores  210744 (0.0887) | 2010 subdistritos IBGE  212953 | 2022  213427 (0.0922)
+22:07:01 INFO    transformar:   regional 24: 2010 setores  309477 (0.1303) | 2010 subdistritos IBGE  286118 | 2022  309118 (0.1335)
+22:07:01 INFO    transformar:   regional 25: 2010 setores  226110 (0.0952) | 2010 subdistritos IBGE  187315 | 2022  247578 (0.1069)
+22:07:01 INFO    transformar:   regional 26: 2010 setores  266490 (0.1122) | 2010 subdistritos IBGE  262183 | 2022  247315 (0.1068)
+22:07:01 INFO    transformar: População: 153 linhas (regional x ano), anos 2010–2026
+22:07:01 INFO    transformar: -- transformar: logradouros e locais (SCD2)
+22:07:02 INFO    transformar: Logradouros: 243588 registros do si-log ligados a boletins
+22:07:05 INFO    transformar: Logradouros: 8780 códigos, 67 com mais de uma versão (renomeação)
+22:07:05 INFO    transformar: Locais: 184570 boletins com local; origem do bairro: {'INFORMADO': 169152, 'IMPUTADO (moda do cruzamento)': 13064, 'NÃO INFORMADO': 1932, 'IMPUTADO (mesmo endereço)': 326, 'IMPUTADO (logradouro de bairro único)': 96}
+22:07:06 INFO    transformar: Locais: 22100 locais distintos, 22391 versões (286 locais com mais de uma versão)
+22:07:06 INFO    carga_inicial: Etapa 3-transformar concluída em 26.7s
+22:07:06 INFO    carga_inicial: ========== ETAPA: 4-testes_qualidade ==========
+22:07:06 INFO    qualidade: [OK ] CRITICO Unicidade: boletim (numero_boletim, ano) -> 0
+22:07:07 INFO    qualidade: [OK ] CRITICO Unicidade: envolvido (numero_boletim, ano, numero_envolvido) -> 0
+22:07:08 INFO    qualidade: [OK ] CRITICO Unicidade: veículo (numero_boletim, ano, sequencial) -> 0
+22:07:08 INFO    qualidade: [OK ] CRITICO Domínio: UPS final em {1, 5, 13} (dicionário da Fase 2) -> 0
+22:07:08 INFO    qualidade: [OK ] ALERTA  Domínio: valor_ups da fonte em {0, 1, 5, 13} -> 0
+22:07:08 INFO    qualidade: [OK ] ALERTA  Domínio: tipo de sinistro com de-para -> 0
+22:07:08 INFO    qualidade: [OK ] ALERTA  Domínio: cod_tempo e cod_pavimento em 0–4 -> 0
+22:07:08 INFO    qualidade: [OK ] ALERTA  Domínio: severidade do envolvido em 0–3 -> 0
+22:07:09 INFO    qualidade: [OK ] ALERTA  Domínio: espécie de veículo com de-para -> 0
+22:07:09 INFO    qualidade: [OK ] ALERTA  Domínio: código de regional conhecido -> 0
+22:07:10 INFO    qualidade: [OK ] CRITICO Volume: todos os anos esperados presentes -> 14 de 14
+22:07:10 INFO    qualidade: [OK ] CRITICO Volume: sem quedas absurdas (ano / ano anterior >= 50%) -> 0.796
+22:07:10 INFO    qualidade: [OK ] ALERTA  Volume: variação anual moderada (ano / ano anterior >= 75%) -> 0.796
+22:07:10 INFO    qualidade: [OK ] CRITICO Volume: datas válidas e nenhum boletim perdido no stg -> trf -> 184728 stg / 184728 trf
+22:07:12 INFO    qualidade: [OK ] CRITICO Órfãos: registros de si-log/si-veic/si_env sem si-bol -> 0
+22:07:13 INFO    qualidade: [OK ] INFO    Órfãos: boletins sem envolvido, veículo ou logradouro -> 0
+22:07:14 INFO    qualidade: [OK ] ALERTA  Coerência: indicador_fatalidade do si-bol x mortos do si_env -> 99.963%
+22:07:14 INFO    qualidade: [OK ] CRITICO Coerência: vítimas fatais <= vítimas <= envolvidos -> 0
+22:07:14 INFO    qualidade: [OK ] ALERTA  Reprojeção: deslocamento mediano 2011–2015 x 2016+ nos mesmos endereços -> dx=-0.02 m; dy=0.82 m
+22:07:15 INFO    qualidade: [OK ] INFO    Tipo de envolvimento: validação da regra derivada em 2016+ -> precisão 99.2%; recall 92.7%
+22:07:15 INFO    qualidade: [OK ] INFO    Espécie da pessoa: validação da imputação por espécie única no boletim (2017+) -> 100.00% de acerto
+22:07:15 INFO    qualidade: [OK ] ALERTA  Cobertura: % de boletins geolocalizados -> 88.94%
+22:07:15 INFO    qualidade: [OK ] INFO    Cobertura: % de clima imputado pelo INMET -> 63.29%
+22:07:15 INFO    qualidade: [OK ] ALERTA  Cobertura: clima não informado após imputação -> 0.10%
+22:07:15 INFO    qualidade: [OK ] ALERTA  Cobertura: leituras horárias de precipitação do INMET (Pampulha) -> 99.0% (pior ano)
+22:07:15 INFO    qualidade: [OK ] ALERTA  Cobertura: boletins com local (logradouro) identificado -> 99.91%
+22:07:18 INFO    qualidade: [OK ] INFO    Coerência espacial: regional do boletim x ponto (ST_Within) -> 87.9%
+22:07:18 INFO    qualidade: [OK ] CRITICO População: soma das regionais = total do município (trf) -> 0 anos com diferença
+22:07:18 INFO    qualidade: [OK ] CRITICO População: anos dos sinistros com população -> 0 anos sem as 9 regionais
+22:07:18 INFO    qualidade: [OK ] INFO    População: Censo 2022 por regional x valores divulgados na imprensa -> 6 de 9 iguais
+22:07:18 INFO    carga_inicial: Etapa 4-testes_qualidade concluída em 11.9s
+22:07:18 INFO    carga_inicial: ========== ETAPA: 5-carregar_dw ==========
+22:07:18 INFO    etl.banco: SQL 20_limpar_dw.sql executado em 0.5s
+22:07:19 INFO    etl.banco: SQL 21_dim_tempo.sql executado em 0.7s
+22:07:19 INFO    etl.banco: SQL 22_dim_regional.sql executado em 0.0s
+22:07:19 INFO    etl.banco: SQL 23_dim_tipo_sinistro.sql executado em 0.1s
+22:07:19 INFO    etl.banco: SQL 24_dim_condicao_via.sql executado em 0.1s
+22:07:19 INFO    etl.banco: SQL 25_dim_veiculo.sql executado em 0.2s
+22:07:19 INFO    etl.banco: SQL 26_dim_pessoa.sql executado em 0.0s
+22:07:20 INFO    etl.banco: SQL 27_dim_local.sql executado em 0.5s
+22:07:26 INFO    etl.banco: SQL 30_fato_sinistro.sql executado em 6.6s
+22:07:36 INFO    etl.banco: SQL 31_fato_envolvido.sql executado em 9.0s
+22:07:36 INFO    etl.banco: SQL 32_fato_populacao.sql executado em 0.0s
+22:07:36 INFO    etl.banco: SQL 40_atualizar_views.sql executado em 0.7s
+22:07:36 INFO    carregar:   dw.dim_tempo                191727 linhas
+22:07:36 INFO    carregar:   dw.dim_regional                 11 linhas
+22:07:36 INFO    carregar:   dw.dim_local                 22393 linhas
+22:07:36 INFO    carregar:   dw.dim_tipo_sinistro            14 linhas
+22:07:36 INFO    carregar:   dw.dim_condicao_via             61 linhas
+22:07:36 INFO    carregar:   dw.dim_veiculo                 303 linhas
+22:07:36 INFO    carregar:   dw.dim_pessoa                  361 linhas
+22:07:36 INFO    carregar:   dw.fato_sinistro            184728 linhas
+22:07:36 INFO    carregar:   dw.fato_envolvido           404957 linhas
+22:07:36 INFO    carregar:   dw.fato_populacao              153 linhas
+22:07:36 INFO    carga_inicial: Etapa 5-carregar_dw concluída em 18.6s
+22:07:36 INFO    carga_inicial: ========== ETAPA: 6-reconciliar ==========
+22:07:36 INFO    qualidade: [OK ] CRITICO Reconciliação: boletins stg x dw por ano -> 0 anos divergentes
+22:07:36 INFO    qualidade: [OK ] CRITICO Reconciliação: envolvidos stg x dw por ano -> 0 anos divergentes
+22:07:37 INFO    qualidade: [OK ] CRITICO Reconciliação: veículos stg x fato_sinistro.qtd_veiculos -> 333111 stg / 333111 dw
+22:07:37 INFO    qualidade: [OK ] CRITICO Reconciliação: vítimas e mortos fato_sinistro x fato_envolvido -> 224119 vítimas / 2007 mortos
+22:07:37 INFO    qualidade: [OK ] CRITICO Reconciliação: população das regionais = município (dw) -> 17 anos; 0 com diferença
+22:07:37 INFO    qualidade: [OK ] ALERTA  Integridade: FKs nos membros especiais (-1/-2) -> 0.09% local; 0.61% regional
+22:07:37 INFO    qualidade: [OK ] CRITICO SCD2: uma versão atual por local e vigências contíguas -> 0
+22:07:37 INFO    qualidade: [OK ] CRITICO Integridade: fato aponta para a versão vigente na data -> 0
+22:07:37 INFO    qualidade: [OK ] ALERTA  Partições: nenhuma linha na partição DEFAULT -> 0
+22:07:37 INFO    qualidade: [OK ] CRITICO Views materializadas populadas -> 14 / 140 / 69744 / 14
+22:07:37 INFO    carga_inicial: Etapa 6-reconciliar concluída em 0.5s
+22:07:37 INFO    qualidade: Relatório de qualidade: 40 testes, 40 aprovados
+22:07:37 INFO    carga_inicial: ========== ETAPA: 7-evidencias ==========
+22:07:37 INFO    evidencias: Estrutura: 572 colunas documentadas (0 sem comentário)
+22:07:37 INFO    evidencias: Contagens: 39 tabelas, 17 anos
+22:07:37 INFO    evidencias: Consultas de negócio: 8 executadas
+22:07:37 INFO    evidencias: Documentação do modelo: 14 objetos do dw
+22:07:41 INFO    evidencias: Prova do DDL em banco vazio: APROVADA
+22:07:42 INFO    evidencias: pg_dump --schema-only exportado (303535 bytes)
+22:07:42 INFO    carga_inicial: Etapa 7-evidencias concluída em 4.8s
+22:07:42 INFO    carga_inicial: Carga inicial concluída com sucesso (id_execucao=20261013220626).

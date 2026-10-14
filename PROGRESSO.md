@@ -37,22 +37,23 @@ Legenda: `[x]` concluído e validado · `[~]` em andamento · `[ ]` pendente.
 - [x] Aplicado no banco principal
 
 ## 4. ETL / carga inicial (entregável 3)
-- [ ] `etl/` (config, extrair, staging, transformar, carregar, testes_qualidade, carga_inicial)
-- [ ] `sql/carga/` numerado
-- [ ] Carga completa executada, testes de qualidade, reconciliação
+- [x] `etl/` (config, banco, leitura, extrair, staging, transformar, testes_qualidade, carregar, evidencias, carga_inicial)
+- [x] `sql/carga/` numerado (10–15 transformar; 20–27 dimensões; 30–32 fatos; 40 views)
+- [x] Transformação validada isoladamente (stg = trf: 184.728 boletins, 404.957 envolvidos, 333.111 veículos)
+- [x] Carga completa `python -m etl.carga_inicial --recriar` em ~80 s: 184.728 sinistros, 404.957 envolvidos, 153 linhas de população; 38/39 testes (1 ALERTA de regional não resolvida)
+- [x] Ajustes após revisão dos resultados: regional pelo ponto do local quando o boletim não tem coordenada; espécie do passageiro imputada quando o boletim tem espécie única (validada 100% em 2017+); formatação pt-BR nas evidências; scripts 12/13 reordenados (veículo antes de envolvido)
 
 ## 5. Evidências e documentação
-- [ ] Prova do DDL em banco vazio + `pg_dump --schema-only`
-- [ ] Evidências de estrutura, contagens, qualidade e consultas de negócio
-- [ ] `docs/modelo_dimensional.md`
-- [ ] `README.md`
+- [x] Prova do DDL em banco vazio + `pg_dump --schema-only` (`evidencias/05_*`, `ddl_exportado_pg_dump.sql`)
+- [x] Evidências de estrutura, contagens, qualidade (40/40) e consultas de negócio (8)
+- [x] `docs/modelo_dimensional.md` (Mermaid + dicionário gerado dos COMMENT ON)
+- [x] `README.md`
 
-## 6. Testes locais finais (pedido do usuário)
-- [ ] Recriar tudo do zero (drop do banco) com `python -m etl.carga_inicial`
-- [ ] DDL em banco vazio temporário sem erros
-- [ ] Testes de qualidade + reconciliação stg × dw + soma das populações
-- [ ] Consultas de negócio retornando resultados coerentes
-- [ ] Idempotência: segunda execução sem novo download e com as mesmas contagens
+## 6. Testes locais finais (pedido do usuário) — `python -m etl.testes_locais`
+- [x] 1ª bateria: 22/23 — a view da taxa anual ficava vazia em carga parcial sem 2014 (CROSS JOIN) → corrigido com LEFT JOIN
+- [x] 2ª bateria: **23/23 aprovados** → `evidencias/06_testes_locais.md`
+
+## Situação: CONCLUÍDO (13/10/2026). Para reprocessar tudo: `python -m etl.carga_inicial --recriar`
 
 ## Notas para retomada
 - Banco: `docker compose up -d` na pasta do projeto; credenciais no `.env`.

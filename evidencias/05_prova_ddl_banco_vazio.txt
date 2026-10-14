@@ -1,0 +1,18 @@
+PROVA DO DDL EM BANCO VAZIO — 13/10/2026 22:07:41
+Arquivo: sql/ddl_data_warehouse.sql (111,082 bytes)
+Banco temporário: dw_prova_ddl_tmp (CREATE DATABASE vazio; DROP ao final: sim)
+Comando: docker exec -i bi_bhtrans_postgis psql -U <usuario> -d dw_prova_ddl_tmp -v ON_ERROR_STOP=1 < sql/ddl_data_warehouse.sql
+
+1ª execução (banco vazio): código de saída 0
+  stderr: (vazio — nenhum erro)
+2ª execução (re-execução sobre a estrutura existente): código de saída 0
+  stderr: (vazio — nenhum erro)
+
+Objetos criados no banco temporário:
+  dw: 10 tabelas, 255 partições, 4 views materializadas, 246 índices
+  stg: 25 tabelas, 0 partições, 0 views materializadas, 21 índices
+Objetos no banco principal (dw_sinistros_bh):
+  dw: 10 tabelas, 255 partições, 4 views materializadas, 246 índices
+  stg: 25 tabelas, 0 partições, 0 views materializadas, 21 índices
+
+RESULTADO: APROVADO — o DDL roda do zero sem erros, é re-executável e gera a mesma estrutura do banco principal

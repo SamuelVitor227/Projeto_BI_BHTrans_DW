@@ -1,0 +1,573 @@
+schema;tabela;ordem;coluna;tipo;aceita_nulo;comentario
+stg;ibge_localidade;1;tipo;text;True;distrito ou subdistrito.
+stg;ibge_localidade;2;localidade_id;text;True;Código IBGE do distrito/subdistrito.
+stg;ibge_localidade;3;localidade_nome;text;True;Nome do distrito/subdistrito.
+stg;ibge_localidade;4;distrito_id;text;True;Código do distrito a que o subdistrito pertence.
+stg;ibge_localidade;5;distrito_nome;text;True;Nome do distrito a que o subdistrito pertence.
+stg;ibge_localidade;6;municipio_id;text;True;Código IBGE do município.
+stg;ibge_localidade;7;arquivo_origem;text;False;Linhagem: arquivo JSON de origem.
+stg;ibge_localidade;8;linha_arquivo;integer;False;Linhagem: posição do registro no arquivo.
+stg;ibge_localidade;9;dt_carga;timestamp with time zone;False;Linhagem: data e hora da carga no staging.
+stg;ibge_setor2010_malha;1;cd_geocodi;text;True;Código do setor censitário (15 dígitos).
+stg;ibge_setor2010_malha;2;tipo;text;True;Tipo do setor (URBANO/RURAL).
+stg;ibge_setor2010_malha;3;cd_geocodb;text;True;Código do bairro IBGE.
+stg;ibge_setor2010_malha;4;nm_bairro;text;True;Nome do bairro IBGE.
+stg;ibge_setor2010_malha;5;cd_geocods;text;True;Código do subdistrito.
+stg;ibge_setor2010_malha;6;nm_subdist;text;True;Nome do subdistrito.
+stg;ibge_setor2010_malha;7;cd_geocodd;text;True;Código do distrito.
+stg;ibge_setor2010_malha;8;nm_distrit;text;True;Nome do distrito.
+stg;ibge_setor2010_malha;9;cd_geocodm;text;True;Código do município.
+stg;ibge_setor2010_malha;10;nm_municip;text;True;Nome do município.
+stg;ibge_setor2010_malha;11;geometria_geojson;text;True;Polígono do setor em GeoJSON (EPSG:4674).
+stg;ibge_setor2010_malha;12;arquivo_origem;text;False;Linhagem: shapefile de origem.
+stg;ibge_setor2010_malha;13;linha_arquivo;integer;False;Linhagem: número do registro no shapefile.
+stg;ibge_setor2010_malha;14;dt_carga;timestamp with time zone;False;Linhagem: data e hora da carga no staging.
+stg;ibge_setor2010_variavel;1;cod_setor;text;True;Código do setor censitário.
+stg;ibge_setor2010_variavel;2;planilha;text;True;Planilha de origem (Basico, Pessoa13, Domicilio02).
+stg;ibge_setor2010_variavel;3;variavel;text;True;Código da variável (ex.: V001 da Pessoa13 = pessoas residentes).
+stg;ibge_setor2010_variavel;4;valor;text;True;"Valor publicado (texto; ""X"" = sigilo)."
+stg;ibge_setor2010_variavel;5;arquivo_origem;text;False;Linhagem: arquivo CSV de origem.
+stg;ibge_setor2010_variavel;6;linha_arquivo;integer;False;Linhagem: número da linha no arquivo de origem.
+stg;ibge_setor2010_variavel;7;dt_carga;timestamp with time zone;False;Linhagem: data e hora da carga no staging.
+stg;ibge_sidra_valor;1;tabela;text;True;Número da tabela do SIDRA.
+stg;ibge_sidra_valor;2;variavel_id;text;True;"Identificador da variável (9324 estimada; 93 população residente)."
+stg;ibge_sidra_valor;3;variavel_nome;text;True;Nome da variável.
+stg;ibge_sidra_valor;4;nivel;text;True;Nível territorial (N6 município, N10 distrito, N11 subdistrito).
+stg;ibge_sidra_valor;5;localidade_id;text;True;Código IBGE da localidade.
+stg;ibge_sidra_valor;6;localidade_nome;text;True;Nome da localidade.
+stg;ibge_sidra_valor;7;periodo;text;True;Período (ano).
+stg;ibge_sidra_valor;8;valor;text;True;Valor publicado (texto).
+stg;ibge_sidra_valor;9;arquivo_origem;text;False;Linhagem: arquivo JSON de origem.
+stg;ibge_sidra_valor;10;linha_arquivo;integer;False;Linhagem: posição do valor no arquivo.
+stg;ibge_sidra_valor;11;dt_carga;timestamp with time zone;False;Linhagem: data e hora da carga no staging.
+stg;inmet_horario;1;estacao_codigo;text;True;"Código da estação (metadado ""CODIGO (WMO)"")."
+stg;inmet_horario;2;estacao_nome;text;True;"Nome da estação (metadado ""ESTACAO"")."
+stg;inmet_horario;3;data_medicao;text;True;"Data da medição (AAAA-MM-DD até 2018; AAAA/MM/DD depois)."
+stg;inmet_horario;4;hora_utc;text;True;"Hora UTC do fim do intervalo (HH:MM até 2018; ""HHMM UTC"" depois)."
+stg;inmet_horario;5;precipitacao_mm;text;True;"Precipitação total no intervalo horário (mm, vírgula decimal; -9999 ou vazio = ausente)."
+stg;inmet_horario;6;pressao_estacao_mb;text;True;Pressão atmosférica ao nível da estação (mB).
+stg;inmet_horario;7;pressao_max_mb;text;True;Pressão máxima na hora anterior (mB).
+stg;inmet_horario;8;pressao_min_mb;text;True;Pressão mínima na hora anterior (mB).
+stg;inmet_horario;9;radiacao_global_kj_m2;text;True;Radiação global (kJ/m²).
+stg;inmet_horario;10;temperatura_ar_c;text;True;Temperatura do ar, bulbo seco (°C).
+stg;inmet_horario;11;temperatura_orvalho_c;text;True;Temperatura do ponto de orvalho (°C).
+stg;inmet_horario;12;temperatura_max_c;text;True;Temperatura máxima na hora anterior (°C).
+stg;inmet_horario;13;temperatura_min_c;text;True;Temperatura mínima na hora anterior (°C).
+stg;inmet_horario;14;temperatura_orvalho_max_c;text;True;Temperatura de orvalho máxima na hora anterior (°C).
+stg;inmet_horario;15;temperatura_orvalho_min_c;text;True;Temperatura de orvalho mínima na hora anterior (°C).
+stg;inmet_horario;16;umidade_max_pct;text;True;Umidade relativa máxima na hora anterior (%).
+stg;inmet_horario;17;umidade_min_pct;text;True;Umidade relativa mínima na hora anterior (%).
+stg;inmet_horario;18;umidade_relativa_pct;text;True;Umidade relativa do ar horária (%).
+stg;inmet_horario;19;vento_direcao_graus;text;True;Direção horária do vento (graus).
+stg;inmet_horario;20;vento_rajada_ms;text;True;Rajada máxima de vento (m/s).
+stg;inmet_horario;21;vento_velocidade_ms;text;True;Velocidade horária do vento (m/s).
+stg;inmet_horario;22;ano_arquivo;smallint;False;Ano do arquivo (ZIP anual do INMET).
+stg;inmet_horario;23;arquivo_origem;text;False;Linhagem: arquivo CSV de origem.
+stg;inmet_horario;24;linha_arquivo;integer;False;Linhagem: número da linha no arquivo (metadados nas linhas 1 a 8, cabeçalho na 9).
+stg;inmet_horario;25;dt_carga;timestamp with time zone;False;Linhagem: data e hora da carga no staging.
+stg;log_carga;1;id_log;bigint;False;Identificador da linha de log.
+stg;log_carga;2;id_execucao;bigint;False;Identificador da execução (AAAAMMDDHHMISS do início).
+stg;log_carga;3;etapa;text;False;Etapa do ETL.
+stg;log_carga;4;status;text;False;INICIADA, SUCESSO, FALHA ou ALERTA.
+stg;log_carga;5;dt_inicio;timestamp with time zone;False;Início da etapa.
+stg;log_carga;6;dt_fim;timestamp with time zone;True;Fim da etapa.
+stg;log_carga;7;linhas;bigint;True;Linhas processadas na etapa, quando aplicável.
+stg;log_carga;8;mensagem;text;True;Mensagem de resultado ou de erro.
+stg;log_carga;9;parametros;text;True;Parâmetros da execução (anos, forçar download...).
+stg;log_carga;10;arquivo_origem;text;False;Linhagem: módulo que gravou o registro.
+stg;log_carga;11;dt_carga;timestamp with time zone;False;Linhagem: data e hora da gravação.
+stg;manifesto_raw;1;fonte;text;False;Fonte do arquivo (pbh_ckan, ibge, ibge_setores_2010, inmet).
+stg;manifesto_raw;2;conjunto;text;False;Conjunto lógico (si_bol, si_log, si_veic, si_env, regional, estimativas, censo_2022...).
+stg;manifesto_raw;3;recurso;text;True;Nome do recurso na origem.
+stg;manifesto_raw;4;recurso_id;text;True;Identificador do recurso no CKAN da PBH.
+stg;manifesto_raw;5;ano;text;True;Ano de referência do arquivo, quando houver.
+stg;manifesto_raw;6;url;text;True;URL de download (para arquivos extraídos de ZIP, a URL do ZIP).
+stg;manifesto_raw;7;arquivo;text;False;Caminho do arquivo dentro de dados/raw/.
+stg;manifesto_raw;8;sha256;text;True;Hash SHA-256 do arquivo guardado.
+stg;manifesto_raw;9;bytes;text;True;Tamanho do arquivo em bytes.
+stg;manifesto_raw;10;dt_coleta;text;True;Data e hora da coleta (ISO 8601).
+stg;manifesto_raw;11;modificado_na_origem;text;True;Data de modificação informada pelo portal de origem.
+stg;manifesto_raw;12;sha256_pacote;text;True;Hash SHA-256 do ZIP de origem (INMET e setores do IBGE), apagado após a extração.
+stg;manifesto_raw;13;bytes_pacote;text;True;Tamanho do ZIP de origem em bytes.
+stg;manifesto_raw;14;observacao;text;True;Observações da coleta (tipo do recurso, licença, membro do ZIP).
+stg;manifesto_raw;15;arquivo_origem;text;False;Linhagem: arquivo de onde a linha foi carregada.
+stg;manifesto_raw;16;linha_arquivo;integer;False;Linhagem: número da linha no arquivo de origem.
+stg;manifesto_raw;17;dt_carga;timestamp with time zone;False;Linhagem: data e hora da carga no staging.
+stg;map_dominio;1;dominio;text;False;Nome do domínio.
+stg;map_dominio;2;codigo;text;False;Código (ou descrição) como aparece na fonte.
+stg;map_dominio;3;descricao;text;False;Descrição padronizada.
+stg;map_dominio;4;grupo;text;True;Agrupamento analítico (ex.: grupo do tipo de sinistro, grupo da espécie).
+stg;map_dominio;5;ordem;smallint;True;Ordem de exibição.
+stg;map_dominio;6;observacao;text;True;Observações sobre o código.
+stg;map_dominio;7;arquivo_origem;text;False;Linhagem: arquivo de mapeamento de origem.
+stg;map_dominio;8;linha_arquivo;integer;False;Linhagem: linha no arquivo de mapeamento.
+stg;map_dominio;9;dt_carga;timestamp with time zone;False;Linhagem: data e hora da carga.
+stg;map_regional;1;cod_regional_boletim;smallint;False;"Código da regional no si-bol (0 = não informada; 27 = Hipercentro, usado em 2024)."
+stg;map_regional;2;desc_regional_boletim;text;True;Nome da regional no si-bol.
+stg;map_regional;3;cod_reg_limite;smallint;True;COD_REG correspondente no limite de 9 regionais (vigente até jan/2025).
+stg;map_regional;4;nome_regional;text;True;Nome da regional no limite.
+stg;map_regional;5;sigla;text;True;Sigla da regional.
+stg;map_regional;6;nome_subdistrito_ibge;text;True;Nome dos subdistritos do IBGE que compõem a regional (Censos 2010 e 2022).
+stg;map_regional;7;observacao;text;True;Observações do de-para.
+stg;map_regional;8;arquivo_origem;text;False;Linhagem: arquivo de mapeamento de origem.
+stg;map_regional;9;linha_arquivo;integer;False;Linhagem: linha no arquivo de mapeamento.
+stg;map_regional;10;dt_carga;timestamp with time zone;False;Linhagem: data e hora da carga.
+stg;regional_limite;1;id_reg;text;True;Identificador da regional no arquivo.
+stg;regional_limite;2;cod_reg;text;True;Código da regional (o mesmo cod_regional do si-bol).
+stg;regional_limite;3;sigla;text;True;Sigla da regional.
+stg;regional_limite;4;nome;text;True;Nome da regional.
+stg;regional_limite;5;area_km2;text;True;Área em km².
+stg;regional_limite;6;perimetr_m;text;True;Perímetro em metros.
+stg;regional_limite;7;geometria;text;True;Polígono em WKT, SIRGAS 2000 / UTM 23S (EPSG:31983).
+stg;regional_limite;8;arquivo_origem;text;False;Linhagem: arquivo de onde a linha foi carregada.
+stg;regional_limite;9;linha_arquivo;integer;False;Linhagem: número do registro no arquivo de origem.
+stg;regional_limite;10;dt_carga;timestamp with time zone;False;Linhagem: data e hora da carga no staging.
+stg;resultado_qualidade;1;id_resultado;bigint;False;Identificador do resultado.
+stg;resultado_qualidade;2;id_execucao;bigint;False;Execução do ETL a que o teste pertence.
+stg;resultado_qualidade;3;teste;text;False;Nome do teste.
+stg;resultado_qualidade;4;categoria;text;False;Categoria (unicidade, domínio, volume, órfãos, coerência, cobertura, reconciliação).
+stg;resultado_qualidade;5;severidade;text;False;"CRITICO interrompe a carga; ALERTA e INFO apenas registram."
+stg;resultado_qualidade;6;aprovado;boolean;False;Verdadeiro se o critério foi atendido.
+stg;resultado_qualidade;7;valor_obtido;text;True;Valor medido.
+stg;resultado_qualidade;8;criterio;text;True;Critério de aprovação.
+stg;resultado_qualidade;9;detalhe;text;True;Detalhamento (ex.: contagem por ano).
+stg;resultado_qualidade;10;arquivo_origem;text;False;Linhagem: módulo que gravou o resultado.
+stg;resultado_qualidade;11;dt_carga;timestamp with time zone;False;Linhagem: data e hora da gravação.
+stg;si_bol;1;numero_boletim;text;True;"Número do boletim (numérico até 2016; formato AAAA-NNNNNNNNN-NNN depois). Origem: numero_boletim / NUMERO_BOLETIM."
+stg;si_bol;2;data_hora_boletim;text;True;"Data e hora do sinistro, texto DD/MM/AAAA HH:MI. Origem: ""data hora_boletim"" (com espaço)."
+stg;si_bol;3;data_inclusao;text;True;Data de registro do boletim.
+stg;si_bol;4;tipo_acidente;text;True;Código do tipo de sinistro (ex.: H01002).
+stg;si_bol;5;desc_tipo_acidente;text;True;Descrição do tipo de sinistro.
+stg;si_bol;6;cod_tempo;text;True;Código da condição climática declarada (0 não informado, 1 bom, 2 chuva, 3 neblina, 4 nublado).
+stg;si_bol;7;desc_tempo;text;True;Descrição da condição climática.
+stg;si_bol;8;cod_pavimento;text;True;Código do pavimento (0 não informado, 1 asfalto, 2 concreto, 3 terra, 4 calçamento).
+stg;si_bol;9;pavimento;text;True;Descrição do pavimento.
+stg;si_bol;10;cod_regional;text;True;"Código da administração regional (18 a 26; 27 = Hipercentro em 2024; 0 = não informado)."
+stg;si_bol;11;desc_regional;text;True;Nome da regional.
+stg;si_bol;12;origem_boletim;text;True;Órgão/batalhão que registrou o boletim.
+stg;si_bol;13;local_sinalizado;text;True;Indica se o local é sinalizado (SIM, NÃO, NÃO INFORMADO).
+stg;si_bol;14;velocidade_permitida;text;True;"Velocidade máxima permitida no local (km/h; 0 = não informada)."
+stg;si_bol;15;coordenada_x;text;True;"Coordenada X (UTM 23S). Até 2015: SAD 69, X multiplicado por 100; a partir de 2016: SIRGAS 2000."
+stg;si_bol;16;coordenada_y;text;True;"Coordenada Y (UTM 23S). Até 2015: SAD 69, (Y - 7.000.000) multiplicado por 100; a partir de 2016: SIRGAS 2000."
+stg;si_bol;17;hora_informada;text;True;Indica se a hora do sinistro foi informada (SIM/NÃO).
+stg;si_bol;18;indicador_fatalidade;text;True;Indica se houve vítima fatal (SIM/NÃO).
+stg;si_bol;19;valor_ups;text;True;"Unidade Padrão de Severidade atual (1 sem vítima, 5 com vítima não fatal, 13 com vítima fatal; 0 = não informado)."
+stg;si_bol;20;descricao_ups;text;True;Descrição da UPS atual. Origem: descricao_ups / DESCRIÇÃO_UPS.
+stg;si_bol;21;data_alteracao_smsa;text;True;Data de alteração pela Secretaria Municipal de Saúde.
+stg;si_bol;22;valor_ups_antiga;text;True;UPS anterior à revisão da SMSA (preservada apenas no staging).
+stg;si_bol;23;descricao_ups_antiga;text;True;Descrição da UPS anterior (preservada apenas no staging).
+stg;si_bol;24;ano_arquivo;smallint;False;Ano do arquivo de origem (si-bol-AAAA).
+stg;si_bol;25;arquivo_origem;text;False;Linhagem: arquivo de onde a linha foi carregada.
+stg;si_bol;26;linha_arquivo;integer;False;Linhagem: número da linha no arquivo de origem (o cabeçalho é a linha 1).
+stg;si_bol;27;dt_carga;timestamp with time zone;False;Linhagem: data e hora da carga no staging.
+stg;si_env;1;numero_boletim;text;True;Número do boletim. Origem: num_boletim / Nº_boletim.
+stg;si_env;2;data_hora_boletim;text;True;Data e hora do sinistro.
+stg;si_env;3;numero_envolvido;text;True;Número do envolvido no boletim. Origem: numero_envolvido / Nº_envolvido.
+stg;si_env;4;condutor;text;True;"Indica se é condutor (SIM/NÃO/NÃO INFORMADO até 2015; S/N/0 depois)."
+stg;si_env;5;codigo_severidade;text;True;Severidade atual (0 n/i, 1 não fatal, 2 fatal, 3 sem ferimentos). Origem: codigo_severidade / cod_severidade.
+stg;si_env;6;desc_severidade;text;True;Descrição da severidade.
+stg;si_env;7;sexo;text;True;Sexo (M, F, 0 = não informado).
+stg;si_env;8;cinto_seguranca;text;True;Uso de cinto de segurança (SIM/NÃO/NÃO INFORMADO).
+stg;si_env;9;embriaguez;text;True;Indício de embriaguez (SIM/NÃO/NÃO INFORMADO). Origem: Embreagues (grafia da fonte).
+stg;si_env;10;idade;text;True;Idade em anos.
+stg;si_env;11;nascimento;text;True;Data de nascimento (00/00/0000 = não informada).
+stg;si_env;12;categoria_habilitacao;text;True;Categoria da habilitação do condutor.
+stg;si_env;13;descricao_habilitacao;text;True;Descrição da categoria de habilitação.
+stg;si_env;14;declaracao_obito;text;True;Número da declaração de óbito (preservado apenas no staging).
+stg;si_env;15;cod_severidade_antiga;text;True;Severidade anterior à revisão (preservada apenas no staging).
+stg;si_env;16;especie_veiculo;text;True;Espécie do veículo em que a pessoa estava (vazio para pedestres). Não traz o sequencial do veículo.
+stg;si_env;17;pedestre;text;True;"Indicador de pedestre (S/N/0). Origem: indicador_pedestre (2015) / pedestre (2016+); ausente até 2014."
+stg;si_env;18;passageiro;text;True;"Indicador de passageiro (S/N/0). Origem: indicador_passageiro (2015) / passageiro (2016+); ausente até 2014."
+stg;si_env;19;usa_capacete;text;True;Indicador de uso de capacete. Origem: indicador_usa_capacete (somente 2015).
+stg;si_env;20;ano_arquivo;smallint;False;Ano do arquivo de origem.
+stg;si_env;21;arquivo_origem;text;False;Linhagem: arquivo de onde a linha foi carregada.
+stg;si_env;22;linha_arquivo;integer;False;Linhagem: número da linha no arquivo de origem.
+stg;si_env;23;dt_carga;timestamp with time zone;False;Linhagem: data e hora da carga no staging.
+stg;si_log;1;numero_boletim;text;True;Número do boletim. Origem: numero_boletim / Nº_boletim.
+stg;si_log;2;data_boletim;text;True;Data e hora do sinistro.
+stg;si_log;3;numero_municipio;text;True;Código do município do endereço. Origem: numero_municipio / Nº_municipio.
+stg;si_log;4;nome_municipio;text;True;Nome do município do endereço.
+stg;si_log;5;sequencia_logradouro;text;True;Sequência do logradouro no boletim. Origem: sequencia_logradouros / seq_logradouros.
+stg;si_log;6;numero_logradouro;text;True;Código do logradouro no cadastro da PBH. Origem: numero_logradouro / Nº_logradouro.
+stg;si_log;7;tipo_logradouro;text;True;Sigla do tipo de logradouro (RUA, AVE, ROD...).
+stg;si_log;8;nome_logradouro;text;True;Nome do logradouro.
+stg;si_log;9;tipo_logradouro_anterior;text;True;Sigla do tipo do logradouro em denominação anterior.
+stg;si_log;10;nome_logradouro_anterior;text;True;Nome anterior do logradouro. Origem: nome_logradoro_anterior (erro de digitação na fonte) / nome_logradouro_anterior.
+stg;si_log;11;numero_bairro;text;True;Código do bairro. Origem: Numero_bairro / Nº_bairro.
+stg;si_log;12;nome_bairro;text;True;Nome do bairro.
+stg;si_log;13;tipo_bairro;text;True;Sigla do tipo de bairro (B, V, CH...).
+stg;si_log;14;descricao_tipo_bairro;text;True;Descrição do tipo de bairro.
+stg;si_log;15;numero_imovel;text;True;Número do imóvel de referência.
+stg;si_log;16;numero_imovel_proximo;text;True;Número do imóvel mais próximo.
+stg;si_log;17;ano_arquivo;smallint;False;Ano do arquivo de origem.
+stg;si_log;18;arquivo_origem;text;False;Linhagem: arquivo de onde a linha foi carregada.
+stg;si_log;19;linha_arquivo;integer;False;Linhagem: número da linha no arquivo de origem.
+stg;si_log;20;dt_carga;timestamp with time zone;False;Linhagem: data e hora da carga no staging.
+stg;si_veic;1;numero_boletim;text;True;Número do boletim. Origem: numero_boletim / Nº_boletim.
+stg;si_veic;2;data_hora_boletim;text;True;Data e hora do sinistro.
+stg;si_veic;3;sequencial_veiculo;text;True;Sequencial do veículo no boletim. Origem: sequencial_veiculo / seq_veic.
+stg;si_veic;4;codigo_categoria;text;True;Código da categoria (0 n/i, 1 oficial, 2 missão diplomática, 3 particular, 4 aluguel, 5 aprendizagem). Origem: codigo_categoria / cod_categ.
+stg;si_veic;5;descricao_categoria;text;True;Descrição da categoria do veículo.
+stg;si_veic;6;codigo_especie;text;True;Código da espécie do veículo. Origem: codigo_especie / cod_especie.
+stg;si_veic;7;descricao_especie;text;True;Descrição da espécie do veículo (AUTOMOVEL, MOTOCICLETA...).
+stg;si_veic;8;codigo_situacao;text;True;Código da situação (0 n/i, 1 em movimento, 2 parado, 3 estacionado). Origem: codigo_situacao / cod_situacao.
+stg;si_veic;9;descricao_situacao;text;True;Descrição da situação (vazia para o código 3 até 2019). Origem: descricao_situacao / desc_situacao.
+stg;si_veic;10;tipo_socorro;text;True;Código do tipo de socorro prestado.
+stg;si_veic;11;descricao_tipo_socorro;text;True;Descrição do tipo de socorro. Origem: descricao_tipo_socorro / desc_tipo_socorro.
+stg;si_veic;12;ano_arquivo;smallint;False;Ano do arquivo de origem.
+stg;si_veic;13;arquivo_origem;text;False;Linhagem: arquivo de onde a linha foi carregada.
+stg;si_veic;14;linha_arquivo;integer;False;Linhagem: número da linha no arquivo de origem.
+stg;si_veic;15;dt_carga;timestamp with time zone;False;Linhagem: data e hora da carga no staging.
+stg;trf_boletim;1;numero_boletim_dw;text;False;Número do boletim usado no dw (original, com sufixo /n quando o número se repete no ano para outro evento).
+stg;trf_boletim;2;ano;smallint;False;Ano do sinistro (igual ao ano do arquivo).
+stg;trf_boletim;3;numero_boletim_origem;text;False;Número do boletim como veio na fonte.
+stg;trf_boletim;4;seq_ocorrencia;smallint;False;Ordem do evento entre os que compartilham o mesmo número no ano (1 = único/primeiro).
+stg;trf_boletim;5;data_hora;timestamp without time zone;False;Data e hora do sinistro (horário local).
+stg;trf_boletim;6;data;date;False;Data do sinistro.
+stg;trf_boletim;7;hora;smallint;True;Hora do sinistro (nula quando hora_informada = NÃO).
+stg;trf_boletim;8;fl_hora_informada;boolean;False;Verdadeiro se a hora foi informada no boletim.
+stg;trf_boletim;9;cod_tipo_sinistro;text;False;Código do tipo de sinistro (sem espaços).
+stg;trf_boletim;10;cod_tempo;smallint;False;Código da condição climática declarada.
+stg;trf_boletim;11;cod_pavimento;smallint;False;Código do pavimento.
+stg;trf_boletim;12;local_sinalizado;text;False;SIM, NÃO ou NÃO INFORMADO.
+stg;trf_boletim;13;cod_regional_origem;smallint;False;Código da regional informado no boletim.
+stg;trf_boletim;14;velocidade_permitida;smallint;True;"Velocidade permitida (km/h); nula se 0 ou fora de 10–120."
+stg;trf_boletim;15;valor_ups_origem;smallint;True;UPS informada na fonte (0 = não informada).
+stg;trf_boletim;16;fl_indicador_fatalidade;boolean;False;Indicador de fatalidade do boletim (SIM = verdadeiro).
+stg;trf_boletim;17;coordenada_x_origem;numeric(14,2);True;Coordenada X como veio na fonte (numérica).
+stg;trf_boletim;18;coordenada_y_origem;numeric(14,2);True;Coordenada Y como veio na fonte (numérica).
+stg;trf_boletim;19;qtd_linhas_origem;smallint;False;Linhas idênticas (mesmo número, ano e data/hora) consolidadas neste registro.
+stg;trf_boletim;20;qtd_eventos_numero;smallint;False;Quantidade de eventos distintos que compartilham o número do boletim no ano (1 = número único).
+stg;trf_boletim;21;precipitacao_mm;numeric(6,1);True;"Precipitação do INMET na hora do sinistro (Pampulha; Cercadinho se faltar)."
+stg;trf_boletim;22;estacao_inmet;text;True;Estação do INMET usada (A521 ou F501).
+stg;trf_boletim;23;condicao_climatica;text;True;Condição climática final (declarada ou imputada pelo INMET).
+stg;trf_boletim;24;origem_clima;text;True;DECLARADO NO BOLETIM, IMPUTADO PELO INMET ou NÃO INFORMADO.
+stg;trf_boletim;25;grupo_chuva;text;True;COM CHUVA, SEM CHUVA ou NÃO INFORMADO.
+stg;trf_boletim;26;arquivo_origem;text;False;Linhagem: arquivo de origem.
+stg;trf_boletim;27;linha_arquivo;integer;False;Linhagem: linha do registro mantido.
+stg;trf_boletim;28;dt_carga;timestamp with time zone;False;Linhagem: data e hora da transformação.
+stg;trf_boletim_local;1;numero_boletim_dw;text;False;Número do boletim no dw.
+stg;trf_boletim_local;2;ano;smallint;False;Ano do sinistro.
+stg;trf_boletim_local;3;data;date;False;Data do sinistro (para escolher a versão vigente da dim_local).
+stg;trf_boletim_local;4;chave_local;text;False;Chave natural do local: códigos dos logradouros (par ordenado nos cruzamentos) e do bairro.
+stg;trf_boletim_local;5;cod_logradouro_principal;integer;False;Código do logradouro principal (sequência 1).
+stg;trf_boletim_local;6;cod_logradouro_cruzamento;integer;False;"Código do logradouro de cruzamento (sequência 2); 0 se não houver."
+stg;trf_boletim_local;7;cod_bairro;integer;False;Código do bairro (imputado quando 0, ver origem_bairro).
+stg;trf_boletim_local;8;fl_cruzamento;boolean;False;Verdadeiro se há logradouro de cruzamento.
+stg;trf_boletim_local;9;origem_bairro;text;False;INFORMADO, IMPUTADO (moda do mesmo cruzamento/endereço/logradouro) ou NÃO INFORMADO.
+stg;trf_boletim_local;10;numero_imovel;text;True;Número do imóvel de referência no logradouro principal (como veio na fonte).
+stg;trf_boletim_local;11;arquivo_origem;text;False;Linhagem: processo que gerou o registro.
+stg;trf_boletim_local;12;dt_carga;timestamp with time zone;False;Linhagem: data e hora da transformação.
+stg;trf_clima_hora;1;estacao_codigo;text;False;A521 (Pampulha) ou F501 (Cercadinho).
+stg;trf_clima_hora;2;dt_hora_inicio_local;timestamp without time zone;False;Início, em horário local, do intervalo de uma hora coberto pela leitura (chave de cruzamento com a hora do sinistro).
+stg;trf_clima_hora;3;dt_hora_fim_utc;timestamp with time zone;False;Fim do intervalo em UTC, como publicado pelo INMET.
+stg;trf_clima_hora;4;precipitacao_mm;numeric(6,1);True;"Precipitação no intervalo (mm); nula se ausente (-9999 ou vazio)."
+stg;trf_clima_hora;5;temperatura_ar_c;numeric(5,1);True;Temperatura do ar (°C).
+stg;trf_clima_hora;6;umidade_relativa_pct;numeric(5,1);True;Umidade relativa (%).
+stg;trf_clima_hora;7;arquivo_origem;text;False;Linhagem: arquivo CSV do INMET.
+stg;trf_clima_hora;8;dt_carga;timestamp with time zone;False;Linhagem: data e hora da transformação.
+stg;trf_coordenada;1;numero_boletim_dw;text;False;Número do boletim no dw.
+stg;trf_coordenada;2;ano;smallint;False;Ano do sinistro.
+stg;trf_coordenada;3;srid_origem;integer;True;Sistema de referência de origem (29193 ou 31983).
+stg;trf_coordenada;4;x_utm;numeric(12,2);True;X em UTM 23S após a correção de escala (metros).
+stg;trf_coordenada;5;y_utm;numeric(12,2);True;Y em UTM 23S após a correção de escala (metros).
+stg;trf_coordenada;6;longitude;double precision;True;Longitude WGS 84.
+stg;trf_coordenada;7;latitude;double precision;True;Latitude WGS 84.
+stg;trf_coordenada;8;situacao;text;False;VALIDA, ZERADA (sem coordenada) ou FORA_FAIXA_BH (fora da faixa esperada para BH).
+stg;trf_coordenada;9;geom;geometry(Point,4326);True;Ponto em WGS 84 (EPSG:4326).
+stg;trf_coordenada;10;fl_dentro_municipio;boolean;True;Verdadeiro se o ponto está a até 100 m do limite do município (união das regionais).
+stg;trf_coordenada;11;fl_geolocalizado;boolean;False;Verdadeiro se a coordenada é válida e está dentro do município.
+stg;trf_coordenada;12;arquivo_origem;text;False;Linhagem: processo que gerou o registro.
+stg;trf_coordenada;13;dt_carga;timestamp with time zone;False;Linhagem: data e hora da transformação.
+stg;trf_envolvido;1;numero_boletim_dw;text;False;Número do boletim no dw.
+stg;trf_envolvido;2;ano;smallint;False;Ano do sinistro.
+stg;trf_envolvido;3;numero_envolvido;smallint;False;Número do envolvido no boletim.
+stg;trf_envolvido;4;tipo_envolvimento;text;False;CONDUTOR, PASSAGEIRO, PEDESTRE ou NÃO INFORMADO.
+stg;trf_envolvido;5;origem_tipo_envolvimento;text;False;INDICADOR DA FONTE (pedestre/passageiro/condutor informados) ou REGRA DERIVADA (2011–2015 e lacunas).
+stg;trf_envolvido;6;cod_severidade;smallint;False;Severidade atual (0 n/i, 1 não fatal, 2 fatal, 3 sem ferimentos).
+stg;trf_envolvido;7;gravidade;text;False;Descrição da severidade.
+stg;trf_envolvido;8;fl_vitima;boolean;False;"Vítima = severidade 1 (não fatal) ou 2 (fatal); ileso e não informado não são vítimas."
+stg;trf_envolvido;9;fl_vitima_fatal;boolean;False;Severidade 2 (fatal).
+stg;trf_envolvido;10;fl_condutor;boolean;False;Tipo de envolvimento = CONDUTOR.
+stg;trf_envolvido;11;fl_pedestre;boolean;False;Tipo de envolvimento = PEDESTRE.
+stg;trf_envolvido;12;fl_motociclista;boolean;False;Condutor ou passageiro de veículo do grupo Motocicleta.
+stg;trf_envolvido;13;sexo;text;False;MASCULINO, FEMININO ou NÃO INFORMADO.
+stg;trf_envolvido;14;idade;smallint;True;Idade em anos (nula quando 0 sem data de nascimento que a confirme, ou acima de 110).
+stg;trf_envolvido;15;faixa_etaria;text;False;Faixa etária derivada da idade.
+stg;trf_envolvido;16;embriaguez;text;False;SIM, NÃO ou NÃO INFORMADO.
+stg;trf_envolvido;17;especie_veiculo;text;True;"Espécie do veículo em que a pessoa estava (padronizada); nula para pedestre."
+stg;trf_envolvido;18;grupo_especie;text;True;Grupo da espécie (Motocicleta, Automóvel/utilitário, Ônibus, Caminhão, Bicicleta, Outros).
+stg;trf_envolvido;19;origem_especie;text;False;INFORMADA NO BOLETIM, IMPUTADA (ESPÉCIE ÚNICA NO BOLETIM), NÃO INFORMADA ou NÃO SE APLICA (PEDESTRE).
+stg;trf_envolvido;20;arquivo_origem;text;False;Linhagem: arquivo de origem.
+stg;trf_envolvido;21;linha_arquivo;integer;False;Linhagem: linha no arquivo de origem.
+stg;trf_envolvido;22;dt_carga;timestamp with time zone;False;Linhagem: data e hora da transformação.
+stg;trf_local_versao;1;chave_local;text;False;Chave natural do local.
+stg;trf_local_versao;2;versao;smallint;False;Número da versão.
+stg;trf_local_versao;3;dt_inicio;date;False;Início da vigência.
+stg;trf_local_versao;4;dt_fim;date;False;Fim da vigência (exclusivo).
+stg;trf_local_versao;5;fl_versao_atual;boolean;False;Verdadeiro na versão vigente.
+stg;trf_local_versao;6;cod_logradouro_principal;integer;False;Código do logradouro principal.
+stg;trf_local_versao;7;tipo_logradouro_principal;text;False;Sigla do tipo do logradouro principal.
+stg;trf_local_versao;8;nome_logradouro_principal;text;False;Nome do logradouro principal na versão.
+stg;trf_local_versao;9;nome_anterior_principal;text;True;Nome anterior do logradouro principal.
+stg;trf_local_versao;10;cod_logradouro_cruzamento;integer;False;Código do logradouro de cruzamento (0 = sem cruzamento).
+stg;trf_local_versao;11;tipo_logradouro_cruzamento;text;True;Sigla do tipo do logradouro de cruzamento.
+stg;trf_local_versao;12;nome_logradouro_cruzamento;text;True;Nome do logradouro de cruzamento na versão.
+stg;trf_local_versao;13;nome_anterior_cruzamento;text;True;Nome anterior do logradouro de cruzamento.
+stg;trf_local_versao;14;cod_bairro;integer;False;Código do bairro.
+stg;trf_local_versao;15;nome_bairro;text;False;Nome do bairro (mais recente, normalizado).
+stg;trf_local_versao;16;fl_cruzamento;boolean;False;Verdadeiro se é cruzamento.
+stg;trf_local_versao;17;descricao_local;text;False;Descrição legível na versão (ex.: AVE X x RUA Y).
+stg;trf_local_versao;18;descricao_local_atual;text;False;Descrição com os nomes atuais (igual em todas as versões).
+stg;trf_local_versao;19;motivo_versao;text;False;Motivo da abertura da versão.
+stg;trf_local_versao;20;arquivo_origem;text;False;Linhagem: processo que gerou o registro.
+stg;trf_local_versao;21;dt_carga;timestamp with time zone;False;Linhagem: data e hora da transformação.
+stg;trf_logradouro_versao;1;cod_logradouro;integer;False;Código do logradouro no cadastro da PBH.
+stg;trf_logradouro_versao;2;versao;smallint;False;Número da versão (1 = mais antiga).
+stg;trf_logradouro_versao;3;dt_inicio;date;False;"Início da vigência do nome (primeiro registro com o nome; 1900-01-01 na primeira versão)."
+stg;trf_logradouro_versao;4;dt_fim;date;False;"Fim da vigência (exclusivo; 9999-12-31 na versão atual)."
+stg;trf_logradouro_versao;5;tipo_logradouro;text;False;Sigla do tipo de logradouro.
+stg;trf_logradouro_versao;6;nome_logradouro;text;False;Nome normalizado (maiúsculas, sem acento, abreviaturas expandidas).
+stg;trf_logradouro_versao;7;nome_anterior;text;True;Nome da versão anterior.
+stg;trf_logradouro_versao;8;fl_renomeacao_confirmada;boolean;False;Verdadeiro se o campo nome_logradouro_anterior dos registros novos confirma o nome antigo.
+stg;trf_logradouro_versao;9;variantes;text;True;Grafias consolidadas nesta versão.
+stg;trf_logradouro_versao;10;qtd_registros;integer;False;Registros do si-log nesta versão.
+stg;trf_logradouro_versao;11;arquivo_origem;text;False;Linhagem: processo que gerou o registro.
+stg;trf_logradouro_versao;12;dt_carga;timestamp with time zone;False;Linhagem: data e hora da transformação.
+stg;trf_populacao;1;ano;smallint;False;Ano de referência (1º de julho).
+stg;trf_populacao;2;cod_reg_limite;smallint;False;Código da regional (COD_REG).
+stg;trf_populacao;3;populacao_residente;integer;False;População residente estimada da regional.
+stg;trf_populacao;4;participacao;numeric(12,10);False;Participação da regional na população do município.
+stg;trf_populacao;5;populacao_municipio;integer;False;População do município no ano.
+stg;trf_populacao;6;origem_dado;text;False;CENSO, ESTIMATIVA IBGE x PROPORÇÃO, INTERPOLADO x PROPORÇÃO.
+stg;trf_populacao;7;origem_total_municipio;text;False;Origem do total municipal (tabela SIDRA ou interpolação geométrica).
+stg;trf_populacao;8;metodo_regional;text;False;Como a participação da regional foi obtida.
+stg;trf_populacao;9;arquivo_origem;text;False;Linhagem: processo que gerou o registro.
+stg;trf_populacao;10;dt_carga;timestamp with time zone;False;Linhagem: data e hora da transformação.
+stg;trf_setor2010_regional;1;cod_setor;text;False;Código do setor censitário 2010.
+stg;trf_setor2010_regional;2;cod_subdistrito;text;True;Subdistrito IBGE do setor em 2010.
+stg;trf_setor2010_regional;3;nome_subdistrito;text;True;Nome do subdistrito IBGE em 2010.
+stg;trf_setor2010_regional;4;cod_reg_limite;smallint;False;Regional (COD_REG) em que o setor foi alocado.
+stg;trf_setor2010_regional;5;metodo;text;False;PONTO NO POLÍGONO ou REGIONAL MAIS PRÓXIMA.
+stg;trf_setor2010_regional;6;populacao;integer;False;Pessoas residentes no setor (Pessoa13, V001).
+stg;trf_setor2010_regional;7;arquivo_origem;text;False;Linhagem: processo que gerou o registro.
+stg;trf_setor2010_regional;8;dt_carga;timestamp with time zone;False;Linhagem: data e hora da transformação.
+stg;trf_veiculo;1;numero_boletim_dw;text;False;Número do boletim no dw.
+stg;trf_veiculo;2;ano;smallint;False;Ano do sinistro.
+stg;trf_veiculo;3;sequencial_veiculo;smallint;False;Sequencial do veículo no boletim.
+stg;trf_veiculo;4;cod_categoria;smallint;False;Código da categoria.
+stg;trf_veiculo;5;categoria;text;False;Categoria padronizada.
+stg;trf_veiculo;6;cod_especie;smallint;False;Código da espécie.
+stg;trf_veiculo;7;especie;text;False;Espécie padronizada (pela descrição, pois o código 9 é usado para BONDE e TREM).
+stg;trf_veiculo;8;grupo_especie;text;False;Grupo da espécie.
+stg;trf_veiculo;9;cod_situacao;smallint;False;Código da situação.
+stg;trf_veiculo;10;situacao;text;False;Situação padronizada pelo código (3 = ESTACIONADO).
+stg;trf_veiculo;11;arquivo_origem;text;False;Linhagem: arquivo de origem.
+stg;trf_veiculo;12;linha_arquivo;integer;False;Linhagem: linha no arquivo de origem.
+stg;trf_veiculo;13;dt_carga;timestamp with time zone;False;Linhagem: data e hora da transformação.
+dw;dim_condicao_via;1;sk_condicao_via;smallint;False;Chave substituta (-1 = não informado, -2 = não se aplica).
+dw;dim_condicao_via;2;cod_tempo;smallint;True;Código do tempo declarado no boletim.
+dw;dim_condicao_via;3;condicao_climatica;text;False;BOM, CHUVA, NEBLINA, NUBLADO (declarados), CHUVA (INMET), SEM CHUVA (INMET) ou NÃO INFORMADO.
+dw;dim_condicao_via;4;origem_clima;text;False;DECLARADO NO BOLETIM, IMPUTADO PELO INMET ou NÃO INFORMADO.
+dw;dim_condicao_via;5;grupo_chuva;text;False;Agrupamento comparável entre declarado e imputado: COM CHUVA, SEM CHUVA ou NÃO INFORMADO.
+dw;dim_condicao_via;6;cod_pavimento;smallint;True;Código do pavimento.
+dw;dim_condicao_via;7;pavimento;text;False;Pavimento.
+dw;dim_condicao_via;8;local_sinalizado;text;False;SIM, NÃO ou NÃO INFORMADO.
+dw;dim_condicao_via;9;dt_carga;timestamp with time zone;False;Linhagem: data e hora da carga.
+dw;dim_condicao_via;10;arquivo_origem;text;False;Linhagem: arquivo de origem.
+dw;dim_local;1;sk_local;integer;False;Chave substituta (-1 = não informado, -2 = não se aplica).
+dw;dim_local;2;chave_natural;text;False;Chave natural pelos códigos: logradouro(s) e bairro (par de logradouros ordenado nos cruzamentos).
+dw;dim_local;3;versao;smallint;False;Número da versão do local.
+dw;dim_local;4;cod_logradouro_principal;integer;True;Código do logradouro principal (cadastro da PBH).
+dw;dim_local;5;tipo_logradouro_principal;text;True;Tipo do logradouro principal (RUA, AVENIDA...).
+dw;dim_local;6;nome_logradouro_principal;text;False;Nome do logradouro principal vigente na versão.
+dw;dim_local;7;nome_anterior_principal;text;True;Nome anterior do logradouro principal (versão anterior).
+dw;dim_local;8;nome_logradouro_principal_atual;text;False;Nome atual do logradouro principal (igual em todas as versões).
+dw;dim_local;9;cod_logradouro_cruzamento;integer;True;Código do logradouro de cruzamento (nulo se não houver).
+dw;dim_local;10;tipo_logradouro_cruzamento;text;True;Tipo do logradouro de cruzamento.
+dw;dim_local;11;nome_logradouro_cruzamento;text;True;Nome do logradouro de cruzamento vigente na versão.
+dw;dim_local;12;nome_anterior_cruzamento;text;True;Nome anterior do logradouro de cruzamento.
+dw;dim_local;13;nome_logradouro_cruzamento_atual;text;True;Nome atual do logradouro de cruzamento.
+dw;dim_local;14;cod_bairro;integer;True;Código do bairro (0 = não informado).
+dw;dim_local;15;nome_bairro;text;False;Nome do bairro (mais recente, normalizado).
+dw;dim_local;16;fl_cruzamento;boolean;False;Verdadeiro se o local é um cruzamento.
+dw;dim_local;17;descricao_local;text;False;"Descrição legível na versão (ex.: ""AVE AMAZONAS x RUA DOS TUPIS"")."
+dw;dim_local;18;descricao_local_atual;text;False;Descrição com os nomes atuais, para rankings históricos estáveis.
+dw;dim_local;19;latitude;double precision;True;Latitude do ponto representativo.
+dw;dim_local;20;longitude;double precision;True;Longitude do ponto representativo.
+dw;dim_local;21;geom;geometry(Point,4326);True;Ponto representativo dos sinistros do local (o sinistro geolocalizado mais próximo do centroide), EPSG:4326.
+dw;dim_local;22;qtd_pontos_geom;integer;True;Quantidade de sinistros geolocalizados usados no ponto representativo.
+dw;dim_local;23;dt_inicio_vigencia;date;False;Início da vigência da versão.
+dw;dim_local;24;dt_fim_vigencia;date;False;"Fim da vigência (exclusivo; 9999-12-31 na versão atual)."
+dw;dim_local;25;fl_versao_atual;boolean;False;Verdadeiro na versão vigente.
+dw;dim_local;26;motivo_versao;text;True;Motivo da abertura da versão.
+dw;dim_local;27;dt_carga;timestamp with time zone;False;Linhagem: data e hora da carga.
+dw;dim_local;28;arquivo_origem;text;False;Linhagem: arquivo(s) de origem.
+dw;dim_pessoa;1;sk_pessoa;smallint;False;Chave substituta (-1 = não informado, -2 = não se aplica).
+dw;dim_pessoa;2;tipo_envolvimento;text;False;CONDUTOR, PASSAGEIRO, PEDESTRE ou NÃO INFORMADO.
+dw;dim_pessoa;3;sexo;text;False;MASCULINO, FEMININO ou NÃO INFORMADO.
+dw;dim_pessoa;4;faixa_etaria;text;False;Faixa etária (0 a 9 ... 70 ou mais, Não informada).
+dw;dim_pessoa;5;ordem_faixa_etaria;smallint;False;Ordem de exibição da faixa etária.
+dw;dim_pessoa;6;embriaguez;text;False;Indício de embriaguez: SIM, NÃO ou NÃO INFORMADO (consistente a partir de 2016).
+dw;dim_pessoa;7;dt_carga;timestamp with time zone;False;Linhagem: data e hora da carga.
+dw;dim_pessoa;8;arquivo_origem;text;False;Linhagem: origem da linha.
+dw;dim_regional;1;sk_regional;smallint;False;Chave substituta (-1 = não informada, -2 = não se aplica).
+dw;dim_regional;2;cod_regional;smallint;True;Código da regional na PBH (COD_REG = cod_regional do si-bol, 18 a 26).
+dw;dim_regional;3;nome_regional;text;False;Nome da regional.
+dw;dim_regional;4;sigla;text;True;Sigla da regional.
+dw;dim_regional;5;area_km2;numeric(10,3);True;Área em km² (do arquivo da PBH).
+dw;dim_regional;6;perimetro_m;numeric(12,3);True;Perímetro em metros (do arquivo da PBH).
+dw;dim_regional;7;subdistritos_ibge;text;True;Códigos dos subdistritos do IBGE que compõem a regional.
+dw;dim_regional;8;versao_limite;text;True;Arquivo de limite de origem.
+dw;dim_regional;9;geom;geometry(MultiPolygon,4326);True;Polígono da regional (MultiPolygon, EPSG:4326).
+dw;dim_regional;10;dt_carga;timestamp with time zone;False;Linhagem: data e hora da carga.
+dw;dim_regional;11;arquivo_origem;text;False;Linhagem: arquivo de origem.
+dw;dim_tempo;1;sk_tempo;integer;False;"Chave substituta inteligente AAAAMMDDHH (HH = 99 para ""Sem hora"")."
+dw;dim_tempo;2;data;date;True;Data.
+dw;dim_tempo;3;ano;smallint;True;Ano.
+dw;dim_tempo;4;semestre;smallint;True;Semestre (1–2).
+dw;dim_tempo;5;trimestre;smallint;True;Trimestre (1–4).
+dw;dim_tempo;6;mes;smallint;True;Mês (1–12).
+dw;dim_tempo;7;nome_mes;text;False;Nome do mês em português.
+dw;dim_tempo;8;ano_mes;text;True;Ano e mês (AAAA-MM).
+dw;dim_tempo;9;dia;smallint;True;Dia do mês.
+dw;dim_tempo;10;dia_semana;smallint;True;Dia da semana ISO (1 = segunda ... 7 = domingo).
+dw;dim_tempo;11;nome_dia_semana;text;False;Nome do dia da semana.
+dw;dim_tempo;12;fl_fim_de_semana;boolean;True;Sábado ou domingo.
+dw;dim_tempo;13;hora;smallint;True;"Hora (0–23); nula no membro ""Sem hora""."
+dw;dim_tempo;14;fl_hora_informada;boolean;False;"Falso no membro ""Sem hora"" e nos membros especiais."
+dw;dim_tempo;15;faixa_horaria;text;False;"Faixa de 3 horas (00h–02h ... 21h–23h) ou ""Hora não informada""."
+dw;dim_tempo;16;periodo_dia;text;False;"Madrugada (0–5h), Manhã (6–11h), Tarde (12–17h), Noite (18–23h) ou ""Hora não informada""."
+dw;dim_tempo;17;dt_carga;timestamp with time zone;False;Linhagem: data e hora da carga.
+dw;dim_tempo;18;arquivo_origem;text;False;Linhagem: script que gerou a linha.
+dw;dim_tipo_sinistro;1;sk_tipo_sinistro;smallint;False;Chave substituta (-1 = não informado, -2 = não se aplica).
+dw;dim_tipo_sinistro;2;cod_tipo_sinistro;text;False;Código do tipo de sinistro (ex.: H06002).
+dw;dim_tipo_sinistro;3;descricao;text;False;Descrição padronizada.
+dw;dim_tipo_sinistro;4;descricao_origem;text;True;Descrição como veio na fonte.
+dw;dim_tipo_sinistro;5;grupo_tipo_sinistro;text;False;Agrupamento analítico.
+dw;dim_tipo_sinistro;6;ordem;smallint;True;Ordem de exibição.
+dw;dim_tipo_sinistro;7;dt_carga;timestamp with time zone;False;Linhagem: data e hora da carga.
+dw;dim_tipo_sinistro;8;arquivo_origem;text;False;Linhagem: arquivo de origem.
+dw;dim_veiculo;1;sk_veiculo;smallint;False;Chave substituta (-1 = não identificado, -2 = não se aplica (pedestre)).
+dw;dim_veiculo;2;especie;text;False;Espécie do veículo.
+dw;dim_veiculo;3;grupo_especie;text;False;Grupo da espécie (Motocicleta, Automóvel/utilitário, Ônibus, Caminhão, Bicicleta, Outros).
+dw;dim_veiculo;4;categoria;text;False;Categoria (PARTICULAR, ALUGUEL...) ou NÃO IDENTIFICADA quando o veículo exato não pôde ser determinado.
+dw;dim_veiculo;5;situacao;text;False;Situação (EM MOVIMENTO, PARADO...) ou NÃO IDENTIFICADA.
+dw;dim_veiculo;6;fl_identificado;boolean;False;Verdadeiro se categoria e situação vêm do veículo identificado.
+dw;dim_veiculo;7;dt_carga;timestamp with time zone;False;Linhagem: data e hora da carga.
+dw;dim_veiculo;8;arquivo_origem;text;False;Linhagem: arquivo de origem.
+dw;fato_envolvido;1;numero_boletim;text;False;Dimensão degenerada: número do boletim (o mesmo da fato_sinistro).
+dw;fato_envolvido;2;ano;smallint;False;Ano do sinistro (chave de partição).
+dw;fato_envolvido;3;numero_envolvido;smallint;False;Dimensão degenerada: número do envolvido no boletim.
+dw;fato_envolvido;4;sk_tempo;integer;False;FK dim_tempo.
+dw;fato_envolvido;5;sk_local;integer;False;FK dim_local (versão vigente na data).
+dw;fato_envolvido;6;sk_pessoa;smallint;False;FK dim_pessoa (perfil).
+dw;fato_envolvido;7;sk_veiculo;smallint;False;FK dim_veiculo (perfil herdado quando há exatamente um veículo da espécie da pessoa no boletim).
+dw;fato_envolvido;8;sk_regional;smallint;False;"FK dim_regional (dimensão conformada com a fato_sinistro; acréscimo à Fase 2)."
+dw;fato_envolvido;9;idade;smallint;True;"Idade em anos (atributo; nula se não informada)."
+dw;fato_envolvido;10;gravidade;text;False;Dimensão degenerada: FATAL, NÃO FATAL, SEM FERIMENTOS ou NÃO INFORMADA.
+dw;fato_envolvido;11;qtd_envolvido;smallint;False;Contador (sempre 1) para somas.
+dw;fato_envolvido;12;fl_vitima;boolean;False;"Vítima (gravidade NÃO FATAL ou FATAL); envolvido ileso não é vítima."
+dw;fato_envolvido;13;fl_vitima_fatal;boolean;False;Vítima fatal.
+dw;fato_envolvido;14;fl_pedestre;boolean;False;Pedestre.
+dw;fato_envolvido;15;fl_motociclista;boolean;False;Condutor ou passageiro de motocicleta (grupo).
+dw;fato_envolvido;16;fl_condutor;boolean;False;Condutor.
+dw;fato_envolvido;17;origem_tipo_envolvimento;text;False;INDICADOR DA FONTE ou REGRA DERIVADA (ver README).
+dw;fato_envolvido;18;origem_especie_veiculo;text;False;Origem da espécie do veículo da pessoa: INFORMADA NO BOLETIM, IMPUTADA (ESPÉCIE ÚNICA NO BOLETIM), NÃO INFORMADA ou NÃO SE APLICA (PEDESTRE).
+dw;fato_envolvido;19;dt_carga;timestamp with time zone;False;Linhagem: data e hora da carga.
+dw;fato_envolvido;20;arquivo_origem;text;False;Linhagem: arquivo si_env de origem.
+dw;fato_populacao;1;sk_regional;smallint;False;FK dim_regional.
+dw;fato_populacao;2;sk_tempo;integer;False;"FK dim_tempo: 1º de julho do ano, membro ""Sem hora"" (AAAA070199)."
+dw;fato_populacao;3;ano;smallint;False;Ano de referência.
+dw;fato_populacao;4;populacao_residente;integer;False;População residente da regional (medida semiaditiva: soma entre regionais, não entre anos).
+dw;fato_populacao;5;participacao_regional;numeric(12,10);False;Participação da regional na população do município.
+dw;fato_populacao;6;populacao_municipio;integer;False;População do município no ano (as regionais somam exatamente este total).
+dw;fato_populacao;7;origem_dado;text;False;CENSO, ESTIMATIVA IBGE x PROPORÇÃO ou INTERPOLADO x PROPORÇÃO.
+dw;fato_populacao;8;origem_total_municipio;text;False;Origem do total municipal (tabela SIDRA ou interpolação).
+dw;fato_populacao;9;metodo_regional;text;False;Método da participação da regional (Censo 2022, Censo 2010 por setores ou interpolação linear 2010–2022).
+dw;fato_populacao;10;dt_carga;timestamp with time zone;False;Linhagem: data e hora da carga.
+dw;fato_populacao;11;arquivo_origem;text;False;Linhagem: arquivos de origem.
+dw;fato_sinistro;1;numero_boletim;text;False;Dimensão degenerada: número do boletim (sufixo /n para eventos distintos com o mesmo número no ano).
+dw;fato_sinistro;2;ano;smallint;False;Ano do sinistro (chave de partição).
+dw;fato_sinistro;3;sk_tempo;integer;False;"FK dim_tempo (data + hora; AAAAMMDD99 quando a hora não foi informada)."
+dw;fato_sinistro;4;sk_local;integer;False;FK dim_local (versão vigente na data do sinistro).
+dw;fato_sinistro;5;sk_tipo_sinistro;smallint;False;FK dim_tipo_sinistro.
+dw;fato_sinistro;6;sk_condicao_via;smallint;False;FK dim_condicao_via.
+dw;fato_sinistro;7;sk_regional;smallint;False;"FK dim_regional (código do boletim; 27 Hipercentro -> Centro-Sul; nulo/0 resolvido por ST_Within do ponto do boletim ou, sem ponto, do ponto representativo do local)."
+dw;fato_sinistro;8;qtd_envolvidos;smallint;False;Pessoas envolvidas (si_env).
+dw;fato_sinistro;9;qtd_vitimas;smallint;False;Vítimas: envolvidos com severidade não fatal ou fatal.
+dw;fato_sinistro;10;qtd_vitimas_fatais;smallint;False;Vítimas fatais (severidade fatal no si_env).
+dw;fato_sinistro;11;qtd_veiculos;smallint;False;Veículos envolvidos (si-veic).
+dw;fato_sinistro;12;qtd_motocicletas;smallint;False;Veículos do grupo Motocicleta (motocicleta, motoneta, ciclomotor, triciclo).
+dw;fato_sinistro;13;qtd_automoveis;smallint;False;Veículos do grupo Automóvel/utilitário.
+dw;fato_sinistro;14;qtd_onibus;smallint;False;Veículos do grupo Ônibus (ônibus e micro-ônibus).
+dw;fato_sinistro;15;qtd_caminhoes;smallint;False;Veículos do grupo Caminhão (caminhão, caminhão-trator, reboque).
+dw;fato_sinistro;16;qtd_bicicletas;smallint;False;Bicicletas.
+dw;fato_sinistro;17;qtd_outros_veiculos;smallint;False;Demais espécies e não informadas.
+dw;fato_sinistro;18;valor_ups;smallint;False;"Unidade Padrão de Severidade (1, 5 ou 13): a da fonte quando informada; senão 13 se houve morte e 5 caso contrário."
+dw;fato_sinistro;19;fl_ups_imputada;boolean;False;Verdadeiro quando a UPS não veio na fonte (0 a partir de 2016) e foi derivada da severidade.
+dw;fato_sinistro;20;velocidade_permitida;smallint;True;"Velocidade máxima permitida (km/h) — medida NÃO aditiva; nula se não informada."
+dw;fato_sinistro;21;precipitacao_mm;numeric(6,1);True;Precipitação do INMET na hora do sinistro (mm) — medida não aditiva entre sinistros.
+dw;fato_sinistro;22;estacao_inmet;text;True;Estação usada para a precipitação (A521 Pampulha ou F501 Cercadinho).
+dw;fato_sinistro;23;fl_fatal;boolean;False;Verdadeiro se houve ao menos uma vítima fatal.
+dw;fato_sinistro;24;fl_envolve_pedestre;boolean;False;Verdadeiro se há pedestre envolvido ou o tipo é atropelamento de pessoa.
+dw;fato_sinistro;25;fl_envolve_motociclista;boolean;False;Verdadeiro se há motocicleta (grupo) entre os veículos ou envolvidos.
+dw;fato_sinistro;26;fl_geolocalizado;boolean;False;Verdadeiro se a coordenada é válida e está dentro do município.
+dw;fato_sinistro;27;latitude;double precision;True;Latitude do ponto exato (WGS 84).
+dw;fato_sinistro;28;longitude;double precision;True;Longitude do ponto exato (WGS 84).
+dw;fato_sinistro;29;geom;geometry(Point,4326);True;Ponto exato do sinistro (EPSG:4326), para o mapa de calor.
+dw;fato_sinistro;30;origem_regional;text;False;BOLETIM, HIPERCENTRO -> CENTRO-SUL, ESPACIAL (ST_Within), ESPACIAL (regional mais próxima), ESPACIAL (ponto do local) ou NÃO RESOLVIDA.
+dw;fato_sinistro;31;dt_carga;timestamp with time zone;False;Linhagem: data e hora da carga.
+dw;fato_sinistro;32;arquivo_origem;text;False;Linhagem: arquivo si-bol de origem.
+dw;mv_indicadores_regional_ano;1;ano;smallint;True;Ano.
+dw;mv_indicadores_regional_ano;2;sk_regional;smallint;True;Chave da regional.
+dw;mv_indicadores_regional_ano;3;cod_regional;smallint;True;Código da regional.
+dw;mv_indicadores_regional_ano;4;nome_regional;text;True;Nome da regional.
+dw;mv_indicadores_regional_ano;5;sigla;text;True;Sigla da regional.
+dw;mv_indicadores_regional_ano;6;sinistros;bigint;True;Sinistros com vítima.
+dw;mv_indicadores_regional_ano;7;sinistros_fatais;bigint;True;Sinistros com ao menos uma morte.
+dw;mv_indicadores_regional_ano;8;vitimas;bigint;True;Vítimas.
+dw;mv_indicadores_regional_ano;9;mortos;bigint;True;Vítimas fatais.
+dw;mv_indicadores_regional_ano;10;ups;bigint;True;Soma da Unidade Padrão de Severidade.
+dw;mv_indicadores_regional_ano;11;populacao;integer;True;População residente da regional no ano.
+dw;mv_indicadores_regional_ano;12;taxa_sinistros_100mil;numeric;True;Sinistros por 100 mil habitantes.
+dw;mv_indicadores_regional_ano;13;taxa_vitimas_100mil;numeric;True;Vítimas por 100 mil habitantes.
+dw;mv_indicadores_regional_ano;14;taxa_mortos_100mil;numeric;True;Mortos por 100 mil habitantes.
+dw;mv_participacao_vitimas_ano;1;ano;smallint;True;Ano.
+dw;mv_participacao_vitimas_ano;2;vitimas;bigint;True;Total de vítimas.
+dw;mv_participacao_vitimas_ano;3;vitimas_pedestres;bigint;True;Vítimas pedestres.
+dw;mv_participacao_vitimas_ano;4;vitimas_motociclistas;bigint;True;Vítimas motociclistas (condutores e passageiros).
+dw;mv_participacao_vitimas_ano;5;pct_vitimas_pedestres;numeric;True;Percentual de pedestres nas vítimas.
+dw;mv_participacao_vitimas_ano;6;pct_vitimas_motociclistas;numeric;True;Percentual de motociclistas nas vítimas.
+dw;mv_participacao_vitimas_ano;7;mortos;bigint;True;Total de mortos.
+dw;mv_participacao_vitimas_ano;8;mortos_pedestres;bigint;True;Mortos pedestres.
+dw;mv_participacao_vitimas_ano;9;mortos_motociclistas;bigint;True;Mortos motociclistas.
+dw;mv_participacao_vitimas_ano;10;pct_mortos_pedestres;numeric;True;Percentual de pedestres nos mortos.
+dw;mv_participacao_vitimas_ano;11;pct_mortos_motociclistas;numeric;True;Percentual de motociclistas nos mortos.
+dw;mv_ranking_locais;1;chave_natural;text;True;Chave natural do local.
+dw;mv_ranking_locais;2;ano;smallint;True;Ano.
+dw;mv_ranking_locais;3;descricao_local_atual;text;True;Descrição do local com os nomes atuais.
+dw;mv_ranking_locais;4;fl_cruzamento;boolean;True;Verdadeiro se é cruzamento.
+dw;mv_ranking_locais;5;nome_bairro;text;True;Bairro.
+dw;mv_ranking_locais;6;sinistros;bigint;True;Sinistros com vítima.
+dw;mv_ranking_locais;7;vitimas;bigint;True;Vítimas.
+dw;mv_ranking_locais;8;mortos;bigint;True;Vítimas fatais.
+dw;mv_ranking_locais;9;ups;bigint;True;Soma da UPS (severidade ponderada).
+dw;mv_ranking_locais;10;sinistros_com_pedestre;bigint;True;Sinistros com pedestre envolvido.
+dw;mv_ranking_locais;11;sinistros_com_motocicleta;bigint;True;Sinistros com motocicleta envolvida.
+dw;mv_ranking_locais;12;rank_ups_ano;bigint;True;Posição no ano pela UPS.
+dw;mv_ranking_locais;13;rank_sinistros_ano;bigint;True;Posição no ano pelo número de sinistros.
+dw;mv_ranking_locais;14;latitude;double precision;True;Latitude do ponto representativo do local.
+dw;mv_ranking_locais;15;longitude;double precision;True;Longitude do ponto representativo do local.
+dw;mv_taxa_mortalidade_anual;1;ano;smallint;True;Ano.
+dw;mv_taxa_mortalidade_anual;2;populacao;bigint;True;População do município (soma das regionais).
+dw;mv_taxa_mortalidade_anual;3;origem_populacao;text;True;Origem do total populacional.
+dw;mv_taxa_mortalidade_anual;4;sinistros;bigint;True;Sinistros com vítima.
+dw;mv_taxa_mortalidade_anual;5;vitimas;bigint;True;Vítimas (feridos + mortos).
+dw;mv_taxa_mortalidade_anual;6;mortos;bigint;True;Vítimas fatais registradas nos boletins.
+dw;mv_taxa_mortalidade_anual;7;taxa_mortos_100mil;numeric;True;Mortos por 100 mil habitantes.
+dw;mv_taxa_mortalidade_anual;8;taxa_vitimas_100mil;numeric;True;Vítimas por 100 mil habitantes.
+dw;mv_taxa_mortalidade_anual;9;taxa_base_2014;numeric;True;Taxa de mortos de 2014 (ano-base da meta).
+dw;mv_taxa_mortalidade_anual;10;meta_2030;numeric;True;Meta para 2030: 50% da taxa de 2014.
+dw;mv_taxa_mortalidade_anual;11;distancia_meta;numeric;True;Taxa do ano menos a meta (positivo = acima da meta).
+dw;mv_taxa_mortalidade_anual;12;pct_reducao_vs_2014;numeric;True;Redução percentual da taxa em relação a 2014.

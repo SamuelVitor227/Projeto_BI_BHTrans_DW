@@ -1,0 +1,3 @@
+schema;comentario
+dw;Data Warehouse: modelo estrela (3 fatos e 7 dimensões) e views materializadas de indicadores.
+stg;Staging: espelho das fontes (tudo como texto, sem regra de negócio), tabelas de trabalho da transformação, log de carga e resultados dos testes de qualidade.

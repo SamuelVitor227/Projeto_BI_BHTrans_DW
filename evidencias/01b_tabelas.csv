@@ -1,0 +1,40 @@
+schema;tabela;tipo;colunas;comentario
+stg;ibge_localidade;tabela;9;Distritos e subdistritos de Belo Horizonte segundo a API de localidades do IBGE (divisão territorial vigente).
+stg;ibge_setor2010_malha;tabela;14;Malha de setores censitários do Censo 2010 (shapefile 31SEE250GC_SIR, SIRGAS 2000 geográfico), filtrada para Belo Horizonte.
+stg;ibge_setor2010_variavel;tabela;7;Agregados por setor censitário do Censo 2010 (Resultados do Universo), formato longo, apenas setores de Belo Horizonte e variáveis de população.
+stg;ibge_sidra_valor;tabela;11;Valores das consultas à API de agregados do IBGE (SIDRA): estimativas (tabela 6579), Censo 2010 (202) e Censo 2022 (9923), em formato longo.
+stg;inmet_horario;tabela;25;Espelho dos CSVs horários do INMET das estações automáticas de BH: A521 Pampulha (principal) e F501 Cercadinho (reserva, desde 27/12/2013). Horário em UTC.
+stg;log_carga;tabela;11;Registro de cada execução do ETL (uma linha por etapa: extrair, staging, transformar, testes, carregar, reconciliar).
+stg;manifesto_raw;tabela;17;Espelho de dados/raw/manifesto.csv: um registro por arquivo guardado na camada RAW (origem, hash e data de coleta).
+stg;map_dominio;tabela;9;De-para dos domínios codificados (tipo de sinistro, tempo, pavimento, severidade, categoria/situação/espécie de veículo, tipo de logradouro, sexo), derivado da inspeção dos arquivos reais.
+stg;map_regional;tabela;10;De-para das regionais: cod_regional/desc_regional do si-bol x COD_REG/NOME do limite 20220601 x subdistritos do IBGE.
+stg;regional_limite;tabela;10;Espelho dos arquivos de limites das regionais da PBH: 20220601_regional (9 regionais, vigente até jan/2025, usado no DW) e 20250204_regional (10 regionais, apenas para referência).
+stg;resultado_qualidade;tabela;11;Resultado de cada teste de qualidade executado antes de promover os dados ao dw.
+stg;si_bol;tabela;27;Espelho dos arquivos si-bol-AAAA.csv (PBH/BHTrans): dados gerais de cada boletim de ocorrência de sinistro de trânsito com vítima.
+stg;si_env;tabela;23;"Espelho dos arquivos si_env-AAAA.csv (tabela chamada ""si-pess"" na Fase 2): pessoas envolvidas em cada boletim."
+stg;si_log;tabela;20;"Espelho dos arquivos si-log-AAAA.csv: logradouros do local do sinistro (sequência 1 = logradouro principal; 2 em diante = cruzamento/referência)."
+stg;si_veic;tabela;15;Espelho dos arquivos si-veic-AAAA.csv: veículos envolvidos em cada boletim (o de 2023 é lido em CP850).
+stg;trf_boletim;tabela;28;Boletins tipados e deduplicados (1 linha por sinistro). Números repetidos no mesmo ano com data/hora diferentes são eventos distintos e recebem sufixo /2, /3.
+stg;trf_boletim_local;tabela;12;Local de ocorrência de cada boletim (logradouro principal + cruzamento + bairro), com a chave natural da dim_local.
+stg;trf_clima_hora;tabela;8;Leituras horárias do INMET convertidas de UTC para America/Sao_Paulo (zoneinfo, com horário de verão até 2019). Cada leitura cobre a hora que termina em dt_hora_fim_utc.
+stg;trf_coordenada;tabela;13;Coordenadas corrigidas e reprojetadas com pyproj: 2011–2015 em SAD 69/UTM 23S (EPSG:29193, X e Y em escala x100) e 2016+ em SIRGAS 2000/UTM 23S (EPSG:31983), ambas para WGS 84 (EPSG:4326).
+stg;trf_envolvido;tabela;22;Pessoas envolvidas tipadas, com tipo de envolvimento (indicador da fonte ou regra derivada), gravidade e flags.
+stg;trf_local_versao;tabela;21;Versões (SCD Tipo 2) de cada local: uma nova versão a cada mudança de nome do logradouro principal ou do cruzamento.
+stg;trf_logradouro_versao;tabela;12;"Histórico de nomes por código de logradouro: variações de grafia consolidadas por similaridade; nova versão quando um nome sucede outro no tempo."
+stg;trf_populacao;tabela;10;População residente por regional e ano: participação da regional x população do município, com arredondamento pelo maior resto para fechar exatamente no total.
+stg;trf_setor2010_regional;tabela;8;Setores censitários de 2010 alocados às 9 regionais do limite 20220601 (ponto interior do setor dentro do polígono), para obter a população de 2010 nos limites atuais.
+stg;trf_veiculo;tabela;13;Veículos envolvidos tipados, com descrições padronizadas pelos códigos e grupo de espécie.
+dw;dim_condicao_via;tabela;10;Dimensão lixo (junk) com as condições do local: clima (declarado no boletim ou imputado pelo INMET), pavimento e sinalização.
+dw;dim_local;tabela;28;"Dimensão local de ocorrência (SCD Tipo 2): logradouro principal + logradouro de cruzamento (quando houver) + bairro. Nova versão quando o nome de um logradouro muda; o nome atual fica em todas as versões."
+dw;dim_pessoa;tabela;8;Dimensão perfil de pessoa envolvida (tipo de envolvimento x sexo x faixa etária x embriaguez). O cinto de segurança ficou de fora: o domínio alterna entre anos (valor padrão do sistema), ver README.
+dw;dim_regional;tabela;11;Dimensão regional administrativa: as 9 regionais vigentes até jan/2025 (compatíveis com a série de sinistros e com o Censo 2022).
+dw;dim_tempo;tabela;18;"Dimensão tempo no grão data + hora (2010–2030). Membro ""Sem hora"" por dia (sk AAAAMMDD99) para boletins sem hora informada e para a fato_populacao; -1 e -2 são membros especiais."
+dw;dim_tipo_sinistro;tabela;8;Dimensão tipo de sinistro, com agrupamento derivado do domínio real (colisão/abalroamento, atropelamento, choque, capotamento/tombamento, queda, outros).
+dw;dim_veiculo;tabela;8;Dimensão perfil de veículo (espécie x categoria x situação). Ligada à fato_envolvido: a pessoa herda o perfil do veículo quando o boletim tem exatamente um veículo da espécie dela.
+dw;fato_populacao;tabela;11;"Fato população residente por regional e ano (referência 1º de julho, membro ""Sem hora"" da dim_tempo). Denominador das taxas por 100 mil habitantes."
+dw;fato_envolvido;tabela particionada;20;Fato envolvido: uma linha por pessoa envolvida (numero_boletim + ano + número do envolvido), particionada por ano. Recebe dim_pessoa e dim_veiculo, que não cabem no grão de boletim.
+dw;fato_sinistro;tabela particionada;32;Fato sinistro: uma linha por boletim de ocorrência (numero_boletim + ano), particionada por ano. Contagens de veículos por espécie respondem ao perfil da frota por local sem quebrar o grão.
+dw;mv_indicadores_regional_ano;view materializada;14;Sinistros, vítimas, mortos, UPS e taxas por 100 mil habitantes por regional e ano (risco ajustado pela população).
+dw;mv_participacao_vitimas_ano;view materializada;11;Participação de pedestres e motociclistas (grupos prioritários) nas vítimas e nos mortos, por ano.
+dw;mv_ranking_locais;view materializada;15;Ranking de locais e cruzamentos por ano (sinistros, vítimas, mortos, UPS), agregando todas as versões do local pela chave natural e exibindo o nome atual.
+dw;mv_taxa_mortalidade_anual;view materializada;12;Taxa anual de mortos no trânsito por 100 mil habitantes, meta municipal (50% da taxa de 2014 até 2030) e distância até a meta (nulas se 2014 não estiver carregado).

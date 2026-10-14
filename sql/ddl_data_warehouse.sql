@@ -593,11 +593,18 @@ CREATE TABLE IF NOT EXISTS stg.trf_boletim (
     coordenada_x_origem      numeric(14,2),
     coordenada_y_origem      numeric(14,2),
     qtd_linhas_origem        smallint NOT NULL,
+    qtd_eventos_numero       smallint NOT NULL,
+    precipitacao_mm          numeric(6,1),
+    estacao_inmet            text,
+    condicao_climatica       text,
+    origem_clima             text,
+    grupo_chuva              text,
     arquivo_origem           text NOT NULL,
     linha_arquivo            integer NOT NULL,
     dt_carga                 timestamptz NOT NULL DEFAULT now(),
     CONSTRAINT pk_trf_boletim PRIMARY KEY (numero_boletim_dw, ano)
 );
+CREATE INDEX IF NOT EXISTS ix_trf_boletim_origem ON stg.trf_boletim (numero_boletim_origem, ano);
 COMMENT ON TABLE  stg.trf_boletim IS 'Boletins tipados e deduplicados (1 linha por sinistro). Números repetidos no mesmo ano com data/hora diferentes são eventos distintos e recebem sufixo /2, /3.';
 COMMENT ON COLUMN stg.trf_boletim.numero_boletim_dw IS 'Número do boletim usado no dw (original, com sufixo /n quando o número se repete no ano para outro evento).';
 COMMENT ON COLUMN stg.trf_boletim.ano IS 'Ano do sinistro (igual ao ano do arquivo).';
@@ -618,6 +625,12 @@ COMMENT ON COLUMN stg.trf_boletim.fl_indicador_fatalidade IS 'Indicador de fatal
 COMMENT ON COLUMN stg.trf_boletim.coordenada_x_origem IS 'Coordenada X como veio na fonte (numérica).';
 COMMENT ON COLUMN stg.trf_boletim.coordenada_y_origem IS 'Coordenada Y como veio na fonte (numérica).';
 COMMENT ON COLUMN stg.trf_boletim.qtd_linhas_origem IS 'Linhas idênticas (mesmo número, ano e data/hora) consolidadas neste registro.';
+COMMENT ON COLUMN stg.trf_boletim.qtd_eventos_numero IS 'Quantidade de eventos distintos que compartilham o número do boletim no ano (1 = número único).';
+COMMENT ON COLUMN stg.trf_boletim.precipitacao_mm IS 'Precipitação do INMET na hora do sinistro (Pampulha; Cercadinho se faltar).';
+COMMENT ON COLUMN stg.trf_boletim.estacao_inmet IS 'Estação do INMET usada (A521 ou F501).';
+COMMENT ON COLUMN stg.trf_boletim.condicao_climatica IS 'Condição climática final (declarada ou imputada pelo INMET).';
+COMMENT ON COLUMN stg.trf_boletim.origem_clima IS 'DECLARADO NO BOLETIM, IMPUTADO PELO INMET ou NÃO INFORMADO.';
+COMMENT ON COLUMN stg.trf_boletim.grupo_chuva IS 'COM CHUVA, SEM CHUVA ou NÃO INFORMADO.';
 COMMENT ON COLUMN stg.trf_boletim.arquivo_origem IS 'Linhagem: arquivo de origem.';
 COMMENT ON COLUMN stg.trf_boletim.linha_arquivo IS 'Linhagem: linha do registro mantido.';
 COMMENT ON COLUMN stg.trf_boletim.dt_carga IS 'Linhagem: data e hora da transformação.';
@@ -652,6 +665,7 @@ COMMENT ON COLUMN stg.trf_coordenada.fl_dentro_municipio IS 'Verdadeiro se o pon
 COMMENT ON COLUMN stg.trf_coordenada.fl_geolocalizado IS 'Verdadeiro se a coordenada é válida e está dentro do município.';
 COMMENT ON COLUMN stg.trf_coordenada.arquivo_origem IS 'Linhagem: processo que gerou o registro.';
 COMMENT ON COLUMN stg.trf_coordenada.dt_carga IS 'Linhagem: data e hora da transformação.';
+CREATE INDEX IF NOT EXISTS gix_trf_coordenada_geom ON stg.trf_coordenada USING gist (geom);
 
 CREATE TABLE IF NOT EXISTS stg.trf_envolvido (
     numero_boletim_dw         text NOT NULL,
@@ -672,6 +686,7 @@ CREATE TABLE IF NOT EXISTS stg.trf_envolvido (
     embriaguez                text NOT NULL,
     especie_veiculo           text,
     grupo_especie             text,
+    origem_especie            text NOT NULL,
     arquivo_origem            text NOT NULL,
     linha_arquivo             integer NOT NULL,
     dt_carga                  timestamptz NOT NULL DEFAULT now(),
@@ -696,6 +711,7 @@ COMMENT ON COLUMN stg.trf_envolvido.faixa_etaria IS 'Faixa etária derivada da i
 COMMENT ON COLUMN stg.trf_envolvido.embriaguez IS 'SIM, NÃO ou NÃO INFORMADO.';
 COMMENT ON COLUMN stg.trf_envolvido.especie_veiculo IS 'Espécie do veículo em que a pessoa estava (padronizada); nula para pedestre.';
 COMMENT ON COLUMN stg.trf_envolvido.grupo_especie IS 'Grupo da espécie (Motocicleta, Automóvel/utilitário, Ônibus, Caminhão, Bicicleta, Outros).';
+COMMENT ON COLUMN stg.trf_envolvido.origem_especie IS 'INFORMADA NO BOLETIM, IMPUTADA (ESPÉCIE ÚNICA NO BOLETIM), NÃO INFORMADA ou NÃO SE APLICA (PEDESTRE).';
 COMMENT ON COLUMN stg.trf_envolvido.arquivo_origem IS 'Linhagem: arquivo de origem.';
 COMMENT ON COLUMN stg.trf_envolvido.linha_arquivo IS 'Linhagem: linha no arquivo de origem.';
 COMMENT ON COLUMN stg.trf_envolvido.dt_carga IS 'Linhagem: data e hora da transformação.';
@@ -791,6 +807,7 @@ CREATE TABLE IF NOT EXISTS stg.trf_boletim_local (
     cod_bairro                 integer NOT NULL,
     fl_cruzamento              boolean NOT NULL,
     origem_bairro              text NOT NULL,
+    numero_imovel              text,
     arquivo_origem             text NOT NULL DEFAULT 'etl.transformar (logradouros)',
     dt_carga                   timestamptz NOT NULL DEFAULT now(),
     CONSTRAINT pk_trf_boletim_local PRIMARY KEY (numero_boletim_dw, ano)
@@ -805,6 +822,7 @@ COMMENT ON COLUMN stg.trf_boletim_local.cod_logradouro_cruzamento IS 'Código do
 COMMENT ON COLUMN stg.trf_boletim_local.cod_bairro IS 'Código do bairro (imputado quando 0, ver origem_bairro).';
 COMMENT ON COLUMN stg.trf_boletim_local.fl_cruzamento IS 'Verdadeiro se há logradouro de cruzamento.';
 COMMENT ON COLUMN stg.trf_boletim_local.origem_bairro IS 'INFORMADO, IMPUTADO (moda do mesmo cruzamento/endereço/logradouro) ou NÃO INFORMADO.';
+COMMENT ON COLUMN stg.trf_boletim_local.numero_imovel IS 'Número do imóvel de referência no logradouro principal (como veio na fonte).';
 COMMENT ON COLUMN stg.trf_boletim_local.arquivo_origem IS 'Linhagem: processo que gerou o registro.';
 COMMENT ON COLUMN stg.trf_boletim_local.dt_carga IS 'Linhagem: data e hora da transformação.';
 
@@ -1189,7 +1207,7 @@ COMMENT ON COLUMN dw.fato_sinistro.sk_tempo IS 'FK dim_tempo (data + hora; AAAAM
 COMMENT ON COLUMN dw.fato_sinistro.sk_local IS 'FK dim_local (versão vigente na data do sinistro).';
 COMMENT ON COLUMN dw.fato_sinistro.sk_tipo_sinistro IS 'FK dim_tipo_sinistro.';
 COMMENT ON COLUMN dw.fato_sinistro.sk_condicao_via IS 'FK dim_condicao_via.';
-COMMENT ON COLUMN dw.fato_sinistro.sk_regional IS 'FK dim_regional (código do boletim; nulo/0 resolvido por ST_Within; 27 Hipercentro -> Centro-Sul).';
+COMMENT ON COLUMN dw.fato_sinistro.sk_regional IS 'FK dim_regional (código do boletim; 27 Hipercentro -> Centro-Sul; nulo/0 resolvido por ST_Within do ponto do boletim ou, sem ponto, do ponto representativo do local).';
 COMMENT ON COLUMN dw.fato_sinistro.qtd_envolvidos IS 'Pessoas envolvidas (si_env).';
 COMMENT ON COLUMN dw.fato_sinistro.qtd_vitimas IS 'Vítimas: envolvidos com severidade não fatal ou fatal.';
 COMMENT ON COLUMN dw.fato_sinistro.qtd_vitimas_fatais IS 'Vítimas fatais (severidade fatal no si_env).';
@@ -1212,7 +1230,7 @@ COMMENT ON COLUMN dw.fato_sinistro.fl_geolocalizado IS 'Verdadeiro se a coordena
 COMMENT ON COLUMN dw.fato_sinistro.latitude IS 'Latitude do ponto exato (WGS 84).';
 COMMENT ON COLUMN dw.fato_sinistro.longitude IS 'Longitude do ponto exato (WGS 84).';
 COMMENT ON COLUMN dw.fato_sinistro.geom IS 'Ponto exato do sinistro (EPSG:4326), para o mapa de calor.';
-COMMENT ON COLUMN dw.fato_sinistro.origem_regional IS 'BOLETIM, ESPACIAL (ST_Within), HIPERCENTRO -> CENTRO-SUL ou NÃO RESOLVIDA.';
+COMMENT ON COLUMN dw.fato_sinistro.origem_regional IS 'BOLETIM, HIPERCENTRO -> CENTRO-SUL, ESPACIAL (ST_Within), ESPACIAL (regional mais próxima), ESPACIAL (ponto do local) ou NÃO RESOLVIDA.';
 COMMENT ON COLUMN dw.fato_sinistro.dt_carga IS 'Linhagem: data e hora da carga.';
 COMMENT ON COLUMN dw.fato_sinistro.arquivo_origem IS 'Linhagem: arquivo si-bol de origem.';
 
@@ -1261,6 +1279,7 @@ CREATE TABLE IF NOT EXISTS dw.fato_envolvido (
     fl_motociclista           boolean NOT NULL,
     fl_condutor               boolean NOT NULL,
     origem_tipo_envolvimento  text NOT NULL,
+    origem_especie_veiculo    text NOT NULL,
     dt_carga                  timestamptz NOT NULL DEFAULT now(),
     arquivo_origem            text NOT NULL,
     CONSTRAINT pk_fato_envolvido PRIMARY KEY (numero_boletim, ano, numero_envolvido),
@@ -1285,6 +1304,7 @@ COMMENT ON COLUMN dw.fato_envolvido.fl_pedestre IS 'Pedestre.';
 COMMENT ON COLUMN dw.fato_envolvido.fl_motociclista IS 'Condutor ou passageiro de motocicleta (grupo).';
 COMMENT ON COLUMN dw.fato_envolvido.fl_condutor IS 'Condutor.';
 COMMENT ON COLUMN dw.fato_envolvido.origem_tipo_envolvimento IS 'INDICADOR DA FONTE ou REGRA DERIVADA (ver README).';
+COMMENT ON COLUMN dw.fato_envolvido.origem_especie_veiculo IS 'Origem da espécie do veículo da pessoa: INFORMADA NO BOLETIM, IMPUTADA (ESPÉCIE ÚNICA NO BOLETIM), NÃO INFORMADA ou NÃO SE APLICA (PEDESTRE).';
 COMMENT ON COLUMN dw.fato_envolvido.dt_carga IS 'Linhagem: data e hora da carga.';
 COMMENT ON COLUMN dw.fato_envolvido.arquivo_origem IS 'Linhagem: arquivo si_env de origem.';
 
@@ -1377,9 +1397,9 @@ SELECT s.ano,
        round(100 * (1 - (s.mortos * 100000.0 / p.populacao) / b.taxa_2014), 1) AS pct_reducao_vs_2014
 FROM sin s
 JOIN pop p ON p.ano = s.ano
-CROSS JOIN base b
+LEFT JOIN base b ON true   -- sem 2014 carregado (carga parcial com --anos), meta e distância ficam nulas
 WITH NO DATA;
-COMMENT ON MATERIALIZED VIEW dw.mv_taxa_mortalidade_anual IS 'Taxa anual de mortos no trânsito por 100 mil habitantes, meta municipal (50% da taxa de 2014 até 2030) e distância até a meta.';
+COMMENT ON MATERIALIZED VIEW dw.mv_taxa_mortalidade_anual IS 'Taxa anual de mortos no trânsito por 100 mil habitantes, meta municipal (50% da taxa de 2014 até 2030) e distância até a meta (nulas se 2014 não estiver carregado).';
 COMMENT ON COLUMN dw.mv_taxa_mortalidade_anual.ano IS 'Ano.';
 COMMENT ON COLUMN dw.mv_taxa_mortalidade_anual.populacao IS 'População do município (soma das regionais).';
 COMMENT ON COLUMN dw.mv_taxa_mortalidade_anual.origem_populacao IS 'Origem do total populacional.';
