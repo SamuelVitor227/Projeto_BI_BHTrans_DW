@@ -34,10 +34,10 @@ SCRIPTS_DW = [
 
 
 def aplicar_ddl(conn, recriar: bool = False) -> None:
-    """Executa sql/ddl_data_warehouse.sql. Com recriar=True apaga antes os schemas stg e dw."""
+    """Executa sql/ddl_data_warehouse.sql. Com recriar=True apaga antes os schemas bi, dw e stg."""
     if recriar:
-        log.warning("Recriando a estrutura: DROP SCHEMA dw e stg")
-        conn.execute("DROP SCHEMA IF EXISTS dw CASCADE; DROP SCHEMA IF EXISTS stg CASCADE;")
+        log.warning("Recriando a estrutura: DROP SCHEMA bi, dw e stg")
+        conn.execute("DROP SCHEMA IF EXISTS bi CASCADE; DROP SCHEMA IF EXISTS dw CASCADE; DROP SCHEMA IF EXISTS stg CASCADE;")
     banco.executar_arquivo(conn, config.ARQ_DDL)
     conn.commit()
 

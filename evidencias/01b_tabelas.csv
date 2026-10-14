@@ -38,3 +38,18 @@ dw;mv_indicadores_regional_ano;view materializada;14;Sinistros, vítimas, mortos
 dw;mv_participacao_vitimas_ano;view materializada;11;Participação de pedestres e motociclistas (grupos prioritários) nas vítimas e nos mortos, por ano.
 dw;mv_ranking_locais;view materializada;15;Ranking de locais e cruzamentos por ano (sinistros, vítimas, mortos, UPS), agregando todas as versões do local pela chave natural e exibindo o nome atual.
 dw;mv_taxa_mortalidade_anual;view materializada;12;Taxa anual de mortos no trânsito por 100 mil habitantes, meta municipal (50% da taxa de 2014 até 2030) e distância até a meta (nulas se 2014 não estiver carregado).
+bi;dim_calendario;view (Power BI);16;"Calendário diário de 2010 a 2030 (1 linha por data) para ""Marcar como tabela de datas"" no Power BI. Relaciona-se com as fatos pela coluna data."
+bi;dim_condicao_via;view (Power BI);8;dw.dim_condicao_via sem as colunas de linhagem.
+bi;dim_hora;view (Power BI);6;"Horas do dia (0–23) e o membro 99 ""Não informada"". Relaciona-se com fato_sinistro e fato_envolvido pela coluna hora."
+bi;dim_local;view (Power BI);25;"dw.dim_local (SCD Tipo 2) sem a geometria; o ponto representativo está em latitude/longitude."
+bi;dim_pessoa;view (Power BI);6;dw.dim_pessoa sem as colunas de linhagem.
+bi;dim_regional;view (Power BI);10;"dw.dim_regional sem a geometria; latitude/longitude de um ponto interno ao polígono (rótulos e bolhas). Os polígonos estão em powerbi/regionais_bh.*."
+bi;dim_tipo_sinistro;view (Power BI);6;dw.dim_tipo_sinistro sem as colunas de linhagem.
+bi;dim_veiculo;view (Power BI);6;dw.dim_veiculo sem as colunas de linhagem.
+bi;fato_envolvido;view (Power BI);21;dw.fato_envolvido (1 linha por pessoa) com data e hora no lugar de sk_tempo e com o tipo de sinistro e a condição da via herdados do boletim.
+bi;fato_populacao;view (Power BI);9;dw.fato_populacao (regional x ano) com a data de referência (1º de julho) no lugar de sk_tempo.
+bi;fato_sinistro;view (Power BI);30;"dw.fato_sinistro (1 linha por boletim) com data e hora no lugar de sk_tempo e sem a geometria; o ponto exato está em latitude/longitude (nulas quando não geolocalizado)."
+bi;ind_participacao_vitimas_ano;view (Power BI);11;Exposição de dw.mv_participacao_vitimas_ano: participação de pedestres e motociclistas nas vítimas e nos mortos.
+bi;ind_ranking_locais;view (Power BI);15;Exposição de dw.mv_ranking_locais: ranking anual de locais e cruzamentos.
+bi;ind_regional_ano;view (Power BI);14;Exposição de dw.mv_indicadores_regional_ano: sinistros, vítimas, mortos e taxas por regional e ano.
+bi;ind_taxa_mortalidade_anual;view (Power BI);12;Exposição de dw.mv_taxa_mortalidade_anual: taxa anual de mortos por 100 mil hab., meta 2030 e distância até a meta.

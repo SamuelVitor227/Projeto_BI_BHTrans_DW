@@ -1,4 +1,4 @@
-# Contagens da carga — gerado em 13/10/2026 22:07
+# Contagens da carga — gerado em 13/10/2026 22:48
 
 ## Linhas por tabela
 
@@ -14,7 +14,7 @@
 | stg | map_dominio | 91 |
 | stg | map_regional | 11 |
 | stg | regional_limite | 19 |
-| stg | resultado_qualidade | 160 |
+| stg | resultado_qualidade | 168 |
 | stg | si_bol | 184.728 |
 | stg | si_env | 404.957 |
 | stg | si_log | 243.588 |
@@ -33,7 +33,7 @@
 | dw | dim_local | 22.393 |
 | dw | dim_pessoa | 361 |
 | dw | dim_regional | 11 |
-| dw | dim_tempo | 191.727 |
+| dw | dim_tempo | 191.752 |
 | dw | dim_tipo_sinistro | 14 |
 | dw | dim_veiculo | 303 |
 | dw | fato_envolvido | 404.957 |

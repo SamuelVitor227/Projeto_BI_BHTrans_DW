@@ -45,7 +45,7 @@ Legenda: `[x]` concluído e validado · `[~]` em andamento · `[ ]` pendente.
 
 ## 5. Evidências e documentação
 - [x] Prova do DDL em banco vazio + `pg_dump --schema-only` (`evidencias/05_*`, `ddl_exportado_pg_dump.sql`)
-- [x] Evidências de estrutura, contagens, qualidade (40/40) e consultas de negócio (8)
+- [x] Evidências de estrutura, contagens, qualidade (42/42) e consultas de negócio (8)
 - [x] `docs/modelo_dimensional.md` (Mermaid + dicionário gerado dos COMMENT ON)
 - [x] `README.md`
 
@@ -53,7 +53,19 @@ Legenda: `[x]` concluído e validado · `[~]` em andamento · `[ ]` pendente.
 - [x] 1ª bateria: 22/23 — a view da taxa anual ficava vazia em carga parcial sem 2014 (CROSS JOIN) → corrigido com LEFT JOIN
 - [x] 2ª bateria: **23/23 aprovados** → `evidencias/06_testes_locais.md`
 
+## 7. Auditoria contra os requisitos (13/10/2026)
+- [x] Publicado no GitHub (público, a pedido do usuário): https://github.com/SamuelVitor227/Projeto_BI_BHTrans_DW
+- [x] Conferência item a item no banco, no DDL e nos arquivos: tudo atendido, exceto 1 defeito
+- [x] Defeito: `dim_tempo` terminava em 30/12/2030 (generate_series com DATE vira timestamptz e o horário de verão deslocava a série) → corrigido com TIMESTAMP em `sql/carga/21_dim_tempo.sql` + novo teste de cobertura (41/41 aprovados)
+- [x] Portal da PBH reconferido: 2025 ainda não publicado (2011–2024)
+
 ## Situação: CONCLUÍDO (13/10/2026). Para reprocessar tudo: `python -m etl.carga_inicial --recriar`
 
 ## Notas para retomada
 - Banco: `docker compose up -d` na pasta do projeto; credenciais no `.env`.
+
+## 8. Preparação para o Power BI (13/10/2026)
+- [x] Schema `bi` no DDL (seção 8): 15 views sem geometria, sem partições e sem linhagem; `dim_calendario` diária + `dim_hora`; MVs expostas como views `ind_*`; `fato_envolvido` com tipo de sinistro e condição da via do boletim
+- [x] `etl/powerbi.py` (etapa 7): polígonos das regionais em `powerbi/regionais_bh.geojson` (Azure Maps) e `powerbi/regionais_bh_topojson.json` (Mapa de formas)
+- [x] `powerbi/medidas.dax` (34 medidas) e `powerbi/GUIA_POWER_BI.md` (conexão, relacionamentos, ordenações, mapas, valores de conferência)
+- [x] Novo teste de qualidade da camada bi (42/42) e testes locais 24/24

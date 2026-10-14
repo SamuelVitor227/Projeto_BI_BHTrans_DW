@@ -1,23 +1,25 @@
-# Estrutura do Data Warehouse — gerado em 13/10/2026 22:07
+# Estrutura do Data Warehouse — gerado em 13/10/2026 22:48
 
 - SGBD: `PostgreSQL 16.9 (Debian 16.9-1.pgdg110+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit`
 - PostGIS: `POSTGIS="3.5.2 dea6d0a" [EXTENSION] PGSQL="160" GEOS="3.9.0-CAPI-1.16.2" PROJ="7.2.1 NETWORK_ENABLED=OFF URL_ENDPOINT=ht...`
 - dw: **10** tabelas (7 dimensões + 3 fatos), **255** partições, **4** views materializadas
 - stg: **25** tabelas (espelhos, de-paras, trabalho, log e qualidade)
-- Colunas: **572** em stg e dw; sem COMMENT: **0**
+- bi: **15** views de consumo do Power BI (sem geometria e sem partições)
+- Colunas: **767** em stg, dw e bi; sem COMMENT: **0**
 - Dicionário completo das colunas (tipo, nulidade, comentário): `01f_colunas.csv`
 ## Schemas
 
-Arquivo completo: `01a_schemas.csv` (2 linhas)
+Arquivo completo: `01a_schemas.csv` (3 linhas)
 
 | schema | comentario |
 |---|---|
+| bi | Camada de consumo do Power BI: views sobre o dw sem geometria, sem partições e sem colunas de linhagem, com calendário diário e dimensão de hora. |
 | dw | Data Warehouse: modelo estrela (3 fatos e 7 dimensões) e views materializadas de indicadores. |
 | stg | Staging: espelho das fontes (tudo como texto, sem regra de negócio), tabelas de trabalho da transformação, log de carga e resultados dos testes de qualidade. |
 
-## Tabelas (sem partições) e views materializadas
+## Tabelas (sem partições), views materializadas e views do Power BI
 
-Arquivo completo: `01b_tabelas.csv` (39 linhas)
+Arquivo completo: `01b_tabelas.csv` (54 linhas)
 
 | schema | tabela | tipo | colunas | comentario |
 |---|---|---|---|---|
@@ -60,6 +62,21 @@ Arquivo completo: `01b_tabelas.csv` (39 linhas)
 | dw | mv_participacao_vitimas_ano | view materializada | 11 | Participação de pedestres e motociclistas (grupos prioritários) nas vítimas e nos mortos, por ano. |
 | dw | mv_ranking_locais | view materializada | 15 | Ranking de locais e cruzamentos por ano (sinistros, vítimas, mortos, UPS), agregando todas as versões do local pela chave natural e exibindo o nome atual. |
 | dw | mv_taxa_mortalidade_anual | view materializada | 12 | Taxa anual de mortos no trânsito por 100 mil habitantes, meta municipal (50% da taxa de 2014 até 2030) e distância até a meta (nulas se 2014 não estiver carregado). |
+| bi | dim_calendario | view (Power BI) | 16 | Calendário diário de 2010 a 2030 (1 linha por data) para "Marcar como tabela de datas" no Power BI. Relaciona-se com as fatos pela coluna data. |
+| bi | dim_condicao_via | view (Power BI) | 8 | dw.dim_condicao_via sem as colunas de linhagem. |
+| bi | dim_hora | view (Power BI) | 6 | Horas do dia (0–23) e o membro 99 "Não informada". Relaciona-se com fato_sinistro e fato_envolvido pela coluna hora. |
+| bi | dim_local | view (Power BI) | 25 | dw.dim_local (SCD Tipo 2) sem a geometria; o ponto representativo está em latitude/longitude. |
+| bi | dim_pessoa | view (Power BI) | 6 | dw.dim_pessoa sem as colunas de linhagem. |
+| bi | dim_regional | view (Power BI) | 10 | dw.dim_regional sem a geometria; latitude/longitude de um ponto interno ao polígono (rótulos e bolhas). Os polígonos estão em powerbi/regionais_bh.*. |
+| bi | dim_tipo_sinistro | view (Power BI) | 6 | dw.dim_tipo_sinistro sem as colunas de linhagem. |
+| bi | dim_veiculo | view (Power BI) | 6 | dw.dim_veiculo sem as colunas de linhagem. |
+| bi | fato_envolvido | view (Power BI) | 21 | dw.fato_envolvido (1 linha por pessoa) com data e hora no lugar de sk_tempo e com o tipo de sinistro e a condição da via herdados do boletim. |
+| bi | fato_populacao | view (Power BI) | 9 | dw.fato_populacao (regional x ano) com a data de referência (1º de julho) no lugar de sk_tempo. |
+| bi | fato_sinistro | view (Power BI) | 30 | dw.fato_sinistro (1 linha por boletim) com data e hora no lugar de sk_tempo e sem a geometria; o ponto exato está em latitude/longitude (nulas quando não geolocalizado). |
+| bi | ind_participacao_vitimas_ano | view (Power BI) | 11 | Exposição de dw.mv_participacao_vitimas_ano: participação de pedestres e motociclistas nas vítimas e nos mortos. |
+| bi | ind_ranking_locais | view (Power BI) | 15 | Exposição de dw.mv_ranking_locais: ranking anual de locais e cruzamentos. |
+| bi | ind_regional_ano | view (Power BI) | 14 | Exposição de dw.mv_indicadores_regional_ano: sinistros, vítimas, mortos e taxas por regional e ano. |
+| bi | ind_taxa_mortalidade_anual | view (Power BI) | 12 | Exposição de dw.mv_taxa_mortalidade_anual: taxa anual de mortos por 100 mil hab., meta 2030 e distância até a meta. |
 
 ## Partições das fatos
 

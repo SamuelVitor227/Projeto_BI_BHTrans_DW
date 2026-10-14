@@ -17,6 +17,20 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
+-- Name: bi; Type: SCHEMA; Schema: -; Owner: -
+--
+
+CREATE SCHEMA bi;
+
+
+--
+-- Name: SCHEMA bi; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON SCHEMA bi IS 'Camada de consumo do Power BI: views sobre o dw sem geometria, sem partições e sem colunas de linhagem, com calendário diário e dimensão de hora.';
+
+
+--
 -- Name: dw; Type: SCHEMA; Schema: -; Owner: -
 --
 
@@ -161,6 +175,310 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
+-- Name: dim_tempo; Type: TABLE; Schema: dw; Owner: -
+--
+
+CREATE TABLE dw.dim_tempo (
+    sk_tempo integer NOT NULL,
+    data date,
+    ano smallint,
+    semestre smallint,
+    trimestre smallint,
+    mes smallint,
+    nome_mes text NOT NULL,
+    ano_mes text,
+    dia smallint,
+    dia_semana smallint,
+    nome_dia_semana text NOT NULL,
+    fl_fim_de_semana boolean,
+    hora smallint,
+    fl_hora_informada boolean NOT NULL,
+    faixa_horaria text NOT NULL,
+    periodo_dia text NOT NULL,
+    dt_carga timestamp with time zone DEFAULT now() NOT NULL,
+    arquivo_origem text NOT NULL,
+    CONSTRAINT ck_dim_tempo_hora CHECK (((hora IS NULL) OR ((hora >= 0) AND (hora <= 23))))
+);
+
+
+--
+-- Name: TABLE dim_tempo; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON TABLE dw.dim_tempo IS 'Dimensão tempo no grão data + hora (2010–2030). Membro "Sem hora" por dia (sk AAAAMMDD99) para boletins sem hora informada e para a fato_populacao; -1 e -2 são membros especiais.';
+
+
+--
+-- Name: COLUMN dim_tempo.sk_tempo; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.dim_tempo.sk_tempo IS 'Chave substituta inteligente AAAAMMDDHH (HH = 99 para "Sem hora").';
+
+
+--
+-- Name: COLUMN dim_tempo.data; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.dim_tempo.data IS 'Data.';
+
+
+--
+-- Name: COLUMN dim_tempo.ano; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.dim_tempo.ano IS 'Ano.';
+
+
+--
+-- Name: COLUMN dim_tempo.semestre; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.dim_tempo.semestre IS 'Semestre (1–2).';
+
+
+--
+-- Name: COLUMN dim_tempo.trimestre; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.dim_tempo.trimestre IS 'Trimestre (1–4).';
+
+
+--
+-- Name: COLUMN dim_tempo.mes; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.dim_tempo.mes IS 'Mês (1–12).';
+
+
+--
+-- Name: COLUMN dim_tempo.nome_mes; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.dim_tempo.nome_mes IS 'Nome do mês em português.';
+
+
+--
+-- Name: COLUMN dim_tempo.ano_mes; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.dim_tempo.ano_mes IS 'Ano e mês (AAAA-MM).';
+
+
+--
+-- Name: COLUMN dim_tempo.dia; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.dim_tempo.dia IS 'Dia do mês.';
+
+
+--
+-- Name: COLUMN dim_tempo.dia_semana; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.dim_tempo.dia_semana IS 'Dia da semana ISO (1 = segunda ... 7 = domingo).';
+
+
+--
+-- Name: COLUMN dim_tempo.nome_dia_semana; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.dim_tempo.nome_dia_semana IS 'Nome do dia da semana.';
+
+
+--
+-- Name: COLUMN dim_tempo.fl_fim_de_semana; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.dim_tempo.fl_fim_de_semana IS 'Sábado ou domingo.';
+
+
+--
+-- Name: COLUMN dim_tempo.hora; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.dim_tempo.hora IS 'Hora (0–23); nula no membro "Sem hora".';
+
+
+--
+-- Name: COLUMN dim_tempo.fl_hora_informada; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.dim_tempo.fl_hora_informada IS 'Falso no membro "Sem hora" e nos membros especiais.';
+
+
+--
+-- Name: COLUMN dim_tempo.faixa_horaria; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.dim_tempo.faixa_horaria IS 'Faixa de 3 horas (00h–02h ... 21h–23h) ou "Hora não informada".';
+
+
+--
+-- Name: COLUMN dim_tempo.periodo_dia; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.dim_tempo.periodo_dia IS 'Madrugada (0–5h), Manhã (6–11h), Tarde (12–17h), Noite (18–23h) ou "Hora não informada".';
+
+
+--
+-- Name: COLUMN dim_tempo.dt_carga; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.dim_tempo.dt_carga IS 'Linhagem: data e hora da carga.';
+
+
+--
+-- Name: COLUMN dim_tempo.arquivo_origem; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.dim_tempo.arquivo_origem IS 'Linhagem: script que gerou a linha.';
+
+
+--
+-- Name: dim_calendario; Type: VIEW; Schema: bi; Owner: -
+--
+
+CREATE VIEW bi.dim_calendario AS
+ SELECT data,
+    ano,
+    semestre,
+    ((ano || '-S'::text) || semestre) AS ano_semestre,
+    trimestre,
+    ((ano || '-T'::text) || trimestre) AS ano_trimestre,
+    mes,
+    nome_mes,
+    "left"(nome_mes, 3) AS nome_mes_abrev,
+    ano_mes,
+    (((ano)::integer * 100) + mes) AS ano_mes_ordem,
+    dia,
+    dia_semana,
+    nome_dia_semana,
+    "left"(nome_dia_semana, 3) AS nome_dia_semana_abrev,
+    fl_fim_de_semana
+   FROM dw.dim_tempo t
+  WHERE ((sk_tempo > 0) AND (hora IS NULL));
+
+
+--
+-- Name: VIEW dim_calendario; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON VIEW bi.dim_calendario IS 'Calendário diário de 2010 a 2030 (1 linha por data) para "Marcar como tabela de datas" no Power BI. Relaciona-se com as fatos pela coluna data.';
+
+
+--
+-- Name: COLUMN dim_calendario.data; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_calendario.data IS 'Data.';
+
+
+--
+-- Name: COLUMN dim_calendario.ano; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_calendario.ano IS 'Ano.';
+
+
+--
+-- Name: COLUMN dim_calendario.semestre; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_calendario.semestre IS 'Semestre (1–2).';
+
+
+--
+-- Name: COLUMN dim_calendario.ano_semestre; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_calendario.ano_semestre IS 'Ano e semestre (ex.: 2024-S1).';
+
+
+--
+-- Name: COLUMN dim_calendario.trimestre; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_calendario.trimestre IS 'Trimestre (1–4).';
+
+
+--
+-- Name: COLUMN dim_calendario.ano_trimestre; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_calendario.ano_trimestre IS 'Ano e trimestre (ex.: 2024-T3).';
+
+
+--
+-- Name: COLUMN dim_calendario.mes; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_calendario.mes IS 'Mês (1–12).';
+
+
+--
+-- Name: COLUMN dim_calendario.nome_mes; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_calendario.nome_mes IS 'Nome do mês em português.';
+
+
+--
+-- Name: COLUMN dim_calendario.nome_mes_abrev; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_calendario.nome_mes_abrev IS 'Nome do mês abreviado (Jan, Fev...). Ordenar por mes.';
+
+
+--
+-- Name: COLUMN dim_calendario.ano_mes; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_calendario.ano_mes IS 'Ano e mês (AAAA-MM).';
+
+
+--
+-- Name: COLUMN dim_calendario.ano_mes_ordem; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_calendario.ano_mes_ordem IS 'Ano e mês como número AAAAMM, para ordenar ano_mes.';
+
+
+--
+-- Name: COLUMN dim_calendario.dia; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_calendario.dia IS 'Dia do mês.';
+
+
+--
+-- Name: COLUMN dim_calendario.dia_semana; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_calendario.dia_semana IS 'Dia da semana ISO (1 = segunda ... 7 = domingo).';
+
+
+--
+-- Name: COLUMN dim_calendario.nome_dia_semana; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_calendario.nome_dia_semana IS 'Nome do dia da semana.';
+
+
+--
+-- Name: COLUMN dim_calendario.nome_dia_semana_abrev; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_calendario.nome_dia_semana_abrev IS 'Dia da semana abreviado (Seg, Ter...). Ordenar por dia_semana.';
+
+
+--
+-- Name: COLUMN dim_calendario.fl_fim_de_semana; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_calendario.fl_fim_de_semana IS 'Sábado ou domingo.';
+
+
+--
 -- Name: dim_condicao_via; Type: TABLE; Schema: dw; Owner: -
 --
 
@@ -258,17 +576,157 @@ COMMENT ON COLUMN dw.dim_condicao_via.arquivo_origem IS 'Linhagem: arquivo de or
 
 
 --
--- Name: dim_condicao_via_sk_condicao_via_seq; Type: SEQUENCE; Schema: dw; Owner: -
+-- Name: dim_condicao_via; Type: VIEW; Schema: bi; Owner: -
 --
 
-ALTER TABLE dw.dim_condicao_via ALTER COLUMN sk_condicao_via ADD GENERATED BY DEFAULT AS IDENTITY (
-    SEQUENCE NAME dw.dim_condicao_via_sk_condicao_via_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1
-);
+CREATE VIEW bi.dim_condicao_via AS
+ SELECT sk_condicao_via,
+    cod_tempo,
+    condicao_climatica,
+    origem_clima,
+    grupo_chuva,
+    cod_pavimento,
+    pavimento,
+    local_sinalizado
+   FROM dw.dim_condicao_via;
+
+
+--
+-- Name: VIEW dim_condicao_via; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON VIEW bi.dim_condicao_via IS 'dw.dim_condicao_via sem as colunas de linhagem.';
+
+
+--
+-- Name: COLUMN dim_condicao_via.sk_condicao_via; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_condicao_via.sk_condicao_via IS 'Chave substituta (-1 = não informado, -2 = não se aplica).';
+
+
+--
+-- Name: COLUMN dim_condicao_via.cod_tempo; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_condicao_via.cod_tempo IS 'Código do tempo declarado no boletim.';
+
+
+--
+-- Name: COLUMN dim_condicao_via.condicao_climatica; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_condicao_via.condicao_climatica IS 'BOM, CHUVA, NEBLINA, NUBLADO (declarados), CHUVA (INMET), SEM CHUVA (INMET) ou NÃO INFORMADO.';
+
+
+--
+-- Name: COLUMN dim_condicao_via.origem_clima; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_condicao_via.origem_clima IS 'DECLARADO NO BOLETIM, IMPUTADO PELO INMET ou NÃO INFORMADO.';
+
+
+--
+-- Name: COLUMN dim_condicao_via.grupo_chuva; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_condicao_via.grupo_chuva IS 'Agrupamento comparável entre declarado e imputado: COM CHUVA, SEM CHUVA ou NÃO INFORMADO.';
+
+
+--
+-- Name: COLUMN dim_condicao_via.cod_pavimento; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_condicao_via.cod_pavimento IS 'Código do pavimento.';
+
+
+--
+-- Name: COLUMN dim_condicao_via.pavimento; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_condicao_via.pavimento IS 'Pavimento.';
+
+
+--
+-- Name: COLUMN dim_condicao_via.local_sinalizado; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_condicao_via.local_sinalizado IS 'SIM, NÃO ou NÃO INFORMADO.';
+
+
+--
+-- Name: dim_hora; Type: VIEW; Schema: bi; Owner: -
+--
+
+CREATE VIEW bi.dim_hora AS
+ SELECT (COALESCE((hora)::integer, 99))::smallint AS hora,
+        CASE
+            WHEN (hora IS NULL) THEN 'Não informada'::text
+            ELSE (lpad((hora)::text, 2, '0'::text) || 'h'::text)
+        END AS hora_texto,
+    faixa_horaria,
+    periodo_dia,
+    (
+        CASE periodo_dia
+            WHEN 'Madrugada'::text THEN 1
+            WHEN 'Manhã'::text THEN 2
+            WHEN 'Tarde'::text THEN 3
+            WHEN 'Noite'::text THEN 4
+            ELSE 5
+        END)::smallint AS ordem_periodo_dia,
+    fl_hora_informada
+   FROM dw.dim_tempo t
+  WHERE (data = ( SELECT min(dim_tempo.data) AS min
+           FROM dw.dim_tempo));
+
+
+--
+-- Name: VIEW dim_hora; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON VIEW bi.dim_hora IS 'Horas do dia (0–23) e o membro 99 "Não informada". Relaciona-se com fato_sinistro e fato_envolvido pela coluna hora.';
+
+
+--
+-- Name: COLUMN dim_hora.hora; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_hora.hora IS 'Hora do dia (0–23); 99 = hora não informada no boletim.';
+
+
+--
+-- Name: COLUMN dim_hora.hora_texto; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_hora.hora_texto IS 'Hora formatada (00h...23h) ou "Não informada". Ordenar por hora.';
+
+
+--
+-- Name: COLUMN dim_hora.faixa_horaria; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_hora.faixa_horaria IS 'Faixa de 3 horas (00h–02h ... 21h–23h) ou "Hora não informada".';
+
+
+--
+-- Name: COLUMN dim_hora.periodo_dia; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_hora.periodo_dia IS 'Madrugada (0–5h), Manhã (6–11h), Tarde (12–17h), Noite (18–23h) ou "Hora não informada".';
+
+
+--
+-- Name: COLUMN dim_hora.ordem_periodo_dia; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_hora.ordem_periodo_dia IS 'Ordem do período do dia (1 Madrugada, 2 Manhã, 3 Tarde, 4 Noite, 5 Hora não informada), para ordenar periodo_dia.';
+
+
+--
+-- Name: COLUMN dim_hora.fl_hora_informada; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_hora.fl_hora_informada IS 'Falso no membro "Sem hora" e nos membros especiais.';
 
 
 --
@@ -512,17 +970,218 @@ COMMENT ON COLUMN dw.dim_local.arquivo_origem IS 'Linhagem: arquivo(s) de origem
 
 
 --
--- Name: dim_local_sk_local_seq; Type: SEQUENCE; Schema: dw; Owner: -
+-- Name: dim_local; Type: VIEW; Schema: bi; Owner: -
 --
 
-ALTER TABLE dw.dim_local ALTER COLUMN sk_local ADD GENERATED BY DEFAULT AS IDENTITY (
-    SEQUENCE NAME dw.dim_local_sk_local_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1
-);
+CREATE VIEW bi.dim_local AS
+ SELECT sk_local,
+    chave_natural,
+    versao,
+    cod_logradouro_principal,
+    tipo_logradouro_principal,
+    nome_logradouro_principal,
+    nome_anterior_principal,
+    nome_logradouro_principal_atual,
+    cod_logradouro_cruzamento,
+    tipo_logradouro_cruzamento,
+    nome_logradouro_cruzamento,
+    nome_anterior_cruzamento,
+    nome_logradouro_cruzamento_atual,
+    cod_bairro,
+    nome_bairro,
+    fl_cruzamento,
+    descricao_local,
+    descricao_local_atual,
+    latitude,
+    longitude,
+    qtd_pontos_geom,
+    dt_inicio_vigencia,
+    dt_fim_vigencia,
+    fl_versao_atual,
+    motivo_versao
+   FROM dw.dim_local;
+
+
+--
+-- Name: VIEW dim_local; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON VIEW bi.dim_local IS 'dw.dim_local (SCD Tipo 2) sem a geometria; o ponto representativo está em latitude/longitude.';
+
+
+--
+-- Name: COLUMN dim_local.sk_local; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_local.sk_local IS 'Chave substituta (-1 = não informado, -2 = não se aplica).';
+
+
+--
+-- Name: COLUMN dim_local.chave_natural; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_local.chave_natural IS 'Chave natural pelos códigos: logradouro(s) e bairro (par de logradouros ordenado nos cruzamentos).';
+
+
+--
+-- Name: COLUMN dim_local.versao; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_local.versao IS 'Número da versão do local.';
+
+
+--
+-- Name: COLUMN dim_local.cod_logradouro_principal; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_local.cod_logradouro_principal IS 'Código do logradouro principal (cadastro da PBH).';
+
+
+--
+-- Name: COLUMN dim_local.tipo_logradouro_principal; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_local.tipo_logradouro_principal IS 'Tipo do logradouro principal (RUA, AVENIDA...).';
+
+
+--
+-- Name: COLUMN dim_local.nome_logradouro_principal; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_local.nome_logradouro_principal IS 'Nome do logradouro principal vigente na versão.';
+
+
+--
+-- Name: COLUMN dim_local.nome_anterior_principal; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_local.nome_anterior_principal IS 'Nome anterior do logradouro principal (versão anterior).';
+
+
+--
+-- Name: COLUMN dim_local.nome_logradouro_principal_atual; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_local.nome_logradouro_principal_atual IS 'Nome atual do logradouro principal (igual em todas as versões).';
+
+
+--
+-- Name: COLUMN dim_local.cod_logradouro_cruzamento; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_local.cod_logradouro_cruzamento IS 'Código do logradouro de cruzamento (nulo se não houver).';
+
+
+--
+-- Name: COLUMN dim_local.tipo_logradouro_cruzamento; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_local.tipo_logradouro_cruzamento IS 'Tipo do logradouro de cruzamento.';
+
+
+--
+-- Name: COLUMN dim_local.nome_logradouro_cruzamento; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_local.nome_logradouro_cruzamento IS 'Nome do logradouro de cruzamento vigente na versão.';
+
+
+--
+-- Name: COLUMN dim_local.nome_anterior_cruzamento; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_local.nome_anterior_cruzamento IS 'Nome anterior do logradouro de cruzamento.';
+
+
+--
+-- Name: COLUMN dim_local.nome_logradouro_cruzamento_atual; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_local.nome_logradouro_cruzamento_atual IS 'Nome atual do logradouro de cruzamento.';
+
+
+--
+-- Name: COLUMN dim_local.cod_bairro; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_local.cod_bairro IS 'Código do bairro (0 = não informado).';
+
+
+--
+-- Name: COLUMN dim_local.nome_bairro; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_local.nome_bairro IS 'Nome do bairro (mais recente, normalizado).';
+
+
+--
+-- Name: COLUMN dim_local.fl_cruzamento; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_local.fl_cruzamento IS 'Verdadeiro se o local é um cruzamento.';
+
+
+--
+-- Name: COLUMN dim_local.descricao_local; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_local.descricao_local IS 'Descrição legível na versão (ex.: "AVE AMAZONAS x RUA DOS TUPIS").';
+
+
+--
+-- Name: COLUMN dim_local.descricao_local_atual; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_local.descricao_local_atual IS 'Descrição com os nomes atuais, para rankings históricos estáveis.';
+
+
+--
+-- Name: COLUMN dim_local.latitude; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_local.latitude IS 'Latitude do ponto representativo.';
+
+
+--
+-- Name: COLUMN dim_local.longitude; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_local.longitude IS 'Longitude do ponto representativo.';
+
+
+--
+-- Name: COLUMN dim_local.qtd_pontos_geom; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_local.qtd_pontos_geom IS 'Quantidade de sinistros geolocalizados usados no ponto representativo.';
+
+
+--
+-- Name: COLUMN dim_local.dt_inicio_vigencia; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_local.dt_inicio_vigencia IS 'Início da vigência da versão.';
+
+
+--
+-- Name: COLUMN dim_local.dt_fim_vigencia; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_local.dt_fim_vigencia IS 'Fim da vigência (exclusivo; 9999-12-31 na versão atual).';
+
+
+--
+-- Name: COLUMN dim_local.fl_versao_atual; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_local.fl_versao_atual IS 'Verdadeiro na versão vigente.';
+
+
+--
+-- Name: COLUMN dim_local.motivo_versao; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_local.motivo_versao IS 'Motivo da abertura da versão.';
 
 
 --
@@ -605,17 +1264,66 @@ COMMENT ON COLUMN dw.dim_pessoa.arquivo_origem IS 'Linhagem: origem da linha.';
 
 
 --
--- Name: dim_pessoa_sk_pessoa_seq; Type: SEQUENCE; Schema: dw; Owner: -
+-- Name: dim_pessoa; Type: VIEW; Schema: bi; Owner: -
 --
 
-ALTER TABLE dw.dim_pessoa ALTER COLUMN sk_pessoa ADD GENERATED BY DEFAULT AS IDENTITY (
-    SEQUENCE NAME dw.dim_pessoa_sk_pessoa_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1
-);
+CREATE VIEW bi.dim_pessoa AS
+ SELECT sk_pessoa,
+    tipo_envolvimento,
+    sexo,
+    faixa_etaria,
+    ordem_faixa_etaria,
+    embriaguez
+   FROM dw.dim_pessoa;
+
+
+--
+-- Name: VIEW dim_pessoa; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON VIEW bi.dim_pessoa IS 'dw.dim_pessoa sem as colunas de linhagem.';
+
+
+--
+-- Name: COLUMN dim_pessoa.sk_pessoa; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_pessoa.sk_pessoa IS 'Chave substituta (-1 = não informado, -2 = não se aplica).';
+
+
+--
+-- Name: COLUMN dim_pessoa.tipo_envolvimento; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_pessoa.tipo_envolvimento IS 'CONDUTOR, PASSAGEIRO, PEDESTRE ou NÃO INFORMADO.';
+
+
+--
+-- Name: COLUMN dim_pessoa.sexo; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_pessoa.sexo IS 'MASCULINO, FEMININO ou NÃO INFORMADO.';
+
+
+--
+-- Name: COLUMN dim_pessoa.faixa_etaria; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_pessoa.faixa_etaria IS 'Faixa etária (0 a 9 ... 70 ou mais, Não informada).';
+
+
+--
+-- Name: COLUMN dim_pessoa.ordem_faixa_etaria; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_pessoa.ordem_faixa_etaria IS 'Ordem de exibição da faixa etária.';
+
+
+--
+-- Name: COLUMN dim_pessoa.embriaguez; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_pessoa.embriaguez IS 'Indício de embriaguez: SIM, NÃO ou NÃO INFORMADO (consistente a partir de 2016).';
 
 
 --
@@ -722,163 +1430,98 @@ COMMENT ON COLUMN dw.dim_regional.arquivo_origem IS 'Linhagem: arquivo de origem
 
 
 --
--- Name: dim_tempo; Type: TABLE; Schema: dw; Owner: -
+-- Name: dim_regional; Type: VIEW; Schema: bi; Owner: -
 --
 
-CREATE TABLE dw.dim_tempo (
-    sk_tempo integer NOT NULL,
-    data date,
-    ano smallint,
-    semestre smallint,
-    trimestre smallint,
-    mes smallint,
-    nome_mes text NOT NULL,
-    ano_mes text,
-    dia smallint,
-    dia_semana smallint,
-    nome_dia_semana text NOT NULL,
-    fl_fim_de_semana boolean,
-    hora smallint,
-    fl_hora_informada boolean NOT NULL,
-    faixa_horaria text NOT NULL,
-    periodo_dia text NOT NULL,
-    dt_carga timestamp with time zone DEFAULT now() NOT NULL,
-    arquivo_origem text NOT NULL,
-    CONSTRAINT ck_dim_tempo_hora CHECK (((hora IS NULL) OR ((hora >= 0) AND (hora <= 23))))
-);
+CREATE VIEW bi.dim_regional AS
+ SELECT sk_regional,
+    cod_regional,
+    nome_regional,
+    sigla,
+    area_km2,
+    perimetro_m,
+    subdistritos_ibge,
+    versao_limite,
+    round((public.st_y(public.st_pointonsurface(geom)))::numeric, 6) AS latitude,
+    round((public.st_x(public.st_pointonsurface(geom)))::numeric, 6) AS longitude
+   FROM dw.dim_regional r;
 
 
 --
--- Name: TABLE dim_tempo; Type: COMMENT; Schema: dw; Owner: -
+-- Name: VIEW dim_regional; Type: COMMENT; Schema: bi; Owner: -
 --
 
-COMMENT ON TABLE dw.dim_tempo IS 'Dimensão tempo no grão data + hora (2010–2030). Membro "Sem hora" por dia (sk AAAAMMDD99) para boletins sem hora informada e para a fato_populacao; -1 e -2 são membros especiais.';
-
-
---
--- Name: COLUMN dim_tempo.sk_tempo; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.dim_tempo.sk_tempo IS 'Chave substituta inteligente AAAAMMDDHH (HH = 99 para "Sem hora").';
+COMMENT ON VIEW bi.dim_regional IS 'dw.dim_regional sem a geometria; latitude/longitude de um ponto interno ao polígono (rótulos e bolhas). Os polígonos estão em powerbi/regionais_bh.*.';
 
 
 --
--- Name: COLUMN dim_tempo.data; Type: COMMENT; Schema: dw; Owner: -
+-- Name: COLUMN dim_regional.sk_regional; Type: COMMENT; Schema: bi; Owner: -
 --
 
-COMMENT ON COLUMN dw.dim_tempo.data IS 'Data.';
-
-
---
--- Name: COLUMN dim_tempo.ano; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.dim_tempo.ano IS 'Ano.';
+COMMENT ON COLUMN bi.dim_regional.sk_regional IS 'Chave substituta (-1 = não informada, -2 = não se aplica).';
 
 
 --
--- Name: COLUMN dim_tempo.semestre; Type: COMMENT; Schema: dw; Owner: -
+-- Name: COLUMN dim_regional.cod_regional; Type: COMMENT; Schema: bi; Owner: -
 --
 
-COMMENT ON COLUMN dw.dim_tempo.semestre IS 'Semestre (1–2).';
-
-
---
--- Name: COLUMN dim_tempo.trimestre; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.dim_tempo.trimestre IS 'Trimestre (1–4).';
+COMMENT ON COLUMN bi.dim_regional.cod_regional IS 'Código da regional na PBH (COD_REG = cod_regional do si-bol, 18 a 26).';
 
 
 --
--- Name: COLUMN dim_tempo.mes; Type: COMMENT; Schema: dw; Owner: -
+-- Name: COLUMN dim_regional.nome_regional; Type: COMMENT; Schema: bi; Owner: -
 --
 
-COMMENT ON COLUMN dw.dim_tempo.mes IS 'Mês (1–12).';
-
-
---
--- Name: COLUMN dim_tempo.nome_mes; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.dim_tempo.nome_mes IS 'Nome do mês em português.';
+COMMENT ON COLUMN bi.dim_regional.nome_regional IS 'Nome da regional.';
 
 
 --
--- Name: COLUMN dim_tempo.ano_mes; Type: COMMENT; Schema: dw; Owner: -
+-- Name: COLUMN dim_regional.sigla; Type: COMMENT; Schema: bi; Owner: -
 --
 
-COMMENT ON COLUMN dw.dim_tempo.ano_mes IS 'Ano e mês (AAAA-MM).';
-
-
---
--- Name: COLUMN dim_tempo.dia; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.dim_tempo.dia IS 'Dia do mês.';
+COMMENT ON COLUMN bi.dim_regional.sigla IS 'Sigla da regional.';
 
 
 --
--- Name: COLUMN dim_tempo.dia_semana; Type: COMMENT; Schema: dw; Owner: -
+-- Name: COLUMN dim_regional.area_km2; Type: COMMENT; Schema: bi; Owner: -
 --
 
-COMMENT ON COLUMN dw.dim_tempo.dia_semana IS 'Dia da semana ISO (1 = segunda ... 7 = domingo).';
-
-
---
--- Name: COLUMN dim_tempo.nome_dia_semana; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.dim_tempo.nome_dia_semana IS 'Nome do dia da semana.';
+COMMENT ON COLUMN bi.dim_regional.area_km2 IS 'Área em km² (do arquivo da PBH).';
 
 
 --
--- Name: COLUMN dim_tempo.fl_fim_de_semana; Type: COMMENT; Schema: dw; Owner: -
+-- Name: COLUMN dim_regional.perimetro_m; Type: COMMENT; Schema: bi; Owner: -
 --
 
-COMMENT ON COLUMN dw.dim_tempo.fl_fim_de_semana IS 'Sábado ou domingo.';
-
-
---
--- Name: COLUMN dim_tempo.hora; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.dim_tempo.hora IS 'Hora (0–23); nula no membro "Sem hora".';
+COMMENT ON COLUMN bi.dim_regional.perimetro_m IS 'Perímetro em metros (do arquivo da PBH).';
 
 
 --
--- Name: COLUMN dim_tempo.fl_hora_informada; Type: COMMENT; Schema: dw; Owner: -
+-- Name: COLUMN dim_regional.subdistritos_ibge; Type: COMMENT; Schema: bi; Owner: -
 --
 
-COMMENT ON COLUMN dw.dim_tempo.fl_hora_informada IS 'Falso no membro "Sem hora" e nos membros especiais.';
-
-
---
--- Name: COLUMN dim_tempo.faixa_horaria; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.dim_tempo.faixa_horaria IS 'Faixa de 3 horas (00h–02h ... 21h–23h) ou "Hora não informada".';
+COMMENT ON COLUMN bi.dim_regional.subdistritos_ibge IS 'Códigos dos subdistritos do IBGE que compõem a regional.';
 
 
 --
--- Name: COLUMN dim_tempo.periodo_dia; Type: COMMENT; Schema: dw; Owner: -
+-- Name: COLUMN dim_regional.versao_limite; Type: COMMENT; Schema: bi; Owner: -
 --
 
-COMMENT ON COLUMN dw.dim_tempo.periodo_dia IS 'Madrugada (0–5h), Manhã (6–11h), Tarde (12–17h), Noite (18–23h) ou "Hora não informada".';
-
-
---
--- Name: COLUMN dim_tempo.dt_carga; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.dim_tempo.dt_carga IS 'Linhagem: data e hora da carga.';
+COMMENT ON COLUMN bi.dim_regional.versao_limite IS 'Arquivo de limite de origem.';
 
 
 --
--- Name: COLUMN dim_tempo.arquivo_origem; Type: COMMENT; Schema: dw; Owner: -
+-- Name: COLUMN dim_regional.latitude; Type: COMMENT; Schema: bi; Owner: -
 --
 
-COMMENT ON COLUMN dw.dim_tempo.arquivo_origem IS 'Linhagem: script que gerou a linha.';
+COMMENT ON COLUMN bi.dim_regional.latitude IS 'Latitude (WGS 84) de um ponto interno ao polígono da regional (ST_PointOnSurface).';
+
+
+--
+-- Name: COLUMN dim_regional.longitude; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_regional.longitude IS 'Longitude (WGS 84) de um ponto interno ao polígono da regional (ST_PointOnSurface).';
 
 
 --
@@ -961,17 +1604,66 @@ COMMENT ON COLUMN dw.dim_tipo_sinistro.arquivo_origem IS 'Linhagem: arquivo de o
 
 
 --
--- Name: dim_tipo_sinistro_sk_tipo_sinistro_seq; Type: SEQUENCE; Schema: dw; Owner: -
+-- Name: dim_tipo_sinistro; Type: VIEW; Schema: bi; Owner: -
 --
 
-ALTER TABLE dw.dim_tipo_sinistro ALTER COLUMN sk_tipo_sinistro ADD GENERATED BY DEFAULT AS IDENTITY (
-    SEQUENCE NAME dw.dim_tipo_sinistro_sk_tipo_sinistro_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1
-);
+CREATE VIEW bi.dim_tipo_sinistro AS
+ SELECT sk_tipo_sinistro,
+    cod_tipo_sinistro,
+    descricao,
+    descricao_origem,
+    grupo_tipo_sinistro,
+    ordem
+   FROM dw.dim_tipo_sinistro;
+
+
+--
+-- Name: VIEW dim_tipo_sinistro; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON VIEW bi.dim_tipo_sinistro IS 'dw.dim_tipo_sinistro sem as colunas de linhagem.';
+
+
+--
+-- Name: COLUMN dim_tipo_sinistro.sk_tipo_sinistro; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_tipo_sinistro.sk_tipo_sinistro IS 'Chave substituta (-1 = não informado, -2 = não se aplica).';
+
+
+--
+-- Name: COLUMN dim_tipo_sinistro.cod_tipo_sinistro; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_tipo_sinistro.cod_tipo_sinistro IS 'Código do tipo de sinistro (ex.: H06002).';
+
+
+--
+-- Name: COLUMN dim_tipo_sinistro.descricao; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_tipo_sinistro.descricao IS 'Descrição padronizada.';
+
+
+--
+-- Name: COLUMN dim_tipo_sinistro.descricao_origem; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_tipo_sinistro.descricao_origem IS 'Descrição como veio na fonte.';
+
+
+--
+-- Name: COLUMN dim_tipo_sinistro.grupo_tipo_sinistro; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_tipo_sinistro.grupo_tipo_sinistro IS 'Agrupamento analítico.';
+
+
+--
+-- Name: COLUMN dim_tipo_sinistro.ordem; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_tipo_sinistro.ordem IS 'Ordem de exibição.';
 
 
 --
@@ -1054,17 +1746,66 @@ COMMENT ON COLUMN dw.dim_veiculo.arquivo_origem IS 'Linhagem: arquivo de origem.
 
 
 --
--- Name: dim_veiculo_sk_veiculo_seq; Type: SEQUENCE; Schema: dw; Owner: -
+-- Name: dim_veiculo; Type: VIEW; Schema: bi; Owner: -
 --
 
-ALTER TABLE dw.dim_veiculo ALTER COLUMN sk_veiculo ADD GENERATED BY DEFAULT AS IDENTITY (
-    SEQUENCE NAME dw.dim_veiculo_sk_veiculo_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1
-);
+CREATE VIEW bi.dim_veiculo AS
+ SELECT sk_veiculo,
+    especie,
+    grupo_especie,
+    categoria,
+    situacao,
+    fl_identificado
+   FROM dw.dim_veiculo;
+
+
+--
+-- Name: VIEW dim_veiculo; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON VIEW bi.dim_veiculo IS 'dw.dim_veiculo sem as colunas de linhagem.';
+
+
+--
+-- Name: COLUMN dim_veiculo.sk_veiculo; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_veiculo.sk_veiculo IS 'Chave substituta (-1 = não identificado, -2 = não se aplica (pedestre)).';
+
+
+--
+-- Name: COLUMN dim_veiculo.especie; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_veiculo.especie IS 'Espécie do veículo.';
+
+
+--
+-- Name: COLUMN dim_veiculo.grupo_especie; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_veiculo.grupo_especie IS 'Grupo da espécie (Motocicleta, Automóvel/utilitário, Ônibus, Caminhão, Bicicleta, Outros).';
+
+
+--
+-- Name: COLUMN dim_veiculo.categoria; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_veiculo.categoria IS 'Categoria (PARTICULAR, ALUGUEL...) ou NÃO IDENTIFICADA quando o veículo exato não pôde ser determinado.';
+
+
+--
+-- Name: COLUMN dim_veiculo.situacao; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_veiculo.situacao IS 'Situação (EM MOVIMENTO, PARADO...) ou NÃO IDENTIFICADA.';
+
+
+--
+-- Name: COLUMN dim_veiculo.fl_identificado; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.dim_veiculo.fl_identificado IS 'Verdadeiro se categoria e situação vêm do veículo identificado.';
 
 
 --
@@ -1243,6 +1984,1967 @@ COMMENT ON COLUMN dw.fato_envolvido.dt_carga IS 'Linhagem: data e hora da carga.
 --
 
 COMMENT ON COLUMN dw.fato_envolvido.arquivo_origem IS 'Linhagem: arquivo si_env de origem.';
+
+
+--
+-- Name: fato_sinistro; Type: TABLE; Schema: dw; Owner: -
+--
+
+CREATE TABLE dw.fato_sinistro (
+    numero_boletim text NOT NULL,
+    ano smallint NOT NULL,
+    sk_tempo integer NOT NULL,
+    sk_local integer NOT NULL,
+    sk_tipo_sinistro smallint NOT NULL,
+    sk_condicao_via smallint NOT NULL,
+    sk_regional smallint NOT NULL,
+    qtd_envolvidos smallint NOT NULL,
+    qtd_vitimas smallint NOT NULL,
+    qtd_vitimas_fatais smallint NOT NULL,
+    qtd_veiculos smallint NOT NULL,
+    qtd_motocicletas smallint NOT NULL,
+    qtd_automoveis smallint NOT NULL,
+    qtd_onibus smallint NOT NULL,
+    qtd_caminhoes smallint NOT NULL,
+    qtd_bicicletas smallint NOT NULL,
+    qtd_outros_veiculos smallint NOT NULL,
+    valor_ups smallint NOT NULL,
+    fl_ups_imputada boolean NOT NULL,
+    velocidade_permitida smallint,
+    precipitacao_mm numeric(6,1),
+    estacao_inmet text,
+    fl_fatal boolean NOT NULL,
+    fl_envolve_pedestre boolean NOT NULL,
+    fl_envolve_motociclista boolean NOT NULL,
+    fl_geolocalizado boolean NOT NULL,
+    latitude double precision,
+    longitude double precision,
+    geom public.geometry(Point,4326),
+    origem_regional text NOT NULL,
+    dt_carga timestamp with time zone DEFAULT now() NOT NULL,
+    arquivo_origem text NOT NULL,
+    CONSTRAINT ck_fato_sinistro_ups CHECK ((valor_ups = ANY (ARRAY[1, 5, 13]))),
+    CONSTRAINT ck_fato_sinistro_vitimas CHECK (((qtd_vitimas_fatais <= qtd_vitimas) AND (qtd_vitimas <= qtd_envolvidos)))
+)
+PARTITION BY RANGE (ano);
+
+
+--
+-- Name: TABLE fato_sinistro; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON TABLE dw.fato_sinistro IS 'Fato sinistro: uma linha por boletim de ocorrência (numero_boletim + ano), particionada por ano. Contagens de veículos por espécie respondem ao perfil da frota por local sem quebrar o grão.';
+
+
+--
+-- Name: COLUMN fato_sinistro.numero_boletim; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_sinistro.numero_boletim IS 'Dimensão degenerada: número do boletim (sufixo /n para eventos distintos com o mesmo número no ano).';
+
+
+--
+-- Name: COLUMN fato_sinistro.ano; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_sinistro.ano IS 'Ano do sinistro (chave de partição).';
+
+
+--
+-- Name: COLUMN fato_sinistro.sk_tempo; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_sinistro.sk_tempo IS 'FK dim_tempo (data + hora; AAAAMMDD99 quando a hora não foi informada).';
+
+
+--
+-- Name: COLUMN fato_sinistro.sk_local; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_sinistro.sk_local IS 'FK dim_local (versão vigente na data do sinistro).';
+
+
+--
+-- Name: COLUMN fato_sinistro.sk_tipo_sinistro; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_sinistro.sk_tipo_sinistro IS 'FK dim_tipo_sinistro.';
+
+
+--
+-- Name: COLUMN fato_sinistro.sk_condicao_via; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_sinistro.sk_condicao_via IS 'FK dim_condicao_via.';
+
+
+--
+-- Name: COLUMN fato_sinistro.sk_regional; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_sinistro.sk_regional IS 'FK dim_regional (código do boletim; 27 Hipercentro -> Centro-Sul; nulo/0 resolvido por ST_Within do ponto do boletim ou, sem ponto, do ponto representativo do local).';
+
+
+--
+-- Name: COLUMN fato_sinistro.qtd_envolvidos; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_sinistro.qtd_envolvidos IS 'Pessoas envolvidas (si_env).';
+
+
+--
+-- Name: COLUMN fato_sinistro.qtd_vitimas; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_sinistro.qtd_vitimas IS 'Vítimas: envolvidos com severidade não fatal ou fatal.';
+
+
+--
+-- Name: COLUMN fato_sinistro.qtd_vitimas_fatais; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_sinistro.qtd_vitimas_fatais IS 'Vítimas fatais (severidade fatal no si_env).';
+
+
+--
+-- Name: COLUMN fato_sinistro.qtd_veiculos; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_sinistro.qtd_veiculos IS 'Veículos envolvidos (si-veic).';
+
+
+--
+-- Name: COLUMN fato_sinistro.qtd_motocicletas; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_sinistro.qtd_motocicletas IS 'Veículos do grupo Motocicleta (motocicleta, motoneta, ciclomotor, triciclo).';
+
+
+--
+-- Name: COLUMN fato_sinistro.qtd_automoveis; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_sinistro.qtd_automoveis IS 'Veículos do grupo Automóvel/utilitário.';
+
+
+--
+-- Name: COLUMN fato_sinistro.qtd_onibus; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_sinistro.qtd_onibus IS 'Veículos do grupo Ônibus (ônibus e micro-ônibus).';
+
+
+--
+-- Name: COLUMN fato_sinistro.qtd_caminhoes; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_sinistro.qtd_caminhoes IS 'Veículos do grupo Caminhão (caminhão, caminhão-trator, reboque).';
+
+
+--
+-- Name: COLUMN fato_sinistro.qtd_bicicletas; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_sinistro.qtd_bicicletas IS 'Bicicletas.';
+
+
+--
+-- Name: COLUMN fato_sinistro.qtd_outros_veiculos; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_sinistro.qtd_outros_veiculos IS 'Demais espécies e não informadas.';
+
+
+--
+-- Name: COLUMN fato_sinistro.valor_ups; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_sinistro.valor_ups IS 'Unidade Padrão de Severidade (1, 5 ou 13): a da fonte quando informada; senão 13 se houve morte e 5 caso contrário.';
+
+
+--
+-- Name: COLUMN fato_sinistro.fl_ups_imputada; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_sinistro.fl_ups_imputada IS 'Verdadeiro quando a UPS não veio na fonte (0 a partir de 2016) e foi derivada da severidade.';
+
+
+--
+-- Name: COLUMN fato_sinistro.velocidade_permitida; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_sinistro.velocidade_permitida IS 'Velocidade máxima permitida (km/h) — medida NÃO aditiva; nula se não informada.';
+
+
+--
+-- Name: COLUMN fato_sinistro.precipitacao_mm; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_sinistro.precipitacao_mm IS 'Precipitação do INMET na hora do sinistro (mm) — medida não aditiva entre sinistros.';
+
+
+--
+-- Name: COLUMN fato_sinistro.estacao_inmet; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_sinistro.estacao_inmet IS 'Estação usada para a precipitação (A521 Pampulha ou F501 Cercadinho).';
+
+
+--
+-- Name: COLUMN fato_sinistro.fl_fatal; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_sinistro.fl_fatal IS 'Verdadeiro se houve ao menos uma vítima fatal.';
+
+
+--
+-- Name: COLUMN fato_sinistro.fl_envolve_pedestre; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_sinistro.fl_envolve_pedestre IS 'Verdadeiro se há pedestre envolvido ou o tipo é atropelamento de pessoa.';
+
+
+--
+-- Name: COLUMN fato_sinistro.fl_envolve_motociclista; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_sinistro.fl_envolve_motociclista IS 'Verdadeiro se há motocicleta (grupo) entre os veículos ou envolvidos.';
+
+
+--
+-- Name: COLUMN fato_sinistro.fl_geolocalizado; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_sinistro.fl_geolocalizado IS 'Verdadeiro se a coordenada é válida e está dentro do município.';
+
+
+--
+-- Name: COLUMN fato_sinistro.latitude; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_sinistro.latitude IS 'Latitude do ponto exato (WGS 84).';
+
+
+--
+-- Name: COLUMN fato_sinistro.longitude; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_sinistro.longitude IS 'Longitude do ponto exato (WGS 84).';
+
+
+--
+-- Name: COLUMN fato_sinistro.geom; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_sinistro.geom IS 'Ponto exato do sinistro (EPSG:4326), para o mapa de calor.';
+
+
+--
+-- Name: COLUMN fato_sinistro.origem_regional; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_sinistro.origem_regional IS 'BOLETIM, HIPERCENTRO -> CENTRO-SUL, ESPACIAL (ST_Within), ESPACIAL (regional mais próxima), ESPACIAL (ponto do local) ou NÃO RESOLVIDA.';
+
+
+--
+-- Name: COLUMN fato_sinistro.dt_carga; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_sinistro.dt_carga IS 'Linhagem: data e hora da carga.';
+
+
+--
+-- Name: COLUMN fato_sinistro.arquivo_origem; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_sinistro.arquivo_origem IS 'Linhagem: arquivo si-bol de origem.';
+
+
+--
+-- Name: fato_envolvido; Type: VIEW; Schema: bi; Owner: -
+--
+
+CREATE VIEW bi.fato_envolvido AS
+ SELECT e.numero_boletim,
+    e.ano,
+    e.numero_envolvido,
+    t.data,
+    (COALESCE((t.hora)::integer, 99))::smallint AS hora,
+    e.sk_local,
+    e.sk_pessoa,
+    e.sk_veiculo,
+    e.sk_regional,
+    COALESCE((s.sk_tipo_sinistro)::integer, '-1'::integer) AS sk_tipo_sinistro,
+    COALESCE((s.sk_condicao_via)::integer, '-1'::integer) AS sk_condicao_via,
+    e.idade,
+    e.gravidade,
+    e.qtd_envolvido,
+    e.fl_vitima,
+    e.fl_vitima_fatal,
+    e.fl_pedestre,
+    e.fl_motociclista,
+    e.fl_condutor,
+    e.origem_tipo_envolvimento,
+    e.origem_especie_veiculo
+   FROM ((dw.fato_envolvido e
+     JOIN dw.dim_tempo t ON ((t.sk_tempo = e.sk_tempo)))
+     LEFT JOIN dw.fato_sinistro s ON (((s.numero_boletim = e.numero_boletim) AND (s.ano = e.ano))));
+
+
+--
+-- Name: VIEW fato_envolvido; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON VIEW bi.fato_envolvido IS 'dw.fato_envolvido (1 linha por pessoa) com data e hora no lugar de sk_tempo e com o tipo de sinistro e a condição da via herdados do boletim.';
+
+
+--
+-- Name: COLUMN fato_envolvido.numero_boletim; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_envolvido.numero_boletim IS 'Dimensão degenerada: número do boletim (o mesmo da fato_sinistro).';
+
+
+--
+-- Name: COLUMN fato_envolvido.ano; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_envolvido.ano IS 'Ano do sinistro (chave de partição).';
+
+
+--
+-- Name: COLUMN fato_envolvido.numero_envolvido; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_envolvido.numero_envolvido IS 'Dimensão degenerada: número do envolvido no boletim.';
+
+
+--
+-- Name: COLUMN fato_envolvido.data; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_envolvido.data IS 'Data do sinistro (chave para bi.dim_calendario).';
+
+
+--
+-- Name: COLUMN fato_envolvido.hora; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_envolvido.hora IS 'Hora do sinistro (0–23; 99 = não informada; chave para bi.dim_hora).';
+
+
+--
+-- Name: COLUMN fato_envolvido.sk_local; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_envolvido.sk_local IS 'FK dim_local (versão vigente na data).';
+
+
+--
+-- Name: COLUMN fato_envolvido.sk_pessoa; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_envolvido.sk_pessoa IS 'FK dim_pessoa (perfil).';
+
+
+--
+-- Name: COLUMN fato_envolvido.sk_veiculo; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_envolvido.sk_veiculo IS 'FK dim_veiculo (perfil herdado quando há exatamente um veículo da espécie da pessoa no boletim).';
+
+
+--
+-- Name: COLUMN fato_envolvido.sk_regional; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_envolvido.sk_regional IS 'FK dim_regional (dimensão conformada com a fato_sinistro; acréscimo à Fase 2).';
+
+
+--
+-- Name: COLUMN fato_envolvido.sk_tipo_sinistro; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_envolvido.sk_tipo_sinistro IS 'Tipo de sinistro do boletim do envolvido (herdado de dw.fato_sinistro).';
+
+
+--
+-- Name: COLUMN fato_envolvido.sk_condicao_via; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_envolvido.sk_condicao_via IS 'Condição da via (clima e pavimento) do boletim do envolvido (herdada de dw.fato_sinistro).';
+
+
+--
+-- Name: COLUMN fato_envolvido.idade; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_envolvido.idade IS 'Idade em anos (atributo; nula se não informada).';
+
+
+--
+-- Name: COLUMN fato_envolvido.gravidade; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_envolvido.gravidade IS 'Dimensão degenerada: FATAL, NÃO FATAL, SEM FERIMENTOS ou NÃO INFORMADA.';
+
+
+--
+-- Name: COLUMN fato_envolvido.qtd_envolvido; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_envolvido.qtd_envolvido IS 'Contador (sempre 1) para somas.';
+
+
+--
+-- Name: COLUMN fato_envolvido.fl_vitima; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_envolvido.fl_vitima IS 'Vítima (gravidade NÃO FATAL ou FATAL); envolvido ileso não é vítima.';
+
+
+--
+-- Name: COLUMN fato_envolvido.fl_vitima_fatal; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_envolvido.fl_vitima_fatal IS 'Vítima fatal.';
+
+
+--
+-- Name: COLUMN fato_envolvido.fl_pedestre; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_envolvido.fl_pedestre IS 'Pedestre.';
+
+
+--
+-- Name: COLUMN fato_envolvido.fl_motociclista; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_envolvido.fl_motociclista IS 'Condutor ou passageiro de motocicleta (grupo).';
+
+
+--
+-- Name: COLUMN fato_envolvido.fl_condutor; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_envolvido.fl_condutor IS 'Condutor.';
+
+
+--
+-- Name: COLUMN fato_envolvido.origem_tipo_envolvimento; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_envolvido.origem_tipo_envolvimento IS 'INDICADOR DA FONTE ou REGRA DERIVADA (ver README).';
+
+
+--
+-- Name: COLUMN fato_envolvido.origem_especie_veiculo; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_envolvido.origem_especie_veiculo IS 'Origem da espécie do veículo da pessoa: INFORMADA NO BOLETIM, IMPUTADA (ESPÉCIE ÚNICA NO BOLETIM), NÃO INFORMADA ou NÃO SE APLICA (PEDESTRE).';
+
+
+--
+-- Name: fato_populacao; Type: TABLE; Schema: dw; Owner: -
+--
+
+CREATE TABLE dw.fato_populacao (
+    sk_regional smallint NOT NULL,
+    sk_tempo integer NOT NULL,
+    ano smallint NOT NULL,
+    populacao_residente integer NOT NULL,
+    participacao_regional numeric(12,10) NOT NULL,
+    populacao_municipio integer NOT NULL,
+    origem_dado text NOT NULL,
+    origem_total_municipio text NOT NULL,
+    metodo_regional text NOT NULL,
+    dt_carga timestamp with time zone DEFAULT now() NOT NULL,
+    arquivo_origem text NOT NULL,
+    CONSTRAINT fato_populacao_populacao_residente_check CHECK ((populacao_residente > 0))
+);
+
+
+--
+-- Name: TABLE fato_populacao; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON TABLE dw.fato_populacao IS 'Fato população residente por regional e ano (referência 1º de julho, membro "Sem hora" da dim_tempo). Denominador das taxas por 100 mil habitantes.';
+
+
+--
+-- Name: COLUMN fato_populacao.sk_regional; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_populacao.sk_regional IS 'FK dim_regional.';
+
+
+--
+-- Name: COLUMN fato_populacao.sk_tempo; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_populacao.sk_tempo IS 'FK dim_tempo: 1º de julho do ano, membro "Sem hora" (AAAA070199).';
+
+
+--
+-- Name: COLUMN fato_populacao.ano; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_populacao.ano IS 'Ano de referência.';
+
+
+--
+-- Name: COLUMN fato_populacao.populacao_residente; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_populacao.populacao_residente IS 'População residente da regional (medida semiaditiva: soma entre regionais, não entre anos).';
+
+
+--
+-- Name: COLUMN fato_populacao.participacao_regional; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_populacao.participacao_regional IS 'Participação da regional na população do município.';
+
+
+--
+-- Name: COLUMN fato_populacao.populacao_municipio; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_populacao.populacao_municipio IS 'População do município no ano (as regionais somam exatamente este total).';
+
+
+--
+-- Name: COLUMN fato_populacao.origem_dado; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_populacao.origem_dado IS 'CENSO, ESTIMATIVA IBGE x PROPORÇÃO ou INTERPOLADO x PROPORÇÃO.';
+
+
+--
+-- Name: COLUMN fato_populacao.origem_total_municipio; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_populacao.origem_total_municipio IS 'Origem do total municipal (tabela SIDRA ou interpolação).';
+
+
+--
+-- Name: COLUMN fato_populacao.metodo_regional; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_populacao.metodo_regional IS 'Método da participação da regional (Censo 2022, Censo 2010 por setores ou interpolação linear 2010–2022).';
+
+
+--
+-- Name: COLUMN fato_populacao.dt_carga; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_populacao.dt_carga IS 'Linhagem: data e hora da carga.';
+
+
+--
+-- Name: COLUMN fato_populacao.arquivo_origem; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.fato_populacao.arquivo_origem IS 'Linhagem: arquivos de origem.';
+
+
+--
+-- Name: fato_populacao; Type: VIEW; Schema: bi; Owner: -
+--
+
+CREATE VIEW bi.fato_populacao AS
+ SELECT p.sk_regional,
+    p.ano,
+    t.data,
+    p.populacao_residente,
+    p.participacao_regional,
+    p.populacao_municipio,
+    p.origem_dado,
+    p.origem_total_municipio,
+    p.metodo_regional
+   FROM (dw.fato_populacao p
+     JOIN dw.dim_tempo t ON ((t.sk_tempo = p.sk_tempo)));
+
+
+--
+-- Name: VIEW fato_populacao; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON VIEW bi.fato_populacao IS 'dw.fato_populacao (regional x ano) com a data de referência (1º de julho) no lugar de sk_tempo.';
+
+
+--
+-- Name: COLUMN fato_populacao.sk_regional; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_populacao.sk_regional IS 'FK dim_regional.';
+
+
+--
+-- Name: COLUMN fato_populacao.ano; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_populacao.ano IS 'Ano de referência.';
+
+
+--
+-- Name: COLUMN fato_populacao.data; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_populacao.data IS 'Data de referência da população (1º de julho do ano; chave para bi.dim_calendario).';
+
+
+--
+-- Name: COLUMN fato_populacao.populacao_residente; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_populacao.populacao_residente IS 'População residente da regional (medida semiaditiva: soma entre regionais, não entre anos).';
+
+
+--
+-- Name: COLUMN fato_populacao.participacao_regional; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_populacao.participacao_regional IS 'Participação da regional na população do município.';
+
+
+--
+-- Name: COLUMN fato_populacao.populacao_municipio; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_populacao.populacao_municipio IS 'População do município no ano (as regionais somam exatamente este total).';
+
+
+--
+-- Name: COLUMN fato_populacao.origem_dado; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_populacao.origem_dado IS 'CENSO, ESTIMATIVA IBGE x PROPORÇÃO ou INTERPOLADO x PROPORÇÃO.';
+
+
+--
+-- Name: COLUMN fato_populacao.origem_total_municipio; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_populacao.origem_total_municipio IS 'Origem do total municipal (tabela SIDRA ou interpolação).';
+
+
+--
+-- Name: COLUMN fato_populacao.metodo_regional; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_populacao.metodo_regional IS 'Método da participação da regional (Censo 2022, Censo 2010 por setores ou interpolação linear 2010–2022).';
+
+
+--
+-- Name: fato_sinistro; Type: VIEW; Schema: bi; Owner: -
+--
+
+CREATE VIEW bi.fato_sinistro AS
+ SELECT f.numero_boletim,
+    f.ano,
+    t.data,
+    (COALESCE((t.hora)::integer, 99))::smallint AS hora,
+    f.sk_local,
+    f.sk_tipo_sinistro,
+    f.sk_condicao_via,
+    f.sk_regional,
+    f.qtd_envolvidos,
+    f.qtd_vitimas,
+    f.qtd_vitimas_fatais,
+    f.qtd_veiculos,
+    f.qtd_motocicletas,
+    f.qtd_automoveis,
+    f.qtd_onibus,
+    f.qtd_caminhoes,
+    f.qtd_bicicletas,
+    f.qtd_outros_veiculos,
+    f.valor_ups,
+    f.fl_ups_imputada,
+    f.velocidade_permitida,
+    f.precipitacao_mm,
+    f.estacao_inmet,
+    f.fl_fatal,
+    f.fl_envolve_pedestre,
+    f.fl_envolve_motociclista,
+    f.fl_geolocalizado,
+    f.latitude,
+    f.longitude,
+    f.origem_regional
+   FROM (dw.fato_sinistro f
+     JOIN dw.dim_tempo t ON ((t.sk_tempo = f.sk_tempo)));
+
+
+--
+-- Name: VIEW fato_sinistro; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON VIEW bi.fato_sinistro IS 'dw.fato_sinistro (1 linha por boletim) com data e hora no lugar de sk_tempo e sem a geometria; o ponto exato está em latitude/longitude (nulas quando não geolocalizado).';
+
+
+--
+-- Name: COLUMN fato_sinistro.numero_boletim; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_sinistro.numero_boletim IS 'Dimensão degenerada: número do boletim (sufixo /n para eventos distintos com o mesmo número no ano).';
+
+
+--
+-- Name: COLUMN fato_sinistro.ano; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_sinistro.ano IS 'Ano do sinistro (chave de partição).';
+
+
+--
+-- Name: COLUMN fato_sinistro.data; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_sinistro.data IS 'Data do sinistro (chave para bi.dim_calendario).';
+
+
+--
+-- Name: COLUMN fato_sinistro.hora; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_sinistro.hora IS 'Hora do sinistro (0–23; 99 = não informada; chave para bi.dim_hora).';
+
+
+--
+-- Name: COLUMN fato_sinistro.sk_local; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_sinistro.sk_local IS 'FK dim_local (versão vigente na data do sinistro).';
+
+
+--
+-- Name: COLUMN fato_sinistro.sk_tipo_sinistro; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_sinistro.sk_tipo_sinistro IS 'FK dim_tipo_sinistro.';
+
+
+--
+-- Name: COLUMN fato_sinistro.sk_condicao_via; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_sinistro.sk_condicao_via IS 'FK dim_condicao_via.';
+
+
+--
+-- Name: COLUMN fato_sinistro.sk_regional; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_sinistro.sk_regional IS 'FK dim_regional (código do boletim; 27 Hipercentro -> Centro-Sul; nulo/0 resolvido por ST_Within do ponto do boletim ou, sem ponto, do ponto representativo do local).';
+
+
+--
+-- Name: COLUMN fato_sinistro.qtd_envolvidos; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_sinistro.qtd_envolvidos IS 'Pessoas envolvidas (si_env).';
+
+
+--
+-- Name: COLUMN fato_sinistro.qtd_vitimas; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_sinistro.qtd_vitimas IS 'Vítimas: envolvidos com severidade não fatal ou fatal.';
+
+
+--
+-- Name: COLUMN fato_sinistro.qtd_vitimas_fatais; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_sinistro.qtd_vitimas_fatais IS 'Vítimas fatais (severidade fatal no si_env).';
+
+
+--
+-- Name: COLUMN fato_sinistro.qtd_veiculos; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_sinistro.qtd_veiculos IS 'Veículos envolvidos (si-veic).';
+
+
+--
+-- Name: COLUMN fato_sinistro.qtd_motocicletas; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_sinistro.qtd_motocicletas IS 'Veículos do grupo Motocicleta (motocicleta, motoneta, ciclomotor, triciclo).';
+
+
+--
+-- Name: COLUMN fato_sinistro.qtd_automoveis; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_sinistro.qtd_automoveis IS 'Veículos do grupo Automóvel/utilitário.';
+
+
+--
+-- Name: COLUMN fato_sinistro.qtd_onibus; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_sinistro.qtd_onibus IS 'Veículos do grupo Ônibus (ônibus e micro-ônibus).';
+
+
+--
+-- Name: COLUMN fato_sinistro.qtd_caminhoes; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_sinistro.qtd_caminhoes IS 'Veículos do grupo Caminhão (caminhão, caminhão-trator, reboque).';
+
+
+--
+-- Name: COLUMN fato_sinistro.qtd_bicicletas; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_sinistro.qtd_bicicletas IS 'Bicicletas.';
+
+
+--
+-- Name: COLUMN fato_sinistro.qtd_outros_veiculos; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_sinistro.qtd_outros_veiculos IS 'Demais espécies e não informadas.';
+
+
+--
+-- Name: COLUMN fato_sinistro.valor_ups; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_sinistro.valor_ups IS 'Unidade Padrão de Severidade (1, 5 ou 13): a da fonte quando informada; senão 13 se houve morte e 5 caso contrário.';
+
+
+--
+-- Name: COLUMN fato_sinistro.fl_ups_imputada; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_sinistro.fl_ups_imputada IS 'Verdadeiro quando a UPS não veio na fonte (0 a partir de 2016) e foi derivada da severidade.';
+
+
+--
+-- Name: COLUMN fato_sinistro.velocidade_permitida; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_sinistro.velocidade_permitida IS 'Velocidade máxima permitida (km/h) — medida NÃO aditiva; nula se não informada.';
+
+
+--
+-- Name: COLUMN fato_sinistro.precipitacao_mm; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_sinistro.precipitacao_mm IS 'Precipitação do INMET na hora do sinistro (mm) — medida não aditiva entre sinistros.';
+
+
+--
+-- Name: COLUMN fato_sinistro.estacao_inmet; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_sinistro.estacao_inmet IS 'Estação usada para a precipitação (A521 Pampulha ou F501 Cercadinho).';
+
+
+--
+-- Name: COLUMN fato_sinistro.fl_fatal; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_sinistro.fl_fatal IS 'Verdadeiro se houve ao menos uma vítima fatal.';
+
+
+--
+-- Name: COLUMN fato_sinistro.fl_envolve_pedestre; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_sinistro.fl_envolve_pedestre IS 'Verdadeiro se há pedestre envolvido ou o tipo é atropelamento de pessoa.';
+
+
+--
+-- Name: COLUMN fato_sinistro.fl_envolve_motociclista; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_sinistro.fl_envolve_motociclista IS 'Verdadeiro se há motocicleta (grupo) entre os veículos ou envolvidos.';
+
+
+--
+-- Name: COLUMN fato_sinistro.fl_geolocalizado; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_sinistro.fl_geolocalizado IS 'Verdadeiro se a coordenada é válida e está dentro do município.';
+
+
+--
+-- Name: COLUMN fato_sinistro.latitude; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_sinistro.latitude IS 'Latitude do ponto exato (WGS 84).';
+
+
+--
+-- Name: COLUMN fato_sinistro.longitude; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_sinistro.longitude IS 'Longitude do ponto exato (WGS 84).';
+
+
+--
+-- Name: COLUMN fato_sinistro.origem_regional; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.fato_sinistro.origem_regional IS 'BOLETIM, HIPERCENTRO -> CENTRO-SUL, ESPACIAL (ST_Within), ESPACIAL (regional mais próxima), ESPACIAL (ponto do local) ou NÃO RESOLVIDA.';
+
+
+--
+-- Name: mv_participacao_vitimas_ano; Type: MATERIALIZED VIEW; Schema: dw; Owner: -
+--
+
+CREATE MATERIALIZED VIEW dw.mv_participacao_vitimas_ano AS
+ SELECT ano,
+    count(*) FILTER (WHERE fl_vitima) AS vitimas,
+    count(*) FILTER (WHERE (fl_vitima AND fl_pedestre)) AS vitimas_pedestres,
+    count(*) FILTER (WHERE (fl_vitima AND fl_motociclista)) AS vitimas_motociclistas,
+    round(((100.0 * (count(*) FILTER (WHERE (fl_vitima AND fl_pedestre)))::numeric) / (NULLIF(count(*) FILTER (WHERE fl_vitima), 0))::numeric), 2) AS pct_vitimas_pedestres,
+    round(((100.0 * (count(*) FILTER (WHERE (fl_vitima AND fl_motociclista)))::numeric) / (NULLIF(count(*) FILTER (WHERE fl_vitima), 0))::numeric), 2) AS pct_vitimas_motociclistas,
+    count(*) FILTER (WHERE fl_vitima_fatal) AS mortos,
+    count(*) FILTER (WHERE (fl_vitima_fatal AND fl_pedestre)) AS mortos_pedestres,
+    count(*) FILTER (WHERE (fl_vitima_fatal AND fl_motociclista)) AS mortos_motociclistas,
+    round(((100.0 * (count(*) FILTER (WHERE (fl_vitima_fatal AND fl_pedestre)))::numeric) / (NULLIF(count(*) FILTER (WHERE fl_vitima_fatal), 0))::numeric), 2) AS pct_mortos_pedestres,
+    round(((100.0 * (count(*) FILTER (WHERE (fl_vitima_fatal AND fl_motociclista)))::numeric) / (NULLIF(count(*) FILTER (WHERE fl_vitima_fatal), 0))::numeric), 2) AS pct_mortos_motociclistas
+   FROM dw.fato_envolvido e
+  GROUP BY ano
+  WITH NO DATA;
+
+
+--
+-- Name: MATERIALIZED VIEW mv_participacao_vitimas_ano; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON MATERIALIZED VIEW dw.mv_participacao_vitimas_ano IS 'Participação de pedestres e motociclistas (grupos prioritários) nas vítimas e nos mortos, por ano.';
+
+
+--
+-- Name: COLUMN mv_participacao_vitimas_ano.ano; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_participacao_vitimas_ano.ano IS 'Ano.';
+
+
+--
+-- Name: COLUMN mv_participacao_vitimas_ano.vitimas; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_participacao_vitimas_ano.vitimas IS 'Total de vítimas.';
+
+
+--
+-- Name: COLUMN mv_participacao_vitimas_ano.vitimas_pedestres; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_participacao_vitimas_ano.vitimas_pedestres IS 'Vítimas pedestres.';
+
+
+--
+-- Name: COLUMN mv_participacao_vitimas_ano.vitimas_motociclistas; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_participacao_vitimas_ano.vitimas_motociclistas IS 'Vítimas motociclistas (condutores e passageiros).';
+
+
+--
+-- Name: COLUMN mv_participacao_vitimas_ano.pct_vitimas_pedestres; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_participacao_vitimas_ano.pct_vitimas_pedestres IS 'Percentual de pedestres nas vítimas.';
+
+
+--
+-- Name: COLUMN mv_participacao_vitimas_ano.pct_vitimas_motociclistas; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_participacao_vitimas_ano.pct_vitimas_motociclistas IS 'Percentual de motociclistas nas vítimas.';
+
+
+--
+-- Name: COLUMN mv_participacao_vitimas_ano.mortos; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_participacao_vitimas_ano.mortos IS 'Total de mortos.';
+
+
+--
+-- Name: COLUMN mv_participacao_vitimas_ano.mortos_pedestres; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_participacao_vitimas_ano.mortos_pedestres IS 'Mortos pedestres.';
+
+
+--
+-- Name: COLUMN mv_participacao_vitimas_ano.mortos_motociclistas; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_participacao_vitimas_ano.mortos_motociclistas IS 'Mortos motociclistas.';
+
+
+--
+-- Name: COLUMN mv_participacao_vitimas_ano.pct_mortos_pedestres; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_participacao_vitimas_ano.pct_mortos_pedestres IS 'Percentual de pedestres nos mortos.';
+
+
+--
+-- Name: COLUMN mv_participacao_vitimas_ano.pct_mortos_motociclistas; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_participacao_vitimas_ano.pct_mortos_motociclistas IS 'Percentual de motociclistas nos mortos.';
+
+
+--
+-- Name: ind_participacao_vitimas_ano; Type: VIEW; Schema: bi; Owner: -
+--
+
+CREATE VIEW bi.ind_participacao_vitimas_ano AS
+ SELECT ano,
+    vitimas,
+    vitimas_pedestres,
+    vitimas_motociclistas,
+    pct_vitimas_pedestres,
+    pct_vitimas_motociclistas,
+    mortos,
+    mortos_pedestres,
+    mortos_motociclistas,
+    pct_mortos_pedestres,
+    pct_mortos_motociclistas
+   FROM dw.mv_participacao_vitimas_ano m;
+
+
+--
+-- Name: VIEW ind_participacao_vitimas_ano; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON VIEW bi.ind_participacao_vitimas_ano IS 'Exposição de dw.mv_participacao_vitimas_ano: participação de pedestres e motociclistas nas vítimas e nos mortos.';
+
+
+--
+-- Name: COLUMN ind_participacao_vitimas_ano.ano; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_participacao_vitimas_ano.ano IS 'Ano.';
+
+
+--
+-- Name: COLUMN ind_participacao_vitimas_ano.vitimas; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_participacao_vitimas_ano.vitimas IS 'Total de vítimas.';
+
+
+--
+-- Name: COLUMN ind_participacao_vitimas_ano.vitimas_pedestres; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_participacao_vitimas_ano.vitimas_pedestres IS 'Vítimas pedestres.';
+
+
+--
+-- Name: COLUMN ind_participacao_vitimas_ano.vitimas_motociclistas; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_participacao_vitimas_ano.vitimas_motociclistas IS 'Vítimas motociclistas (condutores e passageiros).';
+
+
+--
+-- Name: COLUMN ind_participacao_vitimas_ano.pct_vitimas_pedestres; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_participacao_vitimas_ano.pct_vitimas_pedestres IS 'Percentual de pedestres nas vítimas.';
+
+
+--
+-- Name: COLUMN ind_participacao_vitimas_ano.pct_vitimas_motociclistas; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_participacao_vitimas_ano.pct_vitimas_motociclistas IS 'Percentual de motociclistas nas vítimas.';
+
+
+--
+-- Name: COLUMN ind_participacao_vitimas_ano.mortos; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_participacao_vitimas_ano.mortos IS 'Total de mortos.';
+
+
+--
+-- Name: COLUMN ind_participacao_vitimas_ano.mortos_pedestres; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_participacao_vitimas_ano.mortos_pedestres IS 'Mortos pedestres.';
+
+
+--
+-- Name: COLUMN ind_participacao_vitimas_ano.mortos_motociclistas; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_participacao_vitimas_ano.mortos_motociclistas IS 'Mortos motociclistas.';
+
+
+--
+-- Name: COLUMN ind_participacao_vitimas_ano.pct_mortos_pedestres; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_participacao_vitimas_ano.pct_mortos_pedestres IS 'Percentual de pedestres nos mortos.';
+
+
+--
+-- Name: COLUMN ind_participacao_vitimas_ano.pct_mortos_motociclistas; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_participacao_vitimas_ano.pct_mortos_motociclistas IS 'Percentual de motociclistas nos mortos.';
+
+
+--
+-- Name: mv_ranking_locais; Type: MATERIALIZED VIEW; Schema: dw; Owner: -
+--
+
+CREATE MATERIALIZED VIEW dw.mv_ranking_locais AS
+ SELECT l.chave_natural,
+    f.ano,
+    max(l.descricao_local_atual) AS descricao_local_atual,
+    bool_or(l.fl_cruzamento) AS fl_cruzamento,
+    max(l.nome_bairro) AS nome_bairro,
+    count(*) AS sinistros,
+    sum(f.qtd_vitimas) AS vitimas,
+    sum(f.qtd_vitimas_fatais) AS mortos,
+    sum(f.valor_ups) AS ups,
+    count(*) FILTER (WHERE f.fl_envolve_pedestre) AS sinistros_com_pedestre,
+    count(*) FILTER (WHERE f.fl_envolve_motociclista) AS sinistros_com_motocicleta,
+    rank() OVER (PARTITION BY f.ano ORDER BY (sum(f.valor_ups)) DESC) AS rank_ups_ano,
+    rank() OVER (PARTITION BY f.ano ORDER BY (count(*)) DESC) AS rank_sinistros_ano,
+    max(l.latitude) AS latitude,
+    max(l.longitude) AS longitude
+   FROM (dw.fato_sinistro f
+     JOIN dw.dim_local l ON ((l.sk_local = f.sk_local)))
+  WHERE (f.sk_local > 0)
+  GROUP BY l.chave_natural, f.ano
+  WITH NO DATA;
+
+
+--
+-- Name: MATERIALIZED VIEW mv_ranking_locais; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON MATERIALIZED VIEW dw.mv_ranking_locais IS 'Ranking de locais e cruzamentos por ano (sinistros, vítimas, mortos, UPS), agregando todas as versões do local pela chave natural e exibindo o nome atual.';
+
+
+--
+-- Name: COLUMN mv_ranking_locais.chave_natural; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_ranking_locais.chave_natural IS 'Chave natural do local.';
+
+
+--
+-- Name: COLUMN mv_ranking_locais.ano; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_ranking_locais.ano IS 'Ano.';
+
+
+--
+-- Name: COLUMN mv_ranking_locais.descricao_local_atual; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_ranking_locais.descricao_local_atual IS 'Descrição do local com os nomes atuais.';
+
+
+--
+-- Name: COLUMN mv_ranking_locais.fl_cruzamento; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_ranking_locais.fl_cruzamento IS 'Verdadeiro se é cruzamento.';
+
+
+--
+-- Name: COLUMN mv_ranking_locais.nome_bairro; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_ranking_locais.nome_bairro IS 'Bairro.';
+
+
+--
+-- Name: COLUMN mv_ranking_locais.sinistros; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_ranking_locais.sinistros IS 'Sinistros com vítima.';
+
+
+--
+-- Name: COLUMN mv_ranking_locais.vitimas; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_ranking_locais.vitimas IS 'Vítimas.';
+
+
+--
+-- Name: COLUMN mv_ranking_locais.mortos; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_ranking_locais.mortos IS 'Vítimas fatais.';
+
+
+--
+-- Name: COLUMN mv_ranking_locais.ups; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_ranking_locais.ups IS 'Soma da UPS (severidade ponderada).';
+
+
+--
+-- Name: COLUMN mv_ranking_locais.sinistros_com_pedestre; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_ranking_locais.sinistros_com_pedestre IS 'Sinistros com pedestre envolvido.';
+
+
+--
+-- Name: COLUMN mv_ranking_locais.sinistros_com_motocicleta; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_ranking_locais.sinistros_com_motocicleta IS 'Sinistros com motocicleta envolvida.';
+
+
+--
+-- Name: COLUMN mv_ranking_locais.rank_ups_ano; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_ranking_locais.rank_ups_ano IS 'Posição no ano pela UPS.';
+
+
+--
+-- Name: COLUMN mv_ranking_locais.rank_sinistros_ano; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_ranking_locais.rank_sinistros_ano IS 'Posição no ano pelo número de sinistros.';
+
+
+--
+-- Name: COLUMN mv_ranking_locais.latitude; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_ranking_locais.latitude IS 'Latitude do ponto representativo do local.';
+
+
+--
+-- Name: COLUMN mv_ranking_locais.longitude; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_ranking_locais.longitude IS 'Longitude do ponto representativo do local.';
+
+
+--
+-- Name: ind_ranking_locais; Type: VIEW; Schema: bi; Owner: -
+--
+
+CREATE VIEW bi.ind_ranking_locais AS
+ SELECT chave_natural,
+    ano,
+    descricao_local_atual,
+    fl_cruzamento,
+    nome_bairro,
+    sinistros,
+    vitimas,
+    mortos,
+    ups,
+    sinistros_com_pedestre,
+    sinistros_com_motocicleta,
+    rank_ups_ano,
+    rank_sinistros_ano,
+    latitude,
+    longitude
+   FROM dw.mv_ranking_locais m;
+
+
+--
+-- Name: VIEW ind_ranking_locais; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON VIEW bi.ind_ranking_locais IS 'Exposição de dw.mv_ranking_locais: ranking anual de locais e cruzamentos.';
+
+
+--
+-- Name: COLUMN ind_ranking_locais.chave_natural; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_ranking_locais.chave_natural IS 'Chave natural do local.';
+
+
+--
+-- Name: COLUMN ind_ranking_locais.ano; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_ranking_locais.ano IS 'Ano.';
+
+
+--
+-- Name: COLUMN ind_ranking_locais.descricao_local_atual; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_ranking_locais.descricao_local_atual IS 'Descrição do local com os nomes atuais.';
+
+
+--
+-- Name: COLUMN ind_ranking_locais.fl_cruzamento; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_ranking_locais.fl_cruzamento IS 'Verdadeiro se é cruzamento.';
+
+
+--
+-- Name: COLUMN ind_ranking_locais.nome_bairro; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_ranking_locais.nome_bairro IS 'Bairro.';
+
+
+--
+-- Name: COLUMN ind_ranking_locais.sinistros; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_ranking_locais.sinistros IS 'Sinistros com vítima.';
+
+
+--
+-- Name: COLUMN ind_ranking_locais.vitimas; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_ranking_locais.vitimas IS 'Vítimas.';
+
+
+--
+-- Name: COLUMN ind_ranking_locais.mortos; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_ranking_locais.mortos IS 'Vítimas fatais.';
+
+
+--
+-- Name: COLUMN ind_ranking_locais.ups; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_ranking_locais.ups IS 'Soma da UPS (severidade ponderada).';
+
+
+--
+-- Name: COLUMN ind_ranking_locais.sinistros_com_pedestre; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_ranking_locais.sinistros_com_pedestre IS 'Sinistros com pedestre envolvido.';
+
+
+--
+-- Name: COLUMN ind_ranking_locais.sinistros_com_motocicleta; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_ranking_locais.sinistros_com_motocicleta IS 'Sinistros com motocicleta envolvida.';
+
+
+--
+-- Name: COLUMN ind_ranking_locais.rank_ups_ano; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_ranking_locais.rank_ups_ano IS 'Posição no ano pela UPS.';
+
+
+--
+-- Name: COLUMN ind_ranking_locais.rank_sinistros_ano; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_ranking_locais.rank_sinistros_ano IS 'Posição no ano pelo número de sinistros.';
+
+
+--
+-- Name: COLUMN ind_ranking_locais.latitude; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_ranking_locais.latitude IS 'Latitude do ponto representativo do local.';
+
+
+--
+-- Name: COLUMN ind_ranking_locais.longitude; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_ranking_locais.longitude IS 'Longitude do ponto representativo do local.';
+
+
+--
+-- Name: mv_indicadores_regional_ano; Type: MATERIALIZED VIEW; Schema: dw; Owner: -
+--
+
+CREATE MATERIALIZED VIEW dw.mv_indicadores_regional_ano AS
+ SELECT f.ano,
+    r.sk_regional,
+    r.cod_regional,
+    r.nome_regional,
+    r.sigla,
+    count(*) AS sinistros,
+    count(*) FILTER (WHERE f.fl_fatal) AS sinistros_fatais,
+    sum(f.qtd_vitimas) AS vitimas,
+    sum(f.qtd_vitimas_fatais) AS mortos,
+    sum(f.valor_ups) AS ups,
+    max(p.populacao_residente) AS populacao,
+    round((((count(*))::numeric * 100000.0) / (NULLIF(max(p.populacao_residente), 0))::numeric), 2) AS taxa_sinistros_100mil,
+    round((((sum(f.qtd_vitimas))::numeric * 100000.0) / (NULLIF(max(p.populacao_residente), 0))::numeric), 2) AS taxa_vitimas_100mil,
+    round((((sum(f.qtd_vitimas_fatais))::numeric * 100000.0) / (NULLIF(max(p.populacao_residente), 0))::numeric), 3) AS taxa_mortos_100mil
+   FROM ((dw.fato_sinistro f
+     JOIN dw.dim_regional r ON ((r.sk_regional = f.sk_regional)))
+     LEFT JOIN dw.fato_populacao p ON (((p.sk_regional = f.sk_regional) AND (p.ano = f.ano))))
+  GROUP BY f.ano, r.sk_regional, r.cod_regional, r.nome_regional, r.sigla
+  WITH NO DATA;
+
+
+--
+-- Name: MATERIALIZED VIEW mv_indicadores_regional_ano; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON MATERIALIZED VIEW dw.mv_indicadores_regional_ano IS 'Sinistros, vítimas, mortos, UPS e taxas por 100 mil habitantes por regional e ano (risco ajustado pela população).';
+
+
+--
+-- Name: COLUMN mv_indicadores_regional_ano.ano; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_indicadores_regional_ano.ano IS 'Ano.';
+
+
+--
+-- Name: COLUMN mv_indicadores_regional_ano.sk_regional; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_indicadores_regional_ano.sk_regional IS 'Chave da regional.';
+
+
+--
+-- Name: COLUMN mv_indicadores_regional_ano.cod_regional; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_indicadores_regional_ano.cod_regional IS 'Código da regional.';
+
+
+--
+-- Name: COLUMN mv_indicadores_regional_ano.nome_regional; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_indicadores_regional_ano.nome_regional IS 'Nome da regional.';
+
+
+--
+-- Name: COLUMN mv_indicadores_regional_ano.sigla; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_indicadores_regional_ano.sigla IS 'Sigla da regional.';
+
+
+--
+-- Name: COLUMN mv_indicadores_regional_ano.sinistros; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_indicadores_regional_ano.sinistros IS 'Sinistros com vítima.';
+
+
+--
+-- Name: COLUMN mv_indicadores_regional_ano.sinistros_fatais; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_indicadores_regional_ano.sinistros_fatais IS 'Sinistros com ao menos uma morte.';
+
+
+--
+-- Name: COLUMN mv_indicadores_regional_ano.vitimas; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_indicadores_regional_ano.vitimas IS 'Vítimas.';
+
+
+--
+-- Name: COLUMN mv_indicadores_regional_ano.mortos; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_indicadores_regional_ano.mortos IS 'Vítimas fatais.';
+
+
+--
+-- Name: COLUMN mv_indicadores_regional_ano.ups; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_indicadores_regional_ano.ups IS 'Soma da Unidade Padrão de Severidade.';
+
+
+--
+-- Name: COLUMN mv_indicadores_regional_ano.populacao; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_indicadores_regional_ano.populacao IS 'População residente da regional no ano.';
+
+
+--
+-- Name: COLUMN mv_indicadores_regional_ano.taxa_sinistros_100mil; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_indicadores_regional_ano.taxa_sinistros_100mil IS 'Sinistros por 100 mil habitantes.';
+
+
+--
+-- Name: COLUMN mv_indicadores_regional_ano.taxa_vitimas_100mil; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_indicadores_regional_ano.taxa_vitimas_100mil IS 'Vítimas por 100 mil habitantes.';
+
+
+--
+-- Name: COLUMN mv_indicadores_regional_ano.taxa_mortos_100mil; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_indicadores_regional_ano.taxa_mortos_100mil IS 'Mortos por 100 mil habitantes.';
+
+
+--
+-- Name: ind_regional_ano; Type: VIEW; Schema: bi; Owner: -
+--
+
+CREATE VIEW bi.ind_regional_ano AS
+ SELECT ano,
+    sk_regional,
+    cod_regional,
+    nome_regional,
+    sigla,
+    sinistros,
+    sinistros_fatais,
+    vitimas,
+    mortos,
+    ups,
+    populacao,
+    taxa_sinistros_100mil,
+    taxa_vitimas_100mil,
+    taxa_mortos_100mil
+   FROM dw.mv_indicadores_regional_ano m;
+
+
+--
+-- Name: VIEW ind_regional_ano; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON VIEW bi.ind_regional_ano IS 'Exposição de dw.mv_indicadores_regional_ano: sinistros, vítimas, mortos e taxas por regional e ano.';
+
+
+--
+-- Name: COLUMN ind_regional_ano.ano; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_regional_ano.ano IS 'Ano.';
+
+
+--
+-- Name: COLUMN ind_regional_ano.sk_regional; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_regional_ano.sk_regional IS 'Chave da regional.';
+
+
+--
+-- Name: COLUMN ind_regional_ano.cod_regional; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_regional_ano.cod_regional IS 'Código da regional.';
+
+
+--
+-- Name: COLUMN ind_regional_ano.nome_regional; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_regional_ano.nome_regional IS 'Nome da regional.';
+
+
+--
+-- Name: COLUMN ind_regional_ano.sigla; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_regional_ano.sigla IS 'Sigla da regional.';
+
+
+--
+-- Name: COLUMN ind_regional_ano.sinistros; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_regional_ano.sinistros IS 'Sinistros com vítima.';
+
+
+--
+-- Name: COLUMN ind_regional_ano.sinistros_fatais; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_regional_ano.sinistros_fatais IS 'Sinistros com ao menos uma morte.';
+
+
+--
+-- Name: COLUMN ind_regional_ano.vitimas; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_regional_ano.vitimas IS 'Vítimas.';
+
+
+--
+-- Name: COLUMN ind_regional_ano.mortos; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_regional_ano.mortos IS 'Vítimas fatais.';
+
+
+--
+-- Name: COLUMN ind_regional_ano.ups; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_regional_ano.ups IS 'Soma da Unidade Padrão de Severidade.';
+
+
+--
+-- Name: COLUMN ind_regional_ano.populacao; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_regional_ano.populacao IS 'População residente da regional no ano.';
+
+
+--
+-- Name: COLUMN ind_regional_ano.taxa_sinistros_100mil; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_regional_ano.taxa_sinistros_100mil IS 'Sinistros por 100 mil habitantes.';
+
+
+--
+-- Name: COLUMN ind_regional_ano.taxa_vitimas_100mil; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_regional_ano.taxa_vitimas_100mil IS 'Vítimas por 100 mil habitantes.';
+
+
+--
+-- Name: COLUMN ind_regional_ano.taxa_mortos_100mil; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_regional_ano.taxa_mortos_100mil IS 'Mortos por 100 mil habitantes.';
+
+
+--
+-- Name: mv_taxa_mortalidade_anual; Type: MATERIALIZED VIEW; Schema: dw; Owner: -
+--
+
+CREATE MATERIALIZED VIEW dw.mv_taxa_mortalidade_anual AS
+ WITH pop AS (
+         SELECT p_1.ano,
+            sum(p_1.populacao_residente) AS populacao,
+            string_agg(DISTINCT p_1.origem_total_municipio, '; '::text) AS origem_populacao
+           FROM dw.fato_populacao p_1
+          GROUP BY p_1.ano
+        ), sin AS (
+         SELECT f.ano,
+            count(*) AS sinistros,
+            sum(f.qtd_vitimas) AS vitimas,
+            sum(f.qtd_vitimas_fatais) AS mortos
+           FROM dw.fato_sinistro f
+          GROUP BY f.ano
+        ), base AS (
+         SELECT (((s_1.mortos)::numeric * 100000.0) / (p_1.populacao)::numeric) AS taxa_2014
+           FROM (sin s_1
+             JOIN pop p_1 ON ((p_1.ano = s_1.ano)))
+          WHERE (s_1.ano = 2014)
+        )
+ SELECT s.ano,
+    p.populacao,
+    p.origem_populacao,
+    s.sinistros,
+    s.vitimas,
+    s.mortos,
+    round((((s.mortos)::numeric * 100000.0) / (p.populacao)::numeric), 3) AS taxa_mortos_100mil,
+    round((((s.vitimas)::numeric * 100000.0) / (p.populacao)::numeric), 2) AS taxa_vitimas_100mil,
+    round(b.taxa_2014, 3) AS taxa_base_2014,
+    round((b.taxa_2014 * 0.5), 3) AS meta_2030,
+    round(((((s.mortos)::numeric * 100000.0) / (p.populacao)::numeric) - (b.taxa_2014 * 0.5)), 3) AS distancia_meta,
+    round(((100)::numeric * ((1)::numeric - ((((s.mortos)::numeric * 100000.0) / (p.populacao)::numeric) / b.taxa_2014))), 1) AS pct_reducao_vs_2014
+   FROM ((sin s
+     JOIN pop p ON ((p.ano = s.ano)))
+     LEFT JOIN base b ON (true))
+  WITH NO DATA;
+
+
+--
+-- Name: MATERIALIZED VIEW mv_taxa_mortalidade_anual; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON MATERIALIZED VIEW dw.mv_taxa_mortalidade_anual IS 'Taxa anual de mortos no trânsito por 100 mil habitantes, meta municipal (50% da taxa de 2014 até 2030) e distância até a meta (nulas se 2014 não estiver carregado).';
+
+
+--
+-- Name: COLUMN mv_taxa_mortalidade_anual.ano; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_taxa_mortalidade_anual.ano IS 'Ano.';
+
+
+--
+-- Name: COLUMN mv_taxa_mortalidade_anual.populacao; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_taxa_mortalidade_anual.populacao IS 'População do município (soma das regionais).';
+
+
+--
+-- Name: COLUMN mv_taxa_mortalidade_anual.origem_populacao; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_taxa_mortalidade_anual.origem_populacao IS 'Origem do total populacional.';
+
+
+--
+-- Name: COLUMN mv_taxa_mortalidade_anual.sinistros; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_taxa_mortalidade_anual.sinistros IS 'Sinistros com vítima.';
+
+
+--
+-- Name: COLUMN mv_taxa_mortalidade_anual.vitimas; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_taxa_mortalidade_anual.vitimas IS 'Vítimas (feridos + mortos).';
+
+
+--
+-- Name: COLUMN mv_taxa_mortalidade_anual.mortos; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_taxa_mortalidade_anual.mortos IS 'Vítimas fatais registradas nos boletins.';
+
+
+--
+-- Name: COLUMN mv_taxa_mortalidade_anual.taxa_mortos_100mil; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_taxa_mortalidade_anual.taxa_mortos_100mil IS 'Mortos por 100 mil habitantes.';
+
+
+--
+-- Name: COLUMN mv_taxa_mortalidade_anual.taxa_vitimas_100mil; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_taxa_mortalidade_anual.taxa_vitimas_100mil IS 'Vítimas por 100 mil habitantes.';
+
+
+--
+-- Name: COLUMN mv_taxa_mortalidade_anual.taxa_base_2014; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_taxa_mortalidade_anual.taxa_base_2014 IS 'Taxa de mortos de 2014 (ano-base da meta).';
+
+
+--
+-- Name: COLUMN mv_taxa_mortalidade_anual.meta_2030; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_taxa_mortalidade_anual.meta_2030 IS 'Meta para 2030: 50% da taxa de 2014.';
+
+
+--
+-- Name: COLUMN mv_taxa_mortalidade_anual.distancia_meta; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_taxa_mortalidade_anual.distancia_meta IS 'Taxa do ano menos a meta (positivo = acima da meta).';
+
+
+--
+-- Name: COLUMN mv_taxa_mortalidade_anual.pct_reducao_vs_2014; Type: COMMENT; Schema: dw; Owner: -
+--
+
+COMMENT ON COLUMN dw.mv_taxa_mortalidade_anual.pct_reducao_vs_2014 IS 'Redução percentual da taxa em relação a 2014.';
+
+
+--
+-- Name: ind_taxa_mortalidade_anual; Type: VIEW; Schema: bi; Owner: -
+--
+
+CREATE VIEW bi.ind_taxa_mortalidade_anual AS
+ SELECT ano,
+    populacao,
+    origem_populacao,
+    sinistros,
+    vitimas,
+    mortos,
+    taxa_mortos_100mil,
+    taxa_vitimas_100mil,
+    taxa_base_2014,
+    meta_2030,
+    distancia_meta,
+    pct_reducao_vs_2014
+   FROM dw.mv_taxa_mortalidade_anual m;
+
+
+--
+-- Name: VIEW ind_taxa_mortalidade_anual; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON VIEW bi.ind_taxa_mortalidade_anual IS 'Exposição de dw.mv_taxa_mortalidade_anual: taxa anual de mortos por 100 mil hab., meta 2030 e distância até a meta.';
+
+
+--
+-- Name: COLUMN ind_taxa_mortalidade_anual.ano; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_taxa_mortalidade_anual.ano IS 'Ano.';
+
+
+--
+-- Name: COLUMN ind_taxa_mortalidade_anual.populacao; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_taxa_mortalidade_anual.populacao IS 'População do município (soma das regionais).';
+
+
+--
+-- Name: COLUMN ind_taxa_mortalidade_anual.origem_populacao; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_taxa_mortalidade_anual.origem_populacao IS 'Origem do total populacional.';
+
+
+--
+-- Name: COLUMN ind_taxa_mortalidade_anual.sinistros; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_taxa_mortalidade_anual.sinistros IS 'Sinistros com vítima.';
+
+
+--
+-- Name: COLUMN ind_taxa_mortalidade_anual.vitimas; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_taxa_mortalidade_anual.vitimas IS 'Vítimas (feridos + mortos).';
+
+
+--
+-- Name: COLUMN ind_taxa_mortalidade_anual.mortos; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_taxa_mortalidade_anual.mortos IS 'Vítimas fatais registradas nos boletins.';
+
+
+--
+-- Name: COLUMN ind_taxa_mortalidade_anual.taxa_mortos_100mil; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_taxa_mortalidade_anual.taxa_mortos_100mil IS 'Mortos por 100 mil habitantes.';
+
+
+--
+-- Name: COLUMN ind_taxa_mortalidade_anual.taxa_vitimas_100mil; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_taxa_mortalidade_anual.taxa_vitimas_100mil IS 'Vítimas por 100 mil habitantes.';
+
+
+--
+-- Name: COLUMN ind_taxa_mortalidade_anual.taxa_base_2014; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_taxa_mortalidade_anual.taxa_base_2014 IS 'Taxa de mortos de 2014 (ano-base da meta).';
+
+
+--
+-- Name: COLUMN ind_taxa_mortalidade_anual.meta_2030; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_taxa_mortalidade_anual.meta_2030 IS 'Meta para 2030: 50% da taxa de 2014.';
+
+
+--
+-- Name: COLUMN ind_taxa_mortalidade_anual.distancia_meta; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_taxa_mortalidade_anual.distancia_meta IS 'Taxa do ano menos a meta (positivo = acima da meta).';
+
+
+--
+-- Name: COLUMN ind_taxa_mortalidade_anual.pct_reducao_vs_2014; Type: COMMENT; Schema: bi; Owner: -
+--
+
+COMMENT ON COLUMN bi.ind_taxa_mortalidade_anual.pct_reducao_vs_2014 IS 'Redução percentual da taxa em relação a 2014.';
+
+
+--
+-- Name: dim_condicao_via_sk_condicao_via_seq; Type: SEQUENCE; Schema: dw; Owner: -
+--
+
+ALTER TABLE dw.dim_condicao_via ALTER COLUMN sk_condicao_via ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME dw.dim_condicao_via_sk_condicao_via_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- Name: dim_local_sk_local_seq; Type: SEQUENCE; Schema: dw; Owner: -
+--
+
+ALTER TABLE dw.dim_local ALTER COLUMN sk_local ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME dw.dim_local_sk_local_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- Name: dim_pessoa_sk_pessoa_seq; Type: SEQUENCE; Schema: dw; Owner: -
+--
+
+ALTER TABLE dw.dim_pessoa ALTER COLUMN sk_pessoa ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME dw.dim_pessoa_sk_pessoa_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- Name: dim_tipo_sinistro_sk_tipo_sinistro_seq; Type: SEQUENCE; Schema: dw; Owner: -
+--
+
+ALTER TABLE dw.dim_tipo_sinistro ALTER COLUMN sk_tipo_sinistro ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME dw.dim_tipo_sinistro_sk_tipo_sinistro_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- Name: dim_veiculo_sk_veiculo_seq; Type: SEQUENCE; Schema: dw; Owner: -
+--
+
+ALTER TABLE dw.dim_veiculo ALTER COLUMN sk_veiculo ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME dw.dim_veiculo_sk_veiculo_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
 
 
 --
@@ -1760,384 +4462,6 @@ CREATE TABLE dw.fato_envolvido_default (
 --
 
 COMMENT ON TABLE dw.fato_envolvido_default IS 'Partição padrão da fato_envolvido (anos fora de 2011–2026).';
-
-
---
--- Name: fato_populacao; Type: TABLE; Schema: dw; Owner: -
---
-
-CREATE TABLE dw.fato_populacao (
-    sk_regional smallint NOT NULL,
-    sk_tempo integer NOT NULL,
-    ano smallint NOT NULL,
-    populacao_residente integer NOT NULL,
-    participacao_regional numeric(12,10) NOT NULL,
-    populacao_municipio integer NOT NULL,
-    origem_dado text NOT NULL,
-    origem_total_municipio text NOT NULL,
-    metodo_regional text NOT NULL,
-    dt_carga timestamp with time zone DEFAULT now() NOT NULL,
-    arquivo_origem text NOT NULL,
-    CONSTRAINT fato_populacao_populacao_residente_check CHECK ((populacao_residente > 0))
-);
-
-
---
--- Name: TABLE fato_populacao; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON TABLE dw.fato_populacao IS 'Fato população residente por regional e ano (referência 1º de julho, membro "Sem hora" da dim_tempo). Denominador das taxas por 100 mil habitantes.';
-
-
---
--- Name: COLUMN fato_populacao.sk_regional; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_populacao.sk_regional IS 'FK dim_regional.';
-
-
---
--- Name: COLUMN fato_populacao.sk_tempo; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_populacao.sk_tempo IS 'FK dim_tempo: 1º de julho do ano, membro "Sem hora" (AAAA070199).';
-
-
---
--- Name: COLUMN fato_populacao.ano; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_populacao.ano IS 'Ano de referência.';
-
-
---
--- Name: COLUMN fato_populacao.populacao_residente; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_populacao.populacao_residente IS 'População residente da regional (medida semiaditiva: soma entre regionais, não entre anos).';
-
-
---
--- Name: COLUMN fato_populacao.participacao_regional; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_populacao.participacao_regional IS 'Participação da regional na população do município.';
-
-
---
--- Name: COLUMN fato_populacao.populacao_municipio; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_populacao.populacao_municipio IS 'População do município no ano (as regionais somam exatamente este total).';
-
-
---
--- Name: COLUMN fato_populacao.origem_dado; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_populacao.origem_dado IS 'CENSO, ESTIMATIVA IBGE x PROPORÇÃO ou INTERPOLADO x PROPORÇÃO.';
-
-
---
--- Name: COLUMN fato_populacao.origem_total_municipio; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_populacao.origem_total_municipio IS 'Origem do total municipal (tabela SIDRA ou interpolação).';
-
-
---
--- Name: COLUMN fato_populacao.metodo_regional; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_populacao.metodo_regional IS 'Método da participação da regional (Censo 2022, Censo 2010 por setores ou interpolação linear 2010–2022).';
-
-
---
--- Name: COLUMN fato_populacao.dt_carga; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_populacao.dt_carga IS 'Linhagem: data e hora da carga.';
-
-
---
--- Name: COLUMN fato_populacao.arquivo_origem; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_populacao.arquivo_origem IS 'Linhagem: arquivos de origem.';
-
-
---
--- Name: fato_sinistro; Type: TABLE; Schema: dw; Owner: -
---
-
-CREATE TABLE dw.fato_sinistro (
-    numero_boletim text NOT NULL,
-    ano smallint NOT NULL,
-    sk_tempo integer NOT NULL,
-    sk_local integer NOT NULL,
-    sk_tipo_sinistro smallint NOT NULL,
-    sk_condicao_via smallint NOT NULL,
-    sk_regional smallint NOT NULL,
-    qtd_envolvidos smallint NOT NULL,
-    qtd_vitimas smallint NOT NULL,
-    qtd_vitimas_fatais smallint NOT NULL,
-    qtd_veiculos smallint NOT NULL,
-    qtd_motocicletas smallint NOT NULL,
-    qtd_automoveis smallint NOT NULL,
-    qtd_onibus smallint NOT NULL,
-    qtd_caminhoes smallint NOT NULL,
-    qtd_bicicletas smallint NOT NULL,
-    qtd_outros_veiculos smallint NOT NULL,
-    valor_ups smallint NOT NULL,
-    fl_ups_imputada boolean NOT NULL,
-    velocidade_permitida smallint,
-    precipitacao_mm numeric(6,1),
-    estacao_inmet text,
-    fl_fatal boolean NOT NULL,
-    fl_envolve_pedestre boolean NOT NULL,
-    fl_envolve_motociclista boolean NOT NULL,
-    fl_geolocalizado boolean NOT NULL,
-    latitude double precision,
-    longitude double precision,
-    geom public.geometry(Point,4326),
-    origem_regional text NOT NULL,
-    dt_carga timestamp with time zone DEFAULT now() NOT NULL,
-    arquivo_origem text NOT NULL,
-    CONSTRAINT ck_fato_sinistro_ups CHECK ((valor_ups = ANY (ARRAY[1, 5, 13]))),
-    CONSTRAINT ck_fato_sinistro_vitimas CHECK (((qtd_vitimas_fatais <= qtd_vitimas) AND (qtd_vitimas <= qtd_envolvidos)))
-)
-PARTITION BY RANGE (ano);
-
-
---
--- Name: TABLE fato_sinistro; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON TABLE dw.fato_sinistro IS 'Fato sinistro: uma linha por boletim de ocorrência (numero_boletim + ano), particionada por ano. Contagens de veículos por espécie respondem ao perfil da frota por local sem quebrar o grão.';
-
-
---
--- Name: COLUMN fato_sinistro.numero_boletim; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_sinistro.numero_boletim IS 'Dimensão degenerada: número do boletim (sufixo /n para eventos distintos com o mesmo número no ano).';
-
-
---
--- Name: COLUMN fato_sinistro.ano; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_sinistro.ano IS 'Ano do sinistro (chave de partição).';
-
-
---
--- Name: COLUMN fato_sinistro.sk_tempo; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_sinistro.sk_tempo IS 'FK dim_tempo (data + hora; AAAAMMDD99 quando a hora não foi informada).';
-
-
---
--- Name: COLUMN fato_sinistro.sk_local; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_sinistro.sk_local IS 'FK dim_local (versão vigente na data do sinistro).';
-
-
---
--- Name: COLUMN fato_sinistro.sk_tipo_sinistro; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_sinistro.sk_tipo_sinistro IS 'FK dim_tipo_sinistro.';
-
-
---
--- Name: COLUMN fato_sinistro.sk_condicao_via; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_sinistro.sk_condicao_via IS 'FK dim_condicao_via.';
-
-
---
--- Name: COLUMN fato_sinistro.sk_regional; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_sinistro.sk_regional IS 'FK dim_regional (código do boletim; 27 Hipercentro -> Centro-Sul; nulo/0 resolvido por ST_Within do ponto do boletim ou, sem ponto, do ponto representativo do local).';
-
-
---
--- Name: COLUMN fato_sinistro.qtd_envolvidos; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_sinistro.qtd_envolvidos IS 'Pessoas envolvidas (si_env).';
-
-
---
--- Name: COLUMN fato_sinistro.qtd_vitimas; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_sinistro.qtd_vitimas IS 'Vítimas: envolvidos com severidade não fatal ou fatal.';
-
-
---
--- Name: COLUMN fato_sinistro.qtd_vitimas_fatais; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_sinistro.qtd_vitimas_fatais IS 'Vítimas fatais (severidade fatal no si_env).';
-
-
---
--- Name: COLUMN fato_sinistro.qtd_veiculos; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_sinistro.qtd_veiculos IS 'Veículos envolvidos (si-veic).';
-
-
---
--- Name: COLUMN fato_sinistro.qtd_motocicletas; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_sinistro.qtd_motocicletas IS 'Veículos do grupo Motocicleta (motocicleta, motoneta, ciclomotor, triciclo).';
-
-
---
--- Name: COLUMN fato_sinistro.qtd_automoveis; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_sinistro.qtd_automoveis IS 'Veículos do grupo Automóvel/utilitário.';
-
-
---
--- Name: COLUMN fato_sinistro.qtd_onibus; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_sinistro.qtd_onibus IS 'Veículos do grupo Ônibus (ônibus e micro-ônibus).';
-
-
---
--- Name: COLUMN fato_sinistro.qtd_caminhoes; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_sinistro.qtd_caminhoes IS 'Veículos do grupo Caminhão (caminhão, caminhão-trator, reboque).';
-
-
---
--- Name: COLUMN fato_sinistro.qtd_bicicletas; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_sinistro.qtd_bicicletas IS 'Bicicletas.';
-
-
---
--- Name: COLUMN fato_sinistro.qtd_outros_veiculos; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_sinistro.qtd_outros_veiculos IS 'Demais espécies e não informadas.';
-
-
---
--- Name: COLUMN fato_sinistro.valor_ups; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_sinistro.valor_ups IS 'Unidade Padrão de Severidade (1, 5 ou 13): a da fonte quando informada; senão 13 se houve morte e 5 caso contrário.';
-
-
---
--- Name: COLUMN fato_sinistro.fl_ups_imputada; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_sinistro.fl_ups_imputada IS 'Verdadeiro quando a UPS não veio na fonte (0 a partir de 2016) e foi derivada da severidade.';
-
-
---
--- Name: COLUMN fato_sinistro.velocidade_permitida; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_sinistro.velocidade_permitida IS 'Velocidade máxima permitida (km/h) — medida NÃO aditiva; nula se não informada.';
-
-
---
--- Name: COLUMN fato_sinistro.precipitacao_mm; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_sinistro.precipitacao_mm IS 'Precipitação do INMET na hora do sinistro (mm) — medida não aditiva entre sinistros.';
-
-
---
--- Name: COLUMN fato_sinistro.estacao_inmet; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_sinistro.estacao_inmet IS 'Estação usada para a precipitação (A521 Pampulha ou F501 Cercadinho).';
-
-
---
--- Name: COLUMN fato_sinistro.fl_fatal; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_sinistro.fl_fatal IS 'Verdadeiro se houve ao menos uma vítima fatal.';
-
-
---
--- Name: COLUMN fato_sinistro.fl_envolve_pedestre; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_sinistro.fl_envolve_pedestre IS 'Verdadeiro se há pedestre envolvido ou o tipo é atropelamento de pessoa.';
-
-
---
--- Name: COLUMN fato_sinistro.fl_envolve_motociclista; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_sinistro.fl_envolve_motociclista IS 'Verdadeiro se há motocicleta (grupo) entre os veículos ou envolvidos.';
-
-
---
--- Name: COLUMN fato_sinistro.fl_geolocalizado; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_sinistro.fl_geolocalizado IS 'Verdadeiro se a coordenada é válida e está dentro do município.';
-
-
---
--- Name: COLUMN fato_sinistro.latitude; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_sinistro.latitude IS 'Latitude do ponto exato (WGS 84).';
-
-
---
--- Name: COLUMN fato_sinistro.longitude; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_sinistro.longitude IS 'Longitude do ponto exato (WGS 84).';
-
-
---
--- Name: COLUMN fato_sinistro.geom; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_sinistro.geom IS 'Ponto exato do sinistro (EPSG:4326), para o mapa de calor.';
-
-
---
--- Name: COLUMN fato_sinistro.origem_regional; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_sinistro.origem_regional IS 'BOLETIM, HIPERCENTRO -> CENTRO-SUL, ESPACIAL (ST_Within), ESPACIAL (regional mais próxima), ESPACIAL (ponto do local) ou NÃO RESOLVIDA.';
-
-
---
--- Name: COLUMN fato_sinistro.dt_carga; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_sinistro.dt_carga IS 'Linhagem: data e hora da carga.';
-
-
---
--- Name: COLUMN fato_sinistro.arquivo_origem; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.fato_sinistro.arquivo_origem IS 'Linhagem: arquivo si-bol de origem.';
 
 
 --
@@ -2859,514 +5183,6 @@ CREATE TABLE dw.fato_sinistro_default (
 --
 
 COMMENT ON TABLE dw.fato_sinistro_default IS 'Partição padrão da fato_sinistro (anos fora de 2011–2026).';
-
-
---
--- Name: mv_indicadores_regional_ano; Type: MATERIALIZED VIEW; Schema: dw; Owner: -
---
-
-CREATE MATERIALIZED VIEW dw.mv_indicadores_regional_ano AS
- SELECT f.ano,
-    r.sk_regional,
-    r.cod_regional,
-    r.nome_regional,
-    r.sigla,
-    count(*) AS sinistros,
-    count(*) FILTER (WHERE f.fl_fatal) AS sinistros_fatais,
-    sum(f.qtd_vitimas) AS vitimas,
-    sum(f.qtd_vitimas_fatais) AS mortos,
-    sum(f.valor_ups) AS ups,
-    max(p.populacao_residente) AS populacao,
-    round((((count(*))::numeric * 100000.0) / (NULLIF(max(p.populacao_residente), 0))::numeric), 2) AS taxa_sinistros_100mil,
-    round((((sum(f.qtd_vitimas))::numeric * 100000.0) / (NULLIF(max(p.populacao_residente), 0))::numeric), 2) AS taxa_vitimas_100mil,
-    round((((sum(f.qtd_vitimas_fatais))::numeric * 100000.0) / (NULLIF(max(p.populacao_residente), 0))::numeric), 3) AS taxa_mortos_100mil
-   FROM ((dw.fato_sinistro f
-     JOIN dw.dim_regional r ON ((r.sk_regional = f.sk_regional)))
-     LEFT JOIN dw.fato_populacao p ON (((p.sk_regional = f.sk_regional) AND (p.ano = f.ano))))
-  GROUP BY f.ano, r.sk_regional, r.cod_regional, r.nome_regional, r.sigla
-  WITH NO DATA;
-
-
---
--- Name: MATERIALIZED VIEW mv_indicadores_regional_ano; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON MATERIALIZED VIEW dw.mv_indicadores_regional_ano IS 'Sinistros, vítimas, mortos, UPS e taxas por 100 mil habitantes por regional e ano (risco ajustado pela população).';
-
-
---
--- Name: COLUMN mv_indicadores_regional_ano.ano; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_indicadores_regional_ano.ano IS 'Ano.';
-
-
---
--- Name: COLUMN mv_indicadores_regional_ano.sk_regional; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_indicadores_regional_ano.sk_regional IS 'Chave da regional.';
-
-
---
--- Name: COLUMN mv_indicadores_regional_ano.cod_regional; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_indicadores_regional_ano.cod_regional IS 'Código da regional.';
-
-
---
--- Name: COLUMN mv_indicadores_regional_ano.nome_regional; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_indicadores_regional_ano.nome_regional IS 'Nome da regional.';
-
-
---
--- Name: COLUMN mv_indicadores_regional_ano.sigla; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_indicadores_regional_ano.sigla IS 'Sigla da regional.';
-
-
---
--- Name: COLUMN mv_indicadores_regional_ano.sinistros; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_indicadores_regional_ano.sinistros IS 'Sinistros com vítima.';
-
-
---
--- Name: COLUMN mv_indicadores_regional_ano.sinistros_fatais; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_indicadores_regional_ano.sinistros_fatais IS 'Sinistros com ao menos uma morte.';
-
-
---
--- Name: COLUMN mv_indicadores_regional_ano.vitimas; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_indicadores_regional_ano.vitimas IS 'Vítimas.';
-
-
---
--- Name: COLUMN mv_indicadores_regional_ano.mortos; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_indicadores_regional_ano.mortos IS 'Vítimas fatais.';
-
-
---
--- Name: COLUMN mv_indicadores_regional_ano.ups; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_indicadores_regional_ano.ups IS 'Soma da Unidade Padrão de Severidade.';
-
-
---
--- Name: COLUMN mv_indicadores_regional_ano.populacao; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_indicadores_regional_ano.populacao IS 'População residente da regional no ano.';
-
-
---
--- Name: COLUMN mv_indicadores_regional_ano.taxa_sinistros_100mil; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_indicadores_regional_ano.taxa_sinistros_100mil IS 'Sinistros por 100 mil habitantes.';
-
-
---
--- Name: COLUMN mv_indicadores_regional_ano.taxa_vitimas_100mil; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_indicadores_regional_ano.taxa_vitimas_100mil IS 'Vítimas por 100 mil habitantes.';
-
-
---
--- Name: COLUMN mv_indicadores_regional_ano.taxa_mortos_100mil; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_indicadores_regional_ano.taxa_mortos_100mil IS 'Mortos por 100 mil habitantes.';
-
-
---
--- Name: mv_participacao_vitimas_ano; Type: MATERIALIZED VIEW; Schema: dw; Owner: -
---
-
-CREATE MATERIALIZED VIEW dw.mv_participacao_vitimas_ano AS
- SELECT ano,
-    count(*) FILTER (WHERE fl_vitima) AS vitimas,
-    count(*) FILTER (WHERE (fl_vitima AND fl_pedestre)) AS vitimas_pedestres,
-    count(*) FILTER (WHERE (fl_vitima AND fl_motociclista)) AS vitimas_motociclistas,
-    round(((100.0 * (count(*) FILTER (WHERE (fl_vitima AND fl_pedestre)))::numeric) / (NULLIF(count(*) FILTER (WHERE fl_vitima), 0))::numeric), 2) AS pct_vitimas_pedestres,
-    round(((100.0 * (count(*) FILTER (WHERE (fl_vitima AND fl_motociclista)))::numeric) / (NULLIF(count(*) FILTER (WHERE fl_vitima), 0))::numeric), 2) AS pct_vitimas_motociclistas,
-    count(*) FILTER (WHERE fl_vitima_fatal) AS mortos,
-    count(*) FILTER (WHERE (fl_vitima_fatal AND fl_pedestre)) AS mortos_pedestres,
-    count(*) FILTER (WHERE (fl_vitima_fatal AND fl_motociclista)) AS mortos_motociclistas,
-    round(((100.0 * (count(*) FILTER (WHERE (fl_vitima_fatal AND fl_pedestre)))::numeric) / (NULLIF(count(*) FILTER (WHERE fl_vitima_fatal), 0))::numeric), 2) AS pct_mortos_pedestres,
-    round(((100.0 * (count(*) FILTER (WHERE (fl_vitima_fatal AND fl_motociclista)))::numeric) / (NULLIF(count(*) FILTER (WHERE fl_vitima_fatal), 0))::numeric), 2) AS pct_mortos_motociclistas
-   FROM dw.fato_envolvido e
-  GROUP BY ano
-  WITH NO DATA;
-
-
---
--- Name: MATERIALIZED VIEW mv_participacao_vitimas_ano; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON MATERIALIZED VIEW dw.mv_participacao_vitimas_ano IS 'Participação de pedestres e motociclistas (grupos prioritários) nas vítimas e nos mortos, por ano.';
-
-
---
--- Name: COLUMN mv_participacao_vitimas_ano.ano; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_participacao_vitimas_ano.ano IS 'Ano.';
-
-
---
--- Name: COLUMN mv_participacao_vitimas_ano.vitimas; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_participacao_vitimas_ano.vitimas IS 'Total de vítimas.';
-
-
---
--- Name: COLUMN mv_participacao_vitimas_ano.vitimas_pedestres; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_participacao_vitimas_ano.vitimas_pedestres IS 'Vítimas pedestres.';
-
-
---
--- Name: COLUMN mv_participacao_vitimas_ano.vitimas_motociclistas; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_participacao_vitimas_ano.vitimas_motociclistas IS 'Vítimas motociclistas (condutores e passageiros).';
-
-
---
--- Name: COLUMN mv_participacao_vitimas_ano.pct_vitimas_pedestres; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_participacao_vitimas_ano.pct_vitimas_pedestres IS 'Percentual de pedestres nas vítimas.';
-
-
---
--- Name: COLUMN mv_participacao_vitimas_ano.pct_vitimas_motociclistas; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_participacao_vitimas_ano.pct_vitimas_motociclistas IS 'Percentual de motociclistas nas vítimas.';
-
-
---
--- Name: COLUMN mv_participacao_vitimas_ano.mortos; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_participacao_vitimas_ano.mortos IS 'Total de mortos.';
-
-
---
--- Name: COLUMN mv_participacao_vitimas_ano.mortos_pedestres; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_participacao_vitimas_ano.mortos_pedestres IS 'Mortos pedestres.';
-
-
---
--- Name: COLUMN mv_participacao_vitimas_ano.mortos_motociclistas; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_participacao_vitimas_ano.mortos_motociclistas IS 'Mortos motociclistas.';
-
-
---
--- Name: COLUMN mv_participacao_vitimas_ano.pct_mortos_pedestres; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_participacao_vitimas_ano.pct_mortos_pedestres IS 'Percentual de pedestres nos mortos.';
-
-
---
--- Name: COLUMN mv_participacao_vitimas_ano.pct_mortos_motociclistas; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_participacao_vitimas_ano.pct_mortos_motociclistas IS 'Percentual de motociclistas nos mortos.';
-
-
---
--- Name: mv_ranking_locais; Type: MATERIALIZED VIEW; Schema: dw; Owner: -
---
-
-CREATE MATERIALIZED VIEW dw.mv_ranking_locais AS
- SELECT l.chave_natural,
-    f.ano,
-    max(l.descricao_local_atual) AS descricao_local_atual,
-    bool_or(l.fl_cruzamento) AS fl_cruzamento,
-    max(l.nome_bairro) AS nome_bairro,
-    count(*) AS sinistros,
-    sum(f.qtd_vitimas) AS vitimas,
-    sum(f.qtd_vitimas_fatais) AS mortos,
-    sum(f.valor_ups) AS ups,
-    count(*) FILTER (WHERE f.fl_envolve_pedestre) AS sinistros_com_pedestre,
-    count(*) FILTER (WHERE f.fl_envolve_motociclista) AS sinistros_com_motocicleta,
-    rank() OVER (PARTITION BY f.ano ORDER BY (sum(f.valor_ups)) DESC) AS rank_ups_ano,
-    rank() OVER (PARTITION BY f.ano ORDER BY (count(*)) DESC) AS rank_sinistros_ano,
-    max(l.latitude) AS latitude,
-    max(l.longitude) AS longitude
-   FROM (dw.fato_sinistro f
-     JOIN dw.dim_local l ON ((l.sk_local = f.sk_local)))
-  WHERE (f.sk_local > 0)
-  GROUP BY l.chave_natural, f.ano
-  WITH NO DATA;
-
-
---
--- Name: MATERIALIZED VIEW mv_ranking_locais; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON MATERIALIZED VIEW dw.mv_ranking_locais IS 'Ranking de locais e cruzamentos por ano (sinistros, vítimas, mortos, UPS), agregando todas as versões do local pela chave natural e exibindo o nome atual.';
-
-
---
--- Name: COLUMN mv_ranking_locais.chave_natural; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_ranking_locais.chave_natural IS 'Chave natural do local.';
-
-
---
--- Name: COLUMN mv_ranking_locais.ano; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_ranking_locais.ano IS 'Ano.';
-
-
---
--- Name: COLUMN mv_ranking_locais.descricao_local_atual; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_ranking_locais.descricao_local_atual IS 'Descrição do local com os nomes atuais.';
-
-
---
--- Name: COLUMN mv_ranking_locais.fl_cruzamento; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_ranking_locais.fl_cruzamento IS 'Verdadeiro se é cruzamento.';
-
-
---
--- Name: COLUMN mv_ranking_locais.nome_bairro; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_ranking_locais.nome_bairro IS 'Bairro.';
-
-
---
--- Name: COLUMN mv_ranking_locais.sinistros; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_ranking_locais.sinistros IS 'Sinistros com vítima.';
-
-
---
--- Name: COLUMN mv_ranking_locais.vitimas; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_ranking_locais.vitimas IS 'Vítimas.';
-
-
---
--- Name: COLUMN mv_ranking_locais.mortos; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_ranking_locais.mortos IS 'Vítimas fatais.';
-
-
---
--- Name: COLUMN mv_ranking_locais.ups; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_ranking_locais.ups IS 'Soma da UPS (severidade ponderada).';
-
-
---
--- Name: COLUMN mv_ranking_locais.sinistros_com_pedestre; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_ranking_locais.sinistros_com_pedestre IS 'Sinistros com pedestre envolvido.';
-
-
---
--- Name: COLUMN mv_ranking_locais.sinistros_com_motocicleta; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_ranking_locais.sinistros_com_motocicleta IS 'Sinistros com motocicleta envolvida.';
-
-
---
--- Name: COLUMN mv_ranking_locais.rank_ups_ano; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_ranking_locais.rank_ups_ano IS 'Posição no ano pela UPS.';
-
-
---
--- Name: COLUMN mv_ranking_locais.rank_sinistros_ano; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_ranking_locais.rank_sinistros_ano IS 'Posição no ano pelo número de sinistros.';
-
-
---
--- Name: COLUMN mv_ranking_locais.latitude; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_ranking_locais.latitude IS 'Latitude do ponto representativo do local.';
-
-
---
--- Name: COLUMN mv_ranking_locais.longitude; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_ranking_locais.longitude IS 'Longitude do ponto representativo do local.';
-
-
---
--- Name: mv_taxa_mortalidade_anual; Type: MATERIALIZED VIEW; Schema: dw; Owner: -
---
-
-CREATE MATERIALIZED VIEW dw.mv_taxa_mortalidade_anual AS
- WITH pop AS (
-         SELECT p_1.ano,
-            sum(p_1.populacao_residente) AS populacao,
-            string_agg(DISTINCT p_1.origem_total_municipio, '; '::text) AS origem_populacao
-           FROM dw.fato_populacao p_1
-          GROUP BY p_1.ano
-        ), sin AS (
-         SELECT f.ano,
-            count(*) AS sinistros,
-            sum(f.qtd_vitimas) AS vitimas,
-            sum(f.qtd_vitimas_fatais) AS mortos
-           FROM dw.fato_sinistro f
-          GROUP BY f.ano
-        ), base AS (
-         SELECT (((s_1.mortos)::numeric * 100000.0) / (p_1.populacao)::numeric) AS taxa_2014
-           FROM (sin s_1
-             JOIN pop p_1 ON ((p_1.ano = s_1.ano)))
-          WHERE (s_1.ano = 2014)
-        )
- SELECT s.ano,
-    p.populacao,
-    p.origem_populacao,
-    s.sinistros,
-    s.vitimas,
-    s.mortos,
-    round((((s.mortos)::numeric * 100000.0) / (p.populacao)::numeric), 3) AS taxa_mortos_100mil,
-    round((((s.vitimas)::numeric * 100000.0) / (p.populacao)::numeric), 2) AS taxa_vitimas_100mil,
-    round(b.taxa_2014, 3) AS taxa_base_2014,
-    round((b.taxa_2014 * 0.5), 3) AS meta_2030,
-    round(((((s.mortos)::numeric * 100000.0) / (p.populacao)::numeric) - (b.taxa_2014 * 0.5)), 3) AS distancia_meta,
-    round(((100)::numeric * ((1)::numeric - ((((s.mortos)::numeric * 100000.0) / (p.populacao)::numeric) / b.taxa_2014))), 1) AS pct_reducao_vs_2014
-   FROM ((sin s
-     JOIN pop p ON ((p.ano = s.ano)))
-     LEFT JOIN base b ON (true))
-  WITH NO DATA;
-
-
---
--- Name: MATERIALIZED VIEW mv_taxa_mortalidade_anual; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON MATERIALIZED VIEW dw.mv_taxa_mortalidade_anual IS 'Taxa anual de mortos no trânsito por 100 mil habitantes, meta municipal (50% da taxa de 2014 até 2030) e distância até a meta (nulas se 2014 não estiver carregado).';
-
-
---
--- Name: COLUMN mv_taxa_mortalidade_anual.ano; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_taxa_mortalidade_anual.ano IS 'Ano.';
-
-
---
--- Name: COLUMN mv_taxa_mortalidade_anual.populacao; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_taxa_mortalidade_anual.populacao IS 'População do município (soma das regionais).';
-
-
---
--- Name: COLUMN mv_taxa_mortalidade_anual.origem_populacao; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_taxa_mortalidade_anual.origem_populacao IS 'Origem do total populacional.';
-
-
---
--- Name: COLUMN mv_taxa_mortalidade_anual.sinistros; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_taxa_mortalidade_anual.sinistros IS 'Sinistros com vítima.';
-
-
---
--- Name: COLUMN mv_taxa_mortalidade_anual.vitimas; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_taxa_mortalidade_anual.vitimas IS 'Vítimas (feridos + mortos).';
-
-
---
--- Name: COLUMN mv_taxa_mortalidade_anual.mortos; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_taxa_mortalidade_anual.mortos IS 'Vítimas fatais registradas nos boletins.';
-
-
---
--- Name: COLUMN mv_taxa_mortalidade_anual.taxa_mortos_100mil; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_taxa_mortalidade_anual.taxa_mortos_100mil IS 'Mortos por 100 mil habitantes.';
-
-
---
--- Name: COLUMN mv_taxa_mortalidade_anual.taxa_vitimas_100mil; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_taxa_mortalidade_anual.taxa_vitimas_100mil IS 'Vítimas por 100 mil habitantes.';
-
-
---
--- Name: COLUMN mv_taxa_mortalidade_anual.taxa_base_2014; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_taxa_mortalidade_anual.taxa_base_2014 IS 'Taxa de mortos de 2014 (ano-base da meta).';
-
-
---
--- Name: COLUMN mv_taxa_mortalidade_anual.meta_2030; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_taxa_mortalidade_anual.meta_2030 IS 'Meta para 2030: 50% da taxa de 2014.';
-
-
---
--- Name: COLUMN mv_taxa_mortalidade_anual.distancia_meta; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_taxa_mortalidade_anual.distancia_meta IS 'Taxa do ano menos a meta (positivo = acima da meta).';
-
-
---
--- Name: COLUMN mv_taxa_mortalidade_anual.pct_reducao_vs_2014; Type: COMMENT; Schema: dw; Owner: -
---
-
-COMMENT ON COLUMN dw.mv_taxa_mortalidade_anual.pct_reducao_vs_2014 IS 'Redução percentual da taxa em relação a 2014.';
 
 
 --

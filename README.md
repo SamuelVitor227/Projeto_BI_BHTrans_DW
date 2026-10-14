@@ -8,7 +8,7 @@ O DW apoia a gestão de segurança viária de Belo Horizonte (BHTrans/PBH), cuja
 
 | # | Entregável | Onde |
 |---|---|---|
-| 1 | Estrutura completa do DW num SGBD relacional, rodando localmente | PostgreSQL 16.9 + PostGIS 3.5 (Docker), banco `dw_sinistros_bh`, schemas `stg` e `dw` — ver `evidencias/01_estrutura_dw.md` |
+| 1 | Estrutura completa do DW num SGBD relacional, rodando localmente | PostgreSQL 16.9 + PostGIS 3.5 (Docker), banco `dw_sinistros_bh`, schemas `stg` e `dw` (+ `bi`, views de consumo do Power BI) — ver `evidencias/01_estrutura_dw.md` |
 | 2 | Script DDL único | [`sql/ddl_data_warehouse.sql`](sql/ddl_data_warehouse.sql) — prova em banco vazio: `evidencias/05_prova_ddl_banco_vazio.txt`; exportação: `evidencias/ddl_exportado_pg_dump.sql` |
 | 3 | Carga inicial completa, com evidências | `python -m etl.carga_inicial` — contagens, qualidade e consultas em `evidencias/` |
 
@@ -26,8 +26,8 @@ O DW apoia a gestão de segurança viária de Belo Horizonte (BHTrans/PBH), cuja
 | % clima imputado pelo INMET | 63,29% (sobram 0,10% sem clima) |
 | % UPS derivada da severidade | 59,87% (a fonte traz UPS = 0 a partir de 2016) |
 | % regional não resolvida | 0,61% |
-| Testes de qualidade + reconciliação | 40 de 40 aprovados (`evidencias/03_relatorio_qualidade.md`) |
-| Testes locais de ponta a ponta | 23 de 23 aprovados (`evidencias/06_testes_locais.md`) |
+| Testes de qualidade + reconciliação | 42 de 42 aprovados (`evidencias/03_relatorio_qualidade.md`) |
+| Testes locais de ponta a ponta | 24 de 24 aprovados (`evidencias/06_testes_locais.md`) |
 | Tempo da carga completa | ~80 s (com a camada RAW já baixada; o primeiro download, com os ZIPs do INMET, leva ~3 min) |
 
 ---
@@ -107,11 +107,12 @@ Projeto_BI_BHTrans_DW/
   sql/carga/                      DML de transformação e carga, numerado (10–15 transformar, 20–40 carregar)
   sql/consultas_validacao.sql     consultas de negócio da Fase 1
   etl/                            config, banco, leitura, extrair, staging, transformar, testes_qualidade,
-                                  carregar, evidencias, carga_inicial, inspecionar_fontes, testes_locais
+                                  carregar, evidencias, powerbi, carga_inicial, inspecionar_fontes, testes_locais
   etl/mapeamentos/                de-paras versionados (cabeçalhos, domínios, regionais, abreviaturas)
   dados/raw/<fonte>/              camada RAW (fora do Git) + dados/raw/manifesto.csv (versionado)
   evidencias/                     estrutura, contagens, qualidade, consultas, prova do DDL, pg_dump, log
   docs/modelo_dimensional.md      diagrama Mermaid e dicionário de dados do dw
+  powerbi/                        guia do Power BI, medidas DAX e polígonos das regionais (GeoJSON/TopoJSON)
 ```
 
 ---
@@ -221,7 +222,22 @@ Os de-paras foram construídos a partir da inspeção de **todos** os arquivos (
 | `03_relatorio_qualidade.md` | resultado de todos os testes de qualidade e da reconciliação |
 | `04_consultas_negocio.md` | consultas de `sql/consultas_validacao.sql` (taxa × meta 2030, regionais por risco, top 10 locais e cruzamentos, pedestres e motociclistas, tipos mais letais, clima × severidade, dia × período) com resultados |
 | `05_prova_ddl_banco_vazio.txt` | o DDL rodado com `psql -v ON_ERROR_STOP=1` num banco temporário vazio, duas vezes (re-execução), comparado com o banco principal e apagado em seguida |
-| `06_testes_locais.md` | os 23 testes locais de ponta a ponta (`python -m etl.testes_locais`) |
+| `06_testes_locais.md` | os 24 testes locais de ponta a ponta (`python -m etl.testes_locais`) |
 | `ddl_exportado_pg_dump.sql` | `pg_dump --schema-only` do banco principal |
 | `log_carga_inicial.txt` | log completo da última execução |
 | `inspecao_fontes/` | codificação, cabeçalhos por ano e domínios de todos os arquivos (base dos de-paras) |
+
+---
+
+## 7. Power BI
+
+O Power BI conecta no schema **`bi`**, uma camada de views sobre o `dw` criada no próprio DDL (seção 8). Ela contorna quatro limitações do conector PostgreSQL do Power BI:
+
+- **Geometria:** o conector não lê colunas `geometry` do PostGIS. As views não têm geometria, os pontos vêm como latitude/longitude e os polígonos das regionais são exportados para `powerbi/` pelo ETL.
+- **Views materializadas:** não aparecem no Navegador, então os indicadores prontos são expostos como views comuns (`bi.ind_*`).
+- **Calendário:** a `dim_tempo` (data + hora) não pode ser marcada como tabela de datas. No `bi` ela vira `dim_calendario` (1 linha por dia) + `dim_hora`.
+- **Partições:** ficam escondidas, com uma view por fato.
+
+A `bi.fato_envolvido` também traz o tipo de sinistro e a condição da via do boletim, para dispensar relacionamento entre fatos.
+
+O passo a passo está em [`powerbi/GUIA_POWER_BI.md`](powerbi/GUIA_POWER_BI.md): conexão, relacionamentos, tabela de datas, ordenações, medidas DAX prontas em `powerbi/medidas.dax`, mapas, sugestão de páginas e valores de conferência.

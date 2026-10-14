@@ -16,6 +16,7 @@ Uso:  python -m etl.testes_locais        (leva alguns minutos: roda a carga 4 ve
 from __future__ import annotations
 
 import csv
+import json
 import logging
 import re
 import subprocess
@@ -23,7 +24,7 @@ import sys
 import time
 from datetime import datetime
 
-from etl import banco, config, testes_qualidade
+from etl import banco, config, powerbi, testes_qualidade
 from etl.util import configurar_log
 
 log = logging.getLogger("testes_locais")
@@ -179,11 +180,17 @@ def main() -> int:
         sem_comentario = c.execute("""
             SELECT count(*) FROM pg_attribute a JOIN pg_class cl ON cl.oid = a.attrelid
             JOIN pg_namespace n ON n.oid = cl.relnamespace
-            WHERE n.nspname IN ('stg', 'dw') AND cl.relkind IN ('r', 'p', 'm') AND NOT cl.relispartition
+            WHERE n.nspname IN ('stg', 'dw', 'bi') AND cl.relkind IN ('r', 'p', 'm', 'v') AND NOT cl.relispartition
               AND a.attnum > 0 AND NOT a.attisdropped AND col_description(cl.oid, a.attnum) IS NULL""").fetchone()[0]
     registrar("Testes de qualidade: nenhum CRÍTICO reprovado", criticos[0] == 0,
               f"{criticos[2]} testes; {criticos[1]} reprovados (todos não críticos)")
-    registrar("COMMENT ON em todas as colunas de stg e dw", sem_comentario == 0, f"{sem_comentario} sem comentário")
+    registrar("COMMENT ON em todas as colunas de stg, dw e bi", sem_comentario == 0, f"{sem_comentario} sem comentário")
+    def qtd_regionais(arquivo):
+        d = json.loads(arquivo.read_text(encoding="utf-8"))
+        return len(d["features"]) if d["type"] == "FeatureCollection" else len(d["objects"]["regionais"]["geometries"])
+    regionais = [qtd_regionais(m) for m in (powerbi.ARQ_GEOJSON, powerbi.ARQ_TOPOJSON) if m.exists()]
+    registrar("Power BI: polígonos das 9 regionais exportados (GeoJSON e TopoJSON)", regionais == [9, 9],
+              f"regionais por arquivo: {regionais}")
     consultas = (config.DIR_EVIDENCIAS / "04_consultas_negocio.md").read_text(encoding="utf-8")
     secoes = re.findall(r"\*\*Resultado\*\* \((\d+) linhas\)", consultas)
     registrar("Consultas de negócio executadas e com resultado", len(secoes) >= 6 and all(int(s) > 0 for s in secoes),

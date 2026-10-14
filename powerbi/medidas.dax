@@ -1,0 +1,122 @@
+// =============================================================================
+// Medidas DAX do DW de sinistros de trânsito de BH (camada bi do PostgreSQL)
+//
+// Como usar no Power BI Desktop (detalhes em powerbi/GUIA_POWER_BI.md):
+//   1. Importe as views do schema bi, renomeie as tabelas sem o prefixo "bi"
+//      (ex.: "bi fato_sinistro" -> "fato_sinistro") e crie os relacionamentos.
+//   2. Abra o "Modo de exibição de consulta DAX" (ícone na barra lateral esquerda),
+//      cole este arquivo inteiro e clique em "Executar".
+//   3. Clique em "Atualizar modelo com alterações" para gravar as medidas no modelo.
+//   4. Confira a tabela de resultado com os valores de referência do guia
+//      (ex.: 2014 -> 177 mortos, taxa 7,11; 2024 -> 159 mortos, taxa 6,58; meta 3,55).
+// =============================================================================
+DEFINE
+    // ---- Sinistros (fato_sinistro: 1 linha por boletim) ---------------------
+    MEASURE 'fato_sinistro'[Sinistros] =
+        COUNTROWS ( 'fato_sinistro' )
+    MEASURE 'fato_sinistro'[Sinistros fatais] =
+        CALCULATE ( [Sinistros], 'fato_sinistro'[fl_fatal] = TRUE () )
+    MEASURE 'fato_sinistro'[Sinistros com pedestre] =
+        CALCULATE ( [Sinistros], 'fato_sinistro'[fl_envolve_pedestre] = TRUE () )
+    MEASURE 'fato_sinistro'[Sinistros com motocicleta] =
+        CALCULATE ( [Sinistros], 'fato_sinistro'[fl_envolve_motociclista] = TRUE () )
+    MEASURE 'fato_sinistro'[Vítimas] =
+        SUM ( 'fato_sinistro'[qtd_vitimas] )
+    MEASURE 'fato_sinistro'[Mortos] =
+        SUM ( 'fato_sinistro'[qtd_vitimas_fatais] )
+    MEASURE 'fato_sinistro'[Veículos] =
+        SUM ( 'fato_sinistro'[qtd_veiculos] )
+    MEASURE 'fato_sinistro'[UPS] =
+        SUM ( 'fato_sinistro'[valor_ups] )
+    MEASURE 'fato_sinistro'[Mortos por 1.000 sinistros] =
+        DIVIDE ( [Mortos], [Sinistros] ) * 1000
+    MEASURE 'fato_sinistro'[% sinistros geolocalizados] =
+        DIVIDE ( CALCULATE ( [Sinistros], 'fato_sinistro'[fl_geolocalizado] = TRUE () ), [Sinistros] )
+    MEASURE 'fato_sinistro'[Sinistros (ano anterior)] =
+        CALCULATE ( [Sinistros], SAMEPERIODLASTYEAR ( 'dim_calendario'[data] ) )
+    MEASURE 'fato_sinistro'[Var. % sinistros vs ano anterior] =
+        DIVIDE ( [Sinistros] - [Sinistros (ano anterior)], [Sinistros (ano anterior)] )
+    MEASURE 'fato_sinistro'[Mortos (ano anterior)] =
+        CALCULATE ( [Mortos], SAMEPERIODLASTYEAR ( 'dim_calendario'[data] ) )
+    MEASURE 'fato_sinistro'[Var. % mortos vs ano anterior] =
+        DIVIDE ( [Mortos] - [Mortos (ano anterior)], [Mortos (ano anterior)] )
+
+    // ---- Pessoas (fato_envolvido: 1 linha por pessoa envolvida) --------------
+    // Use estas medidas com dim_pessoa e dim_veiculo, que só se ligam à fato_envolvido.
+    MEASURE 'fato_envolvido'[Envolvidos] =
+        COUNTROWS ( 'fato_envolvido' )
+    MEASURE 'fato_envolvido'[Vítimas (pessoas)] =
+        CALCULATE ( [Envolvidos], 'fato_envolvido'[fl_vitima] = TRUE () )
+    MEASURE 'fato_envolvido'[Mortos (pessoas)] =
+        CALCULATE ( [Envolvidos], 'fato_envolvido'[fl_vitima_fatal] = TRUE () )
+    MEASURE 'fato_envolvido'[Vítimas pedestres] =
+        CALCULATE ( [Vítimas (pessoas)], 'fato_envolvido'[fl_pedestre] = TRUE () )
+    MEASURE 'fato_envolvido'[Vítimas motociclistas] =
+        CALCULATE ( [Vítimas (pessoas)], 'fato_envolvido'[fl_motociclista] = TRUE () )
+    MEASURE 'fato_envolvido'[% vítimas pedestres] =
+        DIVIDE ( [Vítimas pedestres], [Vítimas (pessoas)] )
+    MEASURE 'fato_envolvido'[% vítimas motociclistas] =
+        DIVIDE ( [Vítimas motociclistas], [Vítimas (pessoas)] )
+    MEASURE 'fato_envolvido'[Mortos pedestres] =
+        CALCULATE ( [Mortos (pessoas)], 'fato_envolvido'[fl_pedestre] = TRUE () )
+    MEASURE 'fato_envolvido'[Mortos motociclistas] =
+        CALCULATE ( [Mortos (pessoas)], 'fato_envolvido'[fl_motociclista] = TRUE () )
+    MEASURE 'fato_envolvido'[% mortos pedestres] =
+        DIVIDE ( [Mortos pedestres], [Mortos (pessoas)] )
+    MEASURE 'fato_envolvido'[% mortos motociclistas] =
+        DIVIDE ( [Mortos motociclistas], [Mortos (pessoas)] )
+    MEASURE 'fato_envolvido'[Idade média] =
+        AVERAGE ( 'fato_envolvido'[idade] )
+
+    // ---- População e taxas por 100 mil hab. (fato_populacao: regional x ano) --
+    // A população é anual (1º de julho). A medida pega os anos visíveis no filtro
+    // de calendário, mesmo que o filtro seja de mês ou dia, e só conta os anos que
+    // têm sinistros carregados. Assim um cartão sem filtro de ano (2011–2024 inteiro)
+    // dá a taxa média anual do período, e não dilui pelos anos sem dados.
+    MEASURE 'fato_populacao'[População] =
+        VAR anos_com_dados = ALL ( 'fato_sinistro'[ano] )
+        RETURN
+            CALCULATE (
+                SUM ( 'fato_populacao'[populacao_residente] ),
+                REMOVEFILTERS ( 'dim_calendario' ),
+                INTERSECT ( VALUES ( 'dim_calendario'[ano] ), anos_com_dados )
+            )
+    MEASURE 'fato_populacao'[Taxa de mortos por 100 mil hab.] =
+        DIVIDE ( [Mortos], [População] ) * 100000
+    MEASURE 'fato_populacao'[Taxa de vítimas por 100 mil hab.] =
+        DIVIDE ( [Vítimas], [População] ) * 100000
+    MEASURE 'fato_populacao'[Taxa de sinistros por 100 mil hab.] =
+        DIVIDE ( [Sinistros], [População] ) * 100000
+    // Meta municipal: reduzir em 50% a taxa de mortos de 2014 até 2030.
+    MEASURE 'fato_populacao'[Taxa base 2014] =
+        CALCULATE (
+            [Taxa de mortos por 100 mil hab.],
+            REMOVEFILTERS ( 'dim_calendario' ),
+            'dim_calendario'[ano] = 2014
+        )
+    MEASURE 'fato_populacao'[Meta 2030] =
+        [Taxa base 2014] * 0.5
+    MEASURE 'fato_populacao'[Distância para a meta] =
+        VAR taxa = [Taxa de mortos por 100 mil hab.]
+        RETURN IF ( NOT ISBLANK ( taxa ), taxa - [Meta 2030] )
+    MEASURE 'fato_populacao'[% redução vs 2014] =
+        VAR taxa = [Taxa de mortos por 100 mil hab.]
+        RETURN IF ( NOT ISBLANK ( taxa ), DIVIDE ( [Taxa base 2014] - taxa, [Taxa base 2014] ) )
+
+// Conferência: uma linha por ano, comparável com bi.ind_taxa_mortalidade_anual
+// e com evidencias/04_consultas_negocio.md (consultas 1 e 4).
+EVALUATE
+    SUMMARIZECOLUMNS (
+        'dim_calendario'[ano],
+        FILTER ( ALL ( 'dim_calendario'[ano] ), 'dim_calendario'[ano] >= 2011 && 'dim_calendario'[ano] <= 2024 ),
+        "Sinistros", [Sinistros],
+        "Vítimas", [Vítimas],
+        "Mortos", [Mortos],
+        "População", [População],
+        "Taxa de mortos por 100 mil", [Taxa de mortos por 100 mil hab.],
+        "Meta 2030", [Meta 2030],
+        "Distância para a meta", [Distância para a meta],
+        "% vítimas pedestres", [% vítimas pedestres],
+        "% vítimas motociclistas", [% vítimas motociclistas]
+    )
+    ORDER BY 'dim_calendario'[ano]

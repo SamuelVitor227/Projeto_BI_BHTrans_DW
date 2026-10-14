@@ -370,6 +370,31 @@ def testes_pos_carga() -> list[Teste]:
             SELECT ((SELECT count(*) FROM dw.fato_sinistro_default) + (SELECT count(*) FROM dw.fato_envolvido_default))::text,
                    (SELECT count(*) FROM dw.fato_sinistro_default) + (SELECT count(*) FROM dw.fato_envolvido_default) = 0,
                    'anos fora de 2011–2026 cairiam na DEFAULT'"""),
+        Teste("dim_tempo: todos os dias de 2010–2030, com 24 horas + \"Sem hora\"", "integridade", "CRITICO", "7.670 dias x 25 membros", """
+            SELECT count(DISTINCT data) || ' dias; ' || count(*) FILTER (WHERE sk_tempo > 0) || ' linhas',
+                   min(data) = DATE '2010-01-01' AND max(data) = DATE '2030-12-31'
+                   AND count(DISTINCT data) = DATE '2030-12-31' - DATE '2010-01-01' + 1
+                   AND count(*) FILTER (WHERE sk_tempo > 0) = 25 * count(DISTINCT data),
+                   'de ' || min(data) || ' a ' || max(data)
+            FROM dw.dim_tempo"""),
+        Teste("Camada bi (Power BI): sem geometria e com as mesmas linhas do dw", "integridade", "CRITICO",
+              "0 colunas geometry; fatos bi = dw; data sempre preenchida", """
+            WITH g AS (SELECT count(*) AS geometrias
+                       FROM pg_attribute a JOIN pg_class c ON c.oid = a.attrelid JOIN pg_namespace n ON n.oid = c.relnamespace
+                       WHERE n.nspname = 'bi' AND a.attnum > 0 AND a.atttypid = 'geometry'::regtype),
+            q AS (SELECT (SELECT count(*) FROM bi.fato_sinistro) AS bi_sin, (SELECT count(*) FROM dw.fato_sinistro) AS dw_sin,
+                         (SELECT count(*) FROM bi.fato_envolvido) AS bi_env, (SELECT count(*) FROM dw.fato_envolvido) AS dw_env,
+                         (SELECT count(*) FROM bi.fato_populacao) AS bi_pop, (SELECT count(*) FROM dw.fato_populacao) AS dw_pop,
+                         (SELECT count(*) FROM bi.fato_sinistro WHERE data IS NULL)
+                         + (SELECT count(*) FROM bi.fato_envolvido WHERE data IS NULL) AS sem_data,
+                         (SELECT count(*) - count(DISTINCT data) FROM bi.dim_calendario) AS datas_repetidas)
+            SELECT g.geometrias || ' colunas geometry',
+                   g.geometrias = 0 AND bi_sin = dw_sin AND bi_env = dw_env AND bi_pop = dw_pop
+                   AND sem_data = 0 AND datas_repetidas = 0,
+                   'sinistros ' || bi_sin || '/' || dw_sin || '; envolvidos ' || bi_env || '/' || dw_env
+                   || '; população ' || bi_pop || '/' || dw_pop || '; fatos sem data: ' || sem_data
+                   || '; datas repetidas no calendário: ' || datas_repetidas
+            FROM g, q"""),
         Teste("Views materializadas populadas", "integridade", "CRITICO", "4 views com linhas", """
             SELECT (SELECT count(*) FROM dw.mv_taxa_mortalidade_anual) || ' / ' || (SELECT count(*) FROM dw.mv_indicadores_regional_ano)
                    || ' / ' || (SELECT count(*) FROM dw.mv_ranking_locais) || ' / ' || (SELECT count(*) FROM dw.mv_participacao_vitimas_ano),

@@ -34,5 +34,8 @@ SELECT to_char(d, 'YYYYMMDD')::int * 100 + coalesce(h.hora, 99),
             WHEN h.hora < 18 THEN 'Tarde'
             ELSE 'Noite' END,
        'sql/carga/21_dim_tempo.sql'
-FROM generate_series(DATE '2010-01-01', DATE '2030-12-31', INTERVAL '1 day') AS d
+-- TIMESTAMP sem fuso: com DATE, o generate_series vira timestamptz e, no fuso de
+-- São Paulo, a meia-noite inexistente do início do horário de verão desloca a série
+-- para 01:00, o que deixava 31/12/2030 de fora.
+FROM generate_series(TIMESTAMP '2010-01-01', TIMESTAMP '2030-12-31', INTERVAL '1 day') AS d
 CROSS JOIN (SELECT generate_series(0, 23)::smallint AS hora UNION ALL SELECT NULL::smallint) AS h;

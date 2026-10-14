@@ -1,3 +1,4 @@
 schema;comentario
+bi;Camada de consumo do Power BI: views sobre o dw sem geometria, sem partições e sem colunas de linhagem, com calendário diário e dimensão de hora.
 dw;Data Warehouse: modelo estrela (3 fatos e 7 dimensões) e views materializadas de indicadores.
 stg;Staging: espelho das fontes (tudo como texto, sem regra de negócio), tabelas de trabalho da transformação, log de carga e resultados dos testes de qualidade.

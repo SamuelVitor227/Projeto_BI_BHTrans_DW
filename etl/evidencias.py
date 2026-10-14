@@ -71,15 +71,15 @@ def estrutura(conn) -> None:
     consultas = {
         "Schemas": ("01a_schemas.csv", """
             SELECT n.nspname AS schema, obj_description(n.oid, 'pg_namespace') AS comentario
-            FROM pg_namespace n WHERE n.nspname IN ('stg', 'dw') ORDER BY 1"""),
-        "Tabelas (sem partições) e views materializadas": ("01b_tabelas.csv", """
+            FROM pg_namespace n WHERE n.nspname IN ('stg', 'dw', 'bi') ORDER BY 1"""),
+        "Tabelas (sem partições), views materializadas e views do Power BI": ("01b_tabelas.csv", """
             SELECT n.nspname AS schema, c.relname AS tabela,
                    CASE c.relkind WHEN 'p' THEN 'tabela particionada' WHEN 'r' THEN 'tabela'
-                                  WHEN 'm' THEN 'view materializada' END AS tipo,
+                                  WHEN 'm' THEN 'view materializada' WHEN 'v' THEN 'view (Power BI)' END AS tipo,
                    (SELECT count(*) FROM pg_attribute a WHERE a.attrelid = c.oid AND a.attnum > 0 AND NOT a.attisdropped) AS colunas,
                    obj_description(c.oid, 'pg_class') AS comentario
             FROM pg_class c JOIN pg_namespace n ON n.oid = c.relnamespace
-            WHERE n.nspname IN ('stg', 'dw') AND c.relkind IN ('r', 'p', 'm') AND NOT c.relispartition
+            WHERE n.nspname IN ('stg', 'dw', 'bi') AND c.relkind IN ('r', 'p', 'm', 'v') AND NOT c.relispartition
             ORDER BY 1 DESC, 3, 2"""),
         "Partições das fatos": ("01c_particoes.csv", """
             SELECT p.relname AS tabela_pai, c.relname AS particao, pg_get_expr(c.relpartbound, c.oid) AS limites
@@ -110,7 +110,7 @@ def estrutura(conn) -> None:
                format_type(a.atttypid, a.atttypmod) AS tipo, NOT a.attnotnull AS aceita_nulo,
                col_description(c.oid, a.attnum) AS comentario
         FROM pg_attribute a JOIN pg_class c ON c.oid = a.attrelid JOIN pg_namespace n ON n.oid = c.relnamespace
-        WHERE n.nspname IN ('stg', 'dw') AND c.relkind IN ('r', 'p', 'm') AND NOT c.relispartition
+        WHERE n.nspname IN ('stg', 'dw', 'bi') AND c.relkind IN ('r', 'p', 'm', 'v') AND NOT c.relispartition
           AND a.attnum > 0 AND NOT a.attisdropped
         ORDER BY 1 DESC, 2, 3""")
     _csv("01f_colunas.csv", cols, linhas)
@@ -119,14 +119,16 @@ def estrutura(conn) -> None:
         SELECT count(*) FILTER (WHERE n.nspname = 'dw' AND c.relkind IN ('r','p') AND NOT c.relispartition),
                count(*) FILTER (WHERE n.nspname = 'dw' AND c.relispartition),
                count(*) FILTER (WHERE n.nspname = 'dw' AND c.relkind = 'm'),
-               count(*) FILTER (WHERE n.nspname = 'stg' AND c.relkind = 'r')
-        FROM pg_class c JOIN pg_namespace n ON n.oid = c.relnamespace WHERE n.nspname IN ('stg','dw')""").fetchone()
+               count(*) FILTER (WHERE n.nspname = 'stg' AND c.relkind = 'r'),
+               count(*) FILTER (WHERE n.nspname = 'bi' AND c.relkind = 'v')
+        FROM pg_class c JOIN pg_namespace n ON n.oid = c.relnamespace WHERE n.nspname IN ('stg', 'dw', 'bi')""").fetchone()
     versao = conn.execute("SELECT version(), postgis_full_version()").fetchone()
     md = [f"# Estrutura do Data Warehouse — gerado em {datetime.now():%d/%m/%Y %H:%M}", "",
           f"- SGBD: `{versao[0]}`", f"- PostGIS: `{versao[1][:120]}...`",
           f"- dw: **{resumo[0]}** tabelas (7 dimensões + 3 fatos), **{resumo[1]}** partições, **{resumo[2]}** views materializadas",
           f"- stg: **{resumo[3]}** tabelas (espelhos, de-paras, trabalho, log e qualidade)",
-          f"- Colunas: **{len(linhas)}** em stg e dw; sem COMMENT: **{len(sem_comentario)}**"
+          f"- bi: **{resumo[4]}** views de consumo do Power BI (sem geometria e sem partições)",
+          f"- Colunas: **{len(linhas)}** em stg, dw e bi; sem COMMENT: **{len(sem_comentario)}**"
           + (f" ({', '.join(f'{l[1]}.{l[3]}' for l in sem_comentario[:10])})" if sem_comentario else ""),
           f"- Dicionário completo das colunas (tipo, nulidade, comentário): `01f_colunas.csv`", ""]
     (DIR / "01_estrutura_dw.md").write_text("\n".join(md) + "\n\n".join(secoes) + "\n", encoding="utf-8")
@@ -210,9 +212,10 @@ def prova_ddl(conn) -> None:
         consulta = """SELECT n.nspname || ': ' || count(*) FILTER (WHERE c.relkind IN ('r','p') AND NOT c.relispartition) || ' tabelas, '
                              || count(*) FILTER (WHERE c.relispartition) || ' partições, '
                              || count(*) FILTER (WHERE c.relkind = 'm') || ' views materializadas, '
+                             || count(*) FILTER (WHERE c.relkind = 'v') || ' views, '
                              || count(*) FILTER (WHERE c.relkind = 'i') || ' índices'
                       FROM pg_class c JOIN pg_namespace n ON n.oid = c.relnamespace
-                      WHERE n.nspname IN ('stg', 'dw') GROUP BY n.nspname ORDER BY n.nspname"""
+                      WHERE n.nspname IN ('stg', 'dw', 'bi') GROUP BY n.nspname ORDER BY n.nspname"""
         with banco.conectar(dbname=banco_prova) as cp:
             objetos_prova = [l[0] for l in cp.execute(consulta).fetchall()]
         objetos_principal = [l[0] for l in conn.execute(consulta).fetchall()]

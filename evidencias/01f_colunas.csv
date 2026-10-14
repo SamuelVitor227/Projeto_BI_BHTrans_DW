@@ -571,3 +571,198 @@ dw;mv_taxa_mortalidade_anual;9;taxa_base_2014;numeric;True;Taxa de mortos de 201
 dw;mv_taxa_mortalidade_anual;10;meta_2030;numeric;True;Meta para 2030: 50% da taxa de 2014.
 dw;mv_taxa_mortalidade_anual;11;distancia_meta;numeric;True;Taxa do ano menos a meta (positivo = acima da meta).
 dw;mv_taxa_mortalidade_anual;12;pct_reducao_vs_2014;numeric;True;Redução percentual da taxa em relação a 2014.
+bi;dim_calendario;1;data;date;True;Data.
+bi;dim_calendario;2;ano;smallint;True;Ano.
+bi;dim_calendario;3;semestre;smallint;True;Semestre (1–2).
+bi;dim_calendario;4;ano_semestre;text;True;Ano e semestre (ex.: 2024-S1).
+bi;dim_calendario;5;trimestre;smallint;True;Trimestre (1–4).
+bi;dim_calendario;6;ano_trimestre;text;True;Ano e trimestre (ex.: 2024-T3).
+bi;dim_calendario;7;mes;smallint;True;Mês (1–12).
+bi;dim_calendario;8;nome_mes;text;True;Nome do mês em português.
+bi;dim_calendario;9;nome_mes_abrev;text;True;Nome do mês abreviado (Jan, Fev...). Ordenar por mes.
+bi;dim_calendario;10;ano_mes;text;True;Ano e mês (AAAA-MM).
+bi;dim_calendario;11;ano_mes_ordem;integer;True;Ano e mês como número AAAAMM, para ordenar ano_mes.
+bi;dim_calendario;12;dia;smallint;True;Dia do mês.
+bi;dim_calendario;13;dia_semana;smallint;True;Dia da semana ISO (1 = segunda ... 7 = domingo).
+bi;dim_calendario;14;nome_dia_semana;text;True;Nome do dia da semana.
+bi;dim_calendario;15;nome_dia_semana_abrev;text;True;Dia da semana abreviado (Seg, Ter...). Ordenar por dia_semana.
+bi;dim_calendario;16;fl_fim_de_semana;boolean;True;Sábado ou domingo.
+bi;dim_condicao_via;1;sk_condicao_via;smallint;True;Chave substituta (-1 = não informado, -2 = não se aplica).
+bi;dim_condicao_via;2;cod_tempo;smallint;True;Código do tempo declarado no boletim.
+bi;dim_condicao_via;3;condicao_climatica;text;True;BOM, CHUVA, NEBLINA, NUBLADO (declarados), CHUVA (INMET), SEM CHUVA (INMET) ou NÃO INFORMADO.
+bi;dim_condicao_via;4;origem_clima;text;True;DECLARADO NO BOLETIM, IMPUTADO PELO INMET ou NÃO INFORMADO.
+bi;dim_condicao_via;5;grupo_chuva;text;True;Agrupamento comparável entre declarado e imputado: COM CHUVA, SEM CHUVA ou NÃO INFORMADO.
+bi;dim_condicao_via;6;cod_pavimento;smallint;True;Código do pavimento.
+bi;dim_condicao_via;7;pavimento;text;True;Pavimento.
+bi;dim_condicao_via;8;local_sinalizado;text;True;SIM, NÃO ou NÃO INFORMADO.
+bi;dim_hora;1;hora;smallint;True;"Hora do dia (0–23); 99 = hora não informada no boletim."
+bi;dim_hora;2;hora_texto;text;True;"Hora formatada (00h...23h) ou ""Não informada"". Ordenar por hora."
+bi;dim_hora;3;faixa_horaria;text;True;"Faixa de 3 horas (00h–02h ... 21h–23h) ou ""Hora não informada""."
+bi;dim_hora;4;periodo_dia;text;True;"Madrugada (0–5h), Manhã (6–11h), Tarde (12–17h), Noite (18–23h) ou ""Hora não informada""."
+bi;dim_hora;5;ordem_periodo_dia;smallint;True;Ordem do período do dia (1 Madrugada, 2 Manhã, 3 Tarde, 4 Noite, 5 Hora não informada), para ordenar periodo_dia.
+bi;dim_hora;6;fl_hora_informada;boolean;True;"Falso no membro ""Sem hora"" e nos membros especiais."
+bi;dim_local;1;sk_local;integer;True;Chave substituta (-1 = não informado, -2 = não se aplica).
+bi;dim_local;2;chave_natural;text;True;Chave natural pelos códigos: logradouro(s) e bairro (par de logradouros ordenado nos cruzamentos).
+bi;dim_local;3;versao;smallint;True;Número da versão do local.
+bi;dim_local;4;cod_logradouro_principal;integer;True;Código do logradouro principal (cadastro da PBH).
+bi;dim_local;5;tipo_logradouro_principal;text;True;Tipo do logradouro principal (RUA, AVENIDA...).
+bi;dim_local;6;nome_logradouro_principal;text;True;Nome do logradouro principal vigente na versão.
+bi;dim_local;7;nome_anterior_principal;text;True;Nome anterior do logradouro principal (versão anterior).
+bi;dim_local;8;nome_logradouro_principal_atual;text;True;Nome atual do logradouro principal (igual em todas as versões).
+bi;dim_local;9;cod_logradouro_cruzamento;integer;True;Código do logradouro de cruzamento (nulo se não houver).
+bi;dim_local;10;tipo_logradouro_cruzamento;text;True;Tipo do logradouro de cruzamento.
+bi;dim_local;11;nome_logradouro_cruzamento;text;True;Nome do logradouro de cruzamento vigente na versão.
+bi;dim_local;12;nome_anterior_cruzamento;text;True;Nome anterior do logradouro de cruzamento.
+bi;dim_local;13;nome_logradouro_cruzamento_atual;text;True;Nome atual do logradouro de cruzamento.
+bi;dim_local;14;cod_bairro;integer;True;Código do bairro (0 = não informado).
+bi;dim_local;15;nome_bairro;text;True;Nome do bairro (mais recente, normalizado).
+bi;dim_local;16;fl_cruzamento;boolean;True;Verdadeiro se o local é um cruzamento.
+bi;dim_local;17;descricao_local;text;True;"Descrição legível na versão (ex.: ""AVE AMAZONAS x RUA DOS TUPIS"")."
+bi;dim_local;18;descricao_local_atual;text;True;Descrição com os nomes atuais, para rankings históricos estáveis.
+bi;dim_local;19;latitude;double precision;True;Latitude do ponto representativo.
+bi;dim_local;20;longitude;double precision;True;Longitude do ponto representativo.
+bi;dim_local;21;qtd_pontos_geom;integer;True;Quantidade de sinistros geolocalizados usados no ponto representativo.
+bi;dim_local;22;dt_inicio_vigencia;date;True;Início da vigência da versão.
+bi;dim_local;23;dt_fim_vigencia;date;True;"Fim da vigência (exclusivo; 9999-12-31 na versão atual)."
+bi;dim_local;24;fl_versao_atual;boolean;True;Verdadeiro na versão vigente.
+bi;dim_local;25;motivo_versao;text;True;Motivo da abertura da versão.
+bi;dim_pessoa;1;sk_pessoa;smallint;True;Chave substituta (-1 = não informado, -2 = não se aplica).
+bi;dim_pessoa;2;tipo_envolvimento;text;True;CONDUTOR, PASSAGEIRO, PEDESTRE ou NÃO INFORMADO.
+bi;dim_pessoa;3;sexo;text;True;MASCULINO, FEMININO ou NÃO INFORMADO.
+bi;dim_pessoa;4;faixa_etaria;text;True;Faixa etária (0 a 9 ... 70 ou mais, Não informada).
+bi;dim_pessoa;5;ordem_faixa_etaria;smallint;True;Ordem de exibição da faixa etária.
+bi;dim_pessoa;6;embriaguez;text;True;Indício de embriaguez: SIM, NÃO ou NÃO INFORMADO (consistente a partir de 2016).
+bi;dim_regional;1;sk_regional;smallint;True;Chave substituta (-1 = não informada, -2 = não se aplica).
+bi;dim_regional;2;cod_regional;smallint;True;Código da regional na PBH (COD_REG = cod_regional do si-bol, 18 a 26).
+bi;dim_regional;3;nome_regional;text;True;Nome da regional.
+bi;dim_regional;4;sigla;text;True;Sigla da regional.
+bi;dim_regional;5;area_km2;numeric(10,3);True;Área em km² (do arquivo da PBH).
+bi;dim_regional;6;perimetro_m;numeric(12,3);True;Perímetro em metros (do arquivo da PBH).
+bi;dim_regional;7;subdistritos_ibge;text;True;Códigos dos subdistritos do IBGE que compõem a regional.
+bi;dim_regional;8;versao_limite;text;True;Arquivo de limite de origem.
+bi;dim_regional;9;latitude;numeric;True;Latitude (WGS 84) de um ponto interno ao polígono da regional (ST_PointOnSurface).
+bi;dim_regional;10;longitude;numeric;True;Longitude (WGS 84) de um ponto interno ao polígono da regional (ST_PointOnSurface).
+bi;dim_tipo_sinistro;1;sk_tipo_sinistro;smallint;True;Chave substituta (-1 = não informado, -2 = não se aplica).
+bi;dim_tipo_sinistro;2;cod_tipo_sinistro;text;True;Código do tipo de sinistro (ex.: H06002).
+bi;dim_tipo_sinistro;3;descricao;text;True;Descrição padronizada.
+bi;dim_tipo_sinistro;4;descricao_origem;text;True;Descrição como veio na fonte.
+bi;dim_tipo_sinistro;5;grupo_tipo_sinistro;text;True;Agrupamento analítico.
+bi;dim_tipo_sinistro;6;ordem;smallint;True;Ordem de exibição.
+bi;dim_veiculo;1;sk_veiculo;smallint;True;Chave substituta (-1 = não identificado, -2 = não se aplica (pedestre)).
+bi;dim_veiculo;2;especie;text;True;Espécie do veículo.
+bi;dim_veiculo;3;grupo_especie;text;True;Grupo da espécie (Motocicleta, Automóvel/utilitário, Ônibus, Caminhão, Bicicleta, Outros).
+bi;dim_veiculo;4;categoria;text;True;Categoria (PARTICULAR, ALUGUEL...) ou NÃO IDENTIFICADA quando o veículo exato não pôde ser determinado.
+bi;dim_veiculo;5;situacao;text;True;Situação (EM MOVIMENTO, PARADO...) ou NÃO IDENTIFICADA.
+bi;dim_veiculo;6;fl_identificado;boolean;True;Verdadeiro se categoria e situação vêm do veículo identificado.
+bi;fato_envolvido;1;numero_boletim;text;True;Dimensão degenerada: número do boletim (o mesmo da fato_sinistro).
+bi;fato_envolvido;2;ano;smallint;True;Ano do sinistro (chave de partição).
+bi;fato_envolvido;3;numero_envolvido;smallint;True;Dimensão degenerada: número do envolvido no boletim.
+bi;fato_envolvido;4;data;date;True;Data do sinistro (chave para bi.dim_calendario).
+bi;fato_envolvido;5;hora;smallint;True;"Hora do sinistro (0–23; 99 = não informada; chave para bi.dim_hora)."
+bi;fato_envolvido;6;sk_local;integer;True;FK dim_local (versão vigente na data).
+bi;fato_envolvido;7;sk_pessoa;smallint;True;FK dim_pessoa (perfil).
+bi;fato_envolvido;8;sk_veiculo;smallint;True;FK dim_veiculo (perfil herdado quando há exatamente um veículo da espécie da pessoa no boletim).
+bi;fato_envolvido;9;sk_regional;smallint;True;"FK dim_regional (dimensão conformada com a fato_sinistro; acréscimo à Fase 2)."
+bi;fato_envolvido;10;sk_tipo_sinistro;integer;True;Tipo de sinistro do boletim do envolvido (herdado de dw.fato_sinistro).
+bi;fato_envolvido;11;sk_condicao_via;integer;True;Condição da via (clima e pavimento) do boletim do envolvido (herdada de dw.fato_sinistro).
+bi;fato_envolvido;12;idade;smallint;True;"Idade em anos (atributo; nula se não informada)."
+bi;fato_envolvido;13;gravidade;text;True;Dimensão degenerada: FATAL, NÃO FATAL, SEM FERIMENTOS ou NÃO INFORMADA.
+bi;fato_envolvido;14;qtd_envolvido;smallint;True;Contador (sempre 1) para somas.
+bi;fato_envolvido;15;fl_vitima;boolean;True;"Vítima (gravidade NÃO FATAL ou FATAL); envolvido ileso não é vítima."
+bi;fato_envolvido;16;fl_vitima_fatal;boolean;True;Vítima fatal.
+bi;fato_envolvido;17;fl_pedestre;boolean;True;Pedestre.
+bi;fato_envolvido;18;fl_motociclista;boolean;True;Condutor ou passageiro de motocicleta (grupo).
+bi;fato_envolvido;19;fl_condutor;boolean;True;Condutor.
+bi;fato_envolvido;20;origem_tipo_envolvimento;text;True;INDICADOR DA FONTE ou REGRA DERIVADA (ver README).
+bi;fato_envolvido;21;origem_especie_veiculo;text;True;Origem da espécie do veículo da pessoa: INFORMADA NO BOLETIM, IMPUTADA (ESPÉCIE ÚNICA NO BOLETIM), NÃO INFORMADA ou NÃO SE APLICA (PEDESTRE).
+bi;fato_populacao;1;sk_regional;smallint;True;FK dim_regional.
+bi;fato_populacao;2;ano;smallint;True;Ano de referência.
+bi;fato_populacao;3;data;date;True;"Data de referência da população (1º de julho do ano; chave para bi.dim_calendario)."
+bi;fato_populacao;4;populacao_residente;integer;True;População residente da regional (medida semiaditiva: soma entre regionais, não entre anos).
+bi;fato_populacao;5;participacao_regional;numeric(12,10);True;Participação da regional na população do município.
+bi;fato_populacao;6;populacao_municipio;integer;True;População do município no ano (as regionais somam exatamente este total).
+bi;fato_populacao;7;origem_dado;text;True;CENSO, ESTIMATIVA IBGE x PROPORÇÃO ou INTERPOLADO x PROPORÇÃO.
+bi;fato_populacao;8;origem_total_municipio;text;True;Origem do total municipal (tabela SIDRA ou interpolação).
+bi;fato_populacao;9;metodo_regional;text;True;Método da participação da regional (Censo 2022, Censo 2010 por setores ou interpolação linear 2010–2022).
+bi;fato_sinistro;1;numero_boletim;text;True;Dimensão degenerada: número do boletim (sufixo /n para eventos distintos com o mesmo número no ano).
+bi;fato_sinistro;2;ano;smallint;True;Ano do sinistro (chave de partição).
+bi;fato_sinistro;3;data;date;True;Data do sinistro (chave para bi.dim_calendario).
+bi;fato_sinistro;4;hora;smallint;True;"Hora do sinistro (0–23; 99 = não informada; chave para bi.dim_hora)."
+bi;fato_sinistro;5;sk_local;integer;True;FK dim_local (versão vigente na data do sinistro).
+bi;fato_sinistro;6;sk_tipo_sinistro;smallint;True;FK dim_tipo_sinistro.
+bi;fato_sinistro;7;sk_condicao_via;smallint;True;FK dim_condicao_via.
+bi;fato_sinistro;8;sk_regional;smallint;True;"FK dim_regional (código do boletim; 27 Hipercentro -> Centro-Sul; nulo/0 resolvido por ST_Within do ponto do boletim ou, sem ponto, do ponto representativo do local)."
+bi;fato_sinistro;9;qtd_envolvidos;smallint;True;Pessoas envolvidas (si_env).
+bi;fato_sinistro;10;qtd_vitimas;smallint;True;Vítimas: envolvidos com severidade não fatal ou fatal.
+bi;fato_sinistro;11;qtd_vitimas_fatais;smallint;True;Vítimas fatais (severidade fatal no si_env).
+bi;fato_sinistro;12;qtd_veiculos;smallint;True;Veículos envolvidos (si-veic).
+bi;fato_sinistro;13;qtd_motocicletas;smallint;True;Veículos do grupo Motocicleta (motocicleta, motoneta, ciclomotor, triciclo).
+bi;fato_sinistro;14;qtd_automoveis;smallint;True;Veículos do grupo Automóvel/utilitário.
+bi;fato_sinistro;15;qtd_onibus;smallint;True;Veículos do grupo Ônibus (ônibus e micro-ônibus).
+bi;fato_sinistro;16;qtd_caminhoes;smallint;True;Veículos do grupo Caminhão (caminhão, caminhão-trator, reboque).
+bi;fato_sinistro;17;qtd_bicicletas;smallint;True;Bicicletas.
+bi;fato_sinistro;18;qtd_outros_veiculos;smallint;True;Demais espécies e não informadas.
+bi;fato_sinistro;19;valor_ups;smallint;True;"Unidade Padrão de Severidade (1, 5 ou 13): a da fonte quando informada; senão 13 se houve morte e 5 caso contrário."
+bi;fato_sinistro;20;fl_ups_imputada;boolean;True;Verdadeiro quando a UPS não veio na fonte (0 a partir de 2016) e foi derivada da severidade.
+bi;fato_sinistro;21;velocidade_permitida;smallint;True;"Velocidade máxima permitida (km/h) — medida NÃO aditiva; nula se não informada."
+bi;fato_sinistro;22;precipitacao_mm;numeric(6,1);True;Precipitação do INMET na hora do sinistro (mm) — medida não aditiva entre sinistros.
+bi;fato_sinistro;23;estacao_inmet;text;True;Estação usada para a precipitação (A521 Pampulha ou F501 Cercadinho).
+bi;fato_sinistro;24;fl_fatal;boolean;True;Verdadeiro se houve ao menos uma vítima fatal.
+bi;fato_sinistro;25;fl_envolve_pedestre;boolean;True;Verdadeiro se há pedestre envolvido ou o tipo é atropelamento de pessoa.
+bi;fato_sinistro;26;fl_envolve_motociclista;boolean;True;Verdadeiro se há motocicleta (grupo) entre os veículos ou envolvidos.
+bi;fato_sinistro;27;fl_geolocalizado;boolean;True;Verdadeiro se a coordenada é válida e está dentro do município.
+bi;fato_sinistro;28;latitude;double precision;True;Latitude do ponto exato (WGS 84).
+bi;fato_sinistro;29;longitude;double precision;True;Longitude do ponto exato (WGS 84).
+bi;fato_sinistro;30;origem_regional;text;True;BOLETIM, HIPERCENTRO -> CENTRO-SUL, ESPACIAL (ST_Within), ESPACIAL (regional mais próxima), ESPACIAL (ponto do local) ou NÃO RESOLVIDA.
+bi;ind_participacao_vitimas_ano;1;ano;smallint;True;Ano.
+bi;ind_participacao_vitimas_ano;2;vitimas;bigint;True;Total de vítimas.
+bi;ind_participacao_vitimas_ano;3;vitimas_pedestres;bigint;True;Vítimas pedestres.
+bi;ind_participacao_vitimas_ano;4;vitimas_motociclistas;bigint;True;Vítimas motociclistas (condutores e passageiros).
+bi;ind_participacao_vitimas_ano;5;pct_vitimas_pedestres;numeric;True;Percentual de pedestres nas vítimas.
+bi;ind_participacao_vitimas_ano;6;pct_vitimas_motociclistas;numeric;True;Percentual de motociclistas nas vítimas.
+bi;ind_participacao_vitimas_ano;7;mortos;bigint;True;Total de mortos.
+bi;ind_participacao_vitimas_ano;8;mortos_pedestres;bigint;True;Mortos pedestres.
+bi;ind_participacao_vitimas_ano;9;mortos_motociclistas;bigint;True;Mortos motociclistas.
+bi;ind_participacao_vitimas_ano;10;pct_mortos_pedestres;numeric;True;Percentual de pedestres nos mortos.
+bi;ind_participacao_vitimas_ano;11;pct_mortos_motociclistas;numeric;True;Percentual de motociclistas nos mortos.
+bi;ind_ranking_locais;1;chave_natural;text;True;Chave natural do local.
+bi;ind_ranking_locais;2;ano;smallint;True;Ano.
+bi;ind_ranking_locais;3;descricao_local_atual;text;True;Descrição do local com os nomes atuais.
+bi;ind_ranking_locais;4;fl_cruzamento;boolean;True;Verdadeiro se é cruzamento.
+bi;ind_ranking_locais;5;nome_bairro;text;True;Bairro.
+bi;ind_ranking_locais;6;sinistros;bigint;True;Sinistros com vítima.
+bi;ind_ranking_locais;7;vitimas;bigint;True;Vítimas.
+bi;ind_ranking_locais;8;mortos;bigint;True;Vítimas fatais.
+bi;ind_ranking_locais;9;ups;bigint;True;Soma da UPS (severidade ponderada).
+bi;ind_ranking_locais;10;sinistros_com_pedestre;bigint;True;Sinistros com pedestre envolvido.
+bi;ind_ranking_locais;11;sinistros_com_motocicleta;bigint;True;Sinistros com motocicleta envolvida.
+bi;ind_ranking_locais;12;rank_ups_ano;bigint;True;Posição no ano pela UPS.
+bi;ind_ranking_locais;13;rank_sinistros_ano;bigint;True;Posição no ano pelo número de sinistros.
+bi;ind_ranking_locais;14;latitude;double precision;True;Latitude do ponto representativo do local.
+bi;ind_ranking_locais;15;longitude;double precision;True;Longitude do ponto representativo do local.
+bi;ind_regional_ano;1;ano;smallint;True;Ano.
+bi;ind_regional_ano;2;sk_regional;smallint;True;Chave da regional.
+bi;ind_regional_ano;3;cod_regional;smallint;True;Código da regional.
+bi;ind_regional_ano;4;nome_regional;text;True;Nome da regional.
+bi;ind_regional_ano;5;sigla;text;True;Sigla da regional.
+bi;ind_regional_ano;6;sinistros;bigint;True;Sinistros com vítima.
+bi;ind_regional_ano;7;sinistros_fatais;bigint;True;Sinistros com ao menos uma morte.
+bi;ind_regional_ano;8;vitimas;bigint;True;Vítimas.
+bi;ind_regional_ano;9;mortos;bigint;True;Vítimas fatais.
+bi;ind_regional_ano;10;ups;bigint;True;Soma da Unidade Padrão de Severidade.
+bi;ind_regional_ano;11;populacao;integer;True;População residente da regional no ano.
+bi;ind_regional_ano;12;taxa_sinistros_100mil;numeric;True;Sinistros por 100 mil habitantes.
+bi;ind_regional_ano;13;taxa_vitimas_100mil;numeric;True;Vítimas por 100 mil habitantes.
+bi;ind_regional_ano;14;taxa_mortos_100mil;numeric;True;Mortos por 100 mil habitantes.
+bi;ind_taxa_mortalidade_anual;1;ano;smallint;True;Ano.
+bi;ind_taxa_mortalidade_anual;2;populacao;bigint;True;População do município (soma das regionais).
+bi;ind_taxa_mortalidade_anual;3;origem_populacao;text;True;Origem do total populacional.
+bi;ind_taxa_mortalidade_anual;4;sinistros;bigint;True;Sinistros com vítima.
+bi;ind_taxa_mortalidade_anual;5;vitimas;bigint;True;Vítimas (feridos + mortos).
+bi;ind_taxa_mortalidade_anual;6;mortos;bigint;True;Vítimas fatais registradas nos boletins.
+bi;ind_taxa_mortalidade_anual;7;taxa_mortos_100mil;numeric;True;Mortos por 100 mil habitantes.
+bi;ind_taxa_mortalidade_anual;8;taxa_vitimas_100mil;numeric;True;Vítimas por 100 mil habitantes.
+bi;ind_taxa_mortalidade_anual;9;taxa_base_2014;numeric;True;Taxa de mortos de 2014 (ano-base da meta).
+bi;ind_taxa_mortalidade_anual;10;meta_2030;numeric;True;Meta para 2030: 50% da taxa de 2014.
+bi;ind_taxa_mortalidade_anual;11;distancia_meta;numeric;True;Taxa do ano menos a meta (positivo = acima da meta).
+bi;ind_taxa_mortalidade_anual;12;pct_reducao_vs_2014;numeric;True;Redução percentual da taxa em relação a 2014.

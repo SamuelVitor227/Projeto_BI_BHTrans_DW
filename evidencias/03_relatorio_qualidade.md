@@ -1,6 +1,6 @@
-# Relatório de qualidade dos dados — execução 20261013220626
+# Relatório de qualidade dos dados — execução 20261013224718
 
-Testes executados: **40** · aprovados: **40** · reprovados: **0** (CRÍTICO interrompe a carga; ALERTA e INFO apenas registram).
+Testes executados: **42** · aprovados: **42** · reprovados: **0** (CRÍTICO interrompe a carga; ALERTA e INFO apenas registram).
 
 | # | Resultado | Severidade | Categoria | Teste | Valor obtido | Critério | Detalhe |
 |---|---|---|---|---|---|---|---|
@@ -33,7 +33,7 @@ Testes executados: **40** · aprovados: **40** · reprovados: **0** (CRÍTICO in
 | 27 | ✅ aprovado | INFO | coerência | Coerência espacial: regional do boletim x ponto (ST_Within) | 87.9% | informativo | 160691 boletins geolocalizados com regional informada; divergências concentram-se a menos de 50 m das divisas (avenidas-limite) |
 | 28 | ✅ aprovado | CRITICO | reconciliação | População: soma das regionais = total do município (trf) | 0 anos com diferença | diferença 0 em todos os anos | 2010=2375151, 2011=2385640, 2012=2395785, 2013=2479165, 2014=2491109, 2015=2502557, 2016=2513451, 2017=2523794, 2018=2501576, 2019=2512070, 2020=2521564, 2021=2530701, 2022=2315560, 2023=2365413, 2024=2416339, 2025=2415872, 2026=2415451 |
 | 29 | ✅ aprovado | CRITICO | reconciliação | População: anos dos sinistros com população | 0 anos sem as 9 regionais | todo ano de sinistro tem 9 regionais | 2011:9, 2012:9, 2013:9, 2014:9, 2015:9, 2016:9, 2017:9, 2018:9, 2019:9, 2020:9, 2021:9, 2022:9, 2023:9, 2024:9 |
-| 30 | ✅ aprovado | INFO | reconciliação | População: Censo 2022 por regional x valores divulgados na imprensa | 6 de 9 iguais | informativo | 19: censo 272016 x imprensa 271769 (247); 20: censo 220694 x imprensa 220941 (-247); 24: censo 309118 x imprensa 308406 (712) \| Oeste: +712 do subdistrito Oeste no distrito Barreiro; Centro-Sul/Leste: 247 pessoas trocadas |
+| 30 | ✅ aprovado | INFO | reconciliação | População: Censo 2022 por regional x valores divulgados na imprensa | 6 de 9 iguais | informativo | 24: censo 309118 x imprensa 308406 (712); 19: censo 272016 x imprensa 271769 (247); 20: censo 220694 x imprensa 220941 (-247) \| Oeste: +712 do subdistrito Oeste no distrito Barreiro; Centro-Sul/Leste: 247 pessoas trocadas |
 | 31 | ✅ aprovado | CRITICO | reconciliação | Reconciliação: boletins stg x dw por ano | 0 anos divergentes | fato = stg - duplicatas exatas, em todos os anos | 2011 16294/16294, 2012 15261/15261, 2013 14145/14145, 2014 14965/14965, 2015 13299/13299, 2016 12477/12477, 2017 12243/12243, 2018 11656/11656, 2019 13342/13342, 2020 10624/10624, 2021 11122/11122, 2022 12148/12148, 2023 13886/13886, 2024 13266/13266 |
 | 32 | ✅ aprovado | CRITICO | reconciliação | Reconciliação: envolvidos stg x dw por ano | 0 anos divergentes | fato = trf em todos os anos e stg = trf | 2011 36084/36084, 2012 33745/33745, 2013 32152/32152, 2014 33588/33588, 2015 29131/29131, 2016 27216/27216, 2017 26622/26622, 2018 25524/25524, 2019 28972/28972, 2020 22643/22643, 2021 23736/23736, 2022 26094/26094, 2023 30170/30170, 2024 29280/29280 |
 | 33 | ✅ aprovado | CRITICO | reconciliação | Reconciliação: veículos stg x fato_sinistro.qtd_veiculos | 333111 stg / 333111 dw | soma igual | motos 133194; automóveis 163818; ônibus 19180; caminhões 7575; bicicletas 5331; outros 4013 |
@@ -43,4 +43,6 @@ Testes executados: **40** · aprovados: **40** · reprovados: **0** (CRÍTICO in
 | 37 | ✅ aprovado | CRITICO | integridade | SCD2: uma versão atual por local e vigências contíguas | 0 | 0 locais inconsistentes | 22100 locais; 22391 versões; 286 locais com mais de uma versão |
 | 38 | ✅ aprovado | CRITICO | integridade | Integridade: fato aponta para a versão vigente na data | 0 | 0 sinistros fora da vigência | verificado em todos os sinistros com local |
 | 39 | ✅ aprovado | ALERTA | integridade | Partições: nenhuma linha na partição DEFAULT | 0 | 0 linhas | anos fora de 2011–2026 cairiam na DEFAULT |
-| 40 | ✅ aprovado | CRITICO | integridade | Views materializadas populadas | 14 / 140 / 69744 / 14 | 4 views com linhas | taxa anual / regional x ano / ranking de locais / participação de vítimas |
+| 40 | ✅ aprovado | CRITICO | integridade | dim_tempo: todos os dias de 2010–2030, com 24 horas + "Sem hora" | 7670 dias; 191750 linhas | 7.670 dias x 25 membros | de 2010-01-01 a 2030-12-31 |
+| 41 | ✅ aprovado | CRITICO | integridade | Camada bi (Power BI): sem geometria e com as mesmas linhas do dw | 0 colunas geometry | 0 colunas geometry; fatos bi = dw; data sempre preenchida | sinistros 184728/184728; envolvidos 404957/404957; população 153/153; fatos sem data: 0; datas repetidas no calendário: 0 |
+| 42 | ✅ aprovado | CRITICO | integridade | Views materializadas populadas | 14 / 140 / 69744 / 14 | 4 views com linhas | taxa anual / regional x ano / ranking de locais / participação de vítimas |

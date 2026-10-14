@@ -7,7 +7,8 @@
  Banco ......: dw_sinistros_bh
  Data .......: 13/10/2026
  Conteúdo ...: SOMENTE DDL — extensões, schemas stg e dw, tabelas, partições,
-               constraints, índices, comentários e views materializadas.
+               constraints, índices, comentários e views materializadas,
+               e o schema bi (views de consumo para o Power BI).
                Nenhum INSERT: as cargas ficam em sql/carga/ e no ETL Python.
 
  Como executar (a partir da pasta do projeto):
@@ -22,6 +23,7 @@
 -- ---------------------------------------------------------------------------
 -- RESET (opcional) — descomente para apagar e recriar toda a estrutura
 -- ---------------------------------------------------------------------------
+-- DROP SCHEMA IF EXISTS bi  CASCADE;
 -- DROP SCHEMA IF EXISTS dw  CASCADE;
 -- DROP SCHEMA IF EXISTS stg CASCADE;
 
@@ -1525,5 +1527,203 @@ COMMENT ON COLUMN dw.mv_participacao_vitimas_ano.mortos_motociclistas IS 'Mortos
 COMMENT ON COLUMN dw.mv_participacao_vitimas_ano.pct_mortos_pedestres IS 'Percentual de pedestres nos mortos.';
 COMMENT ON COLUMN dw.mv_participacao_vitimas_ano.pct_mortos_motociclistas IS 'Percentual de motociclistas nos mortos.';
 CREATE UNIQUE INDEX IF NOT EXISTS ux_mv_participacao_vitimas_ano ON dw.mv_participacao_vitimas_ano (ano);
+
+-- ===========================================================================
+-- 8. SCHEMA BI — CAMADA DE CONSUMO DO POWER BI (somente views)
+--    O mesmo modelo estrela do dw, ajustado ao conector PostgreSQL do Power BI:
+--    * sem colunas geometry (o conector não reconhece o tipo do PostGIS): os
+--      mapas usam latitude/longitude, e os polígonos das regionais são
+--      exportados para powerbi/ (GeoJSON e TopoJSON) pelo ETL;
+--    * views materializadas expostas como views comuns (o Navegador do Power BI
+--      não lista views materializadas);
+--    * dim_tempo dividida em dim_calendario (1 linha por dia, para "Marcar como
+--      tabela de datas") e dim_hora (24 horas + "Não informada"); as fatos trazem
+--      as colunas data e hora para esses relacionamentos;
+--    * fato_envolvido com o tipo de sinistro e a condição da via do boletim, para
+--      não precisar de relacionamento entre fatos no Power BI;
+--    * sem partições nem colunas de linhagem, para o Navegador ficar limpo.
+--    Sem regra de negócio nova: as views selecionam colunas do dw e derivam
+--    apenas rótulos de apresentação.
+-- ===========================================================================
+CREATE SCHEMA IF NOT EXISTS bi;
+COMMENT ON SCHEMA bi IS 'Camada de consumo do Power BI: views sobre o dw sem geometria, sem partições e sem colunas de linhagem, com calendário diário e dimensão de hora.';
+
+-- 8.1 Calendário e hora (substituem a dim_tempo no Power BI) -------------------
+CREATE OR REPLACE VIEW bi.dim_calendario AS
+SELECT t.data,
+       t.ano,
+       t.semestre,
+       t.ano || '-S' || t.semestre          AS ano_semestre,
+       t.trimestre,
+       t.ano || '-T' || t.trimestre         AS ano_trimestre,
+       t.mes,
+       t.nome_mes,
+       left(t.nome_mes, 3)                  AS nome_mes_abrev,
+       t.ano_mes,
+       t.ano::integer * 100 + t.mes         AS ano_mes_ordem,
+       t.dia,
+       t.dia_semana,
+       t.nome_dia_semana,
+       left(t.nome_dia_semana, 3)           AS nome_dia_semana_abrev,
+       t.fl_fim_de_semana
+FROM dw.dim_tempo t
+WHERE t.sk_tempo > 0 AND t.hora IS NULL;  -- o membro "Sem hora" de cada dia: exatamente 1 linha por data
+
+CREATE OR REPLACE VIEW bi.dim_hora AS
+SELECT coalesce(t.hora, 99)::smallint     AS hora,
+       CASE WHEN t.hora IS NULL THEN 'Não informada'
+            ELSE lpad(t.hora::text, 2, '0') || 'h' END AS hora_texto,
+       t.faixa_horaria,
+       t.periodo_dia,
+       (CASE t.periodo_dia WHEN 'Madrugada' THEN 1 WHEN 'Manhã' THEN 2
+                           WHEN 'Tarde' THEN 3 WHEN 'Noite' THEN 4 ELSE 5 END)::smallint AS ordem_periodo_dia,
+       t.fl_hora_informada
+FROM dw.dim_tempo t
+WHERE t.data = (SELECT min(data) FROM dw.dim_tempo);  -- os atributos de hora não dependem da data: basta um dia
+
+-- 8.2 Demais dimensões ---------------------------------------------------------
+CREATE OR REPLACE VIEW bi.dim_local AS
+SELECT sk_local, chave_natural, versao,
+       cod_logradouro_principal, tipo_logradouro_principal, nome_logradouro_principal,
+       nome_anterior_principal, nome_logradouro_principal_atual,
+       cod_logradouro_cruzamento, tipo_logradouro_cruzamento, nome_logradouro_cruzamento,
+       nome_anterior_cruzamento, nome_logradouro_cruzamento_atual,
+       cod_bairro, nome_bairro, fl_cruzamento, descricao_local, descricao_local_atual,
+       latitude, longitude, qtd_pontos_geom,
+       dt_inicio_vigencia, dt_fim_vigencia, fl_versao_atual, motivo_versao
+FROM dw.dim_local;
+
+CREATE OR REPLACE VIEW bi.dim_regional AS
+SELECT r.sk_regional, r.cod_regional, r.nome_regional, r.sigla, r.area_km2, r.perimetro_m,
+       r.subdistritos_ibge, r.versao_limite,
+       round(ST_Y(ST_PointOnSurface(r.geom))::numeric, 6) AS latitude,
+       round(ST_X(ST_PointOnSurface(r.geom))::numeric, 6) AS longitude
+FROM dw.dim_regional r;
+
+CREATE OR REPLACE VIEW bi.dim_tipo_sinistro AS
+SELECT sk_tipo_sinistro, cod_tipo_sinistro, descricao, descricao_origem, grupo_tipo_sinistro, ordem
+FROM dw.dim_tipo_sinistro;
+
+CREATE OR REPLACE VIEW bi.dim_condicao_via AS
+SELECT sk_condicao_via, cod_tempo, condicao_climatica, origem_clima, grupo_chuva,
+       cod_pavimento, pavimento, local_sinalizado
+FROM dw.dim_condicao_via;
+
+CREATE OR REPLACE VIEW bi.dim_veiculo AS
+SELECT sk_veiculo, especie, grupo_especie, categoria, situacao, fl_identificado
+FROM dw.dim_veiculo;
+
+CREATE OR REPLACE VIEW bi.dim_pessoa AS
+SELECT sk_pessoa, tipo_envolvimento, sexo, faixa_etaria, ordem_faixa_etaria, embriaguez
+FROM dw.dim_pessoa;
+
+-- 8.3 Fatos --------------------------------------------------------------------
+CREATE OR REPLACE VIEW bi.fato_sinistro AS
+SELECT f.numero_boletim, f.ano,
+       t.data, coalesce(t.hora, 99)::smallint AS hora,
+       f.sk_local, f.sk_tipo_sinistro, f.sk_condicao_via, f.sk_regional,
+       f.qtd_envolvidos, f.qtd_vitimas, f.qtd_vitimas_fatais, f.qtd_veiculos,
+       f.qtd_motocicletas, f.qtd_automoveis, f.qtd_onibus, f.qtd_caminhoes, f.qtd_bicicletas,
+       f.qtd_outros_veiculos,
+       f.valor_ups, f.fl_ups_imputada, f.velocidade_permitida, f.precipitacao_mm, f.estacao_inmet,
+       f.fl_fatal, f.fl_envolve_pedestre, f.fl_envolve_motociclista, f.fl_geolocalizado,
+       f.latitude, f.longitude, f.origem_regional
+FROM dw.fato_sinistro f
+JOIN dw.dim_tempo t ON t.sk_tempo = f.sk_tempo;
+
+CREATE OR REPLACE VIEW bi.fato_envolvido AS
+SELECT e.numero_boletim, e.ano, e.numero_envolvido,
+       t.data, coalesce(t.hora, 99)::smallint AS hora,
+       e.sk_local, e.sk_pessoa, e.sk_veiculo, e.sk_regional,
+       coalesce(s.sk_tipo_sinistro, -1) AS sk_tipo_sinistro,
+       coalesce(s.sk_condicao_via, -1)  AS sk_condicao_via,
+       e.idade, e.gravidade, e.qtd_envolvido,
+       e.fl_vitima, e.fl_vitima_fatal, e.fl_pedestre, e.fl_motociclista, e.fl_condutor,
+       e.origem_tipo_envolvimento, e.origem_especie_veiculo
+FROM dw.fato_envolvido e
+JOIN dw.dim_tempo t ON t.sk_tempo = e.sk_tempo
+LEFT JOIN dw.fato_sinistro s ON s.numero_boletim = e.numero_boletim AND s.ano = e.ano;
+
+CREATE OR REPLACE VIEW bi.fato_populacao AS
+SELECT p.sk_regional, p.ano, t.data,
+       p.populacao_residente, p.participacao_regional, p.populacao_municipio,
+       p.origem_dado, p.origem_total_municipio, p.metodo_regional
+FROM dw.fato_populacao p
+JOIN dw.dim_tempo t ON t.sk_tempo = p.sk_tempo;
+
+-- 8.4 Indicadores prontos (as views materializadas do dw) ------------------------
+CREATE OR REPLACE VIEW bi.ind_taxa_mortalidade_anual AS
+SELECT m.* FROM dw.mv_taxa_mortalidade_anual m;
+
+CREATE OR REPLACE VIEW bi.ind_regional_ano AS
+SELECT m.* FROM dw.mv_indicadores_regional_ano m;
+
+CREATE OR REPLACE VIEW bi.ind_ranking_locais AS
+SELECT m.* FROM dw.mv_ranking_locais m;
+
+CREATE OR REPLACE VIEW bi.ind_participacao_vitimas_ano AS
+SELECT m.* FROM dw.mv_participacao_vitimas_ano m;
+
+-- 8.5 Comentários ----------------------------------------------------------------
+COMMENT ON VIEW bi.dim_calendario IS 'Calendário diário de 2010 a 2030 (1 linha por data) para "Marcar como tabela de datas" no Power BI. Relaciona-se com as fatos pela coluna data.';
+COMMENT ON VIEW bi.dim_hora IS 'Horas do dia (0–23) e o membro 99 "Não informada". Relaciona-se com fato_sinistro e fato_envolvido pela coluna hora.';
+COMMENT ON VIEW bi.dim_local IS 'dw.dim_local (SCD Tipo 2) sem a geometria; o ponto representativo está em latitude/longitude.';
+COMMENT ON VIEW bi.dim_regional IS 'dw.dim_regional sem a geometria; latitude/longitude de um ponto interno ao polígono (rótulos e bolhas). Os polígonos estão em powerbi/regionais_bh.*.';
+COMMENT ON VIEW bi.dim_tipo_sinistro IS 'dw.dim_tipo_sinistro sem as colunas de linhagem.';
+COMMENT ON VIEW bi.dim_condicao_via IS 'dw.dim_condicao_via sem as colunas de linhagem.';
+COMMENT ON VIEW bi.dim_veiculo IS 'dw.dim_veiculo sem as colunas de linhagem.';
+COMMENT ON VIEW bi.dim_pessoa IS 'dw.dim_pessoa sem as colunas de linhagem.';
+COMMENT ON VIEW bi.fato_sinistro IS 'dw.fato_sinistro (1 linha por boletim) com data e hora no lugar de sk_tempo e sem a geometria; o ponto exato está em latitude/longitude (nulas quando não geolocalizado).';
+COMMENT ON VIEW bi.fato_envolvido IS 'dw.fato_envolvido (1 linha por pessoa) com data e hora no lugar de sk_tempo e com o tipo de sinistro e a condição da via herdados do boletim.';
+COMMENT ON VIEW bi.fato_populacao IS 'dw.fato_populacao (regional x ano) com a data de referência (1º de julho) no lugar de sk_tempo.';
+COMMENT ON VIEW bi.ind_taxa_mortalidade_anual IS 'Exposição de dw.mv_taxa_mortalidade_anual: taxa anual de mortos por 100 mil hab., meta 2030 e distância até a meta.';
+COMMENT ON VIEW bi.ind_regional_ano IS 'Exposição de dw.mv_indicadores_regional_ano: sinistros, vítimas, mortos e taxas por regional e ano.';
+COMMENT ON VIEW bi.ind_ranking_locais IS 'Exposição de dw.mv_ranking_locais: ranking anual de locais e cruzamentos.';
+COMMENT ON VIEW bi.ind_participacao_vitimas_ano IS 'Exposição de dw.mv_participacao_vitimas_ano: participação de pedestres e motociclistas nas vítimas e nos mortos.';
+
+-- As colunas repassadas herdam o comentário da coluna de mesmo nome no objeto de
+-- origem do dw (o bloco só emite COMMENT ON). As colunas novas são comentadas logo abaixo.
+DO $$
+DECLARE
+    c record;
+BEGIN
+    FOR c IN
+        SELECT m.vista, v.attname AS coluna, col_description(o.attrelid, o.attnum) AS comentario
+        FROM (VALUES ('bi.dim_calendario', 'dw.dim_tempo'), ('bi.dim_hora', 'dw.dim_tempo'),
+                     ('bi.dim_local', 'dw.dim_local'), ('bi.dim_regional', 'dw.dim_regional'),
+                     ('bi.dim_tipo_sinistro', 'dw.dim_tipo_sinistro'), ('bi.dim_condicao_via', 'dw.dim_condicao_via'),
+                     ('bi.dim_veiculo', 'dw.dim_veiculo'), ('bi.dim_pessoa', 'dw.dim_pessoa'),
+                     ('bi.fato_sinistro', 'dw.fato_sinistro'), ('bi.fato_envolvido', 'dw.fato_envolvido'),
+                     ('bi.fato_populacao', 'dw.fato_populacao'),
+                     ('bi.ind_taxa_mortalidade_anual', 'dw.mv_taxa_mortalidade_anual'),
+                     ('bi.ind_regional_ano', 'dw.mv_indicadores_regional_ano'),
+                     ('bi.ind_ranking_locais', 'dw.mv_ranking_locais'),
+                     ('bi.ind_participacao_vitimas_ano', 'dw.mv_participacao_vitimas_ano')) AS m (vista, origem)
+        JOIN pg_attribute v ON v.attrelid = m.vista::regclass AND v.attnum > 0 AND NOT v.attisdropped
+        JOIN pg_attribute o ON o.attrelid = m.origem::regclass AND o.attname = v.attname
+        WHERE col_description(o.attrelid, o.attnum) IS NOT NULL
+    LOOP
+        EXECUTE format('COMMENT ON COLUMN %s.%I IS %L', c.vista, c.coluna, c.comentario);
+    END LOOP;
+END
+$$;
+
+COMMENT ON COLUMN bi.dim_calendario.ano_semestre IS 'Ano e semestre (ex.: 2024-S1).';
+COMMENT ON COLUMN bi.dim_calendario.ano_trimestre IS 'Ano e trimestre (ex.: 2024-T3).';
+COMMENT ON COLUMN bi.dim_calendario.nome_mes_abrev IS 'Nome do mês abreviado (Jan, Fev...). Ordenar por mes.';
+COMMENT ON COLUMN bi.dim_calendario.ano_mes_ordem IS 'Ano e mês como número AAAAMM, para ordenar ano_mes.';
+COMMENT ON COLUMN bi.dim_calendario.nome_dia_semana_abrev IS 'Dia da semana abreviado (Seg, Ter...). Ordenar por dia_semana.';
+COMMENT ON COLUMN bi.dim_hora.hora IS 'Hora do dia (0–23); 99 = hora não informada no boletim.';
+COMMENT ON COLUMN bi.dim_hora.hora_texto IS 'Hora formatada (00h...23h) ou "Não informada". Ordenar por hora.';
+COMMENT ON COLUMN bi.dim_hora.ordem_periodo_dia IS 'Ordem do período do dia (1 Madrugada, 2 Manhã, 3 Tarde, 4 Noite, 5 Hora não informada), para ordenar periodo_dia.';
+COMMENT ON COLUMN bi.dim_regional.latitude IS 'Latitude (WGS 84) de um ponto interno ao polígono da regional (ST_PointOnSurface).';
+COMMENT ON COLUMN bi.dim_regional.longitude IS 'Longitude (WGS 84) de um ponto interno ao polígono da regional (ST_PointOnSurface).';
+COMMENT ON COLUMN bi.fato_sinistro.data IS 'Data do sinistro (chave para bi.dim_calendario).';
+COMMENT ON COLUMN bi.fato_sinistro.hora IS 'Hora do sinistro (0–23; 99 = não informada; chave para bi.dim_hora).';
+COMMENT ON COLUMN bi.fato_envolvido.data IS 'Data do sinistro (chave para bi.dim_calendario).';
+COMMENT ON COLUMN bi.fato_envolvido.hora IS 'Hora do sinistro (0–23; 99 = não informada; chave para bi.dim_hora).';
+COMMENT ON COLUMN bi.fato_envolvido.sk_tipo_sinistro IS 'Tipo de sinistro do boletim do envolvido (herdado de dw.fato_sinistro).';
+COMMENT ON COLUMN bi.fato_envolvido.sk_condicao_via IS 'Condição da via (clima e pavimento) do boletim do envolvido (herdada de dw.fato_sinistro).';
+COMMENT ON COLUMN bi.fato_populacao.data IS 'Data de referência da população (1º de julho do ano; chave para bi.dim_calendario).';
 
 -- Fim do DDL

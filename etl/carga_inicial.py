@@ -4,7 +4,7 @@ CARGA INICIAL COMPLETA — ponto de entrada único e idempotente do ETL.
     python -m etl.carga_inicial                      # tudo, todos os anos publicados
     python -m etl.carga_inicial --anos 2019-2024     # só alguns anos (útil para testes)
     python -m etl.carga_inicial --forcar-download    # baixa de novo mesmo sem mudança na origem
-    python -m etl.carga_inicial --recriar            # apaga e recria os schemas stg e dw antes
+    python -m etl.carga_inicial --recriar            # apaga e recria os schemas stg, dw e bi antes
     python -m etl.carga_inicial --sem-download       # usa só a camada RAW já existente
 
 Etapas (cada uma pode virar uma task de uma DAG do Airflow):
@@ -14,7 +14,7 @@ Etapas (cada uma pode virar uma task de uma DAG do Airflow):
     4. testes       -> stg.resultado_qualidade (falha CRÍTICA interrompe)
     5. carregar     -> schema dw (dimensões, fatos, views materializadas)
     6. reconciliar  -> contagens stg x dw e populações
-    7. evidências   -> evidencias/
+    7. evidências   -> evidencias/ e powerbi/ (polígonos das regionais para os mapas)
 Cada etapa é registrada em stg.log_carga.
 """
 from __future__ import annotations
@@ -26,7 +26,7 @@ import time
 from contextlib import contextmanager
 from datetime import datetime
 
-from etl import (banco, carregar, config, evidencias, extrair, staging, testes_qualidade,
+from etl import (banco, carregar, config, evidencias, extrair, powerbi, staging, testes_qualidade,
                  transformar)
 from etl.util import configurar_log, interpretar_anos
 
@@ -86,7 +86,7 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--anos", help="anos a carregar, ex.: 2011-2024 ou 2019,2020 (padrão: todos os publicados)")
     p.add_argument("--forcar-download", action="store_true", help="baixa novamente mesmo sem mudança na origem")
     p.add_argument("--sem-download", action="store_true", help="não acessa a internet; usa a camada RAW existente")
-    p.add_argument("--recriar", action="store_true", help="apaga e recria os schemas stg e dw antes da carga")
+    p.add_argument("--recriar", action="store_true", help="apaga e recria os schemas stg, dw e bi antes da carga")
     p.add_argument("--sem-evidencias", action="store_true", help="não regenera a pasta evidencias/")
     a = p.parse_args(argv)
 
@@ -144,7 +144,8 @@ def main(argv: list[str] | None = None) -> int:
             if not a.sem_evidencias:
                 with reg.etapa("7-evidencias") as r:
                     evidencias.executar(conn)
-                    r["mensagem"] = "evidencias/ atualizada"
+                    powerbi.exportar(conn)
+                    r["mensagem"] = "evidencias/ e powerbi/ atualizadas"
     except testes_qualidade.FalhaCritica as e:
         log.error("%s", e)
         log.error("Carga INTERROMPIDA. Veja evidencias/03_relatorio_qualidade.md e stg.log_carga (id_execucao=%d).",
