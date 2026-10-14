@@ -1,0 +1,12 @@
+cod_regional_boletim;desc_regional_boletim;cod_reg_limite;nome_regional;sigla;nome_subdistrito_ibge;observacao
+18;BARREIRO;18;BARREIRO;BA;Barreiro;
+19;CENTRO-SUL;19;CENTRO-SUL;CS;Centro-Sul;
+20;LESTE;20;LESTE;LE;Leste;
+21;NORDESTE;21;NORDESTE;NE;Nordeste;subdistritos IBGE nos distritos Belo Horizonte e Venda Nova
+22;NOROESTE;22;NOROESTE;NO;Noroeste;
+23;NORTE;23;NORTE;NT;Norte;subdistritos IBGE nos distritos Belo Horizonte e Venda Nova
+24;OESTE;24;OESTE;OE;Oeste;subdistritos IBGE nos distritos Belo Horizonte e Barreiro
+25;PAMPULHA;25;PAMPULHA;PA;Pampulha;subdistritos IBGE nos distritos Belo Horizonte e Venda Nova
+26;VENDA NOVA;26;VENDA NOVA;VN;Venda Nova;subdistritos IBGE nos distritos Belo Horizonte e Venda Nova
+27;HIPERCENTRO;19;CENTRO-SUL;CS;;regional criada em fev/2025 e usada no si-bol 2024; seu limite está 100% contido na Centro-Sul de 2022
+0;;;;;;não informada: resolvida por ST_Within contra a dim_regional

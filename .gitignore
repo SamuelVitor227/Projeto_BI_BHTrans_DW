@@ -1,0 +1,16 @@
+# Segredos
+.env
+
+# Camada RAW (arquivos baixados das fontes; o manifesto é versionado)
+dados/raw/**
+!dados/raw/manifesto.csv
+
+# Caches e ambientes
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ipynb_checkpoints/
+*.log
+tmp/

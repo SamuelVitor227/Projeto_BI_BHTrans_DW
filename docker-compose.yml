@@ -1,0 +1,37 @@
+# Banco do Data Warehouse: PostgreSQL 16 + PostGIS 3.5.
+# Os dados ficam num volume nomeado do Docker (não há bind mount da pasta do projeto,
+# que está no OneDrive). A porta é publicada apenas em 127.0.0.1.
+# Uso:  docker compose up -d      (lê as variáveis do arquivo .env)
+name: bi_bhtrans_dw
+
+services:
+  postgres:
+    image: postgis/postgis:16-3.5
+    container_name: bi_bhtrans_postgis
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      TZ: America/Sao_Paulo
+      PGTZ: America/Sao_Paulo
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - pgdata_bi_bhtrans:/var/lib/postgresql/data
+    shm_size: 1g
+    command: >
+      postgres
+      -c shared_buffers=1GB
+      -c work_mem=64MB
+      -c maintenance_work_mem=512MB
+      -c max_wal_size=4GB
+      -c timezone=America/Sao_Paulo
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+volumes:
+  pgdata_bi_bhtrans:

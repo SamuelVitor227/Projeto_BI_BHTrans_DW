@@ -1,0 +1,92 @@
+dominio;codigo;descricao;grupo;ordem;observacao
+tipo_sinistro;H01002;Abalroamento com vítima;Colisão/abalroamento;1;descrição na fonte: ABALROAMENTO COM VITIMA
+tipo_sinistro;H09002;Colisão de veículos com vítima;Colisão/abalroamento;2;descrição na fonte: COLISAO DE VEICULOS COM VITIMA
+tipo_sinistro;H06001;Atropelamento de pessoa com vítima fatal;Atropelamento de pessoa;3;o próprio código indica fatalidade
+tipo_sinistro;H06002;Atropelamento de pessoa sem vítima fatal;Atropelamento de pessoa;4;
+tipo_sinistro;H07002;Atropelamento de animal com vítima;Atropelamento de animal;5;
+tipo_sinistro;H08002;Choque mecânico com vítima;Choque;6;choque contra objeto fixo
+tipo_sinistro;H02001;Capotamento/tombamento sem vítima;Capotamento/tombamento;7;1 registro (2019)
+tipo_sinistro;H02002;Capotamento/tombamento com vítima;Capotamento/tombamento;8;
+tipo_sinistro;H03002;Queda de veículo com vítima;Queda;9;
+tipo_sinistro;H04000;Queda de pessoa de veículo;Queda;10;
+tipo_sinistro;H05002;Queda e/ou vazamento de carga de veículo com vítima;Queda;11;
+tipo_sinistro;H99002;Outros com vítima;Outros;12;
+tempo;0;NÃO INFORMADO;NÃO INFORMADO;0;
+tempo;1;BOM;SEM CHUVA;1;
+tempo;2;CHUVA;COM CHUVA;2;
+tempo;3;NEBLINA;SEM CHUVA;3;neblina sem registro de chuva
+tempo;4;NUBLADO;SEM CHUVA;4;
+pavimento;0;NÃO INFORMADO;;0;
+pavimento;1;ASFALTO;;1;
+pavimento;2;CONCRETO;;2;
+pavimento;3;TERRA;;3;
+pavimento;4;CALÇAMENTO;;4;
+local_sinalizado;SIM;SIM;;1;2011-2012 apenas
+local_sinalizado;NÃO;NÃO;;2;a partir de 2016 todos os boletins vêm como NÃO (provável valor padrão do sistema)
+local_sinalizado;NÃO INFORMADO;NÃO INFORMADO;;0;
+severidade;0;NÃO INFORMADA;NÃO VÍTIMA;0;não é contada como vítima
+severidade;1;NÃO FATAL;VÍTIMA;1;ferido
+severidade;2;FATAL;VÍTIMA;2;morto
+severidade;3;SEM FERIMENTOS;NÃO VÍTIMA;3;ileso: não é vítima
+categoria_veiculo;0;NÃO INFORMADA;;0;
+categoria_veiculo;1;OFICIAL;;1;
+categoria_veiculo;2;MISSÃO DIPLOMÁTICA;;2;
+categoria_veiculo;3;PARTICULAR;;3;
+categoria_veiculo;4;ALUGUEL;;4;
+categoria_veiculo;5;APRENDIZAGEM;;5;
+situacao_veiculo;0;NÃO INFORMADA;;0;
+situacao_veiculo;1;EM MOVIMENTO;;1;
+situacao_veiculo;2;PARADO;;2;
+situacao_veiculo;3;ESTACIONADO;;3;descrição vazia na fonte até 2019; ESTACIONADO a partir de 2020
+especie_veiculo;AUTOMOVEL;AUTOMÓVEL;Automóvel/utilitário;1;
+especie_veiculo;TAXI;TÁXI;Automóvel/utilitário;2;
+especie_veiculo;CAMIONETA;CAMIONETA;Automóvel/utilitário;3;
+especie_veiculo;CAMINHONETE;CAMINHONETE;Automóvel/utilitário;4;
+especie_veiculo;KOMBI;KOMBI;Automóvel/utilitário;5;
+especie_veiculo;VAN;VAN;Automóvel/utilitário;6;
+especie_veiculo;MISTO;MISTO;Automóvel/utilitário;7;
+especie_veiculo;MOTOCICLETA;MOTOCICLETA;Motocicleta;10;
+especie_veiculo;MOTONETA;MOTONETA;Motocicleta;11;
+especie_veiculo;CICLOMOTOR;CICLOMOTOR;Motocicleta;12;
+especie_veiculo;TRICICLO;TRICICLO;Motocicleta;13;
+especie_veiculo;ONIBUS;ÔNIBUS;Ônibus;20;
+especie_veiculo;MICROONIBUS;MICRO-ÔNIBUS;Ônibus;21;
+especie_veiculo;CAMINHAO;CAMINHÃO;Caminhão;30;
+especie_veiculo;CAMINHAO-TRATOR;CAMINHÃO-TRATOR;Caminhão;31;
+especie_veiculo;REBOQUE E SEMI-REBOQUE;REBOQUE E SEMIRREBOQUE;Caminhão;32;
+especie_veiculo;BICICLETA;BICICLETA;Bicicleta;40;
+especie_veiculo;PATINETE;PATINETE;Outros;50;
+especie_veiculo;CARROCA;CARROÇA;Outros;51;
+especie_veiculo;CHARRETE;CHARRETE;Outros;52;
+especie_veiculo;CARRO DE MAO;CARRO DE MÃO;Outros;53;
+especie_veiculo;TRACAO;TRAÇÃO ANIMAL;Outros;54;
+especie_veiculo;TRATOR DE RODAS;TRATOR DE RODAS;Outros;55;
+especie_veiculo;TRATOR DE ESTEIRAS;TRATOR DE ESTEIRAS;Outros;56;
+especie_veiculo;TRATOR MISTO;TRATOR MISTO;Outros;57;
+especie_veiculo;ESPECIAL;ESPECIAL;Outros;58;
+especie_veiculo;BONDE;BONDE;Outros;59;código 9 compartilhado com TREM
+especie_veiculo;TREM;TREM;Outros;60;código 9 compartilhado com BONDE
+especie_veiculo;NAO INFORMADO;NÃO INFORMADA;Outros;99;
+tipo_logradouro;RUA;RUA;;1;
+tipo_logradouro;AVE;AVENIDA;;2;
+tipo_logradouro;ROD;RODOVIA;;3;
+tipo_logradouro;PCA;PRAÇA;;4;
+tipo_logradouro;VDT;VIADUTO;;5;
+tipo_logradouro;ALA;ALAMEDA;;6;
+tipo_logradouro;BEC;BECO;;7;
+tipo_logradouro;EST;ESTRADA;;8;
+tipo_logradouro;TRE;TREVO;;9;
+tipo_logradouro;VIA;VIA;;10;
+tipo_logradouro;TUN;TÚNEL;;11;
+tipo_logradouro;TRV;TRAVESSA;;12;
+tipo_logradouro;ACS;ACESSO;;13;
+tipo_logradouro;VDP;VIA DE PEDESTRES;;14;sigla não documentada no dicionário (interpretação)
+tipo_logradouro;ELV;ELEVADO;;15;
+tipo_logradouro;TRI;TRINCHEIRA;;16;
+tipo_logradouro;RDP;RDP;;17;sigla não documentada (1 registro)
+tipo_logradouro;QTF;QTF;;18;sigla não documentada (1 registro)
+tipo_logradouro;ELP;ELP;;19;sigla não documentada (1 registro)
+tipo_logradouro;NI;NÃO INFORMADO;;0;
+sexo;M;MASCULINO;;1;
+sexo;F;FEMININO;;2;
+sexo;0;NÃO INFORMADO;;0;
