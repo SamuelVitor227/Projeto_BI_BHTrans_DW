@@ -1,4 +1,4 @@
-# Contagens da carga — gerado em 13/10/2026 22:48
+# Contagens da carga — gerado em 09/11/2026 21:54
 
 ## Linhas por tabela
 
@@ -9,12 +9,12 @@
 | stg | ibge_setor2010_variavel | 15.580 |
 | stg | ibge_sidra_valor | 54 |
 | stg | inmet_horario | 219.288 |
-| stg | log_carga | 31 |
+| stg | log_carga | 8 |
 | stg | manifesto_raw | 116 |
 | stg | map_dominio | 91 |
 | stg | map_regional | 11 |
 | stg | regional_limite | 19 |
-| stg | resultado_qualidade | 168 |
+| stg | resultado_qualidade | 42 |
 | stg | si_bol | 184.728 |
 | stg | si_env | 404.957 |
 | stg | si_log | 243.588 |

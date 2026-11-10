@@ -1,4 +1,4 @@
-# Estrutura do Data Warehouse — gerado em 13/10/2026 22:48
+# Estrutura do Data Warehouse — gerado em 09/11/2026 21:54
 
 - SGBD: `PostgreSQL 16.9 (Debian 16.9-1.pgdg110+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit`
 - PostGIS: `POSTGIS="3.5.2 dea6d0a" [EXTENSION] PGSQL="160" GEOS="3.9.0-CAPI-1.16.2" PROJ="7.2.1 NETWORK_ENABLED=OFF URL_ENDPOINT=ht...`

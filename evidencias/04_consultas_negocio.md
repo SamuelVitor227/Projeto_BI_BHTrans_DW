@@ -1,4 +1,4 @@
-# Consultas de negócio (requisitos da Fase 1) — gerado em 13/10/2026 22:48
+# Consultas de negócio (requisitos da Fase 1) — gerado em 09/11/2026 21:54
 
 Fonte das consultas: `sql/consultas_validacao.sql`.
 

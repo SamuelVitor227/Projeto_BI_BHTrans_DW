@@ -69,3 +69,9 @@ Legenda: `[x]` concluído e validado · `[~]` em andamento · `[ ]` pendente.
 - [x] `etl/powerbi.py` (etapa 7): polígonos das regionais em `powerbi/regionais_bh.geojson` (Azure Maps) e `powerbi/regionais_bh_topojson.json` (Mapa de formas)
 - [x] `powerbi/medidas.dax` (34 medidas) e `powerbi/GUIA_POWER_BI.md` (conexão, relacionamentos, ordenações, mapas, valores de conferência)
 - [x] Novo teste de qualidade da camada bi (42/42) e testes locais 24/24
+
+## 9. Execução do ETL e carga completa + documento atualizado (09/11/2026)
+- [x] `python -m etl.carga_inicial --recriar` (execução 20261109215325): 89 s, 8 etapas OK, 42/42 testes aprovados
+- [x] Portal da PBH reconsultado: 16 recursos por conjunto (2011–2024 + dicionários) → 2025 ainda não publicado
+- [x] DW idêntico à carga de 13/10 (contagens, testes e consultas iguais); evidências regeneradas
+- [x] Documento do projeto atualizado (Fase 1 + modelo, arquitetura, ETL, carga, qualidade, resultados) (base: documento original da Fase 1 + seções 7–11) → `docs/projeto BI fase 3_texto.pdf` e `.docx`
