@@ -112,6 +112,7 @@ Projeto_BI_BHTrans_DW/
   dados/raw/<fonte>/              camada RAW (fora do Git) + dados/raw/manifesto.csv (versionado)
   evidencias/                     estrutura, contagens, qualidade, consultas, prova do DDL, pg_dump, log
   docs/modelo_dimensional.md      diagrama Mermaid e dicionário de dados do dw
+  docs/entrega_faseN/             entregas acadêmicas por fase (documento de texto, slides e ZIP da entrega)
   powerbi/                        guia do Power BI, medidas DAX e polígonos das regionais (GeoJSON/TopoJSON)
 ```
 

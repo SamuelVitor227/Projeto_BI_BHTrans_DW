@@ -74,4 +74,9 @@ Legenda: `[x]` concluído e validado · `[~]` em andamento · `[ ]` pendente.
 - [x] `python -m etl.carga_inicial --recriar` (execução 20261109215325): 89 s, 8 etapas OK, 42/42 testes aprovados
 - [x] Portal da PBH reconsultado: 16 recursos por conjunto (2011–2024 + dicionários) → 2025 ainda não publicado
 - [x] DW idêntico à carga de 13/10 (contagens, testes e consultas iguais); evidências regeneradas
-- [x] Documento do projeto atualizado (Fase 1 + modelo, arquitetura, ETL, carga, qualidade, resultados) (base: documento original da Fase 1 + seções 7–11) → `docs/projeto BI fase 3_texto.pdf` e `.docx`
+- [x] Documento do projeto atualizado (Fase 1 + modelo, arquitetura, ETL, carga, qualidade, resultados) (base: documento original da Fase 1 + seções 7–11) → `docs/entrega_fase4/projeto BI fase 4_texto.pdf` e `.docx` (capa revisada pelo usuário: Fase 4)
+
+## 10. Slides e pacote da entrega da Fase 4 (10/11/2026)
+- [x] Slides (7, ~5 min, com notas): recapitulação → ETL e carga → próximos passos → `docs/entrega_fase4/projeto BI fase 4_slides.pptx` e `.pdf`
+- [x] `docs/` separado por entrega: `entrega_fase1/` (documento original) e `entrega_fase4/` (documento, slides e ZIP)
+- [x] Pasta `Entrega projeto BI fase 4` + ZIP na Área de Trabalho: documento, slides, código ETL/DDL e evidências da carga
