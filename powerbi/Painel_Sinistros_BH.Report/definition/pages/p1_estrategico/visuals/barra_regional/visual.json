@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "barra_regional",
   "position": {
-    "x": 800,
+    "x": 740,
     "y": 284,
-    "z": 9000,
-    "width": 456,
-    "height": 276,
-    "tabOrder": 9000
+    "z": 14000,
+    "width": 516,
+    "height": 272,
+    "tabOrder": 14000
   },
   "visual": {
     "visualType": "barChart",
@@ -190,6 +190,13 @@
               "expr": {
                 "Literal": {
                   "Value": "45L"
+                }
+              }
+            },
+            "innerPadding": {
+              "expr": {
+                "Literal": {
+                  "Value": "12L"
                 }
               }
             }

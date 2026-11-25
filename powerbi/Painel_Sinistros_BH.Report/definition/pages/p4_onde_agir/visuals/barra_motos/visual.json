@@ -1,16 +1,16 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
-  "name": "barra_frota",
+  "name": "barra_motos",
   "position": {
     "x": 826,
     "y": 408,
-    "z": 7000,
+    "z": 13000,
     "width": 430,
     "height": 296,
-    "tabOrder": 7000
+    "tabOrder": 13000
   },
   "visual": {
-    "visualType": "hundredPercentStackedBarChart",
+    "visualType": "barChart",
     "query": {
       "queryState": {
         "Category": {
@@ -42,67 +42,11 @@
                       "Entity": "fato_sinistro"
                     }
                   },
-                  "Property": "Motocicletas"
+                  "Property": "% motos nos veículos"
                 }
               },
-              "queryRef": "fato_sinistro.Motocicletas",
-              "nativeQueryRef": "Motocicletas"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "fato_sinistro"
-                    }
-                  },
-                  "Property": "Automóveis"
-                }
-              },
-              "queryRef": "fato_sinistro.Automóveis",
-              "nativeQueryRef": "Automóveis"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "fato_sinistro"
-                    }
-                  },
-                  "Property": "Ônibus"
-                }
-              },
-              "queryRef": "fato_sinistro.Ônibus",
-              "nativeQueryRef": "Ônibus"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "fato_sinistro"
-                    }
-                  },
-                  "Property": "Caminhões"
-                }
-              },
-              "queryRef": "fato_sinistro.Caminhões",
-              "nativeQueryRef": "Caminhões"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "fato_sinistro"
-                    }
-                  },
-                  "Property": "Bicicletas"
-                }
-              },
-              "queryRef": "fato_sinistro.Bicicletas",
-              "nativeQueryRef": "Bicicletas"
+              "queryRef": "fato_sinistro.% motos nos veículos",
+              "nativeQueryRef": "% motos nos veículos"
             }
           ]
         }
@@ -111,16 +55,16 @@
         "sort": [
           {
             "field": {
-              "Column": {
+              "Measure": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "dim_regional"
+                    "Entity": "fato_sinistro"
                   }
                 },
-                "Property": "nome_regional"
+                "Property": "% motos nos veículos"
               }
             },
-            "direction": "Ascending"
+            "direction": "Descending"
           }
         ],
         "isDefaultSort": true
@@ -136,51 +80,12 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#E0A100'"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "fato_sinistro.Motocicletas"
-          }
-        },
-        {
-          "properties": {
-            "fill": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#1F3864'"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "fato_sinistro.Automóveis"
-          }
-        },
-        {
-          "properties": {
-            "fill": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
                       "Value": "'#8EA9DB'"
                     }
                   }
                 }
               }
             }
-          },
-          "selector": {
-            "metadata": "fato_sinistro.Ônibus"
           }
         },
         {
@@ -189,8 +94,13 @@
               "solid": {
                 "color": {
                   "expr": {
-                    "Literal": {
-                      "Value": "'#5B6B85'"
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fato_sinistro"
+                        }
+                      },
+                      "Property": "Cor motos regional"
                     }
                   }
                 }
@@ -198,29 +108,17 @@
             }
           },
           "selector": {
-            "metadata": "fato_sinistro.Caminhões"
-          }
-        },
-        {
-          "properties": {
-            "fill": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#2E7D5B'"
-                    }
-                  }
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
                 }
               }
-            }
-          },
-          "selector": {
-            "metadata": "fato_sinistro.Bicicletas"
+            ]
           }
         }
       ],
-      "legend": [
+      "labels": [
         {
           "properties": {
             "show": {
@@ -230,24 +128,21 @@
                 }
               }
             },
-            "position": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Top'"
-                }
-              }
-            },
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "8D"
+                  "Value": "9D"
                 }
               }
             },
-            "showTitle": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#5B6B85'"
+                    }
+                  }
                 }
               }
             }
@@ -291,10 +186,10 @@
                 }
               }
             },
-            "fontSize": {
+            "maxMarginFactor": {
               "expr": {
                 "Literal": {
-                  "Value": "8D"
+                  "Value": "45L"
                 }
               }
             }
@@ -316,7 +211,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Perfil da frota envolvida por regional (% dos veículos)'"
+                  "Value": "'Peso das motos na frota envolvida, por regional'"
                 }
               }
             },
@@ -348,13 +243,56 @@
           }
         }
       ],
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fato_sinistro"
+                    }
+                  },
+                  "Property": "Subtítulo motos"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#5B6B85'"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
       "general": [
         {
           "properties": {
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'Barras 100% empilhadas da espécie dos veículos envolvidos por regional'"
+                  "Value": "'Barras da participação de motocicletas entre os veículos envolvidos, por regional, comparada à média da cidade'"
                 }
               }
             }

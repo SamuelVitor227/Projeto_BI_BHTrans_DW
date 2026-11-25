@@ -4,10 +4,10 @@
   "position": {
     "x": 660,
     "y": 100,
-    "z": 5000,
+    "z": 10000,
     "width": 596,
     "height": 180,
-    "tabOrder": 5000
+    "tabOrder": 10000
   },
   "visual": {
     "visualType": "columnChart",
@@ -42,11 +42,11 @@
                       "Entity": "fato_sinistro"
                     }
                   },
-                  "Property": "Sinistros"
+                  "Property": "Sinistros por ano (média)"
                 }
               },
-              "queryRef": "fato_sinistro.Sinistros",
-              "nativeQueryRef": "Sinistros"
+              "queryRef": "fato_sinistro.Sinistros por ano (média)",
+              "nativeQueryRef": "Sinistros por ano (média)"
             }
           ]
         }
@@ -175,7 +175,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Sazonalidade: sinistros por mês'"
+                  "Value": "'Sazonalidade: média de sinistros por mês'"
                 }
               }
             },
@@ -220,7 +220,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Soma dos anos filtrados'"
+                  "Value": "'Média por ano dos anos filtrados'"
                 }
               }
             },
@@ -251,7 +251,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'Colunas de sinistros por mês'"
+                  "Value": "'Colunas da média anual de sinistros por mês'"
                 }
               }
             }

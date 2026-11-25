@@ -43,7 +43,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Perguntas: quais locais e cruzamentos pedem intervenção física, em que horários e com que frota?",
+                    "value": "Perguntas: quais locais pedem intervenção física, em que horários e com que frota? · Botão direito num local → Detalhar",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "9pt",

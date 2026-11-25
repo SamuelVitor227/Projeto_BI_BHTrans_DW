@@ -4,10 +4,10 @@
   "position": {
     "x": 24,
     "y": 176,
-    "z": 4000,
+    "z": 9000,
     "width": 340,
     "height": 528,
-    "tabOrder": 4000
+    "tabOrder": 9000
   },
   "visual": {
     "visualType": "scatterChart",
@@ -51,7 +51,8 @@
                 }
               },
               "queryRef": "Avg(dim_local.longitude)",
-              "nativeQueryRef": "Average of longitude"
+              "nativeQueryRef": "Average of longitude",
+              "displayName": "Longitude"
             }
           ]
         },
@@ -74,7 +75,8 @@
                 }
               },
               "queryRef": "Avg(dim_local.latitude)",
-              "nativeQueryRef": "Average of latitude"
+              "nativeQueryRef": "Average of latitude",
+              "displayName": "Latitude"
             }
           ]
         },
@@ -93,6 +95,52 @@
               },
               "queryRef": "fato_sinistro.UPS",
               "nativeQueryRef": "UPS"
+            }
+          ]
+        },
+        "Tooltips": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fato_sinistro"
+                    }
+                  },
+                  "Property": "Sinistros"
+                }
+              },
+              "queryRef": "fato_sinistro.Sinistros",
+              "nativeQueryRef": "Sinistros"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fato_sinistro"
+                    }
+                  },
+                  "Property": "Mortos"
+                }
+              },
+              "queryRef": "fato_sinistro.Mortos",
+              "nativeQueryRef": "Mortos"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fato_sinistro"
+                    }
+                  },
+                  "Property": "Horário com mais sinistros"
+                }
+              },
+              "queryRef": "fato_sinistro.Horário com mais sinistros",
+              "nativeQueryRef": "Horário com mais sinistros"
             }
           ]
         }
@@ -342,7 +390,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Bolha = UPS do local · passe o mouse para ver o nome'"
+                  "Value": "'Bolha = UPS · botão direito num ponto → Detalhar'"
                 }
               }
             },
