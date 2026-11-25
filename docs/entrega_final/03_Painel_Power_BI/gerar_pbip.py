@@ -66,6 +66,9 @@ TABELAS: dict[str, dict] = {
         "calc_cols": [
             ("tipo_dia", "text", "IF ( 'dim_calendario'[fl_fim_de_semana], \"Fim de semana\", \"Dia útil\" )",
              "Dia útil ou fim de semana."),
+            ("periodo_analise", "text",
+             "VAR ultimo = MAX ( 'dim_calendario'[ano] )\nRETURN IF ( 'dim_calendario'[ano] >= ultimo - 2, \"Últimos 3 anos\", \"Anos anteriores\" )",
+             "Últimos 3 anos carregados × anos anteriores (acompanha a chegada de novos anos)."),
         ],
     },
     "dim_hora": {
@@ -343,6 +346,41 @@ MEDIDAS = [
      "        & \" acima da meta de \" & FORMAT ( meta, \"0.00\" ) & \" para 2030. O melhor ano foi \" & ano_min\n"
      "        & \" (\" & FORMAT ( minimo, \"0.00\" ) & \").\"",
      "Texto do storytelling da página estratégica, recalculado a cada atualização."),
+    ("fato_populacao", "Taxa (anos-chave)", DEC2, "KPI",
+     "VAR ano_atual = SELECTEDVALUE ( 'dim_calendario'[ano] )\nVAR anos = ALLSELECTED ( 'dim_calendario'[ano] )\n"
+     "VAR primeiro = MINX ( anos, 'dim_calendario'[ano] )\nVAR ultimo = MAXX ( anos, 'dim_calendario'[ano] )\n"
+     "VAR melhor = MAXX ( TOPN ( 1, anos, [Taxa de mortos por 100 mil hab.], ASC ), 'dim_calendario'[ano] )\n"
+     "RETURN IF ( ano_atual IN { primeiro, 2014, melhor, ultimo }, [Taxa de mortos por 100 mil hab.] )",
+     "Taxa só no primeiro ano, em 2014 (base), no melhor ano e no último ano: série usada para rotular os anos-chave."),
+    ("fato_populacao", "Distância da meta (texto)", None, "KPI",
+     "VAR taxa = [Taxa no último ano]\nVAR meta = [Meta 2030]\nRETURN\n    IF (\n        taxa > meta,\n"
+     "        \"+\" & FORMAT ( taxa - meta, \"0.00\" ) & \" acima da meta (+\" & FORMAT ( DIVIDE ( taxa - meta, meta ), \"0%\" ) & \")\",\n"
+     "        \"Meta atingida: \" & FORMAT ( taxa, \"0.00\" ) & \" ≤ \" & FORMAT ( meta, \"0.00\" )\n    )",
+     "Distância do último ano para a meta, em texto (substitui o percentual negativo do visual de KPI)."),
+    ("fato_populacao", "Rótulo de atualização", None, "KPI",
+     "VAR a0 = CALCULATE ( MIN ( 'fato_sinistro'[ano] ), ALL () )\nVAR a1 = CALCULATE ( MAX ( 'fato_sinistro'[ano] ), ALL () )\n"
+     "VAR atualizado = MAX ( 'Atualizacao'[data_atualizacao] )\n"
+     "RETURN \"Dados de \" & a0 & \" a \" & a1 & \" · atualizado em \" & FORMAT ( atualizado, \"dd/MM/yyyy\" )",
+     "Período dos dados e data da última atualização do painel."),
+    ("fato_sinistro", "Sinistros por ano (média)", INT, "Sinistros",
+     "DIVIDE ( [Sinistros], DISTINCTCOUNT ( 'dim_calendario'[ano] ) )", "Média anual de sinistros no contexto (ex.: por mês)."),
+    ("fato_sinistro", "% motos nos veículos", PCT, "Veículos por espécie", "DIVIDE ( [Motocicletas], [Veículos] )", ""),
+    ("fato_sinistro", "% motos na cidade", PCT, "Veículos por espécie",
+     "CALCULATE ( [% motos nos veículos], REMOVEFILTERS ( 'dim_regional' ) )", "Referência da cidade, ignorando o filtro de regional."),
+    ("fato_sinistro", "Cor motos regional", None, "Veículos por espécie",
+     "IF ( [% motos nos veículos] > [% motos na cidade], \"#E0A100\", \"#8EA9DB\" )", "Âmbar para regionais acima da média da cidade."),
+    ("fato_sinistro", "Subtítulo motos", None, "Veículos por espécie",
+     "\"Média da cidade: \" & FORMAT ( [% motos na cidade], \"0.0%\" ) & \" · em âmbar, as regionais acima da média\"", ""),
+    ("fato_sinistro", "Título do local", None, "Local",
+     "IF (\n    HASONEVALUE ( 'dim_local'[descricao_local_atual] ),\n    VALUES ( 'dim_local'[descricao_local_atual] ),\n"
+     "    \"Nenhum local selecionado: na página 4, clique com o botão direito em um ponto do mapa ou do ranking e escolha Detalhar\"\n)", ""),
+    ("fato_sinistro", "Horário com mais sinistros", None, "Local",
+     "VAR faixas = FILTER ( VALUES ( 'dim_hora'[faixa_horaria] ), 'dim_hora'[faixa_horaria] <> \"Hora não informada\" )\n"
+     "RETURN MAXX ( TOPN ( 1, faixas, [Sinistros], DESC ), 'dim_hora'[faixa_horaria] )", "Faixa de 3 horas com mais sinistros no contexto."),
+    ("fato_sinistro", "Pior faixa horária", None, "Local",
+     "VAR faixas = FILTER ( VALUES ( 'dim_hora'[faixa_horaria] ), 'dim_hora'[faixa_horaria] <> \"Hora não informada\" )\n"
+     "VAR pior = TOPN ( 1, faixas, [Sinistros], DESC )\nRETURN \"Pior horário: \" & MAXX ( pior, 'dim_hora'[faixa_horaria] )",
+     "Faixa de 3 horas com mais sinistros no contexto."),
 ]
 
 
@@ -450,8 +488,19 @@ def gerar_modelo() -> None:
              "annotation __PBI_TimeIntelligenceEnabled = 0", "",
              "annotation PBI_QueryOrder = " + json.dumps(ordem, ensure_ascii=False), "",
              "annotation PBI_ProTooling = [\"DevMode\"]", ""]
-    model += [f"ref table {t}" for t in TABELAS]
+    model += [f"ref table {t}" for t in TABELAS] + ["ref table Atualizacao"]
     (d / "model.tmdl").write_text("\n".join(model) + "\n", encoding="utf-8")
+    # tabela calculada com o momento da última atualização (recalculada a cada Atualizar)
+    (d / "tables" / "Atualizacao.tmdl").write_text("\n".join([
+        "/// Data e hora da última atualização do modelo (calculada no refresh).",
+        "table Atualizacao", "\tisHidden", f"\tlineageTag: {tag('t', 'Atualizacao')}", "",
+        "\tcolumn data_atualizacao", "\t\tdataType: dateTime", "\t\tisHidden", "\t\tisDataTypeInferred",
+        "\t\tformatString: General Date", f"\t\tlineageTag: {tag('c', 'Atualizacao', 'data_atualizacao')}",
+        "\t\tsummarizeBy: none", "\t\tsourceColumn: [data_atualizacao]", "",
+        "\t\tannotation SummarizationSetBy = Automatic", "",
+        "\tpartition Atualizacao = calculated", "\t\tmode: import",
+        "\t\tsource = ROW ( \"data_atualizacao\", NOW () )", "",
+        "\tannotation PBI_Id = " + tag("pbi", "Atualizacao").replace("-", ""), ""]), encoding="utf-8")
     expr = []
     for nome, valor, desc in [("Servidor", "127.0.0.1:5432", "Servidor PostgreSQL do DW (host:porta)."),
                               ("BancoDeDados", "dw_sinistros_bh", "Banco de dados do DW.")]:
@@ -522,17 +571,20 @@ def proj(campo: dict, ativo: bool | None = None, nome: str | None = None) -> dic
     return p
 
 
-def titulo(texto: str | None = None, medida: str | None = None, sub: str | None = None) -> dict:
+def titulo(texto: str | None = None, medida: str | None = None, sub: str | None = None, sub_medida: str | None = None) -> dict:
     o = {"title": [{"properties": {"show": lit("true"), "text": s(texto) if texto else {"expr": M(medida)},
                                    "fontSize": lit("12D"), "fontColor": cor(NAVY), "bold": lit("true")}}]}
-    if sub:
-        o["subTitle"] = [{"properties": {"show": lit("true"), "text": s(sub), "fontSize": lit("9D"), "fontColor": cor(SLATE)}}]
+    if sub or sub_medida:
+        o["subTitle"] = [{"properties": {"show": lit("true"), "text": s(sub) if sub else {"expr": M(sub_medida)},
+                                         "fontSize": lit("9D"), "fontColor": cor(SLATE)}}]
     return o
 
 
 class Pagina:
-    def __init__(self, nome: str, exibicao: str):
+    def __init__(self, nome: str, exibicao: str, tipo: str = "Default", oculta: bool = False,
+                 largura: int = 1280, altura: int = 720, extra: dict | None = None):
         self.nome, self.exibicao, self.visuais, self.z = nome, exibicao, [], 0
+        self.tipo, self.oculta, self.largura, self.altura, self.extra = tipo, oculta, largura, altura, extra or {}
 
     def add(self, nome: str, x, y, w, h, visual: dict, filtros: list | None = None, alt: str | None = None):
         self.z += 1000
@@ -544,6 +596,8 @@ class Pagina:
             v["visual"]["visualContainerObjects"]["general"][0]["properties"]["altText"] = s(alt)
         if filtros:
             v["filterConfig"] = {"filters": filtros}
+        if "visualTooltip" in v["visual"].get("visualContainerObjects", {}):
+            v["$schema"] = VC.replace("2.7.0", "2.11.0")
         self.visuais.append(v)
 
 
@@ -689,69 +743,131 @@ REG_INVALIDAS = ["NÃO INFORMADA", "NÃO SE APLICA"]
 TIPO_INVALIDO = ["Não informado", "Não se aplica"]
 
 
+PAGINAS_NAV = [("p1_estrategico", "1 · Meta 2030"), ("p2_onde_quem", "2 · Onde e quem"),
+               ("p3_quando_como", "3 · Quando e como"), ("p4_onde_agir", "4 · Onde agir")]
+SEM_MOLDURA = {"background": [{"properties": {"show": lit("false")}}], "border": [{"properties": {"show": lit("false")}}],
+               "title": [{"properties": {"show": lit("false")}}], "visualHeader": [{"properties": {"show": lit("false")}}],
+               "padding": [{"properties": {"top": lit("0D"), "bottom": lit("0D"), "left": lit("0D"), "right": lit("0D")}}]}
+
+
+def botao(texto_b: str, destino: str | None = None, tipo: str = "PageNavigation", ativo: bool = False, tam="9D") -> dict:
+    fundo, letra = (NAVY, "#FFFFFF") if ativo else (ICE, NAVY)
+    link = {"show": lit("true"), "type": s(tipo)}
+    if destino:
+        link["navigationSection"] = s(destino)
+    return {"visualType": "actionButton",
+            "objects": {"icon": [{"properties": {"show": lit("false")}}],
+                        "text": [{"properties": {"show": lit("true")}},
+                                 {"properties": {"text": s(texto_b), "fontSize": lit(tam), "fontColor": cor(letra), "bold": lit("true"),
+                                                 "fontFamily": s("Segoe UI")}, "selector": {"id": "default"}}],
+                        "fill": [{"properties": {"show": lit("true")}},
+                                 {"properties": {"fillColor": cor(fundo), "transparency": lit("0D")}, "selector": {"id": "default"}}],
+                        "outline": [{"properties": {"show": lit("false")}}],
+                        "shape": [{"properties": {"roundEdge": lit("6L")}, "selector": {"id": "default"}}]},
+            "visualContainerObjects": {**SEM_MOLDURA, "visualLink": [{"properties": link}]},
+            "drillFilterOtherVisuals": True}
+
+
+def texto_medida(medida: str, tam="9D", cor_txt=SLATE, fundo: str | None = None) -> dict:
+    """Card sem moldura que exibe uma medida de texto."""
+    vco = dict(SEM_MOLDURA)
+    if fundo:
+        vco = {**vco, "background": [{"properties": {"show": lit("true"), "color": cor(fundo)}}]}
+    return {"visualType": "card",
+            "query": {"queryState": {"Values": {"projections": [proj(M(medida))]}}},
+            "objects": {"labels": [{"properties": {"color": cor(cor_txt), "fontSize": lit(tam), "fontFamily": s("Segoe UI")}}],
+                        "categoryLabels": [{"properties": {"show": lit("false")}}],
+                        "wordWrap": [{"properties": {"show": lit("true")}}]},
+            "visualContainerObjects": vco, "drillFilterOtherVisuals": True}
+
+
+def navegacao(pg: Pagina, atual: str):
+    pg.add("atualizacao", 516, 4, 276, 24, texto_medida("Rótulo de atualização", tam="8D"), alt="Período dos dados e data da atualização")
+    for i, (destino, rot) in enumerate(PAGINAS_NAV):
+        pg.add(f"nav_{i + 1}", 800 + i * 114, 6, 110, 22, botao(rot, destino, ativo=(destino == atual), tam="8D"), alt=f"Ir para a página {rot}")
+
+
+def dica_local() -> dict:
+    """Dica padrão (a página de dica personalizada não foi aplicada pelo Desktop; os campos extras vão no papel Tooltips)."""
+    return {}
+
+
+def campos_dica() -> dict:
+    return {"Tooltips": {"projections": [proj(M("Sinistros")), proj(M("Mortos")), proj(M("Horário com mais sinistros"))]}}
+
+
 def pagina_estrategica() -> Pagina:
     pg = Pagina("p1_estrategico", "1 · Meta 2030 (estratégico)")
     cabecalho(pg, "Visão estratégica · Gabinete e Diretoria de Segurança Viária",
               "BH está longe da meta de reduzir pela metade as mortes no trânsito até 2030",
               "Pergunta: a taxa de mortos por 100 mil habitantes está caindo no ritmo da meta (−50% sobre 2014 até 2030)?")
-    pg.add("narrativa", 24, 100, 1232, 40, {
-        "visualType": "card",
-        "query": {"queryState": {"Values": {"projections": [proj(M("Narrativa da meta"))]}}},
-        "objects": {"labels": [{"properties": {"color": cor("#1B1F2A"), "fontSize": lit("12D"), "fontFamily": s("Segoe UI")}}],
-                    "categoryLabels": [{"properties": {"show": lit("false")}}],
-                    "wordWrap": [{"properties": {"show": lit("true")}}]},
-        "visualContainerObjects": {"title": [{"properties": {"show": lit("false")}}],
-                                   "background": [{"properties": {"show": lit("true"), "color": cor("#FFF7E0")}}],
-                                   "padding": [{"properties": {"top": lit("2D"), "bottom": lit("2D")}}]},
-        "drillFilterOtherVisuals": True}, alt="Resumo em texto da situação da meta")
+    navegacao(pg, "p1_estrategico")
+    pg.add("narrativa", 24, 100, 1232, 40, texto_medida("Narrativa da meta", tam="12D", cor_txt="#1B1F2A", fundo="#FFF7E0"),
+           alt="Resumo em texto da situação da meta")
+    ano = C("dim_calendario", "ano")
     pg.add("kpi_taxa", 24, 150, 296, 122, {
         "visualType": "kpi",
         "query": {"queryState": {
             "Indicator": {"projections": [proj(M("Taxa de mortos por 100 mil hab."))]},
-            "TrendLine": {"projections": [proj(C("dim_calendario", "ano"))]},
+            "TrendLine": {"projections": [proj(ano)]},
             "Goal": {"projections": [proj(M("Meta 2030"))]}}},
         "objects": {"status": [{"properties": {"direction": s("Negative")}}],
                     "indicator": [{"properties": {"fontSize": lit("24D")}}],
-                    "goals": [{"properties": {"showGoal": lit("true"), "showDistance": lit("true")}}]},
-        "visualContainerObjects": titulo("KPI · Taxa de mortos/100 mil × meta 2030"),
+                    "goals": [{"properties": {"showGoal": lit("true"), "showDistance": lit("false")}}]},
+        "visualContainerObjects": titulo("KPI · Taxa de mortos/100 mil × meta 2030", sub_medida="Distância da meta (texto)"),
         "drillFilterOtherVisuals": True}, alt="KPI da taxa de mortos com tendência anual e meta de 2030")
     pg.add("card_mortos", 336, 150, 224, 122, card("Mortos no último ano", "Mortos no último ano"))
     pg.add("card_reducao", 576, 150, 224, 122, card("Redução da taxa vs 2014", "Redução vs 2014 (meta: 50%)",
                                                    cor_medida="Cor da situação da meta"))
     pg.add("card_falta", 816, 150, 216, 122, card("Queda ainda necessária", "Queda que falta até 2030", cor_valor=RED))
-    pg.add("card_moto", 1048, 150, 208, 122, card("Motociclistas nas vítimas (último ano)", "Motociclistas nas vítimas", cor_valor=AMBER))
-    ano = C("dim_calendario", "ano")
-    meta_ref, base_ref = qref(M("Meta 2030"))[0], qref(M("Taxa base 2014"))[0]
-    pg.add("linha_taxa_meta", 24, 284, 760, 420, grafico(
-        "lineChart", [ano], [M("Taxa de mortos por 100 mil hab."), M("Meta 2030"), M("Taxa base 2014")],
+    pg.add("kpi_moto", 1048, 150, 208, 122, {
+        "visualType": "kpi",
+        "query": {"queryState": {
+            "Indicator": {"projections": [proj(M("% vítimas motociclistas"))]},
+            "TrendLine": {"projections": [proj(ano)]}}},
+        "objects": {"indicator": [{"properties": {"fontSize": lit("22D")}}],
+                    "trendline": [{"properties": {"show": lit("true"), "transparency": lit("70D")}}]},
+        "visualContainerObjects": titulo("Motociclistas nas vítimas"),
+        "drillFilterOtherVisuals": True}, alt="KPI da participação de motociclistas nas vítimas com tendência anual")
+    taxa_ref, meta_ref, base_ref = (qref(M("Taxa de mortos por 100 mil hab."))[0], qref(M("Meta 2030"))[0],
+                                    qref(M("Taxa base 2014"))[0])
+    dest_ref = qref(M("Taxa (anos-chave)"))[0]
+    pg.add("linha_taxa_meta", 24, 284, 700, 420, grafico(
+        "lineChart", [ano], [M("Taxa de mortos por 100 mil hab."), M("Meta 2030"), M("Taxa base 2014"), M("Taxa (anos-chave)")],
         sort=ordenar(ano, desc=False),
         objetos={"dataPoint": [cor_serie("Taxa de mortos por 100 mil hab.", NAVY), cor_serie("Meta 2030", AMBER),
-                               cor_serie("Taxa base 2014", GREY)],
+                               cor_serie("Taxa base 2014", GREY), cor_serie("Taxa (anos-chave)", NAVY)],
                  "lineStyles": [{"properties": {"strokeWidth": lit("3D"), "showMarker": lit("true")}},
                                 {"properties": {"lineStyle": s("dashed"), "showMarker": lit("false")}, "selector": {"metadata": meta_ref}},
                                 {"properties": {"lineStyle": s("dotted"), "showMarker": lit("false"), "strokeWidth": lit("2D")},
-                                 "selector": {"metadata": base_ref}}],
-                 "labels": [{"properties": {"show": lit("true"), "fontSize": lit("9D"), "color": cor(SLATE)}},
-                            {"properties": {"show": lit("false")}, "selector": {"metadata": meta_ref}},
-                            {"properties": {"show": lit("false")}, "selector": {"metadata": base_ref}}],
-                 "legend": LEGENDA_TOPO, "categoryAxis": EIXO_CAT, "valueAxis": EIXO_VAL_ZERO},
+                                 "selector": {"metadata": base_ref}},
+                                {"properties": {"strokeWidth": lit("0D"), "showMarker": lit("true"), "markerSize": lit("6D")},
+                                 "selector": {"metadata": dest_ref}}],
+                 "labels": [{"properties": {"show": lit("true"), "fontSize": lit("11D"), "color": cor(NAVY)}},
+                            {"properties": {"showSeries": lit("false")}, "selector": {"metadata": taxa_ref}},
+                            {"properties": {"showSeries": lit("false")}, "selector": {"metadata": meta_ref}},
+                            {"properties": {"showSeries": lit("false")}, "selector": {"metadata": base_ref}},
+                            {"properties": {"showSeries": lit("true"), "labelPosition": s("Above")}, "selector": {"metadata": dest_ref}}],
+                 "legend": [{"properties": {"show": lit("false")}}], "categoryAxis": EIXO_CAT, "valueAxis": EIXO_VAL_ZERO},
         tit=titulo("A taxa caiu até 2019 e voltou a subir: em 2024 está quase no dobro da meta",
-                   sub="Mortos por 100 mil habitantes · 2022 e 2024 têm degraus metodológicos na população do IBGE (Censo e nova estimativa)")),
+                   sub="Azul: mortos por 100 mil hab. · âmbar tracejado: meta 2030 · cinza pontilhado: base 2014 · "
+                       "2022 e 2024 têm degraus na população do IBGE")),
         alt="Linha da taxa de mortos por 100 mil habitantes de 2011 a 2024 com a meta de 2030 e a base de 2014")
     reg = C("dim_regional", "nome_regional")
-    pg.add("barra_regional", 800, 284, 456, 276, grafico(
+    pg.add("barra_regional", 740, 284, 516, 272, grafico(
         "barChart", [reg], [M("Taxa no último triênio")], sort=ordenar(M("Taxa no último triênio")),
         objetos={"dataPoint": cor_por_medida(LIGHT, "Cor destaque regional"), "labels": rotulos(),
-                 "valueAxis": EIXO_VAL_OCULTO, "categoryAxis": EIXO_BARRA},
+                 "valueAxis": EIXO_VAL_OCULTO,
+                 "categoryAxis": [{"properties": {"showAxisTitle": lit("false"), "maxMarginFactor": lit("45L"), "innerPadding": lit("12L")}}]},
         tit=titulo(medida="Título regional")),
         filtros=[filtro_nao_in("dim_regional", "nome_regional", REG_INVALIDAS, 1)],
         alt="Barras da taxa de mortos por 100 mil habitantes por regional no último triênio")
-    pg.add("linha_grupos", 800, 572, 456, 132, grafico(
-        "lineChart", [ano], [M("% vítimas motociclistas"), M("% vítimas pedestres")], sort=ordenar(ano, desc=False),
-        objetos={"dataPoint": [cor_serie("% vítimas motociclistas", AMBER), cor_serie("% vítimas pedestres", NAVY)],
+    pg.add("linha_grupos", 740, 568, 516, 136, grafico(
+        "lineChart", [ano], [M("% mortos motociclistas"), M("% mortos pedestres")], sort=ordenar(ano, desc=False),
+        objetos={"dataPoint": [cor_serie("% mortos motociclistas", AMBER), cor_serie("% mortos pedestres", NAVY)],
                  "legend": LEGENDA_TOPO, "categoryAxis": EIXO_CAT, "valueAxis": EIXO_VAL_ZERO},
-        tit=titulo("Motociclistas já são 3 em cada 4 vítimas (% das vítimas)")),
-        alt="Linhas da participação de motociclistas e pedestres nas vítimas por ano")
+        tit=titulo("Grupos prioritários entre os mortos (%)")),
+        alt="Linhas da participação de motociclistas e pedestres entre os mortos por ano")
     return pg
 
 
@@ -759,16 +875,17 @@ def pagina_onde_quem() -> Pagina:
     pg = Pagina("p2_onde_quem", "2 · Onde e quem (gerencial)")
     cabecalho(pg, "Visão gerencial · Diretoria, Engenharia de Tráfego e BHTrans Educa",
               "No último triênio, a Pampulha é a regional mais letal; motociclistas e pedestres concentram as mortes",
-              "Perguntas: quais regionais têm mais risco por habitante, quem morre e quais tipos crescem? · A página abre em 2022–2024; "
-              "na série 2011–2024 a Noroeste lidera")
-    pg.add("sl_ano", 24, 100, 210, 64, slicer("dim_calendario", "ano", "Ano", padrao=["2022L", "2023L", "2024L"]))
-    pg.add("sl_regional", 246, 100, 230, 64, slicer("dim_regional", "nome_regional", "Regional"))
+              "Perguntas: onde está o risco por habitante, quem morre e quais tipos crescem? · Abre nos últimos 3 anos (filtro Período)")
+    navegacao(pg, "p2_onde_quem")
+    pg.add("sl_periodo", 24, 100, 160, 64, slicer("dim_calendario", "periodo_analise", "Período", padrao=["'Últimos 3 anos'"]))
+    pg.add("sl_ano", 192, 100, 132, 64, slicer("dim_calendario", "ano", "Ano"))
+    pg.add("sl_regional", 332, 100, 144, 64, slicer("dim_regional", "nome_regional", "Regional"))
     reg = C("dim_regional", "nome_regional")
     pg.add("tabela_regional", 24, 176, 452, 288, tabela(
         [(reg, "Regional"), (M("Mortos"), None), (M("Taxa de vítimas por 100 mil hab."), "Vítimas/100 mil"),
          (M("Taxa de mortos por 100 mil hab."), "Mortos/100 mil")],
         ordenar(M("Taxa de mortos por 100 mil hab.")),
-        titulo("Regionais ajustadas pela população", sub="Taxas = média anual do período filtrado"),
+        titulo("Regionais ajustadas pela população", sub="Taxas = média anual do período · na série completa, a Noroeste lidera"),
         barra=("Taxa de mortos por 100 mil hab.", RED)),
         filtros=[filtro_nao_in("dim_regional", "nome_regional", REG_INVALIDAS, 2)],
         alt="Tabela de mortos e taxas por 100 mil habitantes por regional")
@@ -795,7 +912,7 @@ def pagina_onde_quem() -> Pagina:
         "barChart", [grupo], [M("Variação % entre triênios")], sort=ordenar(M("Variação % entre triênios")),
         objetos={"dataPoint": cor_por_medida(GREEN, "Cor da variação"), "labels": rotulos(),
                  "valueAxis": EIXO_VAL_OCULTO, "categoryAxis": EIXO_BARRA},
-        tit=titulo("Quais tipos mais crescem", sub="Variação da média anual de sinistros: 2011–2013 × 2022–2024 (série completa)")),
+        tit=titulo("Quais tipos mais crescem", sub="Variação da média anual: primeiro × último triênio da série (não segue o filtro de ano)")),
         filtros=[filtro_nao_in("dim_tipo_sinistro", "grupo_tipo_sinistro", TIPO_INVALIDO, 4)],
         alt="Barras da variação percentual de sinistros entre o primeiro e o último triênio por tipo")
     faixa = C("dim_pessoa", "faixa_etaria")
@@ -803,7 +920,8 @@ def pagina_onde_quem() -> Pagina:
         "columnChart", [faixa], [M("Mortos (pessoas)")], sort=ordenar(faixa, desc=False),
         objetos={"dataPoint": [{"properties": {"fill": cor(NAVY)}}], "labels": rotulos(),
                  "valueAxis": EIXO_VAL_OCULTO, "categoryAxis": [{"properties": {"showAxisTitle": lit("false")}}]},
-        tit=titulo("Vítimas fatais por faixa etária", sub="Público-alvo das campanhas educativas")),
+        tit=titulo("Vítimas fatais por faixa etária",
+                   sub="Números absolutos: não há população por idade para calcular taxa · público das campanhas")),
         filtros=[filtro_nao_in("dim_pessoa", "faixa_etaria", ["Não informada", "Não se aplica"], 9)],
         alt="Colunas de mortos por faixa etária")
     return pg
@@ -813,7 +931,8 @@ def pagina_quando_como() -> Pagina:
     pg = Pagina("p3_quando_como", "3 · Quando e como (gerencial)")
     cabecalho(pg, "Visão gerencial · Fiscalização, Operação e Comunicação",
               "Os sinistros se concentram nos dias úteis no fim da tarde; as madrugadas são as mais letais",
-              "Perguntas: em que meses, dias e horários os sinistros acontecem, e como clima e período do dia afetam a gravidade?")
+              "Perguntas: em que meses, dias e horários os sinistros acontecem, e como clima e pavimento afetam a gravidade?")
+    navegacao(pg, "p3_quando_como")
     pg.add("sl_ano", 24, 100, 300, 64, slicer("dim_calendario", "ano", "Ano"))
     pg.add("sl_regional", 344, 100, 300, 64, slicer("dim_regional", "nome_regional", "Regional"))
     faixa, dia = C("dim_hora", "faixa_horaria"), C("dim_calendario", "nome_dia_semana_abrev")
@@ -837,24 +956,30 @@ def pagina_quando_como() -> Pagina:
         "drillFilterOtherVisuals": True}, alt="Matriz de sinistros por faixa horária e dia da semana com escala de cor")
     mes = C("dim_calendario", "nome_mes_abrev")
     pg.add("coluna_mes", 660, 100, 596, 180, grafico(
-        "columnChart", [mes], [M("Sinistros")], sort=ordenar(mes, desc=False),
+        "columnChart", [mes], [M("Sinistros por ano (média)")], sort=ordenar(mes, desc=False),
         objetos={"dataPoint": [{"properties": {"fill": cor(NAVY)}}], "labels": rotulos(),
                  "valueAxis": EIXO_VAL_OCULTO, "categoryAxis": [{"properties": {"showAxisTitle": lit("false")}}]},
-        tit=titulo("Sazonalidade: sinistros por mês", sub="Soma dos anos filtrados")),
-        alt="Colunas de sinistros por mês")
+        tit=titulo("Sazonalidade: média de sinistros por mês", sub="Média por ano dos anos filtrados")),
+        alt="Colunas da média anual de sinistros por mês")
     origem, chuva = C("dim_condicao_via", "origem_clima"), C("dim_condicao_via", "grupo_chuva")
-    pg.add("coluna_clima", 660, 292, 596, 188, grafico(
+    pg.add("coluna_clima", 660, 292, 280, 188, grafico(
         "clusteredColumnChart", [origem], [M("Mortos por 1.000 sinistros")], serie=[chuva],
         objetos={"labels": rotulos(), "legend": LEGENDA_TOPO,
                  "dataPoint": [{"properties": {"fill": cor(NAVY)}, "selector": {"data": [{"scopeId": {"Comparison": {
                      "ComparisonKind": 0, "Left": chuva, "Right": {"Literal": {"Value": "'COM CHUVA'"}}}}}]}},
                                {"properties": {"fill": cor(LIGHT)}, "selector": {"data": [{"scopeId": {"Comparison": {
                                    "ComparisonKind": 0, "Left": chuva, "Right": {"Literal": {"Value": "'SEM CHUVA'"}}}}}]}}],
-                 "valueAxis": EIXO_VAL_OCULTO, "categoryAxis": [{"properties": {"showAxisTitle": lit("false")}}]},
-        tit=titulo("Clima × gravidade (mortos a cada 1.000 sinistros)",
-                   sub="Compare dentro da mesma origem: o clima é anotado com mais frequência em sinistros graves")),
+                 "valueAxis": EIXO_VAL_OCULTO, "categoryAxis": [{"properties": {"showAxisTitle": lit("false"), "fontSize": lit("8D")}}]},
+        tit=titulo("Clima × gravidade", sub="Mortos/1.000 sinistros · compare dentro da mesma origem do dado")),
         filtros=[filtro_nao_in("dim_condicao_via", "origem_clima", ["NÃO INFORMADO", "NÃO SE APLICA"], 5)],
         alt="Colunas de mortos por mil sinistros com e sem chuva, por origem do dado de clima")
+    pav = C("dim_condicao_via", "pavimento")
+    pg.add("tabela_pavimento", 952, 292, 304, 188, tabela(
+        [(pav, "Pavimento"), (M("Sinistros"), None), (M("Mortos por 1.000 sinistros"), "Mortos/mil")],
+        ordenar(M("Sinistros")), titulo("Pavimento × gravidade", sub="62% sem informação; poucos casos fora do asfalto"),
+        fonte="8D"),
+        filtros=[filtro_nao_in("dim_condicao_via", "pavimento", ["NÃO SE APLICA"], 10)],
+        alt="Tabela de sinistros e mortos por mil sinistros por tipo de pavimento")
     ano = C("dim_calendario", "ano")
     pg.add("linha_severidade", 24, 492, 620, 212, grafico(
         "lineChart", [ano], [M("Mortos por 1.000 sinistros")], sort=ordenar(ano, desc=False),
@@ -873,45 +998,54 @@ def pagina_quando_como() -> Pagina:
     return pg
 
 
-def pagina_onde_agir() -> Pagina:
-    pg = Pagina("p4_onde_agir", "4 · Onde agir (operacional)")
-    cabecalho(pg, "Visão operacional · Engenharia de Tráfego e Fiscalização",
-              "Poucos corredores concentram a severidade: Antônio Carlos, Anel Rodoviário e Cristiano Machado",
-              "Perguntas: quais locais e cruzamentos pedem intervenção física, em que horários e com que frota?")
-    pg.add("sl_ano", 24, 100, 164, 64, slicer("dim_calendario", "ano", "Ano"))
-    pg.add("sl_regional", 200, 100, 164, 64, slicer("dim_regional", "nome_regional", "Regional"))
+def mapa_dispersao(n_top: int, w: int, h: int, dica: bool = True) -> dict:
     local = C("dim_local", "descricao_local_atual")
     img = {"image": {"name": s("mapa_regionais_bh.svg"),
                      "url": {"expr": {"ResourcePackageItem": {"PackageName": "RegisteredResources", "PackageType": 1,
                                                              "ItemName": "mapa_regionais_bh.svg"}}},
                      "scaling": s("Fit")}}
-    pg.add("mapa_pontos", 24, 176, 340, 528, {
-        "visualType": "scatterChart",
-        "query": {"queryState": {
-            "Category": {"projections": [proj(local, ativo=True)]},
-            "X": {"projections": [proj(AVG("dim_local", "longitude"))]},
-            "Y": {"projections": [proj(AVG("dim_local", "latitude"))]},
-            "Size": {"projections": [proj(M("UPS"))]}},
-            "sortDefinition": ordenar(M("UPS"))},
-        "objects": {
-            "categoryAxis": [{"properties": {"show": lit("false"), "showAxisTitle": lit("false"), "gridlineShow": lit("false"),
-                                             "start": lit(f"{MAPA['lon0']}D"), "end": lit(f"{MAPA['lon1']}D")}}],
-            "valueAxis": [{"properties": {"show": lit("false"), "showAxisTitle": lit("false"), "gridlineShow": lit("false"),
-                                          "start": lit(f"{MAPA['lat0']}D"), "end": lit(f"{MAPA['lat1']}D")}}],
-            "plotArea": [{"properties": {"image": img, "transparency": lit("0D")}}],
-            "dataPoint": [{"properties": {"fill": cor(RED)}}],
-            "bubbles": [{"properties": {"bubbleSize": lit("-27L")}}],
-            "legend": [{"properties": {"show": lit("false")}}]},
-        "visualContainerObjects": titulo("Mapa dos 300 locais mais severos",
-                                         sub="Bolha = UPS do local · passe o mouse para ver o nome"),
-        "drillFilterOtherVisuals": True},
-        filtros=[filtro_topn("dim_local", "descricao_local_atual", 300, "UPS", 1)],
-        alt="Mapa de BH com as regionais e bolhas nos 300 locais de maior severidade")
+    vco = titulo(f"Mapa dos {n_top} locais mais severos", sub="Bolha = UPS · botão direito num ponto → Detalhar")
+    if dica:
+        vco.update(dica_local())
+    return {"visualType": "scatterChart",
+            "query": {"queryState": {
+                "Category": {"projections": [proj(local, ativo=True)]},
+                "X": {"projections": [proj(AVG("dim_local", "longitude"), nome="Longitude")]},
+                "Y": {"projections": [proj(AVG("dim_local", "latitude"), nome="Latitude")]},
+                "Size": {"projections": [proj(M("UPS"))]}, **campos_dica()},
+                "sortDefinition": ordenar(M("UPS"))},
+            "objects": {
+                "categoryAxis": [{"properties": {"show": lit("false"), "showAxisTitle": lit("false"), "gridlineShow": lit("false"),
+                                                 "start": lit(f"{MAPA['lon0']}D"), "end": lit(f"{MAPA['lon1']}D")}}],
+                "valueAxis": [{"properties": {"show": lit("false"), "showAxisTitle": lit("false"), "gridlineShow": lit("false"),
+                                              "start": lit(f"{MAPA['lat0']}D"), "end": lit(f"{MAPA['lat1']}D")}}],
+                "plotArea": [{"properties": {"image": img, "transparency": lit("0D")}}],
+                "dataPoint": [{"properties": {"fill": cor(RED)}}],
+                "bubbles": [{"properties": {"bubbleSize": lit("-27L")}}],
+                "legend": [{"properties": {"show": lit("false")}}]},
+            "visualContainerObjects": vco, "drillFilterOtherVisuals": True}
+
+
+def pagina_onde_agir() -> Pagina:
+    pg = Pagina("p4_onde_agir", "4 · Onde agir (operacional)")
+    cabecalho(pg, "Visão operacional · Engenharia de Tráfego e Fiscalização",
+              "Poucos corredores concentram a severidade: Antônio Carlos, Anel Rodoviário e Cristiano Machado",
+              "Perguntas: quais locais pedem intervenção física, em que horários e com que frota? · Botão direito num local → Detalhar")
+    navegacao(pg, "p4_onde_agir")
+    pg.add("sl_ano", 24, 100, 164, 64, slicer("dim_calendario", "ano", "Ano"))
+    pg.add("sl_regional", 200, 100, 164, 64, slicer("dim_regional", "nome_regional", "Regional"))
+    local = C("dim_local", "descricao_local_atual")
+    pg.add("mapa_pontos", 24, 176, 340, 528, mapa_dispersao(300, 340, 528),
+           filtros=[filtro_topn("dim_local", "descricao_local_atual", 300, "UPS", 1)],
+           alt="Mapa de BH com as regionais e bolhas nos 300 locais de maior severidade")
+    pg.add("bt_mapa_ruas", 246, 680, 112, 20, botao("Mapa de ruas ↗", "p6_mapa_ruas", tam="8D"),
+           alt="Abrir o mapa com ruas (Azure Maps, requer login no Power BI)")
+    tit_rank = titulo("Ranking dos 25 locais mais severos", sub="UPS = severidade ponderada (morte vale 13) · botão direito → Detalhar")
+    tit_rank.update(dica_local())
     pg.add("tabela_locais", 380, 100, 876, 296, tabela(
         [(local, "Local (nome atual)"), (C("dim_local", "nome_bairro"), "Bairro"), (M("Sinistros"), None),
          (M("Mortos"), None), (M("UPS"), None)],
-        ordenar(M("UPS")), titulo("Ranking dos 25 locais mais severos", sub="UPS = severidade ponderada (sinistro com morte vale 13)"),
-        barra=("UPS", AMBER), fonte="9D"),
+        ordenar(M("UPS")), tit_rank, barra=("UPS", AMBER), fonte="9D"),
         filtros=[filtro_topn("dim_local", "descricao_local_atual", 25, "UPS", 2)],
         alt="Tabela dos 25 locais com maior UPS")
     faixa = C("dim_hora", "faixa_horaria")
@@ -923,16 +1057,118 @@ def pagina_onde_agir() -> Pagina:
         filtros=[filtro_nao_in("dim_hora", "faixa_horaria", ["Hora não informada"], 7)],
         alt="Colunas de sinistros por faixa horária")
     reg = C("dim_regional", "nome_regional")
-    veic = ["Motocicletas", "Automóveis", "Ônibus", "Caminhões", "Bicicletas"]
-    cores_v = [AMBER, NAVY, LIGHT, SLATE, GREEN]
-    pg.add("barra_frota", 826, 408, 430, 296, grafico(
-        "hundredPercentStackedBarChart", [reg], [M(v) for v in veic], sort=ordenar(reg, desc=False),
-        objetos={"dataPoint": [cor_serie(v, c) for v, c in zip(veic, cores_v)],
-                 "legend": [{"properties": {"show": lit("true"), "position": s("Top"), "fontSize": lit("8D"), "showTitle": lit("false")}}],
-                 "valueAxis": EIXO_VAL_OCULTO, "categoryAxis": [{"properties": {"showAxisTitle": lit("false"), "fontSize": lit("8D")}}]},
-        tit=titulo("Perfil da frota envolvida por regional (% dos veículos)")),
+    pg.add("barra_motos", 826, 408, 430, 296, grafico(
+        "barChart", [reg], [M("% motos nos veículos")], sort=ordenar(M("% motos nos veículos")),
+        objetos={"dataPoint": cor_por_medida(LIGHT, "Cor motos regional"), "labels": rotulos(),
+                 "valueAxis": EIXO_VAL_OCULTO, "categoryAxis": EIXO_BARRA},
+        tit=titulo("Peso das motos na frota envolvida, por regional", sub_medida="Subtítulo motos")),
         filtros=[filtro_nao_in("dim_regional", "nome_regional", REG_INVALIDAS, 8)],
-        alt="Barras 100% empilhadas da espécie dos veículos envolvidos por regional")
+        alt="Barras da participação de motocicletas entre os veículos envolvidos, por regional, comparada à média da cidade")
+    return pg
+
+
+def pagina_detalhe_local() -> Pagina:
+    filtro_dt = "f0000000000000000d71"
+    pg = Pagina("p5_detalhe_local", "Detalhe do local", oculta=True, extra={
+        "pageBinding": {"name": "drill_local", "type": "Drillthrough", "referenceScope": "Default",
+                        "parameters": [{"name": "param_local", "boundFilter": filtro_dt,
+                                        "fieldExpr": C("dim_local", "descricao_local_atual")}]},
+        "filterConfig": {"filters": [{"name": filtro_dt, "field": C("dim_local", "descricao_local_atual"),
+                                      "type": "Categorical", "howCreated": "Drillthrough"}]}})
+    pg.add("cabecalho", 24, 4, 1000, 34, texto([[("DETALHE DO LOCAL · ENGENHARIA DE TRÁFEGO (botão direito → Detalhar, na página 4)", TAG)]]))
+    pg.add("titulo_local", 24, 34, 1000, 56, texto_medida("Título do local", tam="16D", cor_txt=NAVY), alt="Nome do local detalhado")
+    pg.add("voltar", 1136, 12, 120, 30, botao("← Voltar", tipo="Back", ativo=True, tam="10D"), alt="Voltar para a página anterior")
+    for i, (med, rot, c) in enumerate([("Sinistros", "Sinistros", NAVY), ("Vítimas", "Vítimas", NAVY), ("Mortos", "Mortos", RED),
+                                        ("UPS", "UPS (severidade)", AMBER), ("Mortos por 1.000 sinistros", "Mortos a cada mil sinistros", RED)]):
+        pg.add(f"card_{i + 1}", 24 + i * 248, 100, 232, 100, card(med, rot, cor_valor=c, tam="24D"))
+    ano = C("dim_calendario", "ano")
+    pg.add("evolucao", 24, 212, 740, 240, {
+        "visualType": "lineClusteredColumnComboChart",
+        "query": {"queryState": {"Category": {"projections": [proj(ano, ativo=True)]},
+                                 "Y": {"projections": [proj(M("Sinistros"))]},
+                                 "Y2": {"projections": [proj(M("Mortos"))]}},
+                  "sortDefinition": ordenar(ano, desc=False)},
+        "objects": {"dataPoint": [cor_serie("Sinistros", LIGHT), cor_serie("Mortos", RED)],
+                    "labels": [{"properties": {"show": lit("true"), "fontSize": lit("9D"), "color": cor(SLATE), "enableBackground": lit("false")}},
+                               {"properties": {"color": cor(RED), "labelPosition": s("Above")}, "selector": {"metadata": qref(M("Mortos"))[0]}}],
+                    "legend": LEGENDA_TOPO, "categoryAxis": EIXO_CAT,
+                    "valueAxis": [{"properties": {"showAxisTitle": lit("false"), "secShowAxisTitle": lit("false")}}]},
+        "visualContainerObjects": titulo("Evolução no local: sinistros (colunas) e mortos (linha)",
+                                         sub="Compare antes e depois de uma intervenção"),
+        "drillFilterOtherVisuals": True}, alt="Colunas de sinistros e linha de mortos por ano no local")
+    faixa = C("dim_hora", "faixa_horaria")
+    pg.add("horario", 780, 212, 476, 240, grafico(
+        "columnChart", [faixa], [M("Sinistros")], sort=ordenar(faixa, desc=False),
+        objetos={"dataPoint": [{"properties": {"fill": cor(NAVY)}}], "labels": rotulos(tam="8D"),
+                 "valueAxis": EIXO_VAL_OCULTO, "categoryAxis": [{"properties": {"showAxisTitle": lit("false"), "fontSize": lit("8D")}}]},
+        tit=titulo(medida="Pior faixa horária", sub="Sinistros por faixa de 3 horas no local")),
+        filtros=[filtro_nao_in("dim_hora", "faixa_horaria", ["Hora não informada"], 11)],
+        alt="Colunas de sinistros por faixa horária no local")
+    grupo = C("dim_tipo_sinistro", "grupo_tipo_sinistro")
+    pg.add("tipos", 24, 464, 400, 240, grafico(
+        "barChart", [grupo], [M("Sinistros")], sort=ordenar(M("Sinistros")),
+        objetos={"dataPoint": [{"properties": {"fill": cor(NAVY)}}], "labels": rotulos(),
+                 "valueAxis": EIXO_VAL_OCULTO, "categoryAxis": EIXO_BARRA},
+        tit=titulo("Tipos de sinistro no local")),
+        filtros=[filtro_nao_in("dim_tipo_sinistro", "grupo_tipo_sinistro", TIPO_INVALIDO, 12)],
+        alt="Barras de sinistros por tipo no local")
+    usuario = C("fato_envolvido", "usuario_via")
+    pg.add("usuarios", 440, 464, 400, 240, grafico(
+        "barChart", [usuario], [M("Vítimas (pessoas)")], sort=ordenar(M("Vítimas (pessoas)")),
+        objetos={"dataPoint": [{"properties": {"fill": cor(LIGHT)}},
+                               {"properties": {"fill": cor(AMBER)}, "selector": {"data": [{"scopeId": {"Comparison": {
+                                   "ComparisonKind": 0, "Left": usuario, "Right": {"Literal": {"Value": "'Motociclista'"}}}}}]}}],
+                 "labels": rotulos(), "valueAxis": EIXO_VAL_OCULTO, "categoryAxis": EIXO_BARRA},
+        tit=titulo("Quem se feriu no local", sub="Vítimas por usuário da via")),
+        alt="Barras de vítimas por usuário da via no local")
+    dia = C("dim_calendario", "nome_dia_semana_abrev")
+    pg.add("dias", 856, 464, 400, 240, grafico(
+        "columnChart", [dia], [M("Sinistros")], sort=ordenar(dia, desc=False),
+        objetos={"dataPoint": [{"properties": {"fill": cor(NAVY)}}], "labels": rotulos(),
+                 "valueAxis": EIXO_VAL_OCULTO, "categoryAxis": [{"properties": {"showAxisTitle": lit("false")}}]},
+        tit=titulo("Dias da semana no local")),
+        alt="Colunas de sinistros por dia da semana no local")
+    return pg
+
+
+def pagina_mapa_ruas() -> Pagina:
+    pg = Pagina("p6_mapa_ruas", "Mapa de ruas (Azure Maps)", oculta=True)
+    cabecalho(pg, "Visão operacional · mapa com ruas (opcional)",
+              "Os 300 locais mais severos sobre o mapa de ruas",
+              "Requer login em uma conta Microsoft no Power BI (botão Entrar); sem login, use o mapa da página 4, que funciona offline.")
+    pg.add("voltar", 1136, 12, 120, 30, botao("← Voltar", tipo="Back", ativo=True, tam="10D"), alt="Voltar para a página anterior")
+    pg.add("sl_ano", 24, 100, 200, 64, slicer("dim_calendario", "ano", "Ano"))
+    pg.add("sl_regional", 236, 100, 240, 64, slicer("dim_regional", "nome_regional", "Regional"))
+    local = C("dim_local", "descricao_local_atual")
+    vco = titulo("Locais mais severos (tamanho = UPS)", sub="Zoom e arraste para navegar pelas ruas")
+    vco.update(dica_local())
+    pg.add("mapa_azure", 24, 176, 1232, 528, {
+        "visualType": "azureMap",
+        "query": {"queryState": {
+            "Category": {"projections": [proj(local, ativo=True)]},
+            "Y": {"projections": [proj(AVG("dim_local", "latitude"), nome="Latitude")]},
+            "X": {"projections": [proj(AVG("dim_local", "longitude"), nome="Longitude")]},
+            "Size": {"projections": [proj(M("UPS"))]}, **campos_dica()},
+            "sortDefinition": ordenar(M("UPS"))},
+        "objects": {"bubbleLayer": [{"properties": {"clusteringEnabled": lit("false"), "bubbleStrokeWidth": lit("1L"),
+                                                    "markerRangeType": s("magnitude")}}],
+                    "dataPoint": [{"properties": {"fill": cor(RED)}}],
+                    "heatMapLayer": [{"properties": {"show": lit("false")}}],
+                    "mapControls": [{"properties": {"defaultStyle": s("road"), "autoZoom": lit("true")}}]},
+        "visualContainerObjects": vco, "drillFilterOtherVisuals": True},
+        filtros=[filtro_topn("dim_local", "descricao_local_atual", 300, "UPS", 3)],
+        alt="Mapa de ruas com os 300 locais de maior severidade (Azure Maps)")
+    return pg
+
+
+def pagina_dica_local() -> Pagina:
+    pg = Pagina("tt_local", "Dica: local", tipo="Tooltip", oculta=True, largura=320, altura=240,
+                extra={"pageBinding": {"name": "dica_local", "type": "Tooltip", "parameters": []}})
+    pg.add("nome", 8, 6, 304, 58, texto_medida("Título do local", tam="11D", cor_txt=NAVY), alt="Nome do local")
+    for i, (med, rot, c) in enumerate([("Sinistros", "Sinistros", NAVY), ("Mortos", "Mortos", RED), ("UPS", "UPS", AMBER)]):
+        pg.add(f"card_{i + 1}", 8 + i * 102, 70, 96, 96, card(med, rot, cor_valor=c, tam="15D"))
+    pg.add("pior_horario", 8, 174, 304, 58, texto_medida("Pior faixa horária", tam="11D", cor_txt="#1B1F2A", fundo="#FFF7E0"),
+           alt="Faixa horária com mais sinistros no local")
     return pg
 
 
@@ -1015,7 +1251,8 @@ def gerar_relatorio() -> None:
     sr = RP / "StaticResources"
     (sr / "RegisteredResources").mkdir(parents=True, exist_ok=True)
     gerar_mapa_fundo(sr / "RegisteredResources" / "mapa_regionais_bh.svg")
-    paginas = [pagina_estrategica(), pagina_onde_quem(), pagina_quando_como(), pagina_onde_agir()]
+    paginas = [pagina_estrategica(), pagina_onde_quem(), pagina_quando_como(), pagina_onde_agir(),
+               pagina_detalhe_local(), pagina_mapa_ruas()]
     (d / "pages").mkdir(parents=True, exist_ok=True)
     (RP / "definition.pbir").write_text(json.dumps({
         "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definitionProperties/2.0.0/schema.json",
@@ -1050,10 +1287,17 @@ def gerar_relatorio() -> None:
     for p in paginas:
         pd = d / "pages" / p.nome
         (pd / "visuals").mkdir(parents=True, exist_ok=True)
-        (pd / "page.json").write_text(json.dumps({
-            "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/1.4.0/schema.json",
-            "name": p.nome, "displayName": p.exibicao, "displayOption": "FitToPage", "height": 720, "width": 1280},
-            indent=2, ensure_ascii=False), encoding="utf-8")
+        versao_pg = "2.1.0" if p.tipo == "Tooltip" else "1.4.0"
+        pj = {"$schema": f"https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/{versao_pg}/schema.json",
+              "name": p.nome, "displayName": p.exibicao,
+              "displayOption": "ActualSize" if p.tipo == "Tooltip" else "FitToPage",
+              "height": p.altura, "width": p.largura}
+        if p.tipo != "Default":
+            pj["type"] = p.tipo
+        if p.oculta:
+            pj["visibility"] = "HiddenInViewMode"
+        pj.update(p.extra)
+        (pd / "page.json").write_text(json.dumps(pj, indent=2, ensure_ascii=False), encoding="utf-8")
         for v in p.visuais:
             vd = pd / "visuals" / v["name"]
             vd.mkdir(parents=True, exist_ok=True)

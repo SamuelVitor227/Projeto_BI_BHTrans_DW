@@ -23,3 +23,4 @@ ref table dim_pessoa
 ref table fato_sinistro
 ref table fato_envolvido
 ref table fato_populacao
+ref table Atualizacao

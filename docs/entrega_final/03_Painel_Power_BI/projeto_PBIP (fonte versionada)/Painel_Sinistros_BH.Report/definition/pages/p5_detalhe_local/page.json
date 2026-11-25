@@ -1,0 +1,49 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/1.4.0/schema.json",
+  "name": "p5_detalhe_local",
+  "displayName": "Detalhe do local",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "visibility": "HiddenInViewMode",
+  "pageBinding": {
+    "name": "drill_local",
+    "type": "Drillthrough",
+    "referenceScope": "Default",
+    "parameters": [
+      {
+        "name": "param_local",
+        "boundFilter": "f0000000000000000d71",
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_local"
+              }
+            },
+            "Property": "descricao_local_atual"
+          }
+        }
+      }
+    ]
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "f0000000000000000d71",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_local"
+              }
+            },
+            "Property": "descricao_local_atual"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      }
+    ]
+  }
+}

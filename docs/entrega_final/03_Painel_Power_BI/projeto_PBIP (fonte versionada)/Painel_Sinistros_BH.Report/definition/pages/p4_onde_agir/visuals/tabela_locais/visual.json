@@ -4,10 +4,10 @@
   "position": {
     "x": 380,
     "y": 100,
-    "z": 5000,
+    "z": 11000,
     "width": 876,
     "height": 296,
-    "tabOrder": 5000
+    "tabOrder": 11000
   },
   "visual": {
     "visualType": "tableEx",
@@ -254,7 +254,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'UPS = severidade ponderada (sinistro com morte vale 13)'"
+                  "Value": "'UPS = severidade ponderada (morte vale 13) · botão direito → Detalhar'"
                 }
               }
             },

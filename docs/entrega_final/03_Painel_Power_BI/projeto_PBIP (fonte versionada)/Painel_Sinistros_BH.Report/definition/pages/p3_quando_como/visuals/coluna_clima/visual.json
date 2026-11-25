@@ -4,10 +4,10 @@
   "position": {
     "x": 660,
     "y": 292,
-    "z": 6000,
-    "width": 596,
+    "z": 11000,
+    "width": 280,
     "height": 188,
-    "tabOrder": 6000
+    "tabOrder": 11000
   },
   "visual": {
     "visualType": "clusteredColumnChart",
@@ -250,6 +250,13 @@
                   "Value": "false"
                 }
               }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "8D"
+                }
+              }
             }
           }
         }
@@ -269,7 +276,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Clima × gravidade (mortos a cada 1.000 sinistros)'"
+                  "Value": "'Clima × gravidade'"
                 }
               }
             },
@@ -314,7 +321,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Compare dentro da mesma origem: o clima é anotado com mais frequência em sinistros graves'"
+                  "Value": "'Mortos/1.000 sinistros · compare dentro da mesma origem do dado'"
                 }
               }
             },

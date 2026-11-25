@@ -1,5 +1,7 @@
 # Guia do Power BI — DW de sinistros de trânsito de BH
 
+> **O painel já está pronto:** abra `Painel_Sinistros_BH.pbix` (dados embutidos) ou `Painel_Sinistros_BH.pbip` (projeto em texto, gerado por `python powerbi/gerar_pbip.py`, com modelo, relacionamentos, 56 medidas e as 4 páginas). O passo a passo abaixo continua valendo para montar um modelo do zero ou entender o que o gerador faz.
+
 Este guia leva do banco PostgreSQL ao modelo pronto no Power BI Desktop. O banco já vem preparado: o schema **`bi`** traz o mesmo modelo estrela do `dw`, mas sem os tipos que o Power BI não lê. Esta pasta tem as medidas DAX e os polígonos das regionais para os mapas.
 
 | Arquivo | Para que serve |

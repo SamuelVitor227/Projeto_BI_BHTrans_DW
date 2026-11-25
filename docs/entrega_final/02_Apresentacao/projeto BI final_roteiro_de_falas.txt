@@ -1,7 +1,7 @@
-ROTEIRO DE FALAS — APRESENTAÇÃO FINAL (10 slides, ~8 min 40 s)
+ROTEIRO DE FALAS — APRESENTAÇÃO FINAL (11 slides, ~9 min 15 s)
 Projeto de BI · Sinistros de Trânsito com Vítima em Belo Horizonte
 Integrantes: Samuel Vitor, Vitor Goddard, Vitor Ribeiro, Pedro Barroso, Luis M.
-Sugestão de divisão: slides 1–2, 3–4, 5–6, 7–8 e 9–10 (um par por integrante).
+Sugestão de divisão: slides 1–2, 3–4, 5–6, 7–8 e 9–11 (um bloco por integrante).
 
 SLIDE 1 — Capa (30 s)
 Boa noite. Somos o grupo do projeto de BI sobre sinistros de trânsito com vítima em Belo Horizonte. Hoje apresentamos a solução
@@ -47,16 +47,22 @@ Aqui está o quando. O mapa de calor cruza dia da semana e horário: o volume se
 fiscalização deve estar. Mas a gravidade está na madrugada: lá morrem cerca de 38 pessoas a cada mil sinistros, contra 7 a 10 à tarde.
 No clima, comparamos com e sem chuva dentro da mesma origem do dado, para não misturar o que foi anotado no boletim com o que veio do INMET.
 
-SLIDE 9 — Painel operacional (50 s)
-Por fim, o painel operacional, para a Engenharia de Tráfego e a Fiscalização. O mapa mostra os 300 locais mais severos sobre as regionais,
-e funciona sem internet. O ranking aponta os corredores: Avenida Antônio Carlos, Anel Rodoviário e Cristiano Machado. Os filtros de ano
-e regional permitem, por exemplo, ver se um ponto deixou de ser crítico depois de uma obra.
+SLIDE 9 — Painel operacional (45 s)
+Agora o painel operacional, para a Engenharia de Tráfego e a Fiscalização. O mapa mostra os 300 locais mais severos sobre as regionais,
+e funciona sem internet; passando o mouse, aparecem os sinistros, os mortos e o horário crítico do local. O ranking aponta os
+corredores: Avenida Antônio Carlos, Anel Rodoviário e Cristiano Machado. E em cinco regionais as motos pesam mais que a média da cidade.
 
-SLIDE 10 — Recomendações (60 s)
+SLIDE 10 — Detalhe do local (40 s)
+Clicando com o botão direito em qualquer ponto do mapa ou do ranking, o gestor abre o detalhe daquele local. Aqui, a Avenida Antônio
+Carlos, no Cachoeirinha: 979 sinistros, 14 mortos, pico entre 18h e 20h e 719 motociclistas feridos. A evolução por ano permite comparar
+antes e depois de uma intervenção, que é exatamente o que a Engenharia de Tráfego precisa.
+
+SLIDE 11 — Recomendações (60 s)
 Para fechar, o que os dados recomendam à BHTrans. Primeiro, priorizar os motociclistas, que já são 73% das vítimas. Segundo, concentrar as
 intervenções físicas nos corredores Antônio Carlos, Anel Rodoviário e Cristiano Machado e na regional Pampulha. Terceiro, ajustar a
 presença de agentes ao horário: fim da tarde dos dias úteis e as madrugadas. E quarto, campanhas para os jovens de 18 a 29 anos. Como
 próximos passos, carregar 2025 quando for publicado, agendar o ETL e publicar o painel no Power BI Service. Obrigado!
 
-DEMONSTRAÇÃO AO VIVO (opcional, se houver tempo): abra powerbi/Painel_Sinistros_BH.pbix, mostre a página 1 e, na página 4, selecione
-a regional PAMPULHA no filtro para ver o mapa, o ranking e as faixas horárias mudarem juntos.
+DEMONSTRAÇÃO AO VIVO (opcional, se houver tempo): abra Painel_Sinistros_BH.pbix e navegue pelos botões 1 → 4 no topo. Na página 4,
+selecione a regional PAMPULHA no filtro (mapa, ranking e horários mudam juntos) e, com o botão direito numa linha do ranking, escolha
+Drill-through → Detalhe do local; o botão "← Voltar" retorna.

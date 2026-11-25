@@ -157,6 +157,40 @@ table fato_populacao
 		displayFolder: KPI
 		lineageTag: 10a396da-306b-5026-af25-8d12dbb81e8c
 
+	/// Taxa só no primeiro ano, em 2014 (base), no melhor ano e no último ano: série usada para rotular os anos-chave.
+	measure 'Taxa (anos-chave)' =
+			VAR ano_atual = SELECTEDVALUE ( 'dim_calendario'[ano] )
+			VAR anos = ALLSELECTED ( 'dim_calendario'[ano] )
+			VAR primeiro = MINX ( anos, 'dim_calendario'[ano] )
+			VAR ultimo = MAXX ( anos, 'dim_calendario'[ano] )
+			VAR melhor = MAXX ( TOPN ( 1, anos, [Taxa de mortos por 100 mil hab.], ASC ), 'dim_calendario'[ano] )
+			RETURN IF ( ano_atual IN { primeiro, 2014, melhor, ultimo }, [Taxa de mortos por 100 mil hab.] )
+		formatString: 0.00
+		displayFolder: KPI
+		lineageTag: f9bcc4a4-e3ff-503b-a366-0dbe1faeb8cc
+
+	/// Distância do último ano para a meta, em texto (substitui o percentual negativo do visual de KPI).
+	measure 'Distância da meta (texto)' =
+			VAR taxa = [Taxa no último ano]
+			VAR meta = [Meta 2030]
+			RETURN
+			    IF (
+			        taxa > meta,
+			        "+" & FORMAT ( taxa - meta, "0.00" ) & " acima da meta (+" & FORMAT ( DIVIDE ( taxa - meta, meta ), "0%" ) & ")",
+			        "Meta atingida: " & FORMAT ( taxa, "0.00" ) & " ≤ " & FORMAT ( meta, "0.00" )
+			    )
+		displayFolder: KPI
+		lineageTag: 67ef0423-ffe7-5954-bab5-ed9b7d04b9ec
+
+	/// Período dos dados e data da última atualização do painel.
+	measure 'Rótulo de atualização' =
+			VAR a0 = CALCULATE ( MIN ( 'fato_sinistro'[ano] ), ALL () )
+			VAR a1 = CALCULATE ( MAX ( 'fato_sinistro'[ano] ), ALL () )
+			VAR atualizado = MAX ( 'Atualizacao'[data_atualizacao] )
+			RETURN "Dados de " & a0 & " a " & a1 & " · atualizado em " & FORMAT ( atualizado, "dd/MM/yyyy" )
+		displayFolder: KPI
+		lineageTag: c18aaeb4-1bcf-56ea-becf-06d4aa2a9fc5
+
 	column sk_regional
 		dataType: int64
 		isHidden

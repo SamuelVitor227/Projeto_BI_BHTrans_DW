@@ -4,10 +4,10 @@
   "position": {
     "x": 24,
     "y": 284,
-    "z": 8000,
-    "width": 760,
+    "z": 13000,
+    "width": 700,
     "height": 420,
-    "tabOrder": 8000
+    "tabOrder": 13000
   },
   "visual": {
     "visualType": "lineChart",
@@ -75,6 +75,20 @@
               },
               "queryRef": "fato_populacao.Taxa base 2014",
               "nativeQueryRef": "Taxa base 2014"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fato_populacao"
+                    }
+                  },
+                  "Property": "Taxa (anos-chave)"
+                }
+              },
+              "queryRef": "fato_populacao.Taxa (anos-chave)",
+              "nativeQueryRef": "Taxa (anos-chave)"
             }
           ]
         }
@@ -154,6 +168,24 @@
           "selector": {
             "metadata": "fato_populacao.Taxa base 2014"
           }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#1F3864'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "fato_populacao.Taxa (anos-chave)"
+          }
         }
       ],
       "lineStyles": [
@@ -223,6 +255,34 @@
           "selector": {
             "metadata": "fato_populacao.Taxa base 2014"
           }
+        },
+        {
+          "properties": {
+            "strokeWidth": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "showMarker": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "markerSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "6D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "fato_populacao.Taxa (anos-chave)"
+          }
         }
       ],
       "labels": [
@@ -238,7 +298,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "9D"
+                  "Value": "11D"
                 }
               }
             },
@@ -247,7 +307,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#5B6B85'"
+                      "Value": "'#1F3864'"
                     }
                   }
                 }
@@ -257,7 +317,21 @@
         },
         {
           "properties": {
-            "show": {
+            "showSeries": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "fato_populacao.Taxa de mortos por 100 mil hab."
+          }
+        },
+        {
+          "properties": {
+            "showSeries": {
               "expr": {
                 "Literal": {
                   "Value": "false"
@@ -271,7 +345,7 @@
         },
         {
           "properties": {
-            "show": {
+            "showSeries": {
               "expr": {
                 "Literal": {
                   "Value": "false"
@@ -282,26 +356,33 @@
           "selector": {
             "metadata": "fato_populacao.Taxa base 2014"
           }
-        }
-      ],
-      "legend": [
+        },
         {
           "properties": {
-            "show": {
+            "showSeries": {
               "expr": {
                 "Literal": {
                   "Value": "true"
                 }
               }
             },
-            "position": {
+            "labelPosition": {
               "expr": {
                 "Literal": {
-                  "Value": "'Top'"
+                  "Value": "'Above'"
                 }
               }
-            },
-            "showTitle": {
+            }
+          },
+          "selector": {
+            "metadata": "fato_populacao.Taxa (anos-chave)"
+          }
+        }
+      ],
+      "legend": [
+        {
+          "properties": {
+            "show": {
               "expr": {
                 "Literal": {
                   "Value": "false"
@@ -411,7 +492,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Mortos por 100 mil habitantes · 2022 e 2024 têm degraus metodológicos na população do IBGE (Censo e nova estimativa)'"
+                  "Value": "'Azul: mortos por 100 mil hab. · âmbar tracejado: meta 2030 · cinza pontilhado: base 2014 · 2022 e 2024 têm degraus na população do IBGE'"
                 }
               }
             },

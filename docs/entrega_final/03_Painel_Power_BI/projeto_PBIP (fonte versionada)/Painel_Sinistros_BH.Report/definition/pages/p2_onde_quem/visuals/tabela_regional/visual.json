@@ -4,10 +4,10 @@
   "position": {
     "x": 24,
     "y": 176,
-    "z": 4000,
+    "z": 10000,
     "width": 452,
     "height": 288,
-    "tabOrder": 4000
+    "tabOrder": 10000
   },
   "visual": {
     "visualType": "tableEx",
@@ -241,7 +241,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Taxas = média anual do período filtrado'"
+                  "Value": "'Taxas = média anual do período · na série completa, a Noroeste lidera'"
                 }
               }
             },

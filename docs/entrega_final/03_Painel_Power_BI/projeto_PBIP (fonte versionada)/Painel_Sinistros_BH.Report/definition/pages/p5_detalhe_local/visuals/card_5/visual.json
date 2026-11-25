@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
-  "name": "card_moto",
+  "name": "card_5",
   "position": {
-    "x": 1048,
-    "y": 150,
-    "z": 7000,
-    "width": 208,
-    "height": 122,
-    "tabOrder": 7000
+    "x": 1016,
+    "y": 100,
+    "z": 8000,
+    "width": 232,
+    "height": 100,
+    "tabOrder": 8000
   },
   "visual": {
     "visualType": "card",
@@ -20,15 +20,15 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "fato_populacao"
+                      "Entity": "fato_sinistro"
                     }
                   },
-                  "Property": "Motociclistas nas vítimas (último ano)"
+                  "Property": "Mortos por 1.000 sinistros"
                 }
               },
-              "queryRef": "fato_populacao.Motociclistas nas vítimas (último ano)",
-              "nativeQueryRef": "Motociclistas nas vítimas (último ano)",
-              "displayName": "Motociclistas nas vítimas"
+              "queryRef": "fato_sinistro.Mortos por 1.000 sinistros",
+              "nativeQueryRef": "Mortos por 1.000 sinistros",
+              "displayName": "Mortos a cada mil sinistros"
             }
           ]
         }
@@ -43,7 +43,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#E0A100'"
+                      "Value": "'#B03A2E'"
                     }
                   }
                 }
@@ -52,7 +52,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "26D"
+                  "Value": "24D"
                 }
               }
             },

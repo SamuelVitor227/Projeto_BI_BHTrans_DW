@@ -4,10 +4,10 @@
   "position": {
     "x": 640,
     "y": 476,
-    "z": 8000,
+    "z": 14000,
     "width": 616,
     "height": 228,
-    "tabOrder": 8000
+    "tabOrder": 14000
   },
   "visual": {
     "visualType": "columnChart",
@@ -220,7 +220,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Público-alvo das campanhas educativas'"
+                  "Value": "'Números absolutos: não há população por idade para calcular taxa · público das campanhas'"
                 }
               }
             },

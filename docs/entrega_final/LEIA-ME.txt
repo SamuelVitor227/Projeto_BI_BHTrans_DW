@@ -5,7 +5,7 @@ Disciplina: Business Intelligence — 6º período (Noite) · Prof. Claudiney Va
 
 CONTEÚDO
 01_Documento/          Texto final completo (Fases 1 a 5 + considerações finais e referências), em PDF e DOCX.
-02_Apresentacao/       Slides da apresentação final (10 slides, ~9 min, com notas) em PPTX e PDF + roteiro de falas.
+02_Apresentacao/       Slides da apresentação final (11 slides, ~9 min, com notas) em PPTX e PDF + roteiro de falas.
 03_Painel_Power_BI/    Painel_Sinistros_BH.pbix  -> abra no Power BI Desktop (gratuito); os dados já estão dentro do
                                                   arquivo, não precisa do banco.
                        Painel_Sinistros_BH_paginas.pdf -> as 4 páginas do painel exportadas pelo Power BI.
@@ -18,7 +18,10 @@ DASHBOARDS (data storytelling em 4 atos)
   1 · Meta 2030 (estratégico)     KPIs e taxa de mortos por 100 mil hab. × meta 2030
   2 · Onde e quem (gerencial)     regionais, usuários da via, letalidade e crescimento por tipo
   3 · Quando e como (gerencial)   mapa de calor dia × horário, sazonalidade, clima e severidade
-  4 · Onde agir (operacional)     mapa dos locais críticos, ranking, horários e frota por regional
+  4 · Onde agir (operacional)     mapa dos locais críticos, ranking, horários e peso das motos por regional
+  Detalhe do local               botão direito num local do mapa/ranking → Drill-through (histórico do ponto)
+  Mapa de ruas (opcional)        Azure Maps com ruas e zoom; requer login no Power BI (botão Entrar)
+  Navegação: botões 1 · 2 · 3 · 4 no topo de cada página.
 
 PARA ATUALIZAR OS DADOS (opcional)
   1. docker compose up -d   (PostgreSQL 16 + PostGIS; copie .env.example para .env)

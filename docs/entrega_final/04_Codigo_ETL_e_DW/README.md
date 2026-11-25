@@ -1,6 +1,8 @@
 # Data Warehouse de sinistros de trânsito de Belo Horizonte
 
-Projeto de Business Intelligence — PUC Minas · Fase 3: construção do Data Warehouse.
+Projeto de Business Intelligence — PUC Minas · Entrega final: Data Warehouse, ETL e dashboards no Power BI.
+
+Integrantes: Samuel Vitor, Vitor Goddard, Vitor Ribeiro, Pedro Barroso e Luis M.
 
 O DW apoia a gestão de segurança viária de Belo Horizonte (BHTrans/PBH), cuja meta é **reduzir em 50% a taxa de mortos no trânsito por 100 mil habitantes até 2030, com 2014 como base**, priorizando pedestres e motociclistas. Ele integra os boletins de sinistros com vítima da PBH (2011–2024), a população do IBGE e a precipitação horária do INMET num modelo estrela no PostgreSQL 16 + PostGIS.
 
@@ -231,6 +233,10 @@ Os de-paras foram construídos a partir da inspeção de **todos** os arquivos (
 ---
 
 ## 7. Power BI
+
+**Painel pronto:** [`powerbi/Painel_Sinistros_BH.pbix`](powerbi/Painel_Sinistros_BH.pbix) abre no Power BI Desktop com os dados já importados (não precisa do banco). São 4 páginas em sequência de *data storytelling*: **1 · Meta 2030** (estratégico: KPIs e taxa × meta), **2 · Onde e quem** e **3 · Quando e como** (gerencial) e **4 · Onde agir** (operacional: mapa dos locais críticos, que funciona offline). A fonte do painel é o projeto PBIP em texto (`Painel_Sinistros_BH.pbip` + pastas `.SemanticModel` em TMDL e `.Report` em PBIR), gerado por `python powerbi/gerar_pbip.py`. Para atualizar, rode o ETL, abra o `.pbip` ou o `.pbix` e clique em **Atualizar** (usuário e senha do `.env`; aceite a conexão sem criptografia, que é local).
+
+As entregas acadêmicas de cada fase (texto, slides e ZIP) ficam em `docs/entrega_faseN/` e `docs/entrega_final/`.
 
 O Power BI conecta no schema **`bi`**, uma camada de views sobre o `dw` criada no próprio DDL (seção 8). Ela contorna quatro limitações do conector PostgreSQL do Power BI:
 

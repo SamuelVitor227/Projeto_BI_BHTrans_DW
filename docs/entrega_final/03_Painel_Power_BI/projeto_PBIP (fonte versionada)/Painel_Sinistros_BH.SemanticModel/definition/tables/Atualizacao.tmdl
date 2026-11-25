@@ -1,0 +1,21 @@
+/// Data e hora da última atualização do modelo (calculada no refresh).
+table Atualizacao
+	isHidden
+	lineageTag: 901e1220-20e3-5f03-8491-6591b5da99a0
+
+	column data_atualizacao
+		dataType: dateTime
+		isHidden
+		isDataTypeInferred
+		formatString: General Date
+		lineageTag: 935283c1-9642-5c12-9909-fb13ea44a80d
+		summarizeBy: none
+		sourceColumn: [data_atualizacao]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Atualizacao = calculated
+		mode: import
+		source = ROW ( "data_atualizacao", NOW () )
+
+	annotation PBI_Id = 1ce9a9be757051eea5648c2ce4db55e3

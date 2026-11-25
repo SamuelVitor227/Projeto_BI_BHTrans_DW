@@ -126,6 +126,16 @@ table dim_calendario
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Últimos 3 anos carregados × anos anteriores (acompanha a chegada de novos anos).
+	column periodo_analise =
+			VAR ultimo = MAX ( 'dim_calendario'[ano] )
+			RETURN IF ( 'dim_calendario'[ano] >= ultimo - 2, "Últimos 3 anos", "Anos anteriores" )
+		dataType: string
+		lineageTag: 5b4dd711-81cb-5f30-bebf-4ade46962380
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition dim_calendario = m
 		mode: import
 		source =

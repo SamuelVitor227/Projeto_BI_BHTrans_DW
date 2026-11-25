@@ -4,7 +4,9 @@
     "p1_estrategico",
     "p2_onde_quem",
     "p3_quando_como",
-    "p4_onde_agir"
+    "p4_onde_agir",
+    "p5_detalhe_local",
+    "p6_mapa_ruas"
   ],
   "activePageName": "p1_estrategico"
 }

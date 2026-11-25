@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "sl_regional",
   "position": {
-    "x": 246,
+    "x": 332,
     "y": 100,
-    "z": 3000,
-    "width": 230,
+    "z": 9000,
+    "width": 144,
     "height": 64,
-    "tabOrder": 3000
+    "tabOrder": 9000
   },
   "visual": {
     "visualType": "slicer",

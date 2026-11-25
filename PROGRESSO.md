@@ -88,3 +88,10 @@ Legenda: `[x]` concluído e validado · `[~]` em andamento · `[ ]` pendente.
 - [x] Dados atualizados do DW e conferidos (2024: 159 mortos, taxa 6,58, meta 3,55; Pampulha 10,67 no último triênio); `.pbix` com dados salvo
 - [x] Texto final (30 p., base = documento da Fase 4 editado pelo grupo + seções 12–14 e integrantes na capa), slides finais (10, ~9 min) e roteiro
 - [x] `docs/entrega_final/` + pasta e ZIP `Entrega final projeto BI` na Área de Trabalho
+
+## 12. Melhorias do painel (25/11/2026, a pedido do grupo)
+- [x] 13 melhorias: tabela de pavimento; página de detalhe do local (drill-through); KPI com distância em texto; filtro "Período" dinâmico;
+      rótulos só nos anos-chave; KPI de motociclistas com tendência; botões de navegação; selo de atualização; dica do mapa com
+      sinistros, mortos e horário; página opcional Azure Maps; motos por regional × média; sazonalidade média; ressalva da faixa etária
+- [x] A página de dica personalizada (tooltip) não foi aplicada pelo Desktop 2.160; substituída por campos extras na dica padrão
+- [x] `.pbix` regravado; texto final (31 p., Figura 7 = detalhe do local), slides (11) e entrega final remontados

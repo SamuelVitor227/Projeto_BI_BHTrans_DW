@@ -138,6 +138,56 @@ table fato_sinistro
 		displayFolder: Tendência
 		lineageTag: 8b76cf76-c3eb-569c-a0f9-4c3804625036
 
+	/// Média anual de sinistros no contexto (ex.: por mês).
+	measure 'Sinistros por ano (média)' = DIVIDE ( [Sinistros], DISTINCTCOUNT ( 'dim_calendario'[ano] ) )
+		formatString: #,0
+		displayFolder: Sinistros
+		lineageTag: 5968c8c8-a502-53ee-952e-a8c02e0a883e
+
+	measure '% motos nos veículos' = DIVIDE ( [Motocicletas], [Veículos] )
+		formatString: 0.0%
+		displayFolder: Veículos por espécie
+		lineageTag: d45b8569-c33a-508a-886b-4522852ab07b
+
+	/// Referência da cidade, ignorando o filtro de regional.
+	measure '% motos na cidade' = CALCULATE ( [% motos nos veículos], REMOVEFILTERS ( 'dim_regional' ) )
+		formatString: 0.0%
+		displayFolder: Veículos por espécie
+		lineageTag: 3845e579-ce68-5ce1-9cc1-58761bc56732
+
+	/// Âmbar para regionais acima da média da cidade.
+	measure 'Cor motos regional' = IF ( [% motos nos veículos] > [% motos na cidade], "#E0A100", "#8EA9DB" )
+		displayFolder: Veículos por espécie
+		lineageTag: 820f044b-91bb-5bdc-96b8-d04a3b0c50a6
+
+	measure 'Subtítulo motos' = "Média da cidade: " & FORMAT ( [% motos na cidade], "0.0%" ) & " · em âmbar, as regionais acima da média"
+		displayFolder: Veículos por espécie
+		lineageTag: fa47d587-cf17-5807-ba12-c8bb6accce7f
+
+	measure 'Título do local' =
+			IF (
+			    HASONEVALUE ( 'dim_local'[descricao_local_atual] ),
+			    VALUES ( 'dim_local'[descricao_local_atual] ),
+			    "Nenhum local selecionado: na página 4, clique com o botão direito em um ponto do mapa ou do ranking e escolha Detalhar"
+			)
+		displayFolder: Local
+		lineageTag: 2354ad72-68ff-5921-a65a-2d11287e06ca
+
+	/// Faixa de 3 horas com mais sinistros no contexto.
+	measure 'Horário com mais sinistros' =
+			VAR faixas = FILTER ( VALUES ( 'dim_hora'[faixa_horaria] ), 'dim_hora'[faixa_horaria] <> "Hora não informada" )
+			RETURN MAXX ( TOPN ( 1, faixas, [Sinistros], DESC ), 'dim_hora'[faixa_horaria] )
+		displayFolder: Local
+		lineageTag: 9700c910-7737-55b9-b08e-2ef9e808bac7
+
+	/// Faixa de 3 horas com mais sinistros no contexto.
+	measure 'Pior faixa horária' =
+			VAR faixas = FILTER ( VALUES ( 'dim_hora'[faixa_horaria] ), 'dim_hora'[faixa_horaria] <> "Hora não informada" )
+			VAR pior = TOPN ( 1, faixas, [Sinistros], DESC )
+			RETURN "Pior horário: " & MAXX ( pior, 'dim_hora'[faixa_horaria] )
+		displayFolder: Local
+		lineageTag: f59ad8aa-d75c-528f-9d9e-4991208f006c
+
 	column ano
 		dataType: int64
 		isHidden

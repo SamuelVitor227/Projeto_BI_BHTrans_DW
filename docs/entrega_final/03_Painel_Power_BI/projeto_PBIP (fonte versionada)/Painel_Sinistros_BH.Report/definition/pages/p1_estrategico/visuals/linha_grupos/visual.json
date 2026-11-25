@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "linha_grupos",
   "position": {
-    "x": 800,
-    "y": 572,
-    "z": 10000,
-    "width": 456,
-    "height": 132,
-    "tabOrder": 10000
+    "x": 740,
+    "y": 568,
+    "z": 15000,
+    "width": 516,
+    "height": 136,
+    "tabOrder": 15000
   },
   "visual": {
     "visualType": "lineChart",
@@ -42,11 +42,11 @@
                       "Entity": "fato_envolvido"
                     }
                   },
-                  "Property": "% vítimas motociclistas"
+                  "Property": "% mortos motociclistas"
                 }
               },
-              "queryRef": "fato_envolvido.% vítimas motociclistas",
-              "nativeQueryRef": "% vítimas motociclistas"
+              "queryRef": "fato_envolvido.% mortos motociclistas",
+              "nativeQueryRef": "% mortos motociclistas"
             },
             {
               "field": {
@@ -56,11 +56,11 @@
                       "Entity": "fato_envolvido"
                     }
                   },
-                  "Property": "% vítimas pedestres"
+                  "Property": "% mortos pedestres"
                 }
               },
-              "queryRef": "fato_envolvido.% vítimas pedestres",
-              "nativeQueryRef": "% vítimas pedestres"
+              "queryRef": "fato_envolvido.% mortos pedestres",
+              "nativeQueryRef": "% mortos pedestres"
             }
           ]
         }
@@ -102,7 +102,7 @@
             }
           },
           "selector": {
-            "metadata": "fato_envolvido.% vítimas motociclistas"
+            "metadata": "fato_envolvido.% mortos motociclistas"
           }
         },
         {
@@ -120,7 +120,7 @@
             }
           },
           "selector": {
-            "metadata": "fato_envolvido.% vítimas pedestres"
+            "metadata": "fato_envolvido.% mortos pedestres"
           }
         }
       ],
@@ -206,7 +206,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Motociclistas já são 3 em cada 4 vítimas (% das vítimas)'"
+                  "Value": "'Grupos prioritários entre os mortos (%)'"
                 }
               }
             },
@@ -244,7 +244,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'Linhas da participação de motociclistas e pedestres nas vítimas por ano'"
+                  "Value": "'Linhas da participação de motociclistas e pedestres entre os mortos por ano'"
                 }
               }
             }
