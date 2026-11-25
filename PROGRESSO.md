@@ -80,3 +80,11 @@ Legenda: `[x]` concluído e validado · `[~]` em andamento · `[ ]` pendente.
 - [x] Slides (8, ~5 min, com notas; slide 7 "Data Warehouse" acrescentado pelo grupo): recapitulação → ETL e carga → próximos passos → `docs/entrega_fase4/projeto BI fase 4_slides.pptx` e `.pdf`
 - [x] `docs/` separado por entrega: `entrega_fase1/` (documento original) e `entrega_fase4/` (documento, slides e ZIP)
 - [x] Pasta `Entrega projeto BI fase 4` + ZIP na Área de Trabalho: documento, slides, código ETL/DDL e evidências da carga
+
+## 11. Fase 5 e entrega final (25/11/2026)
+- [x] Power BI Desktop 2.160 instalado; painel gerado como PBIP por `powerbi/gerar_pbip.py` (11 tabelas, 16 relacionamentos, 56 medidas, 4 páginas, 33 visuais)
+- [x] Data storytelling: título-conclusão, narrativa dinâmica, cores com significado, destaque automático; KPIs (taxa × meta 2030, redução vs 2014, queda necessária, motociclistas)
+- [x] Mapa offline (dispersão lat/long sobre SVG das regionais): o Azure Maps exige login e não serviria para a apresentação
+- [x] Dados atualizados do DW e conferidos (2024: 159 mortos, taxa 6,58, meta 3,55; Pampulha 10,67 no último triênio); `.pbix` com dados salvo
+- [x] Texto final (30 p., base = documento da Fase 4 editado pelo grupo + seções 12–14 e integrantes na capa), slides finais (10, ~9 min) e roteiro
+- [x] `docs/entrega_final/` + pasta e ZIP `Entrega final projeto BI` na Área de Trabalho

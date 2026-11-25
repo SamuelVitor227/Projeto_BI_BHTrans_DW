@@ -1,0 +1,62 @@
+ROTEIRO DE FALAS — APRESENTAÇÃO FINAL (10 slides, ~8 min 40 s)
+Projeto de BI · Sinistros de Trânsito com Vítima em Belo Horizonte
+Integrantes: Samuel Vitor, Vitor Goddard, Vitor Ribeiro, Pedro Barroso, Luis M.
+Sugestão de divisão: slides 1–2, 3–4, 5–6, 7–8 e 9–10 (um par por integrante).
+
+SLIDE 1 — Capa (30 s)
+Boa noite. Somos o grupo do projeto de BI sobre sinistros de trânsito com vítima em Belo Horizonte. Hoje apresentamos a solução
+completa: o Data Warehouse, o processo de ETL e, principalmente, os dashboards no Power BI, construídos com data storytelling e
+indicadores de desempenho.
+
+SLIDE 2 — O problema (50 s)
+O negócio é a gestão da segurança viária da BHTrans. A prefeitura tem uma meta clara: reduzir pela metade a taxa de mortos no trânsito
+por 100 mil habitantes até 2030, em relação a 2014. O problema que encontramos na Fase 1 não era falta de dados: eles estavam espalhados
+em arquivos por ano, em formato bruto, sem ponderação pela população, e eram analisados só quando a imprensa pedia. Passamos pelas cinco
+fases e hoje fechamos o projeto.
+
+SLIDE 3 — A solução (60 s)
+A solução funciona como um fluxo automático. O ETL extrai os dados das APIs da PBH, do IBGE e do INMET, trata e integra tudo em oito
+etapas, com 42 testes de qualidade, em 89 segundos. O resultado vai para o Data Warehouse em modelo estrela, com 184 mil sinistros e
+405 mil pessoas envolvidas. Em cima dele está o Power BI: quatro painéis e 56 medidas. Quando sai um ano novo, basta rodar o ETL e
+clicar em Atualizar.
+
+SLIDE 4 — Storytelling (50 s)
+Para os dashboards usamos data storytelling. Em vez de páginas soltas, o relatório conta uma história em quatro atos, um para cada nível
+decisório: primeiro, se estamos no ritmo da meta; depois, onde está o risco e quem morre; depois, quando e em que condições; e por fim,
+onde agir. Cada gráfico tem como título a conclusão, e não só o nome do dado; as cores têm significado fixo; e uma frase de narrativa se
+recalcula sozinha quando os dados mudam.
+
+SLIDE 5 — KPIs (50 s)
+Estes são os indicadores de desempenho que abrem o painel estratégico. Em 2024 a taxa foi de 6,58 mortos por 100 mil habitantes, quase o
+dobro da meta de 3,55. A redução em relação a 2014 é de só 7,4%, quando a meta pede 50%. Para cumprir a meta, a taxa precisa cair 46% em
+seis anos. E os motociclistas já são 73% das vítimas. No painel, o KPI fica vermelho enquanto estiver acima da meta.
+
+SLIDE 6 — Painel estratégico (60 s)
+Este é o painel estratégico, para o Gabinete e a Diretoria. No topo, a narrativa resume a situação em uma frase. A linha mostra a
+história: a taxa caiu até 2019, chegando a 4,18, e voltou a subir até 6,58 em 2024, enquanto a linha amarela da meta fica cada vez mais
+distante. À direita, as regionais pela taxa do último triênio: a Pampulha, em vermelho, é a mais letal. E a participação dos
+motociclistas só cresce.
+
+SLIDE 7 — Painel gerencial: onde e quem (60 s)
+No painel gerencial, a página abre no último triênio, mas o filtro de ano mostra a série inteira. A tabela ajusta o risco de cada regional
+pela população. O gráfico "quem morre" mostra que motociclistas e pedestres concentram as mortes. Atropelamento é o tipo mais letal, e
+capotamento e tombamento foi o que mais cresceu, 77%. A faixa etária orienta o público das campanhas: os jovens de 18 a 29 anos.
+
+SLIDE 8 — Painel gerencial: quando e como (50 s)
+Aqui está o quando. O mapa de calor cruza dia da semana e horário: o volume se concentra nos dias úteis entre 15h e 20h, que é onde a
+fiscalização deve estar. Mas a gravidade está na madrugada: lá morrem cerca de 38 pessoas a cada mil sinistros, contra 7 a 10 à tarde.
+No clima, comparamos com e sem chuva dentro da mesma origem do dado, para não misturar o que foi anotado no boletim com o que veio do INMET.
+
+SLIDE 9 — Painel operacional (50 s)
+Por fim, o painel operacional, para a Engenharia de Tráfego e a Fiscalização. O mapa mostra os 300 locais mais severos sobre as regionais,
+e funciona sem internet. O ranking aponta os corredores: Avenida Antônio Carlos, Anel Rodoviário e Cristiano Machado. Os filtros de ano
+e regional permitem, por exemplo, ver se um ponto deixou de ser crítico depois de uma obra.
+
+SLIDE 10 — Recomendações (60 s)
+Para fechar, o que os dados recomendam à BHTrans. Primeiro, priorizar os motociclistas, que já são 73% das vítimas. Segundo, concentrar as
+intervenções físicas nos corredores Antônio Carlos, Anel Rodoviário e Cristiano Machado e na regional Pampulha. Terceiro, ajustar a
+presença de agentes ao horário: fim da tarde dos dias úteis e as madrugadas. E quarto, campanhas para os jovens de 18 a 29 anos. Como
+próximos passos, carregar 2025 quando for publicado, agendar o ETL e publicar o painel no Power BI Service. Obrigado!
+
+DEMONSTRAÇÃO AO VIVO (opcional, se houver tempo): abra powerbi/Painel_Sinistros_BH.pbix, mostre a página 1 e, na página 4, selecione
+a regional PAMPULHA no filtro para ver o mapa, o ranking e as faixas horárias mudarem juntos.
