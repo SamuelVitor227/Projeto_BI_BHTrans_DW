@@ -1,0 +1,132 @@
+{
+  "name": "Sinistros BH",
+  "dataColors": [
+    "#1F3864",
+    "#E0A100",
+    "#8EA9DB",
+    "#B03A2E",
+    "#5B6B85",
+    "#2E7D5B",
+    "#C9A227",
+    "#A6B0C3",
+    "#3E5C99",
+    "#7A4E9C"
+  ],
+  "good": "#2E7D5B",
+  "bad": "#B03A2E",
+  "neutral": "#E0A100",
+  "maximum": "#E0A100",
+  "center": "#F3D27A",
+  "minimum": "#FFFFFF",
+  "foreground": "#1B1F2A",
+  "foregroundNeutralSecondary": "#5B6B85",
+  "background": "#FFFFFF",
+  "backgroundLight": "#F4F6FA",
+  "tableAccent": "#1F3864",
+  "textClasses": {
+    "callout": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 26,
+      "color": "#1F3864"
+    },
+    "title": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 12,
+      "color": "#1F3864"
+    },
+    "header": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 11,
+      "color": "#1F3864"
+    },
+    "label": {
+      "fontFace": "Segoe UI",
+      "fontSize": 10,
+      "color": "#1B1F2A"
+    }
+  },
+  "visualStyles": {
+    "*": {
+      "*": {
+        "background": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "transparency": 0
+          }
+        ],
+        "border": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#DDE3EE"
+              }
+            },
+            "radius": 8
+          }
+        ],
+        "dropShadow": [
+          {
+            "show": false
+          }
+        ],
+        "padding": [
+          {
+            "top": 8,
+            "bottom": 8,
+            "left": 12,
+            "right": 12
+          }
+        ],
+        "visualHeader": [
+          {
+            "show": true
+          }
+        ]
+      }
+    },
+    "page": {
+      "*": {
+        "background": [
+          {
+            "color": {
+              "solid": {
+                "color": "#F4F6FA"
+              }
+            },
+            "transparency": 0
+          }
+        ],
+        "outspace": [
+          {
+            "color": {
+              "solid": {
+                "color": "#E9EDF4"
+              }
+            },
+            "transparency": 0
+          }
+        ]
+      }
+    },
+    "textbox": {
+      "*": {
+        "background": [
+          {
+            "show": false
+          }
+        ],
+        "border": [
+          {
+            "show": false
+          }
+        ]
+      }
+    }
+  }
+}

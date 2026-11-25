@@ -1,0 +1,69 @@
+/// Hora do sinistro (0–23; 99 = não informada).
+table dim_hora
+	lineageTag: e55f8f44-65af-52dd-b2cb-148ece8ed530
+
+	column hora
+		dataType: int64
+		formatString: 0
+		lineageTag: 4c04ddc9-8415-54e9-8f21-2d287fdff618
+		summarizeBy: none
+		sourceColumn: hora
+
+		annotation SummarizationSetBy = User
+
+	column hora_texto
+		dataType: string
+		lineageTag: 0ae7208a-a959-567c-82f9-16b2f8984a16
+		summarizeBy: none
+		sourceColumn: hora_texto
+		sortByColumn: hora
+
+		annotation SummarizationSetBy = User
+
+	column faixa_horaria
+		dataType: string
+		lineageTag: 0ef50c27-940e-5e7e-bd79-d5183ac42ff4
+		summarizeBy: none
+		sourceColumn: faixa_horaria
+
+		annotation SummarizationSetBy = User
+
+	column periodo_dia
+		dataType: string
+		lineageTag: a513eeb9-57f0-560a-b5ea-6d59bbd9ce2b
+		summarizeBy: none
+		sourceColumn: periodo_dia
+		sortByColumn: ordem_periodo_dia
+
+		annotation SummarizationSetBy = User
+
+	column ordem_periodo_dia
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 48fc82bb-244f-5346-84ec-2603270a1500
+		summarizeBy: none
+		sourceColumn: ordem_periodo_dia
+
+		annotation SummarizationSetBy = User
+
+	column fl_hora_informada
+		dataType: boolean
+		lineageTag: c671b9b7-c4f4-5f84-b674-c79d3cbfee03
+		summarizeBy: none
+		sourceColumn: fl_hora_informada
+
+		annotation SummarizationSetBy = User
+
+	partition dim_hora = m
+		mode: import
+		source =
+				let
+				    Fonte = PostgreSQL.Database(Servidor, BancoDeDados),
+				    Dados = Fonte{[Schema = "bi", Item = "dim_hora"]}[Data],
+				    Colunas = Table.SelectColumns(Dados, {"hora", "hora_texto", "faixa_horaria", "periodo_dia", "ordem_periodo_dia", "fl_hora_informada"}),
+				    Tipos = Table.TransformColumnTypes(Colunas, {{"hora", Int64.Type}, {"hora_texto", type text}, {"faixa_horaria", type text}, {"periodo_dia", type text}, {"ordem_periodo_dia", Int64.Type}, {"fl_hora_informada", type logical}})
+				in
+				    Tipos
+
+	annotation PBI_ResultType = Table

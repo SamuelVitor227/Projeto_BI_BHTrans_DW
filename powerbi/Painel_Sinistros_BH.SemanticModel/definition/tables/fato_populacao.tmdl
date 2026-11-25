@@ -1,0 +1,223 @@
+/// População residente por regional e ano (IBGE, 1º de julho).
+table fato_populacao
+	lineageTag: 051dd7e0-31d2-5dc5-b6a2-9db2a610a85c
+
+	/// População residente dos anos visíveis que têm sinistros carregados.
+	measure 'População' =
+			VAR anos_com_dados = ALL ( 'fato_sinistro'[ano] )
+			RETURN
+			    CALCULATE (
+			        SUM ( 'fato_populacao'[populacao_residente] ),
+			        REMOVEFILTERS ( 'dim_calendario' ),
+			        INTERSECT ( VALUES ( 'dim_calendario'[ano] ), anos_com_dados )
+			    )
+		formatString: #,0
+		displayFolder: Taxas e meta
+		lineageTag: 8ba8b9ce-604e-5f9c-8dc5-521583c6fcdc
+
+	/// Indicador oficial da política municipal.
+	measure 'Taxa de mortos por 100 mil hab.' = DIVIDE ( [Mortos], [População] ) * 100000
+		formatString: 0.00
+		displayFolder: Taxas e meta
+		lineageTag: f57dbe43-fbf9-5882-aaa1-26f4f0ecfde1
+
+	measure 'Taxa de vítimas por 100 mil hab.' = DIVIDE ( [Vítimas], [População] ) * 100000
+		formatString: 0.0
+		displayFolder: Taxas e meta
+		lineageTag: 0696bffb-c7ae-59cb-ba25-354448903885
+
+	measure 'Taxa de sinistros por 100 mil hab.' = DIVIDE ( [Sinistros], [População] ) * 100000
+		formatString: 0.0
+		displayFolder: Taxas e meta
+		lineageTag: 625596d3-a4d9-55eb-b4f7-5cadf2dca409
+
+	/// Taxa de mortos de 2014, base da meta.
+	measure 'Taxa base 2014' =
+			CALCULATE (
+			    [Taxa de mortos por 100 mil hab.],
+			    REMOVEFILTERS ( 'dim_calendario' ),
+			    'dim_calendario'[ano] = 2014
+			)
+		formatString: 0.00
+		displayFolder: Taxas e meta
+		lineageTag: fbc7028f-543a-5fa1-b181-ea8cb15126a4
+
+	/// Meta: metade da taxa de 2014 até 2030.
+	measure 'Meta 2030' = [Taxa base 2014] * 0.5
+		formatString: 0.00
+		displayFolder: Taxas e meta
+		lineageTag: fd251f0d-9812-5f0b-9acc-c222d1e108aa
+
+	measure 'Distância para a meta' =
+			VAR taxa = [Taxa de mortos por 100 mil hab.]
+			RETURN IF ( NOT ISBLANK ( taxa ), taxa - [Meta 2030] )
+		formatString: 0.00
+		displayFolder: Taxas e meta
+		lineageTag: 45cb1e71-2c4c-5fe0-8112-334e81090165
+
+	measure '% redução vs 2014' =
+			VAR taxa = [Taxa de mortos por 100 mil hab.]
+			RETURN IF ( NOT ISBLANK ( taxa ), DIVIDE ( [Taxa base 2014] - taxa, [Taxa base 2014] ) )
+		formatString: 0.0%
+		displayFolder: Taxas e meta
+		lineageTag: 000b98f0-157d-5c4d-a0d6-a0c53372745c
+
+	/// Último ano visível no filtro.
+	measure 'Ano de referência' = MAX ( 'dim_calendario'[ano] )
+		formatString: 0
+		displayFolder: KPI
+		lineageTag: c09a3458-a635-58d3-895b-064106f32aa1
+
+	measure 'Taxa no último ano' =
+			VAR ano_ref = [Ano de referência]
+			RETURN CALCULATE ( [Taxa de mortos por 100 mil hab.], REMOVEFILTERS ( 'dim_calendario' ), 'dim_calendario'[ano] = ano_ref )
+		formatString: 0.00
+		displayFolder: KPI
+		lineageTag: 64e8725d-9be3-5c38-8f48-7294234f01d1
+
+	measure 'Mortos no último ano' =
+			VAR ano_ref = [Ano de referência]
+			RETURN CALCULATE ( [Mortos], REMOVEFILTERS ( 'dim_calendario' ), 'dim_calendario'[ano] = ano_ref )
+		formatString: #,0
+		displayFolder: KPI
+		lineageTag: 5b01bd5e-cd70-5805-8250-95adb2deeb03
+
+	/// Quanto a taxa do último ano caiu em relação a 2014 (meta: 50%).
+	measure 'Redução da taxa vs 2014' =
+			VAR taxa = [Taxa no último ano]
+			RETURN IF ( NOT ISBLANK ( taxa ), DIVIDE ( [Taxa base 2014] - taxa, [Taxa base 2014] ) )
+		formatString: 0.0%
+		displayFolder: KPI
+		lineageTag: 986746f6-19c2-588e-9191-97d6ff3dad2f
+
+	/// Quanto a taxa do último ano ainda precisa cair para atingir a meta de 2030.
+	measure 'Queda ainda necessária' =
+			VAR taxa = [Taxa no último ano]
+			RETURN IF ( NOT ISBLANK ( taxa ), MAX ( 0, 1 - DIVIDE ( [Meta 2030], taxa ) ) )
+		formatString: 0.0%
+		displayFolder: KPI
+		lineageTag: dd62df5e-cfb4-5cac-9527-aad879f73c50
+
+	measure 'Motociclistas nas vítimas (último ano)' =
+			VAR ano_ref = [Ano de referência]
+			RETURN CALCULATE ( [% vítimas motociclistas], REMOVEFILTERS ( 'dim_calendario' ), 'dim_calendario'[ano] = ano_ref )
+		formatString: 0.0%
+		displayFolder: KPI
+		lineageTag: 2861851d-3629-5900-988e-68c4f2e67292
+
+	/// Taxa média anual de mortos por 100 mil hab. nos três últimos anos visíveis.
+	measure 'Taxa no último triênio' =
+			VAR ano_ref = [Ano de referência]
+			RETURN
+			    CALCULATE (
+			        [Taxa de mortos por 100 mil hab.],
+			        REMOVEFILTERS ( 'dim_calendario' ),
+			        'dim_calendario'[ano] >= ano_ref - 2 && 'dim_calendario'[ano] <= ano_ref
+			    )
+		formatString: 0.00
+		displayFolder: KPI
+		lineageTag: 431a46b9-5dd0-5998-b8f2-e6b18f8e5297
+
+	/// Vermelho para a regional de maior taxa no último triênio.
+	measure 'Cor destaque regional' =
+			VAR taxa = [Taxa no último triênio]
+			VAR maior =
+			    MAXX ( ALLSELECTED ( 'dim_regional'[nome_regional] ), [Taxa no último triênio] )
+			RETURN IF ( taxa = maior, "#B03A2E", "#8EA9DB" )
+		displayFolder: KPI
+		lineageTag: 956bd794-f087-5746-886a-c2b1665a0519
+
+	measure 'Título regional' =
+			VAR ano_ref = [Ano de referência]
+			RETURN "Risco por regional no último triênio (" & ano_ref - 2 & "–" & ano_ref & ")"
+		displayFolder: KPI
+		lineageTag: ddf2a19c-893a-5c72-b494-a7990927709d
+
+	/// Verde se a taxa do último ano já está na meta; vermelho caso contrário.
+	measure 'Cor da situação da meta' =
+			VAR taxa = [Taxa no último ano]
+			RETURN IF ( taxa <= [Meta 2030], "#2E7D5B", "#B03A2E" )
+		displayFolder: KPI
+		lineageTag: a658a254-6591-59a4-b3a6-cfc787e71a8a
+
+	/// Texto do storytelling da página estratégica, recalculado a cada atualização.
+	measure 'Narrativa da meta' =
+			VAR ano_ref = [Ano de referência]
+			VAR taxa = [Taxa no último ano]
+			VAR meta = [Meta 2030]
+			VAR minimo =
+			    MINX ( VALUES ( 'dim_calendario'[ano] ), [Taxa de mortos por 100 mil hab.] )
+			VAR ano_min =
+			    MAXX ( TOPN ( 1, VALUES ( 'dim_calendario'[ano] ), [Taxa de mortos por 100 mil hab.], ASC ), 'dim_calendario'[ano] )
+			RETURN
+			    "Em " & ano_ref & ", " & FORMAT ( [Mortos no último ano], "#,0" ) & " pessoas morreram no trânsito de BH: "
+			        & FORMAT ( taxa, "0.00" ) & " por 100 mil habitantes, " & FORMAT ( taxa - meta, "0.00" )
+			        & " acima da meta de " & FORMAT ( meta, "0.00" ) & " para 2030. O melhor ano foi " & ano_min
+			        & " (" & FORMAT ( minimo, "0.00" ) & ")."
+		displayFolder: KPI
+		lineageTag: 10a396da-306b-5026-af25-8d12dbb81e8c
+
+	column sk_regional
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 9f89c3da-68d0-5f3b-8284-94c4c38b3760
+		summarizeBy: none
+		sourceColumn: sk_regional
+
+		annotation SummarizationSetBy = User
+
+	column ano
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d1579e00-d2c3-52f9-87be-52eb205b01ef
+		summarizeBy: none
+		sourceColumn: ano
+
+		annotation SummarizationSetBy = User
+
+	column data
+		dataType: dateTime
+		isHidden
+		formatString: dd/MM/yyyy
+		lineageTag: 0503d700-1a97-59b6-9a12-4c6483c70da1
+		summarizeBy: none
+		sourceColumn: data
+
+		annotation SummarizationSetBy = User
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column populacao_residente
+		dataType: int64
+		formatString: #,0
+		lineageTag: f9f793ba-a082-55fc-a7c0-36f5098eca0a
+		summarizeBy: sum
+		sourceColumn: populacao_residente
+
+		annotation SummarizationSetBy = User
+
+	column origem_dado
+		dataType: string
+		lineageTag: 5870fa65-7ee7-5e32-8487-c982be337744
+		summarizeBy: none
+		sourceColumn: origem_dado
+
+		annotation SummarizationSetBy = User
+
+	partition fato_populacao = m
+		mode: import
+		source =
+				let
+				    Fonte = PostgreSQL.Database(Servidor, BancoDeDados),
+				    Dados = Fonte{[Schema = "bi", Item = "fato_populacao"]}[Data],
+				    Colunas = Table.SelectColumns(Dados, {"sk_regional", "ano", "data", "populacao_residente", "origem_dado"}),
+				    Tipos = Table.TransformColumnTypes(Colunas, {{"sk_regional", Int64.Type}, {"ano", Int64.Type}, {"data", type date}, {"populacao_residente", Int64.Type}, {"origem_dado", type text}}),
+				    // só os anos que têm sinistros carregados (evita anos vazios nos filtros)
+				    Anos = List.Buffer(Table.Column(Table.Distinct(Table.SelectColumns(Fonte{[Schema = "bi", Item = "fato_sinistro"]}[Data], {"ano"})), "ano")),
+				    Resultado = Table.SelectRows(Tipos, each [ano] >= List.Min(Anos) and [ano] <= List.Max(Anos))
+				in
+				    Resultado
+
+	annotation PBI_ResultType = Table

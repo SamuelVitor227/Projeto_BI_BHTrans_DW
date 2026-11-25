@@ -1,0 +1,63 @@
+relationship ed1306e9-1c6b-50df-93f5-4394bcc7d4a7
+	fromColumn: fato_sinistro.data
+	toColumn: dim_calendario.data
+
+relationship 35b44969-9c65-5347-bfb5-03356d470ada
+	fromColumn: fato_sinistro.hora
+	toColumn: dim_hora.hora
+
+relationship a6ad06a2-6170-5324-8a45-14713aa39491
+	fromColumn: fato_sinistro.sk_local
+	toColumn: dim_local.sk_local
+
+relationship b6c22932-deba-5f19-b878-d2d81412bebb
+	fromColumn: fato_sinistro.sk_tipo_sinistro
+	toColumn: dim_tipo_sinistro.sk_tipo_sinistro
+
+relationship 46ed2ca5-f871-5e95-8644-990c99cfabb1
+	fromColumn: fato_sinistro.sk_condicao_via
+	toColumn: dim_condicao_via.sk_condicao_via
+
+relationship df14bba3-190f-5e69-82d9-5eab59d1c126
+	fromColumn: fato_sinistro.sk_regional
+	toColumn: dim_regional.sk_regional
+
+relationship 06aba098-94f6-505b-bbfe-0ce73122a079
+	fromColumn: fato_envolvido.data
+	toColumn: dim_calendario.data
+
+relationship fc032f11-5c7c-5351-a4a2-f55f708d39c9
+	fromColumn: fato_envolvido.hora
+	toColumn: dim_hora.hora
+
+relationship b43adbf0-f555-5700-b172-1a02671d1ed7
+	fromColumn: fato_envolvido.sk_local
+	toColumn: dim_local.sk_local
+
+relationship f80f80f2-b8c7-557c-a883-ba39906c6da3
+	fromColumn: fato_envolvido.sk_tipo_sinistro
+	toColumn: dim_tipo_sinistro.sk_tipo_sinistro
+
+relationship b144bc71-9a92-550c-aa73-5d94e61aa314
+	fromColumn: fato_envolvido.sk_condicao_via
+	toColumn: dim_condicao_via.sk_condicao_via
+
+relationship 85ca7f20-47d7-5b1c-9a62-e82a71270670
+	fromColumn: fato_envolvido.sk_pessoa
+	toColumn: dim_pessoa.sk_pessoa
+
+relationship 1bdc2777-b5b8-5a8e-bf84-92f30177fd3e
+	fromColumn: fato_envolvido.sk_veiculo
+	toColumn: dim_veiculo.sk_veiculo
+
+relationship 9722dab6-68ba-5a55-adc9-b2682283b511
+	fromColumn: fato_envolvido.sk_regional
+	toColumn: dim_regional.sk_regional
+
+relationship e2213fa1-4189-512a-91f8-74b0eb9cf941
+	fromColumn: fato_populacao.data
+	toColumn: dim_calendario.data
+
+relationship c75ecbb9-b945-5da1-a79f-eee48b898cb2
+	fromColumn: fato_populacao.sk_regional
+	toColumn: dim_regional.sk_regional

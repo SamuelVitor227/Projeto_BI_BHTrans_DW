@@ -1,0 +1,8 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/1.4.0/schema.json",
+  "name": "p1_estrategico",
+  "displayName": "1 · Meta 2030 (estratégico)",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280
+}

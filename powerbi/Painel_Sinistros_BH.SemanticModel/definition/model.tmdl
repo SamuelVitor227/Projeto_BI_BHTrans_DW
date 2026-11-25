@@ -1,0 +1,25 @@
+model Model
+	culture: pt-BR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: pt-BR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["Servidor", "BancoDeDados", "dim_calendario", "dim_hora", "dim_local", "dim_regional", "dim_tipo_sinistro", "dim_condicao_via", "dim_veiculo", "dim_pessoa", "fato_sinistro", "fato_envolvido", "fato_populacao"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table dim_calendario
+ref table dim_hora
+ref table dim_local
+ref table dim_regional
+ref table dim_tipo_sinistro
+ref table dim_condicao_via
+ref table dim_veiculo
+ref table dim_pessoa
+ref table fato_sinistro
+ref table fato_envolvido
+ref table fato_populacao

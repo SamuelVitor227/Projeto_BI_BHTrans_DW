@@ -1,0 +1,12 @@
+/// Servidor PostgreSQL do DW (host:porta).
+expression Servidor = "127.0.0.1:5432" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 4bb5cfcb-2212-58fa-8410-c27bcf76bf40
+
+	annotation PBI_ResultType = Text
+
+/// Banco de dados do DW.
+expression BancoDeDados = "dw_sinistros_bh" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: d5552e29-a63d-59b2-aa15-0362ab54b650
+
+	annotation PBI_ResultType = Text
+

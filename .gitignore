@@ -14,3 +14,7 @@ venv/
 .ipynb_checkpoints/
 *.log
 tmp/
+
+# Power BI Project: configurações locais e cache de dados do Desktop
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
