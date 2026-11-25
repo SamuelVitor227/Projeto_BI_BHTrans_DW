@@ -1,0 +1,29 @@
+PROJETO DE BUSINESS INTELLIGENCE — PUC Minas · ENTREGA FINAL
+Análise de Sinistros de Trânsito com Vítima em Belo Horizonte
+Integrantes: Samuel Vitor, Vitor Goddard, Vitor Ribeiro, Pedro Barroso, Luis M.
+Disciplina: Business Intelligence — 6º período (Noite) · Prof. Claudiney Vander Ramos
+
+CONTEÚDO
+01_Documento/          Texto final completo (Fases 1 a 5 + considerações finais e referências), em PDF e DOCX.
+02_Apresentacao/       Slides da apresentação final (10 slides, ~9 min, com notas) em PPTX e PDF + roteiro de falas.
+03_Painel_Power_BI/    Painel_Sinistros_BH.pbix  -> abra no Power BI Desktop (gratuito); os dados já estão dentro do
+                                                  arquivo, não precisa do banco.
+                       Painel_Sinistros_BH_paginas.pdf -> as 4 páginas do painel exportadas pelo Power BI.
+                       projeto_PBIP/            -> o mesmo painel em formato de projeto (texto), gerado por gerar_pbip.py.
+                       GUIA_POWER_BI.md, medidas.dax e os polígonos das regionais.
+04_Codigo_ETL_e_DW/    Código do ETL (etl/), DDL do DW e scripts SQL (sql/), dicionário do modelo e README com instruções.
+05_Evidencias_da_carga/ Log da carga completa, contagens, relatório de qualidade (42/42) e consultas de negócio.
+
+DASHBOARDS (data storytelling em 4 atos)
+  1 · Meta 2030 (estratégico)     KPIs e taxa de mortos por 100 mil hab. × meta 2030
+  2 · Onde e quem (gerencial)     regionais, usuários da via, letalidade e crescimento por tipo
+  3 · Quando e como (gerencial)   mapa de calor dia × horário, sazonalidade, clima e severidade
+  4 · Onde agir (operacional)     mapa dos locais críticos, ranking, horários e frota por regional
+
+PARA ATUALIZAR OS DADOS (opcional)
+  1. docker compose up -d   (PostgreSQL 16 + PostGIS; copie .env.example para .env)
+  2. pip install -r requirements.txt
+  3. python -m etl.carga_inicial --recriar
+  4. No Power BI, clique em Atualizar (usuário/senha do .env).
+
+Repositório: https://github.com/SamuelVitor227/Projeto_BI_BHTrans_DW

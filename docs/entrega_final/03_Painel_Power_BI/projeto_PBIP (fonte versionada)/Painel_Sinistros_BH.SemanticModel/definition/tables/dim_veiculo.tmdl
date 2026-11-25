@@ -1,0 +1,58 @@
+/// Perfil do veículo da pessoa envolvida.
+table dim_veiculo
+	lineageTag: d1d70d57-239c-5663-85a7-3f878b26e0c1
+
+	column sk_veiculo
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c5058715-7782-55a8-ab67-6d36062763fd
+		summarizeBy: none
+		sourceColumn: sk_veiculo
+
+		annotation SummarizationSetBy = User
+
+	column especie
+		dataType: string
+		lineageTag: 857918b6-ccc2-5178-85ff-e04a2b0a0909
+		summarizeBy: none
+		sourceColumn: especie
+
+		annotation SummarizationSetBy = User
+
+	column grupo_especie
+		dataType: string
+		lineageTag: 5bc71967-196e-5067-b161-a4fdd0569b7d
+		summarizeBy: none
+		sourceColumn: grupo_especie
+
+		annotation SummarizationSetBy = User
+
+	column categoria
+		dataType: string
+		lineageTag: efeaaaac-1963-5ff6-9a6d-2a02b7409038
+		summarizeBy: none
+		sourceColumn: categoria
+
+		annotation SummarizationSetBy = User
+
+	column situacao
+		dataType: string
+		lineageTag: 9a8700f6-ea8d-5603-a706-306c3b199f8d
+		summarizeBy: none
+		sourceColumn: situacao
+
+		annotation SummarizationSetBy = User
+
+	partition dim_veiculo = m
+		mode: import
+		source =
+				let
+				    Fonte = PostgreSQL.Database(Servidor, BancoDeDados),
+				    Dados = Fonte{[Schema = "bi", Item = "dim_veiculo"]}[Data],
+				    Colunas = Table.SelectColumns(Dados, {"sk_veiculo", "especie", "grupo_especie", "categoria", "situacao"}),
+				    Tipos = Table.TransformColumnTypes(Colunas, {{"sk_veiculo", Int64.Type}, {"especie", type text}, {"grupo_especie", type text}, {"categoria", type text}, {"situacao", type text}})
+				in
+				    Tipos
+
+	annotation PBI_ResultType = Table

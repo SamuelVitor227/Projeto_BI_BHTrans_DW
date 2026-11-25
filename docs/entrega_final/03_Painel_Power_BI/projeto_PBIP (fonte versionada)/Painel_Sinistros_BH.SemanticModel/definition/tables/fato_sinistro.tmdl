@@ -1,0 +1,393 @@
+/// Fato sinistro: uma linha por boletim de ocorrência.
+table fato_sinistro
+	lineageTag: 571f5cf0-685e-598a-b860-92f7f5af1ce2
+
+	/// Número de sinistros com vítima (boletins).
+	measure Sinistros = COUNTROWS ( 'fato_sinistro' )
+		formatString: #,0
+		displayFolder: Sinistros
+		lineageTag: a3f7c072-e4a9-5aee-81a4-278b3d154524
+
+	/// Sinistros com ao menos uma vítima fatal.
+	measure 'Sinistros fatais' = CALCULATE ( [Sinistros], 'fato_sinistro'[fl_fatal] = TRUE () )
+		formatString: #,0
+		displayFolder: Sinistros
+		lineageTag: 86c6b609-9910-582a-90e4-19e130fe6791
+
+	measure 'Sinistros com pedestre' = CALCULATE ( [Sinistros], 'fato_sinistro'[fl_envolve_pedestre] = TRUE () )
+		formatString: #,0
+		displayFolder: Sinistros
+		lineageTag: 8274e39b-c682-5dc3-853a-fcc7cefcf774
+
+	measure 'Sinistros com motocicleta' = CALCULATE ( [Sinistros], 'fato_sinistro'[fl_envolve_motociclista] = TRUE () )
+		formatString: #,0
+		displayFolder: Sinistros
+		lineageTag: a4ee9f99-5078-5814-b3d9-903e6b618b2f
+
+	/// Vítimas (feridos e mortos) contadas no boletim.
+	measure 'Vítimas' = SUM ( 'fato_sinistro'[qtd_vitimas] )
+		formatString: #,0
+		displayFolder: Sinistros
+		lineageTag: 3851716d-0462-5c0a-9eca-50699df68cf9
+
+	/// Vítimas fatais registradas nos boletins.
+	measure Mortos = SUM ( 'fato_sinistro'[qtd_vitimas_fatais] )
+		formatString: #,0
+		displayFolder: Sinistros
+		lineageTag: b8437936-c7e6-5bad-9201-d1cda0ffeb3f
+
+	measure 'Veículos' = SUM ( 'fato_sinistro'[qtd_veiculos] )
+		formatString: #,0
+		displayFolder: Sinistros
+		lineageTag: c959d353-4081-58e7-b732-aee503fa74ae
+
+	/// Unidade Padrão de Severidade (1, 5 ou 13 por sinistro).
+	measure UPS = SUM ( 'fato_sinistro'[valor_ups] )
+		formatString: #,0
+		displayFolder: Severidade
+		lineageTag: d242d056-6780-58cf-9d9d-7b5779f24f40
+
+	measure 'UPS média por sinistro' = DIVIDE ( [UPS], [Sinistros] )
+		formatString: 0.00
+		displayFolder: Severidade
+		lineageTag: 8cd0bd99-2346-5b69-9caf-706a181b3ebc
+
+	/// Letalidade: mortos a cada mil sinistros.
+	measure 'Mortos por 1.000 sinistros' = DIVIDE ( [Mortos], [Sinistros] ) * 1000
+		formatString: 0.0
+		displayFolder: Severidade
+		lineageTag: b00e7dc9-ffe1-5549-a2de-429adcdd8f62
+
+	measure '% sinistros geolocalizados' = DIVIDE ( CALCULATE ( [Sinistros], 'fato_sinistro'[fl_geolocalizado] = TRUE () ), [Sinistros] )
+		formatString: 0.0%
+		displayFolder: Sinistros
+		lineageTag: 306aeb07-1b94-574c-841b-bb4828f18a4c
+
+	measure 'Sinistros (ano anterior)' = CALCULATE ( [Sinistros], SAMEPERIODLASTYEAR ( 'dim_calendario'[data] ) )
+		formatString: #,0
+		displayFolder: Tendência
+		lineageTag: 021ad9f1-0cbb-5c0c-9896-f7036729d89a
+
+	measure 'Var. % sinistros vs ano anterior' = DIVIDE ( [Sinistros] - [Sinistros (ano anterior)], [Sinistros (ano anterior)] )
+		formatString: 0.0%
+		displayFolder: Tendência
+		lineageTag: 89e7dbdb-0cc8-5098-b0db-2cccdd4a9894
+
+	measure 'Mortos (ano anterior)' = CALCULATE ( [Mortos], SAMEPERIODLASTYEAR ( 'dim_calendario'[data] ) )
+		formatString: #,0
+		displayFolder: Tendência
+		lineageTag: 617eae9e-41ed-5808-ad14-35e82578bcc7
+
+	measure 'Var. % mortos vs ano anterior' = DIVIDE ( [Mortos] - [Mortos (ano anterior)], [Mortos (ano anterior)] )
+		formatString: 0.0%
+		displayFolder: Tendência
+		lineageTag: 40cc7d74-73ee-5ba7-bb8c-3363ea22a945
+
+	measure Motocicletas = SUM ( 'fato_sinistro'[qtd_motocicletas] )
+		formatString: #,0
+		displayFolder: Veículos por espécie
+		lineageTag: 40c0f1d9-5128-59b9-a280-2ae9fb61c36c
+
+	measure 'Automóveis' = SUM ( 'fato_sinistro'[qtd_automoveis] )
+		formatString: #,0
+		displayFolder: Veículos por espécie
+		lineageTag: 4c49fa5b-ea41-57ce-8562-ee988db11a12
+
+	measure 'Ônibus' = SUM ( 'fato_sinistro'[qtd_onibus] )
+		formatString: #,0
+		displayFolder: Veículos por espécie
+		lineageTag: d6227518-f951-56a6-802d-88a94682fa90
+
+	measure 'Caminhões' = SUM ( 'fato_sinistro'[qtd_caminhoes] )
+		formatString: #,0
+		displayFolder: Veículos por espécie
+		lineageTag: 117fdee5-d6f7-59b5-81c4-6494225d1238
+
+	measure Bicicletas = SUM ( 'fato_sinistro'[qtd_bicicletas] )
+		formatString: #,0
+		displayFolder: Veículos por espécie
+		lineageTag: c2256b47-8e47-5bb3-93fd-df9b461175ff
+
+	measure 'Outros veículos' = SUM ( 'fato_sinistro'[qtd_outros_veiculos] )
+		formatString: #,0
+		displayFolder: Veículos por espécie
+		lineageTag: 79a93aaa-b9ec-5129-984c-8470017ec2c0
+
+	measure 'Sinistros/ano no primeiro triênio' =
+			VAR a0 = CALCULATE ( MIN ( 'fato_sinistro'[ano] ), REMOVEFILTERS ( 'dim_calendario' ) )
+			RETURN DIVIDE ( CALCULATE ( [Sinistros], REMOVEFILTERS ( 'dim_calendario' ), 'dim_calendario'[ano] >= a0 && 'dim_calendario'[ano] <= a0 + 2 ), 3 )
+		formatString: 0.0
+		displayFolder: Tendência
+		lineageTag: 4b479473-0207-562a-957f-152be66898b3
+
+	measure 'Sinistros/ano no último triênio' =
+			VAR a1 = CALCULATE ( MAX ( 'fato_sinistro'[ano] ), REMOVEFILTERS ( 'dim_calendario' ) )
+			RETURN DIVIDE ( CALCULATE ( [Sinistros], REMOVEFILTERS ( 'dim_calendario' ), 'dim_calendario'[ano] >= a1 - 2 && 'dim_calendario'[ano] <= a1 ), 3 )
+		formatString: 0.0
+		displayFolder: Tendência
+		lineageTag: 2bd2972c-c96a-5f5c-9726-b2e3437b6e2c
+
+	/// Crescimento da média anual de sinistros entre o primeiro e o último triênio da série.
+	measure 'Variação % entre triênios' = DIVIDE ( [Sinistros/ano no último triênio] - [Sinistros/ano no primeiro triênio], [Sinistros/ano no primeiro triênio] )
+		formatString: 0.0%
+		displayFolder: Tendência
+		lineageTag: 1dc96580-dcad-5742-860f-83a0fb40c891
+
+	/// Vermelho = cresceu; verde = caiu.
+	measure 'Cor da variação' = IF ( [Variação % entre triênios] > 0, "#B03A2E", "#2E7D5B" )
+		displayFolder: Tendência
+		lineageTag: 8b76cf76-c3eb-569c-a0f9-4c3804625036
+
+	column ano
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 1bc4c04f-cdde-5960-ae7f-eae9043e6e0f
+		summarizeBy: none
+		sourceColumn: ano
+
+		annotation SummarizationSetBy = User
+
+	column data
+		dataType: dateTime
+		isHidden
+		formatString: dd/MM/yyyy
+		lineageTag: 391f0d8a-b2b3-5c59-b49c-68a9dff44fe0
+		summarizeBy: none
+		sourceColumn: data
+
+		annotation SummarizationSetBy = User
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column hora
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2cefa0a2-59cc-595c-96b0-ed794be217b9
+		summarizeBy: none
+		sourceColumn: hora
+
+		annotation SummarizationSetBy = User
+
+	column sk_local
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 39341ad2-6fce-5293-b08f-5dc4969fec1f
+		summarizeBy: none
+		sourceColumn: sk_local
+
+		annotation SummarizationSetBy = User
+
+	column sk_tipo_sinistro
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 361549b5-b7e4-55af-a3d9-971f1cf6091d
+		summarizeBy: none
+		sourceColumn: sk_tipo_sinistro
+
+		annotation SummarizationSetBy = User
+
+	column sk_condicao_via
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d27a9700-8185-5ed7-b6e0-803af9976210
+		summarizeBy: none
+		sourceColumn: sk_condicao_via
+
+		annotation SummarizationSetBy = User
+
+	column sk_regional
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 11ef9630-247f-513e-ba58-e73b1c16de97
+		summarizeBy: none
+		sourceColumn: sk_regional
+
+		annotation SummarizationSetBy = User
+
+	column qtd_envolvidos
+		dataType: int64
+		formatString: 0
+		lineageTag: 687ab314-9f3f-53b0-b950-ea54e1a5d062
+		summarizeBy: sum
+		sourceColumn: qtd_envolvidos
+
+		annotation SummarizationSetBy = User
+
+	column qtd_vitimas
+		dataType: int64
+		formatString: 0
+		lineageTag: 35adbeba-2e77-52b1-bb90-3a9979d2fdc2
+		summarizeBy: sum
+		sourceColumn: qtd_vitimas
+
+		annotation SummarizationSetBy = User
+
+	column qtd_vitimas_fatais
+		dataType: int64
+		formatString: 0
+		lineageTag: 1d188b31-b439-507a-a281-fd7828702ec4
+		summarizeBy: sum
+		sourceColumn: qtd_vitimas_fatais
+
+		annotation SummarizationSetBy = User
+
+	column qtd_veiculos
+		dataType: int64
+		formatString: 0
+		lineageTag: fbc92845-7509-5443-84c5-6d7a4a4df264
+		summarizeBy: sum
+		sourceColumn: qtd_veiculos
+
+		annotation SummarizationSetBy = User
+
+	column qtd_motocicletas
+		dataType: int64
+		formatString: 0
+		lineageTag: f7e2ff4f-f1e7-5ac0-acec-d6d95357c024
+		summarizeBy: sum
+		sourceColumn: qtd_motocicletas
+
+		annotation SummarizationSetBy = User
+
+	column qtd_automoveis
+		dataType: int64
+		formatString: 0
+		lineageTag: 864065ab-568a-5a3f-9176-956364d529e1
+		summarizeBy: sum
+		sourceColumn: qtd_automoveis
+
+		annotation SummarizationSetBy = User
+
+	column qtd_onibus
+		dataType: int64
+		formatString: 0
+		lineageTag: fa857c40-6d83-53d9-85c5-171c3901347d
+		summarizeBy: sum
+		sourceColumn: qtd_onibus
+
+		annotation SummarizationSetBy = User
+
+	column qtd_caminhoes
+		dataType: int64
+		formatString: 0
+		lineageTag: 4707858a-24ec-51bd-842a-cfcf16b025bd
+		summarizeBy: sum
+		sourceColumn: qtd_caminhoes
+
+		annotation SummarizationSetBy = User
+
+	column qtd_bicicletas
+		dataType: int64
+		formatString: 0
+		lineageTag: a09ddd33-cdbe-5e1d-a04f-17739b973df3
+		summarizeBy: sum
+		sourceColumn: qtd_bicicletas
+
+		annotation SummarizationSetBy = User
+
+	column qtd_outros_veiculos
+		dataType: int64
+		formatString: 0
+		lineageTag: 5d2be9a2-25a8-5e16-97f2-67f79325182d
+		summarizeBy: sum
+		sourceColumn: qtd_outros_veiculos
+
+		annotation SummarizationSetBy = User
+
+	column valor_ups
+		dataType: int64
+		formatString: 0
+		lineageTag: 1a82762d-a881-57de-bb8b-821722f2cc4a
+		summarizeBy: sum
+		sourceColumn: valor_ups
+
+		annotation SummarizationSetBy = User
+
+	column velocidade_permitida
+		dataType: int64
+		formatString: 0
+		lineageTag: 2cb02d3e-70f8-5c2c-8327-6197da32ea1c
+		summarizeBy: none
+		sourceColumn: velocidade_permitida
+
+		annotation SummarizationSetBy = User
+
+	column precipitacao_mm
+		dataType: double
+		formatString: 0.0
+		lineageTag: bc4a97eb-d359-582c-96f9-4bc953aa0c2b
+		summarizeBy: none
+		sourceColumn: precipitacao_mm
+
+		annotation SummarizationSetBy = User
+
+	column fl_fatal
+		dataType: boolean
+		lineageTag: a9a16221-0495-5a8c-aaa9-56b0114e5d99
+		summarizeBy: none
+		sourceColumn: fl_fatal
+
+		annotation SummarizationSetBy = User
+
+	column fl_envolve_pedestre
+		dataType: boolean
+		lineageTag: be11ae11-2ef7-52ea-ae1e-c99958089fd9
+		summarizeBy: none
+		sourceColumn: fl_envolve_pedestre
+
+		annotation SummarizationSetBy = User
+
+	column fl_envolve_motociclista
+		dataType: boolean
+		lineageTag: 9e62dfe2-6b7b-575c-88b3-8b84a2c39393
+		summarizeBy: none
+		sourceColumn: fl_envolve_motociclista
+
+		annotation SummarizationSetBy = User
+
+	column fl_geolocalizado
+		dataType: boolean
+		lineageTag: 850bd71d-6e2c-5dc7-b7e8-756999c5811f
+		summarizeBy: none
+		sourceColumn: fl_geolocalizado
+
+		annotation SummarizationSetBy = User
+
+	column latitude
+		dataType: double
+		formatString: 0.000000
+		dataCategory: Latitude
+		lineageTag: 46dcc1e6-8f47-5d8c-920e-e57569c569ba
+		summarizeBy: average
+		sourceColumn: latitude
+
+		annotation SummarizationSetBy = User
+
+	column longitude
+		dataType: double
+		formatString: 0.000000
+		dataCategory: Longitude
+		lineageTag: 06528b7b-f6f5-5b91-8de1-7cdd36dabf67
+		summarizeBy: average
+		sourceColumn: longitude
+
+		annotation SummarizationSetBy = User
+
+	partition fato_sinistro = m
+		mode: import
+		source =
+				let
+				    Fonte = PostgreSQL.Database(Servidor, BancoDeDados),
+				    Dados = Fonte{[Schema = "bi", Item = "fato_sinistro"]}[Data],
+				    Colunas = Table.SelectColumns(Dados, {"ano", "data", "hora", "sk_local", "sk_tipo_sinistro", "sk_condicao_via", "sk_regional", "qtd_envolvidos", "qtd_vitimas", "qtd_vitimas_fatais", "qtd_veiculos", "qtd_motocicletas", "qtd_automoveis", "qtd_onibus", "qtd_caminhoes", "qtd_bicicletas", "qtd_outros_veiculos", "valor_ups", "velocidade_permitida", "precipitacao_mm", "fl_fatal", "fl_envolve_pedestre", "fl_envolve_motociclista", "fl_geolocalizado", "latitude", "longitude"}),
+				    Tipos = Table.TransformColumnTypes(Colunas, {{"ano", Int64.Type}, {"data", type date}, {"hora", Int64.Type}, {"sk_local", Int64.Type}, {"sk_tipo_sinistro", Int64.Type}, {"sk_condicao_via", Int64.Type}, {"sk_regional", Int64.Type}, {"qtd_envolvidos", Int64.Type}, {"qtd_vitimas", Int64.Type}, {"qtd_vitimas_fatais", Int64.Type}, {"qtd_veiculos", Int64.Type}, {"qtd_motocicletas", Int64.Type}, {"qtd_automoveis", Int64.Type}, {"qtd_onibus", Int64.Type}, {"qtd_caminhoes", Int64.Type}, {"qtd_bicicletas", Int64.Type}, {"qtd_outros_veiculos", Int64.Type}, {"valor_ups", Int64.Type}, {"velocidade_permitida", Int64.Type}, {"precipitacao_mm", type number}, {"fl_fatal", type logical}, {"fl_envolve_pedestre", type logical}, {"fl_envolve_motociclista", type logical}, {"fl_geolocalizado", type logical}, {"latitude", type number}, {"longitude", type number}})
+				in
+				    Tipos
+
+	annotation PBI_ResultType = Table

@@ -1,0 +1,86 @@
+/// Local do sinistro (logradouro, cruzamento e bairro), SCD Tipo 2; descricao_local_atual usa o nome vigente.
+table dim_local
+	lineageTag: d528673f-cc81-552d-a189-34caf12f000b
+
+	column sk_local
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: aee59762-4a95-5503-bc2f-3482e31ea16e
+		summarizeBy: none
+		sourceColumn: sk_local
+
+		annotation SummarizationSetBy = User
+
+	column descricao_local_atual
+		dataType: string
+		lineageTag: 46bd4ba4-52e1-5549-9f1f-7bcd8707f31c
+		summarizeBy: none
+		sourceColumn: descricao_local_atual
+
+		annotation SummarizationSetBy = User
+
+	column nome_logradouro_principal_atual
+		dataType: string
+		lineageTag: c1fdbfba-784c-54ed-9f2c-cfb16b17ce49
+		summarizeBy: none
+		sourceColumn: nome_logradouro_principal_atual
+
+		annotation SummarizationSetBy = User
+
+	column nome_bairro
+		dataType: string
+		lineageTag: 4b6474f9-c37f-5ea6-b2a8-28c66862df5c
+		summarizeBy: none
+		sourceColumn: nome_bairro
+
+		annotation SummarizationSetBy = User
+
+	column fl_cruzamento
+		dataType: boolean
+		lineageTag: 154fee6a-1452-5c0e-b55f-06c99741be46
+		summarizeBy: none
+		sourceColumn: fl_cruzamento
+
+		annotation SummarizationSetBy = User
+
+	column latitude
+		dataType: double
+		formatString: 0.000000
+		dataCategory: Latitude
+		lineageTag: 2446194a-0ac0-55df-b69b-97596be277de
+		summarizeBy: average
+		sourceColumn: latitude
+
+		annotation SummarizationSetBy = User
+
+	column longitude
+		dataType: double
+		formatString: 0.000000
+		dataCategory: Longitude
+		lineageTag: f0fcfcf2-c4e8-5d08-91a4-afb7d895210d
+		summarizeBy: average
+		sourceColumn: longitude
+
+		annotation SummarizationSetBy = User
+
+	column fl_versao_atual
+		dataType: boolean
+		lineageTag: 7d000fb0-3ef6-532f-b914-91b8d109ef27
+		summarizeBy: none
+		sourceColumn: fl_versao_atual
+
+		annotation SummarizationSetBy = User
+
+	partition dim_local = m
+		mode: import
+		source =
+				let
+				    Fonte = PostgreSQL.Database(Servidor, BancoDeDados),
+				    Dados = Fonte{[Schema = "bi", Item = "dim_local"]}[Data],
+				    Colunas = Table.SelectColumns(Dados, {"sk_local", "descricao_local_atual", "nome_logradouro_principal_atual", "nome_bairro", "fl_cruzamento", "latitude", "longitude", "fl_versao_atual"}),
+				    Tipos = Table.TransformColumnTypes(Colunas, {{"sk_local", Int64.Type}, {"descricao_local_atual", type text}, {"nome_logradouro_principal_atual", type text}, {"nome_bairro", type text}, {"fl_cruzamento", type logical}, {"latitude", type number}, {"longitude", type number}, {"fl_versao_atual", type logical}})
+				in
+				    Tipos
+
+	annotation PBI_ResultType = Table

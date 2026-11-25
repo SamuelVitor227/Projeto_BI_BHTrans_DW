@@ -1,0 +1,69 @@
+/// Perfil da pessoa envolvida.
+table dim_pessoa
+	lineageTag: d5875230-c8ad-5f2c-bdfd-e1d47e897bed
+
+	column sk_pessoa
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2ceec104-0f52-5c16-82ad-299949efe9bf
+		summarizeBy: none
+		sourceColumn: sk_pessoa
+
+		annotation SummarizationSetBy = User
+
+	column tipo_envolvimento
+		dataType: string
+		lineageTag: c2119c35-2c06-51cf-aae7-c44f3fac9210
+		summarizeBy: none
+		sourceColumn: tipo_envolvimento
+
+		annotation SummarizationSetBy = User
+
+	column sexo
+		dataType: string
+		lineageTag: d15b56b6-d3ee-5631-b2f5-0005026c1d52
+		summarizeBy: none
+		sourceColumn: sexo
+
+		annotation SummarizationSetBy = User
+
+	column faixa_etaria
+		dataType: string
+		lineageTag: ce70b92f-ac94-5f53-81f5-693c0f014571
+		summarizeBy: none
+		sourceColumn: faixa_etaria
+		sortByColumn: ordem_faixa_etaria
+
+		annotation SummarizationSetBy = User
+
+	column ordem_faixa_etaria
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b4f4fc6f-beac-546b-9260-8a82b5536357
+		summarizeBy: none
+		sourceColumn: ordem_faixa_etaria
+
+		annotation SummarizationSetBy = User
+
+	column embriaguez
+		dataType: string
+		lineageTag: d345359a-0559-509b-a6b7-615c3bf5922a
+		summarizeBy: none
+		sourceColumn: embriaguez
+
+		annotation SummarizationSetBy = User
+
+	partition dim_pessoa = m
+		mode: import
+		source =
+				let
+				    Fonte = PostgreSQL.Database(Servidor, BancoDeDados),
+				    Dados = Fonte{[Schema = "bi", Item = "dim_pessoa"]}[Data],
+				    Colunas = Table.SelectColumns(Dados, {"sk_pessoa", "tipo_envolvimento", "sexo", "faixa_etaria", "ordem_faixa_etaria", "embriaguez"}),
+				    Tipos = Table.TransformColumnTypes(Colunas, {{"sk_pessoa", Int64.Type}, {"tipo_envolvimento", type text}, {"sexo", type text}, {"faixa_etaria", type text}, {"ordem_faixa_etaria", Int64.Type}, {"embriaguez", type text}})
+				in
+				    Tipos
+
+	annotation PBI_ResultType = Table

@@ -1,0 +1,53 @@
+/// Tipo de sinistro e grupo (colisão, atropelamento, choque etc.).
+table dim_tipo_sinistro
+	lineageTag: ac0e9a95-6bc6-56bc-a309-bd6be71ed97b
+
+	column sk_tipo_sinistro
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e4a63152-7841-52e8-a961-f7625b2d70d7
+		summarizeBy: none
+		sourceColumn: sk_tipo_sinistro
+
+		annotation SummarizationSetBy = User
+
+	column descricao
+		dataType: string
+		lineageTag: 1093bb4d-b172-5641-8251-4d06545709a2
+		summarizeBy: none
+		sourceColumn: descricao
+		sortByColumn: ordem
+
+		annotation SummarizationSetBy = User
+
+	column grupo_tipo_sinistro
+		dataType: string
+		lineageTag: 77540de4-07f7-5507-b900-e736c0e8cf7b
+		summarizeBy: none
+		sourceColumn: grupo_tipo_sinistro
+
+		annotation SummarizationSetBy = User
+
+	column ordem
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 5c4572a7-b371-55bb-987a-ad9a0c0ae77f
+		summarizeBy: none
+		sourceColumn: ordem
+
+		annotation SummarizationSetBy = User
+
+	partition dim_tipo_sinistro = m
+		mode: import
+		source =
+				let
+				    Fonte = PostgreSQL.Database(Servidor, BancoDeDados),
+				    Dados = Fonte{[Schema = "bi", Item = "dim_tipo_sinistro"]}[Data],
+				    Colunas = Table.SelectColumns(Dados, {"sk_tipo_sinistro", "descricao", "grupo_tipo_sinistro", "ordem"}),
+				    Tipos = Table.TransformColumnTypes(Colunas, {{"sk_tipo_sinistro", Int64.Type}, {"descricao", type text}, {"grupo_tipo_sinistro", type text}, {"ordem", Int64.Type}})
+				in
+				    Tipos
+
+	annotation PBI_ResultType = Table

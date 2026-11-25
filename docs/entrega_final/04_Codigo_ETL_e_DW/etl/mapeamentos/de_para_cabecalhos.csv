@@ -1,0 +1,113 @@
+conjunto;cabecalho_normalizado;coluna_stg;anos_observados;observacao
+si_bol;numero_boletim;numero_boletim;2011-2024;caixa alta a partir de 2016 (NUMERO_BOLETIM)
+si_bol;data_hora_boletim;data_hora_boletim;2011-2024;original com espaço: 'data hora_boletim'
+si_bol;data_inclusao;data_inclusao;2011-2024;
+si_bol;tipo_acidente;tipo_acidente;2011-2024;código do tipo de sinistro (ex.: H01002)
+si_bol;desc_tipo_acidente;desc_tipo_acidente;2011-2024;
+si_bol;cod_tempo;cod_tempo;2011-2024;
+si_bol;desc_tempo;desc_tempo;2011-2024;
+si_bol;cod_pavimento;cod_pavimento;2011-2024;
+si_bol;pavimento;pavimento;2011-2024;
+si_bol;cod_regional;cod_regional;2011-2024;
+si_bol;desc_regional;desc_regional;2011-2024;
+si_bol;origem_boletim;origem_boletim;2011-2024;
+si_bol;local_sinalizado;local_sinalizado;2011-2024;
+si_bol;velocidade_permitida;velocidade_permitida;2011-2024;
+si_bol;coordenada_x;coordenada_x;2011-2024;formato de 2011-2015 diferente (ver README)
+si_bol;coordenada_y;coordenada_y;2011-2024;formato de 2011-2015 diferente (ver README)
+si_bol;hora_informada;hora_informada;2011-2024;
+si_bol;indicador_fatalidade;indicador_fatalidade;2011-2024;
+si_bol;valor_ups;valor_ups;2011-2024;
+si_bol;descricao_ups;descricao_ups;2011-2024;original 'DESCRIÇÃO_UPS' a partir de 2016
+si_bol;data_alteracao_smsa;data_alteracao_smsa;2011-2024;
+si_bol;valor_ups_antiga;valor_ups_antiga;2011-2024;
+si_bol;descricao_ups_antiga;descricao_ups_antiga;2011-2024;original 'DESCRIÇÃO_UPS_ANTIGA' a partir de 2016
+si_log;numero_boletim;numero_boletim;2011-2015;
+si_log;no_boletim;numero_boletim;2016-2024;original 'Nº_boletim'
+si_log;data_boletim;data_boletim;2011-2024;
+si_log;numero_municipio;numero_municipio;2011-2015;
+si_log;no_municipio;numero_municipio;2016-2024;original 'Nº_municipio'
+si_log;nome_municipio;nome_municipio;2011-2024;
+si_log;sequencia_logradouros;sequencia_logradouro;2011-2015;
+si_log;seq_logradouros;sequencia_logradouro;2016-2024;
+si_log;numero_logradouro;numero_logradouro;2011-2015;código do logradouro no cadastro da PBH
+si_log;no_logradouro;numero_logradouro;2016-2024;original 'Nº_logradouro'
+si_log;tipo_logradouro;tipo_logradouro;2011-2024;
+si_log;nome_logradouro;nome_logradouro;2011-2024;
+si_log;tipo_logradouro_anterior;tipo_logradouro_anterior;2011-2024;
+si_log;nome_logradoro_anterior;nome_logradouro_anterior;2011-2018,2021-2024;erro de digitação na origem ('logradoro')
+si_log;nome_logradouro_anterior;nome_logradouro_anterior;2019-2020;
+si_log;numero_bairro;numero_bairro;2011-2015;original 'Numero_bairro'
+si_log;no_bairro;numero_bairro;2016-2024;original 'Nº_bairro'
+si_log;nome_bairro;nome_bairro;2011-2024;
+si_log;tipo_bairro;tipo_bairro;2011-2024;
+si_log;descricao_tipo_bairro;descricao_tipo_bairro;2011-2024;
+si_log;numero_imovel;numero_imovel;2011-2015;
+si_log;no_imovel;numero_imovel;2016-2024;original 'Nº_imovel'
+si_log;numero_imovel_proximo;numero_imovel_proximo;2011-2015;
+si_log;no_imovel_proximo;numero_imovel_proximo;2016-2024;original 'Nº_imovel_proximo'
+si_veic;numero_boletim;numero_boletim;2011-2015;
+si_veic;no_boletim;numero_boletim;2016-2024;original 'Nº_boletim' ('N§_boletim' se lido em Latin-1 o arquivo de 2023, que é CP850)
+si_veic;data_hora_boletim;data_hora_boletim;2011-2024;
+si_veic;sequencial_veiculo;sequencial_veiculo;2011-2015;
+si_veic;seq_veic;sequencial_veiculo;2016-2024;
+si_veic;codigo_categoria;codigo_categoria;2011-2015;
+si_veic;cod_categ;codigo_categoria;2016-2024;
+si_veic;descricao_categoria;descricao_categoria;2011-2024;
+si_veic;codigo_especie;codigo_especie;2011-2015;
+si_veic;cod_especie;codigo_especie;2016-2024;
+si_veic;descricao_especie;descricao_especie;2011-2024;
+si_veic;codigo_situacao;codigo_situacao;2011-2015;
+si_veic;cod_situacao;codigo_situacao;2016-2024;
+si_veic;descricao_situacao;descricao_situacao;2011-2015;
+si_veic;desc_situacao;descricao_situacao;2016-2024;
+si_veic;tipo_socorro;tipo_socorro;2011-2024;
+si_veic;descricao_tipo_socorro;descricao_tipo_socorro;2011-2015;
+si_veic;desc_tipo_socorro;descricao_tipo_socorro;2016-2024;
+si_env;num_boletim;numero_boletim;2011-2017,2019-2020;
+si_env;no_boletim;numero_boletim;2018,2021-2024;original 'Nº_boletim'
+si_env;data_hora_boletim;data_hora_boletim;2011-2024;
+si_env;numero_envolvido;numero_envolvido;2011-2015;
+si_env;no_envolvido;numero_envolvido;2016-2024;original 'Nº_envolvido'
+si_env;condutor;condutor;2011-2024;
+si_env;codigo_severidade;codigo_severidade;2011-2015;
+si_env;cod_severidade;codigo_severidade;2016-2024;
+si_env;desc_severidade;desc_severidade;2011-2024;
+si_env;sexo;sexo;2011-2024;
+si_env;cinto_seguranca;cinto_seguranca;2011-2024;
+si_env;embreagues;embriaguez;2011-2024;original 'Embreagues' (grafia da origem)
+si_env;idade;idade;2011-2024;original 'Idade'
+si_env;nascimento;nascimento;2011-2024;
+si_env;categoria_habilitacao;categoria_habilitacao;2011-2024;
+si_env;descricao_habilitacao;descricao_habilitacao;2011-2024;
+si_env;declaracao_obito;declaracao_obito;2011-2024;
+si_env;cod_severidade_antiga;cod_severidade_antiga;2011-2024;
+si_env;especie_veiculo;especie_veiculo;2011-2024;
+si_env;indicador_pedestre;pedestre;2015;só existe a partir de 2015
+si_env;pedestre;pedestre;2016-2024;
+si_env;indicador_passageiro;passageiro;2015;só existe a partir de 2015
+si_env;passageiro;passageiro;2016-2024;
+si_env;indicador_usa_capacete;usa_capacete;2015;só existe em 2015
+si_env;(vazio);(ignorar);2015;coluna vazia criada pelo ';' no fim de cada linha
+inmet;data_(yyyy-mm-dd);data_medicao;2011-2018;formato AAAA-MM-DD
+inmet;data;data_medicao;2019-2024;formato AAAA/MM/DD
+inmet;hora_(utc);hora_utc;2011-2018;formato HH:MM
+inmet;hora_utc;hora_utc;2019-2024;formato 'HHMM UTC'
+inmet;precipitacao_total,_horario_(mm);precipitacao_mm;2011-2024;
+inmet;pressao_atmosferica_ao_nivel_da_estacao,_horaria_(mb);pressao_estacao_mb;2011-2024;
+inmet;pressao_atmosferica_max.na_hora_ant._(aut)_(mb);pressao_max_mb;2011-2024;
+inmet;pressao_atmosferica_min._na_hora_ant._(aut)_(mb);pressao_min_mb;2011-2024;
+inmet;radiacao_global_(kj/m2);radiacao_global_kj_m2;2011-2024;
+inmet;temperatura_do_ar_-_bulbo_seco,_horaria_(oc);temperatura_ar_c;2011-2024;
+inmet;temperatura_do_ponto_de_orvalho_(oc);temperatura_orvalho_c;2011-2024;
+inmet;temperatura_maxima_na_hora_ant._(aut)_(oc);temperatura_max_c;2011-2024;
+inmet;temperatura_minima_na_hora_ant._(aut)_(oc);temperatura_min_c;2011-2024;
+inmet;temperatura_orvalho_max._na_hora_ant._(aut)_(oc);temperatura_orvalho_max_c;2011-2024;
+inmet;temperatura_orvalho_min._na_hora_ant._(aut)_(oc);temperatura_orvalho_min_c;2011-2024;
+inmet;umidade_rel._max._na_hora_ant._(aut)_(%);umidade_max_pct;2011-2024;
+inmet;umidade_rel._min._na_hora_ant._(aut)_(%);umidade_min_pct;2011-2024;
+inmet;umidade_relativa_do_ar,_horaria_(%);umidade_relativa_pct;2011-2024;
+inmet;vento,_direcao_horaria_(gr)_(o_(gr));vento_direcao_graus;2011-2024;
+inmet;vento,_rajada_maxima_(m/s);vento_rajada_ms;2011-2024;
+inmet;vento,_velocidade_horaria_(m/s);vento_velocidade_ms;2011-2024;
+inmet;(vazio);(ignorar);2011-2024;coluna vazia criada pelo ';' no fim de cada linha

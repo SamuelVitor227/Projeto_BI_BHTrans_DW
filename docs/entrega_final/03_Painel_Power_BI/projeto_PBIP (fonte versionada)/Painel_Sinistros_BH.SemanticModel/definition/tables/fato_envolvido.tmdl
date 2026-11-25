@@ -1,0 +1,247 @@
+/// Fato envolvido: uma linha por pessoa envolvida no sinistro.
+table fato_envolvido
+	lineageTag: 2e258bb3-b6e4-51ad-b127-354d17dab5a7
+
+	measure Envolvidos = COUNTROWS ( 'fato_envolvido' )
+		formatString: #,0
+		displayFolder: Pessoas
+		lineageTag: 8129805f-8099-5cc6-b4bd-5cf781ee6759
+
+	/// Use com dim_pessoa e dim_veiculo.
+	measure 'Vítimas (pessoas)' = CALCULATE ( [Envolvidos], 'fato_envolvido'[fl_vitima] = TRUE () )
+		formatString: #,0
+		displayFolder: Pessoas
+		lineageTag: e4bc81aa-514e-59d3-b780-eed35fd9828a
+
+	/// Use com dim_pessoa e dim_veiculo.
+	measure 'Mortos (pessoas)' = CALCULATE ( [Envolvidos], 'fato_envolvido'[fl_vitima_fatal] = TRUE () )
+		formatString: #,0
+		displayFolder: Pessoas
+		lineageTag: d1ca7935-bd8d-5e02-94d9-95d0031c9a33
+
+	measure 'Vítimas pedestres' = CALCULATE ( [Vítimas (pessoas)], 'fato_envolvido'[fl_pedestre] = TRUE () )
+		formatString: #,0
+		displayFolder: Pessoas
+		lineageTag: 75599f56-1c95-5ecc-9020-b740cdb7e11a
+
+	measure 'Vítimas motociclistas' = CALCULATE ( [Vítimas (pessoas)], 'fato_envolvido'[fl_motociclista] = TRUE () )
+		formatString: #,0
+		displayFolder: Pessoas
+		lineageTag: 7df0a5c9-ab0f-59b1-9557-4fe72bda49a8
+
+	measure '% vítimas pedestres' = DIVIDE ( [Vítimas pedestres], [Vítimas (pessoas)] )
+		formatString: 0.0%
+		displayFolder: Pessoas
+		lineageTag: e72283f4-2b6c-5593-b1b1-d4509b696891
+
+	measure '% vítimas motociclistas' = DIVIDE ( [Vítimas motociclistas], [Vítimas (pessoas)] )
+		formatString: 0.0%
+		displayFolder: Pessoas
+		lineageTag: 33451315-8afc-5318-b93e-ba0d5ff2b5a7
+
+	measure 'Mortos pedestres' = CALCULATE ( [Mortos (pessoas)], 'fato_envolvido'[fl_pedestre] = TRUE () )
+		formatString: #,0
+		displayFolder: Pessoas
+		lineageTag: ac729e21-41e4-5550-b8b8-e6e906a4ebb4
+
+	measure 'Mortos motociclistas' = CALCULATE ( [Mortos (pessoas)], 'fato_envolvido'[fl_motociclista] = TRUE () )
+		formatString: #,0
+		displayFolder: Pessoas
+		lineageTag: f5035dfe-c035-58f7-b9f4-49df6c60835d
+
+	measure '% mortos pedestres' = DIVIDE ( [Mortos pedestres], [Mortos (pessoas)] )
+		formatString: 0.0%
+		displayFolder: Pessoas
+		lineageTag: 979c3252-17ba-58de-a6c8-c34e4685ac61
+
+	measure '% mortos motociclistas' = DIVIDE ( [Mortos motociclistas], [Mortos (pessoas)] )
+		formatString: 0.0%
+		displayFolder: Pessoas
+		lineageTag: 1a649d78-228b-54c8-98b8-d810b8a0b150
+
+	measure 'Idade média' = AVERAGE ( 'fato_envolvido'[idade] )
+		formatString: 0.0
+		displayFolder: Pessoas
+		lineageTag: a0a147c3-16d2-5965-9f47-c86b91bd8b8e
+
+	column ano
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: cecfd293-a22d-55a1-a3b1-2eae5c0c1ea9
+		summarizeBy: none
+		sourceColumn: ano
+
+		annotation SummarizationSetBy = User
+
+	column data
+		dataType: dateTime
+		isHidden
+		formatString: dd/MM/yyyy
+		lineageTag: 694b9b88-97f3-5bb8-8ed4-65cb29a9890b
+		summarizeBy: none
+		sourceColumn: data
+
+		annotation SummarizationSetBy = User
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column hora
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 83855cc2-e2c5-5cdc-8f1e-28bc589584d4
+		summarizeBy: none
+		sourceColumn: hora
+
+		annotation SummarizationSetBy = User
+
+	column sk_local
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 1ea11421-9a9e-5643-976a-028ed45a5b3b
+		summarizeBy: none
+		sourceColumn: sk_local
+
+		annotation SummarizationSetBy = User
+
+	column sk_pessoa
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 66867587-7711-5277-898f-e8e2006ca313
+		summarizeBy: none
+		sourceColumn: sk_pessoa
+
+		annotation SummarizationSetBy = User
+
+	column sk_veiculo
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d7dba81b-9137-5e17-9002-b44b41eda8d6
+		summarizeBy: none
+		sourceColumn: sk_veiculo
+
+		annotation SummarizationSetBy = User
+
+	column sk_regional
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f2adc3b6-d6a3-5900-99f1-57cbf036546b
+		summarizeBy: none
+		sourceColumn: sk_regional
+
+		annotation SummarizationSetBy = User
+
+	column sk_tipo_sinistro
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f820eddb-8562-581a-95a3-d1f2941ff81a
+		summarizeBy: none
+		sourceColumn: sk_tipo_sinistro
+
+		annotation SummarizationSetBy = User
+
+	column sk_condicao_via
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 1629a35b-78d9-5e41-99b6-10c4a158bd09
+		summarizeBy: none
+		sourceColumn: sk_condicao_via
+
+		annotation SummarizationSetBy = User
+
+	column idade
+		dataType: int64
+		formatString: 0
+		lineageTag: f2f5b292-c111-553f-be02-78639ddad0a1
+		summarizeBy: average
+		sourceColumn: idade
+
+		annotation SummarizationSetBy = User
+
+	column gravidade
+		dataType: string
+		lineageTag: 59c4a724-c150-5ab4-afe5-d8d84305e151
+		summarizeBy: none
+		sourceColumn: gravidade
+
+		annotation SummarizationSetBy = User
+
+	column fl_vitima
+		dataType: boolean
+		lineageTag: 7bf23f85-ceb2-59a8-a193-3a1918c62a75
+		summarizeBy: none
+		sourceColumn: fl_vitima
+
+		annotation SummarizationSetBy = User
+
+	column fl_vitima_fatal
+		dataType: boolean
+		lineageTag: e67f55f8-91cf-5391-bddb-5f71fd9cdd63
+		summarizeBy: none
+		sourceColumn: fl_vitima_fatal
+
+		annotation SummarizationSetBy = User
+
+	column fl_pedestre
+		dataType: boolean
+		lineageTag: 190b6269-4fba-5571-a4cb-cc6de5385439
+		summarizeBy: none
+		sourceColumn: fl_pedestre
+
+		annotation SummarizationSetBy = User
+
+	column fl_motociclista
+		dataType: boolean
+		lineageTag: 2b8b1d6f-4233-53c1-b8a7-2ab5b5ba5d98
+		summarizeBy: none
+		sourceColumn: fl_motociclista
+
+		annotation SummarizationSetBy = User
+
+	column fl_condutor
+		dataType: boolean
+		lineageTag: 7e45ef17-9d85-5b4e-b818-408daecddcb0
+		summarizeBy: none
+		sourceColumn: fl_condutor
+
+		annotation SummarizationSetBy = User
+
+	/// Usuário da via derivado do tipo de envolvimento e da espécie do veículo.
+	column usuario_via =
+			VAR especie = RELATED ( 'dim_veiculo'[grupo_especie] )
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        'fato_envolvido'[fl_pedestre], "Pedestre",
+			        'fato_envolvido'[fl_motociclista] || especie = "Motocicleta", "Motociclista",
+			        especie = "Bicicleta", "Ciclista",
+			        especie = "Automóvel/utilitário", "Ocupante de automóvel",
+			        especie = "Ônibus", "Ocupante de ônibus",
+			        especie = "Caminhão", "Ocupante de caminhão",
+			        "Outro / não identificado"
+			    )
+		dataType: string
+		lineageTag: 459e3c56-2463-539e-8fdd-24f03e92ee88
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fato_envolvido = m
+		mode: import
+		source =
+				let
+				    Fonte = PostgreSQL.Database(Servidor, BancoDeDados),
+				    Dados = Fonte{[Schema = "bi", Item = "fato_envolvido"]}[Data],
+				    Colunas = Table.SelectColumns(Dados, {"ano", "data", "hora", "sk_local", "sk_pessoa", "sk_veiculo", "sk_regional", "sk_tipo_sinistro", "sk_condicao_via", "idade", "gravidade", "fl_vitima", "fl_vitima_fatal", "fl_pedestre", "fl_motociclista", "fl_condutor"}),
+				    Tipos = Table.TransformColumnTypes(Colunas, {{"ano", Int64.Type}, {"data", type date}, {"hora", Int64.Type}, {"sk_local", Int64.Type}, {"sk_pessoa", Int64.Type}, {"sk_veiculo", Int64.Type}, {"sk_regional", Int64.Type}, {"sk_tipo_sinistro", Int64.Type}, {"sk_condicao_via", Int64.Type}, {"idade", Int64.Type}, {"gravidade", type text}, {"fl_vitima", type logical}, {"fl_vitima_fatal", type logical}, {"fl_pedestre", type logical}, {"fl_motociclista", type logical}, {"fl_condutor", type logical}})
+				in
+				    Tipos
+
+	annotation PBI_ResultType = Table

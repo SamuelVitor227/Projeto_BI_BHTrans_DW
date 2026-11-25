@@ -1,0 +1,143 @@
+/// Calendário diário dos anos com sinistros carregados (marcado como tabela de datas).
+table dim_calendario
+	lineageTag: f6086d13-9dd1-5b3a-ae9b-16c8ab99f812
+	dataCategory: Time
+
+	column data
+		dataType: dateTime
+		isKey
+		formatString: dd/MM/yyyy
+		lineageTag: 53b9d878-9f29-5eed-bff2-2f6e159940d8
+		summarizeBy: none
+		sourceColumn: data
+
+		annotation SummarizationSetBy = User
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ano
+		dataType: int64
+		formatString: 0
+		lineageTag: 5a527004-7d84-5e5e-a744-4c7f33b4e265
+		summarizeBy: none
+		sourceColumn: ano
+
+		annotation SummarizationSetBy = User
+
+	column trimestre
+		dataType: int64
+		formatString: 0
+		lineageTag: f0e49138-17b5-5b2e-aaee-8c941e22e2ba
+		summarizeBy: none
+		sourceColumn: trimestre
+
+		annotation SummarizationSetBy = User
+
+	column mes
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d1831f1f-278f-5f2d-85af-e3802c6e925d
+		summarizeBy: none
+		sourceColumn: mes
+
+		annotation SummarizationSetBy = User
+
+	column nome_mes
+		dataType: string
+		lineageTag: 6ac59539-9170-5f1a-a8f2-0ada2487881f
+		summarizeBy: none
+		sourceColumn: nome_mes
+		sortByColumn: mes
+
+		annotation SummarizationSetBy = User
+
+	column nome_mes_abrev
+		dataType: string
+		lineageTag: 79352073-02c1-5888-984e-49f17e0e8e0b
+		summarizeBy: none
+		sourceColumn: nome_mes_abrev
+		sortByColumn: mes
+
+		annotation SummarizationSetBy = User
+
+	column ano_mes
+		dataType: string
+		lineageTag: 108bce3f-6b12-598f-b0ca-5c0493327866
+		summarizeBy: none
+		sourceColumn: ano_mes
+		sortByColumn: ano_mes_ordem
+
+		annotation SummarizationSetBy = User
+
+	column ano_mes_ordem
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f3f603d3-bcd4-5cfc-9d11-8c38aa89085c
+		summarizeBy: none
+		sourceColumn: ano_mes_ordem
+
+		annotation SummarizationSetBy = User
+
+	column dia_semana
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 69e5e6d1-efab-52a9-8fe9-53d2ce844d82
+		summarizeBy: none
+		sourceColumn: dia_semana
+
+		annotation SummarizationSetBy = User
+
+	column nome_dia_semana
+		dataType: string
+		lineageTag: 897ffdf9-c2c9-565f-925d-ff398ea25f00
+		summarizeBy: none
+		sourceColumn: nome_dia_semana
+		sortByColumn: dia_semana
+
+		annotation SummarizationSetBy = User
+
+	column nome_dia_semana_abrev
+		dataType: string
+		lineageTag: 3fc2116d-3621-5365-8099-b2f6bc3a2f4a
+		summarizeBy: none
+		sourceColumn: nome_dia_semana_abrev
+		sortByColumn: dia_semana
+
+		annotation SummarizationSetBy = User
+
+	column fl_fim_de_semana
+		dataType: boolean
+		isHidden
+		lineageTag: 82bb9bc2-be04-50f4-8dfe-1d88a00bbb76
+		summarizeBy: none
+		sourceColumn: fl_fim_de_semana
+
+		annotation SummarizationSetBy = User
+
+	/// Dia útil ou fim de semana.
+	column tipo_dia =
+			IF ( 'dim_calendario'[fl_fim_de_semana], "Fim de semana", "Dia útil" )
+		dataType: string
+		lineageTag: 318ae9a6-687b-551f-a4bd-07c09fba9735
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_calendario = m
+		mode: import
+		source =
+				let
+				    Fonte = PostgreSQL.Database(Servidor, BancoDeDados),
+				    Dados = Fonte{[Schema = "bi", Item = "dim_calendario"]}[Data],
+				    Colunas = Table.SelectColumns(Dados, {"data", "ano", "trimestre", "mes", "nome_mes", "nome_mes_abrev", "ano_mes", "ano_mes_ordem", "dia_semana", "nome_dia_semana", "nome_dia_semana_abrev", "fl_fim_de_semana"}),
+				    Tipos = Table.TransformColumnTypes(Colunas, {{"data", type date}, {"ano", Int64.Type}, {"trimestre", Int64.Type}, {"mes", Int64.Type}, {"nome_mes", type text}, {"nome_mes_abrev", type text}, {"ano_mes", type text}, {"ano_mes_ordem", Int64.Type}, {"dia_semana", Int64.Type}, {"nome_dia_semana", type text}, {"nome_dia_semana_abrev", type text}, {"fl_fim_de_semana", type logical}}),
+				    // só os anos que têm sinistros carregados (evita anos vazios nos filtros)
+				    Anos = List.Buffer(Table.Column(Table.Distinct(Table.SelectColumns(Fonte{[Schema = "bi", Item = "fato_sinistro"]}[Data], {"ano"})), "ano")),
+				    Resultado = Table.SelectRows(Tipos, each [ano] >= List.Min(Anos) and [ano] <= List.Max(Anos))
+				in
+				    Resultado
+
+	annotation PBI_ResultType = Table

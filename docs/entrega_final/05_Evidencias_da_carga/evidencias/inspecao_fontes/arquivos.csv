@@ -1,0 +1,83 @@
+conjunto;ano;arquivo;codificacao_detectada;linhas_dados;colunas
+si_bol;2011;si-bol-2011.csv;latin-1;16294;23
+si_bol;2012;si-bol_2012.csv;latin-1;15261;23
+si_bol;2013;si-bol_2013.csv;latin-1;14145;23
+si_bol;2014;si-bol_2014.csv;latin-1;14965;23
+si_bol;2015;si-bol_2015.csv;latin-1;13299;23
+si_bol;2016;si-bol-2016.csv;latin-1;12477;23
+si_bol;2017;si-bol-2017.csv;latin-1;12243;23
+si_bol;2018;si-bol-2018.csv;latin-1;11656;23
+si_bol;2019;si-bol-2019.csv;latin-1;13342;23
+si_bol;2020;si-bol-2020.csv;latin-1;10624;23
+si_bol;2021;si-bol-2021.csv;latin-1;11122;23
+si_bol;2022;si-bol-2022.csv;latin-1;12148;23
+si_bol;2023;si-bol-2023.csv;latin-1;13886;23
+si_bol;2024;si-bol-2024.csv;latin-1;13266;23
+si_log;2011;si-log-2011.csv;latin-1;20540;16
+si_log;2012;si-log-2012.csv;latin-1;19909;16
+si_log;2013;si-log-2013.csv;latin-1;19446;16
+si_log;2014;si-log-2014.csv;latin-1;20600;16
+si_log;2015;si-log-2015.csv;latin-1;17644;16
+si_log;2016;si-log-2016.csv;latin-1;16392;16
+si_log;2017;si-log-2017.csv;latin-1;16072;16
+si_log;2018;si-log-2018.csv;latin-1;15253;16
+si_log;2019;si-log-2019.csv;latin-1;17576;16
+si_log;2020;si-log-2020.csv;latin-1;14181;16
+si_log;2021;si-log-2021.csv;latin-1;14437;16
+si_log;2022;si-log-2022.csv;latin-1;15550;16
+si_log;2023;si-log-2023.csv;latin-1;17418;16
+si_log;2024;si-log-2024.csv;latin-1;18570;16
+si_veic;2011;si-veic-2011.csv;latin-1;28301;11
+si_veic;2012;si-veic-2012.csv;latin-1;26660;11
+si_veic;2013;si-veic-2013.csv;latin-1;25367;11
+si_veic;2014;si-veic-2014.csv;latin-1;26840;11
+si_veic;2015;si-veic-2015.csv;latin-1;23398;11
+si_veic;2016;si-veic-2016.csv;latin-1;22212;11
+si_veic;2017;si-veic-2017.csv;latin-1;22012;11
+si_veic;2018;si-veic-2018.csv;latin-1;21133;11
+si_veic;2019;si-veic-2019.csv;latin-1;24469;11
+si_veic;2020;si-veic-2020.csv;latin-1;19494;11
+si_veic;2021;si-veic-2021.csv;latin-1;20506;11
+si_veic;2022;si-veic-2022.csv;latin-1;22310;11
+si_veic;2023;si-veic-2023.csv;cp850;25569;11
+si_veic;2024;si-veic-2024.csv;latin-1;24840;11
+si_env;2011;si_env-2011.csv;latin-1;36084;16
+si_env;2012;si_env-2012.csv;latin-1;33745;16
+si_env;2013;si_env-2013.csv;latin-1;32152;16
+si_env;2014;si_env-2014.csv;latin-1;33588;16
+si_env;2015;si_env-2015.csv;latin-1;29131;20
+si_env;2016;si_env-2016.csv;latin-1;27216;18
+si_env;2017;si_env-2017.csv;latin-1;26622;18
+si_env;2018;si_env-2018.csv;latin-1;25524;18
+si_env;2019;si_env-2019.csv;latin-1;28972;18
+si_env;2020;si_env-2020.csv;latin-1;22643;18
+si_env;2021;si_env-2021.csv;latin-1;23736;18
+si_env;2022;si_env-2022.csv;latin-1;26094;18
+si_env;2023;si_env-2023.csv;latin-1;30170;18
+si_env;2024;si_env-2024.csv;latin-1;29280;18
+inmet;2011;INMET_SE_MG_A521_PAMPULHA_01-01-2011_A_31-12-2011.CSV;latin-1;8760;20
+inmet;2012;INMET_SE_MG_A521_PAMPULHA_01-01-2012_A_31-12-2012.CSV;latin-1;8784;20
+inmet;2013;INMET_SE_MG_A521_PAMPULHA_01-01-2013_A_31-12-2013.CSV;latin-1;8760;20
+inmet;2013;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_27-12-2013_A_31-12-2013.CSV;latin-1;120;20
+inmet;2014;INMET_SE_MG_A521_PAMPULHA_01-01-2014_A_31-12-2014.CSV;latin-1;8760;20
+inmet;2014;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2014_A_31-12-2014.CSV;latin-1;8760;20
+inmet;2015;INMET_SE_MG_A521_PAMPULHA_01-01-2015_A_31-12-2015.CSV;latin-1;8760;20
+inmet;2015;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2015_A_31-12-2015.CSV;latin-1;8760;20
+inmet;2016;INMET_SE_MG_A521_PAMPULHA_01-01-2016_A_31-12-2016.CSV;latin-1;8784;20
+inmet;2016;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2016_A_31-12-2016.CSV;latin-1;8784;20
+inmet;2017;INMET_SE_MG_A521_PAMPULHA_01-01-2017_A_31-12-2017.CSV;latin-1;8760;20
+inmet;2017;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2017_A_31-12-2017.CSV;latin-1;8760;20
+inmet;2018;INMET_SE_MG_A521_PAMPULHA_01-01-2018_A_31-12-2018.CSV;latin-1;8760;20
+inmet;2018;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2018_A_31-12-2018.CSV;latin-1;8760;20
+inmet;2019;INMET_SE_MG_A521_PAMPULHA_01-01-2019_A_31-12-2019.CSV;latin-1;8760;20
+inmet;2019;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2019_A_31-12-2019.CSV;latin-1;8760;20
+inmet;2020;INMET_SE_MG_A521_PAMPULHA_01-01-2020_A_31-12-2020.CSV;latin-1;8784;20
+inmet;2020;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2020_A_31-12-2020.CSV;latin-1;8784;20
+inmet;2021;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2021_A_31-12-2021.CSV;latin-1;8760;20
+inmet;2021;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2021_A_31-12-2021.CSV;latin-1;8760;20
+inmet;2022;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2022_A_31-12-2022.CSV;latin-1;8760;20
+inmet;2022;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2022_A_31-12-2022.CSV;latin-1;8760;20
+inmet;2023;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2023_A_31-12-2023.CSV;latin-1;8760;20
+inmet;2023;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2023_A_31-12-2023.CSV;latin-1;8760;20
+inmet;2024;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2024_A_31-12-2024.CSV;latin-1;8784;20
+inmet;2024;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2024_A_31-12-2024.CSV;latin-1;8784;20

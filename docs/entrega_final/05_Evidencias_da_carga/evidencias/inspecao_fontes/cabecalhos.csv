@@ -1,0 +1,1467 @@
+conjunto;ano;arquivo;posicao;cabecalho_original;cabecalho_normalizado;coluna_stg
+si_bol;2011;si-bol-2011.csv;1;numero_boletim;numero_boletim;numero_boletim
+si_bol;2011;si-bol-2011.csv;2;data hora_boletim;data_hora_boletim;data_hora_boletim
+si_bol;2011;si-bol-2011.csv;3;data_inclusao;data_inclusao;data_inclusao
+si_bol;2011;si-bol-2011.csv;4;tipo_acidente;tipo_acidente;tipo_acidente
+si_bol;2011;si-bol-2011.csv;5;desc_tipo_acidente;desc_tipo_acidente;desc_tipo_acidente
+si_bol;2011;si-bol-2011.csv;6;cod_tempo;cod_tempo;cod_tempo
+si_bol;2011;si-bol-2011.csv;7;desc_tempo;desc_tempo;desc_tempo
+si_bol;2011;si-bol-2011.csv;8;cod_pavimento;cod_pavimento;cod_pavimento
+si_bol;2011;si-bol-2011.csv;9;pavimento;pavimento;pavimento
+si_bol;2011;si-bol-2011.csv;10;cod_regional;cod_regional;cod_regional
+si_bol;2011;si-bol-2011.csv;11;desc_regional;desc_regional;desc_regional
+si_bol;2011;si-bol-2011.csv;12;origem_boletim;origem_boletim;origem_boletim
+si_bol;2011;si-bol-2011.csv;13;local_sinalizado;local_sinalizado;local_sinalizado
+si_bol;2011;si-bol-2011.csv;14;velocidade_permitida;velocidade_permitida;velocidade_permitida
+si_bol;2011;si-bol-2011.csv;15;coordenada_x;coordenada_x;coordenada_x
+si_bol;2011;si-bol-2011.csv;16;coordenada_y;coordenada_y;coordenada_y
+si_bol;2011;si-bol-2011.csv;17;hora_informada;hora_informada;hora_informada
+si_bol;2011;si-bol-2011.csv;18;indicador_fatalidade;indicador_fatalidade;indicador_fatalidade
+si_bol;2011;si-bol-2011.csv;19;valor_ups;valor_ups;valor_ups
+si_bol;2011;si-bol-2011.csv;20;descricao_ups;descricao_ups;descricao_ups
+si_bol;2011;si-bol-2011.csv;21;data_alteracao_smsa;data_alteracao_smsa;data_alteracao_smsa
+si_bol;2011;si-bol-2011.csv;22;valor_ups_antiga;valor_ups_antiga;valor_ups_antiga
+si_bol;2011;si-bol-2011.csv;23;descricao_ups_antiga;descricao_ups_antiga;descricao_ups_antiga
+si_bol;2012;si-bol_2012.csv;1;numero_boletim;numero_boletim;numero_boletim
+si_bol;2012;si-bol_2012.csv;2;data hora_boletim;data_hora_boletim;data_hora_boletim
+si_bol;2012;si-bol_2012.csv;3;data_inclusao;data_inclusao;data_inclusao
+si_bol;2012;si-bol_2012.csv;4;tipo_acidente;tipo_acidente;tipo_acidente
+si_bol;2012;si-bol_2012.csv;5;desc_tipo_acidente;desc_tipo_acidente;desc_tipo_acidente
+si_bol;2012;si-bol_2012.csv;6;cod_tempo;cod_tempo;cod_tempo
+si_bol;2012;si-bol_2012.csv;7;desc_tempo;desc_tempo;desc_tempo
+si_bol;2012;si-bol_2012.csv;8;cod_pavimento;cod_pavimento;cod_pavimento
+si_bol;2012;si-bol_2012.csv;9;pavimento;pavimento;pavimento
+si_bol;2012;si-bol_2012.csv;10;cod_regional;cod_regional;cod_regional
+si_bol;2012;si-bol_2012.csv;11;desc_regional;desc_regional;desc_regional
+si_bol;2012;si-bol_2012.csv;12;origem_boletim;origem_boletim;origem_boletim
+si_bol;2012;si-bol_2012.csv;13;local_sinalizado;local_sinalizado;local_sinalizado
+si_bol;2012;si-bol_2012.csv;14;velocidade_permitida;velocidade_permitida;velocidade_permitida
+si_bol;2012;si-bol_2012.csv;15;coordenada_x;coordenada_x;coordenada_x
+si_bol;2012;si-bol_2012.csv;16;coordenada_y;coordenada_y;coordenada_y
+si_bol;2012;si-bol_2012.csv;17;hora_informada;hora_informada;hora_informada
+si_bol;2012;si-bol_2012.csv;18;indicador_fatalidade;indicador_fatalidade;indicador_fatalidade
+si_bol;2012;si-bol_2012.csv;19;valor_ups;valor_ups;valor_ups
+si_bol;2012;si-bol_2012.csv;20;descricao_ups;descricao_ups;descricao_ups
+si_bol;2012;si-bol_2012.csv;21;data_alteracao_smsa;data_alteracao_smsa;data_alteracao_smsa
+si_bol;2012;si-bol_2012.csv;22;valor_ups_antiga;valor_ups_antiga;valor_ups_antiga
+si_bol;2012;si-bol_2012.csv;23;descricao_ups_antiga;descricao_ups_antiga;descricao_ups_antiga
+si_bol;2013;si-bol_2013.csv;1;numero_boletim;numero_boletim;numero_boletim
+si_bol;2013;si-bol_2013.csv;2;data hora_boletim;data_hora_boletim;data_hora_boletim
+si_bol;2013;si-bol_2013.csv;3;data_inclusao;data_inclusao;data_inclusao
+si_bol;2013;si-bol_2013.csv;4;tipo_acidente;tipo_acidente;tipo_acidente
+si_bol;2013;si-bol_2013.csv;5;desc_tipo_acidente;desc_tipo_acidente;desc_tipo_acidente
+si_bol;2013;si-bol_2013.csv;6;cod_tempo;cod_tempo;cod_tempo
+si_bol;2013;si-bol_2013.csv;7;desc_tempo;desc_tempo;desc_tempo
+si_bol;2013;si-bol_2013.csv;8;cod_pavimento;cod_pavimento;cod_pavimento
+si_bol;2013;si-bol_2013.csv;9;pavimento;pavimento;pavimento
+si_bol;2013;si-bol_2013.csv;10;cod_regional;cod_regional;cod_regional
+si_bol;2013;si-bol_2013.csv;11;desc_regional;desc_regional;desc_regional
+si_bol;2013;si-bol_2013.csv;12;origem_boletim;origem_boletim;origem_boletim
+si_bol;2013;si-bol_2013.csv;13;local_sinalizado;local_sinalizado;local_sinalizado
+si_bol;2013;si-bol_2013.csv;14;velocidade_permitida;velocidade_permitida;velocidade_permitida
+si_bol;2013;si-bol_2013.csv;15;coordenada_x;coordenada_x;coordenada_x
+si_bol;2013;si-bol_2013.csv;16;coordenada_y;coordenada_y;coordenada_y
+si_bol;2013;si-bol_2013.csv;17;hora_informada;hora_informada;hora_informada
+si_bol;2013;si-bol_2013.csv;18;indicador_fatalidade;indicador_fatalidade;indicador_fatalidade
+si_bol;2013;si-bol_2013.csv;19;valor_ups;valor_ups;valor_ups
+si_bol;2013;si-bol_2013.csv;20;descricao_ups;descricao_ups;descricao_ups
+si_bol;2013;si-bol_2013.csv;21;data_alteracao_smsa;data_alteracao_smsa;data_alteracao_smsa
+si_bol;2013;si-bol_2013.csv;22;valor_ups_antiga;valor_ups_antiga;valor_ups_antiga
+si_bol;2013;si-bol_2013.csv;23;descricao_ups_antiga;descricao_ups_antiga;descricao_ups_antiga
+si_bol;2014;si-bol_2014.csv;1;numero_boletim;numero_boletim;numero_boletim
+si_bol;2014;si-bol_2014.csv;2;data hora_boletim;data_hora_boletim;data_hora_boletim
+si_bol;2014;si-bol_2014.csv;3;data_inclusao;data_inclusao;data_inclusao
+si_bol;2014;si-bol_2014.csv;4;tipo_acidente;tipo_acidente;tipo_acidente
+si_bol;2014;si-bol_2014.csv;5;desc_tipo_acidente;desc_tipo_acidente;desc_tipo_acidente
+si_bol;2014;si-bol_2014.csv;6;cod_tempo;cod_tempo;cod_tempo
+si_bol;2014;si-bol_2014.csv;7;desc_tempo;desc_tempo;desc_tempo
+si_bol;2014;si-bol_2014.csv;8;cod_pavimento;cod_pavimento;cod_pavimento
+si_bol;2014;si-bol_2014.csv;9;pavimento;pavimento;pavimento
+si_bol;2014;si-bol_2014.csv;10;cod_regional;cod_regional;cod_regional
+si_bol;2014;si-bol_2014.csv;11;desc_regional;desc_regional;desc_regional
+si_bol;2014;si-bol_2014.csv;12;origem_boletim;origem_boletim;origem_boletim
+si_bol;2014;si-bol_2014.csv;13;local_sinalizado;local_sinalizado;local_sinalizado
+si_bol;2014;si-bol_2014.csv;14;velocidade_permitida;velocidade_permitida;velocidade_permitida
+si_bol;2014;si-bol_2014.csv;15;coordenada_x;coordenada_x;coordenada_x
+si_bol;2014;si-bol_2014.csv;16;coordenada_y;coordenada_y;coordenada_y
+si_bol;2014;si-bol_2014.csv;17;hora_informada;hora_informada;hora_informada
+si_bol;2014;si-bol_2014.csv;18;indicador_fatalidade;indicador_fatalidade;indicador_fatalidade
+si_bol;2014;si-bol_2014.csv;19;valor_ups;valor_ups;valor_ups
+si_bol;2014;si-bol_2014.csv;20;descricao_ups;descricao_ups;descricao_ups
+si_bol;2014;si-bol_2014.csv;21;data_alteracao_smsa;data_alteracao_smsa;data_alteracao_smsa
+si_bol;2014;si-bol_2014.csv;22;valor_ups_antiga;valor_ups_antiga;valor_ups_antiga
+si_bol;2014;si-bol_2014.csv;23;descricao_ups_antiga;descricao_ups_antiga;descricao_ups_antiga
+si_bol;2015;si-bol_2015.csv;1;numero_boletim;numero_boletim;numero_boletim
+si_bol;2015;si-bol_2015.csv;2;data hora_boletim;data_hora_boletim;data_hora_boletim
+si_bol;2015;si-bol_2015.csv;3;data_inclusao;data_inclusao;data_inclusao
+si_bol;2015;si-bol_2015.csv;4;tipo_acidente;tipo_acidente;tipo_acidente
+si_bol;2015;si-bol_2015.csv;5;desc_tipo_acidente;desc_tipo_acidente;desc_tipo_acidente
+si_bol;2015;si-bol_2015.csv;6;cod_tempo;cod_tempo;cod_tempo
+si_bol;2015;si-bol_2015.csv;7;desc_tempo;desc_tempo;desc_tempo
+si_bol;2015;si-bol_2015.csv;8;cod_pavimento;cod_pavimento;cod_pavimento
+si_bol;2015;si-bol_2015.csv;9;pavimento;pavimento;pavimento
+si_bol;2015;si-bol_2015.csv;10;cod_regional;cod_regional;cod_regional
+si_bol;2015;si-bol_2015.csv;11;desc_regional;desc_regional;desc_regional
+si_bol;2015;si-bol_2015.csv;12;origem_boletim;origem_boletim;origem_boletim
+si_bol;2015;si-bol_2015.csv;13;local_sinalizado;local_sinalizado;local_sinalizado
+si_bol;2015;si-bol_2015.csv;14;velocidade_permitida;velocidade_permitida;velocidade_permitida
+si_bol;2015;si-bol_2015.csv;15;coordenada_x;coordenada_x;coordenada_x
+si_bol;2015;si-bol_2015.csv;16;coordenada_y;coordenada_y;coordenada_y
+si_bol;2015;si-bol_2015.csv;17;hora_informada;hora_informada;hora_informada
+si_bol;2015;si-bol_2015.csv;18;indicador_fatalidade;indicador_fatalidade;indicador_fatalidade
+si_bol;2015;si-bol_2015.csv;19;valor_ups;valor_ups;valor_ups
+si_bol;2015;si-bol_2015.csv;20;descricao_ups;descricao_ups;descricao_ups
+si_bol;2015;si-bol_2015.csv;21;data_alteracao_smsa;data_alteracao_smsa;data_alteracao_smsa
+si_bol;2015;si-bol_2015.csv;22;valor_ups_antiga;valor_ups_antiga;valor_ups_antiga
+si_bol;2015;si-bol_2015.csv;23;descricao_ups_antiga;descricao_ups_antiga;descricao_ups_antiga
+si_bol;2016;si-bol-2016.csv;1;NUMERO_BOLETIM;numero_boletim;numero_boletim
+si_bol;2016;si-bol-2016.csv;2;DATA HORA_BOLETIM;data_hora_boletim;data_hora_boletim
+si_bol;2016;si-bol-2016.csv;3;DATA_INCLUSAO;data_inclusao;data_inclusao
+si_bol;2016;si-bol-2016.csv;4;TIPO_ACIDENTE;tipo_acidente;tipo_acidente
+si_bol;2016;si-bol-2016.csv;5;DESC_TIPO_ACIDENTE;desc_tipo_acidente;desc_tipo_acidente
+si_bol;2016;si-bol-2016.csv;6;COD_TEMPO;cod_tempo;cod_tempo
+si_bol;2016;si-bol-2016.csv;7;DESC_TEMPO;desc_tempo;desc_tempo
+si_bol;2016;si-bol-2016.csv;8;COD_PAVIMENTO;cod_pavimento;cod_pavimento
+si_bol;2016;si-bol-2016.csv;9;PAVIMENTO;pavimento;pavimento
+si_bol;2016;si-bol-2016.csv;10;COD_REGIONAL;cod_regional;cod_regional
+si_bol;2016;si-bol-2016.csv;11;DESC_REGIONAL;desc_regional;desc_regional
+si_bol;2016;si-bol-2016.csv;12;ORIGEM_BOLETIM;origem_boletim;origem_boletim
+si_bol;2016;si-bol-2016.csv;13;LOCAL_SINALIZADO;local_sinalizado;local_sinalizado
+si_bol;2016;si-bol-2016.csv;14;VELOCIDADE_PERMITIDA;velocidade_permitida;velocidade_permitida
+si_bol;2016;si-bol-2016.csv;15;COORDENADA_X;coordenada_x;coordenada_x
+si_bol;2016;si-bol-2016.csv;16;COORDENADA_Y;coordenada_y;coordenada_y
+si_bol;2016;si-bol-2016.csv;17;HORA_INFORMADA;hora_informada;hora_informada
+si_bol;2016;si-bol-2016.csv;18;INDICADOR_FATALIDADE;indicador_fatalidade;indicador_fatalidade
+si_bol;2016;si-bol-2016.csv;19;VALOR_UPS;valor_ups;valor_ups
+si_bol;2016;si-bol-2016.csv;20;DESCRIÇÃO_UPS;descricao_ups;descricao_ups
+si_bol;2016;si-bol-2016.csv;21;DATA_ALTERACAO_SMSA;data_alteracao_smsa;data_alteracao_smsa
+si_bol;2016;si-bol-2016.csv;22;VALOR_UPS_ANTIGA;valor_ups_antiga;valor_ups_antiga
+si_bol;2016;si-bol-2016.csv;23;DESCRIÇÃO_UPS_ANTIGA;descricao_ups_antiga;descricao_ups_antiga
+si_bol;2017;si-bol-2017.csv;1;NUMERO_BOLETIM;numero_boletim;numero_boletim
+si_bol;2017;si-bol-2017.csv;2;DATA HORA_BOLETIM;data_hora_boletim;data_hora_boletim
+si_bol;2017;si-bol-2017.csv;3;DATA_INCLUSAO;data_inclusao;data_inclusao
+si_bol;2017;si-bol-2017.csv;4;TIPO_ACIDENTE;tipo_acidente;tipo_acidente
+si_bol;2017;si-bol-2017.csv;5;DESC_TIPO_ACIDENTE;desc_tipo_acidente;desc_tipo_acidente
+si_bol;2017;si-bol-2017.csv;6;COD_TEMPO;cod_tempo;cod_tempo
+si_bol;2017;si-bol-2017.csv;7;DESC_TEMPO;desc_tempo;desc_tempo
+si_bol;2017;si-bol-2017.csv;8;COD_PAVIMENTO;cod_pavimento;cod_pavimento
+si_bol;2017;si-bol-2017.csv;9;PAVIMENTO;pavimento;pavimento
+si_bol;2017;si-bol-2017.csv;10;COD_REGIONAL;cod_regional;cod_regional
+si_bol;2017;si-bol-2017.csv;11;DESC_REGIONAL;desc_regional;desc_regional
+si_bol;2017;si-bol-2017.csv;12;ORIGEM_BOLETIM;origem_boletim;origem_boletim
+si_bol;2017;si-bol-2017.csv;13;LOCAL_SINALIZADO;local_sinalizado;local_sinalizado
+si_bol;2017;si-bol-2017.csv;14;VELOCIDADE_PERMITIDA;velocidade_permitida;velocidade_permitida
+si_bol;2017;si-bol-2017.csv;15;COORDENADA_X;coordenada_x;coordenada_x
+si_bol;2017;si-bol-2017.csv;16;COORDENADA_Y;coordenada_y;coordenada_y
+si_bol;2017;si-bol-2017.csv;17;HORA_INFORMADA;hora_informada;hora_informada
+si_bol;2017;si-bol-2017.csv;18;INDICADOR_FATALIDADE;indicador_fatalidade;indicador_fatalidade
+si_bol;2017;si-bol-2017.csv;19;VALOR_UPS;valor_ups;valor_ups
+si_bol;2017;si-bol-2017.csv;20;DESCRIÇÃO_UPS;descricao_ups;descricao_ups
+si_bol;2017;si-bol-2017.csv;21;DATA_ALTERACAO_SMSA;data_alteracao_smsa;data_alteracao_smsa
+si_bol;2017;si-bol-2017.csv;22;VALOR_UPS_ANTIGA;valor_ups_antiga;valor_ups_antiga
+si_bol;2017;si-bol-2017.csv;23;DESCRIÇÃO_UPS_ANTIGA;descricao_ups_antiga;descricao_ups_antiga
+si_bol;2018;si-bol-2018.csv;1;NUMERO_BOLETIM;numero_boletim;numero_boletim
+si_bol;2018;si-bol-2018.csv;2;DATA HORA_BOLETIM;data_hora_boletim;data_hora_boletim
+si_bol;2018;si-bol-2018.csv;3;DATA_INCLUSAO;data_inclusao;data_inclusao
+si_bol;2018;si-bol-2018.csv;4;TIPO_ACIDENTE;tipo_acidente;tipo_acidente
+si_bol;2018;si-bol-2018.csv;5;DESC_TIPO_ACIDENTE;desc_tipo_acidente;desc_tipo_acidente
+si_bol;2018;si-bol-2018.csv;6;COD_TEMPO;cod_tempo;cod_tempo
+si_bol;2018;si-bol-2018.csv;7;DESC_TEMPO;desc_tempo;desc_tempo
+si_bol;2018;si-bol-2018.csv;8;COD_PAVIMENTO;cod_pavimento;cod_pavimento
+si_bol;2018;si-bol-2018.csv;9;PAVIMENTO;pavimento;pavimento
+si_bol;2018;si-bol-2018.csv;10;COD_REGIONAL;cod_regional;cod_regional
+si_bol;2018;si-bol-2018.csv;11;DESC_REGIONAL;desc_regional;desc_regional
+si_bol;2018;si-bol-2018.csv;12;ORIGEM_BOLETIM;origem_boletim;origem_boletim
+si_bol;2018;si-bol-2018.csv;13;LOCAL_SINALIZADO;local_sinalizado;local_sinalizado
+si_bol;2018;si-bol-2018.csv;14;VELOCIDADE_PERMITIDA;velocidade_permitida;velocidade_permitida
+si_bol;2018;si-bol-2018.csv;15;COORDENADA_X;coordenada_x;coordenada_x
+si_bol;2018;si-bol-2018.csv;16;COORDENADA_Y;coordenada_y;coordenada_y
+si_bol;2018;si-bol-2018.csv;17;HORA_INFORMADA;hora_informada;hora_informada
+si_bol;2018;si-bol-2018.csv;18;INDICADOR_FATALIDADE;indicador_fatalidade;indicador_fatalidade
+si_bol;2018;si-bol-2018.csv;19;VALOR_UPS;valor_ups;valor_ups
+si_bol;2018;si-bol-2018.csv;20;DESCRIÇÃO_UPS;descricao_ups;descricao_ups
+si_bol;2018;si-bol-2018.csv;21;DATA_ALTERACAO_SMSA;data_alteracao_smsa;data_alteracao_smsa
+si_bol;2018;si-bol-2018.csv;22;VALOR_UPS_ANTIGA;valor_ups_antiga;valor_ups_antiga
+si_bol;2018;si-bol-2018.csv;23;DESCRIÇÃO_UPS_ANTIGA;descricao_ups_antiga;descricao_ups_antiga
+si_bol;2019;si-bol-2019.csv;1;NUMERO_BOLETIM;numero_boletim;numero_boletim
+si_bol;2019;si-bol-2019.csv;2;DATA HORA_BOLETIM;data_hora_boletim;data_hora_boletim
+si_bol;2019;si-bol-2019.csv;3;DATA_INCLUSAO;data_inclusao;data_inclusao
+si_bol;2019;si-bol-2019.csv;4;TIPO_ACIDENTE;tipo_acidente;tipo_acidente
+si_bol;2019;si-bol-2019.csv;5;DESC_TIPO_ACIDENTE;desc_tipo_acidente;desc_tipo_acidente
+si_bol;2019;si-bol-2019.csv;6;COD_TEMPO;cod_tempo;cod_tempo
+si_bol;2019;si-bol-2019.csv;7;DESC_TEMPO;desc_tempo;desc_tempo
+si_bol;2019;si-bol-2019.csv;8;COD_PAVIMENTO;cod_pavimento;cod_pavimento
+si_bol;2019;si-bol-2019.csv;9;PAVIMENTO;pavimento;pavimento
+si_bol;2019;si-bol-2019.csv;10;COD_REGIONAL;cod_regional;cod_regional
+si_bol;2019;si-bol-2019.csv;11;DESC_REGIONAL;desc_regional;desc_regional
+si_bol;2019;si-bol-2019.csv;12;ORIGEM_BOLETIM;origem_boletim;origem_boletim
+si_bol;2019;si-bol-2019.csv;13;LOCAL_SINALIZADO;local_sinalizado;local_sinalizado
+si_bol;2019;si-bol-2019.csv;14;VELOCIDADE_PERMITIDA;velocidade_permitida;velocidade_permitida
+si_bol;2019;si-bol-2019.csv;15;COORDENADA_X;coordenada_x;coordenada_x
+si_bol;2019;si-bol-2019.csv;16;COORDENADA_Y;coordenada_y;coordenada_y
+si_bol;2019;si-bol-2019.csv;17;HORA_INFORMADA;hora_informada;hora_informada
+si_bol;2019;si-bol-2019.csv;18;INDICADOR_FATALIDADE;indicador_fatalidade;indicador_fatalidade
+si_bol;2019;si-bol-2019.csv;19;VALOR_UPS;valor_ups;valor_ups
+si_bol;2019;si-bol-2019.csv;20;DESCRIÇÃO_UPS;descricao_ups;descricao_ups
+si_bol;2019;si-bol-2019.csv;21;DATA_ALTERACAO_SMSA;data_alteracao_smsa;data_alteracao_smsa
+si_bol;2019;si-bol-2019.csv;22;VALOR_UPS_ANTIGA;valor_ups_antiga;valor_ups_antiga
+si_bol;2019;si-bol-2019.csv;23;DESCRIÇÃO_UPS_ANTIGA;descricao_ups_antiga;descricao_ups_antiga
+si_bol;2020;si-bol-2020.csv;1;NUMERO_BOLETIM;numero_boletim;numero_boletim
+si_bol;2020;si-bol-2020.csv;2;DATA HORA_BOLETIM;data_hora_boletim;data_hora_boletim
+si_bol;2020;si-bol-2020.csv;3;DATA_INCLUSAO;data_inclusao;data_inclusao
+si_bol;2020;si-bol-2020.csv;4;TIPO_ACIDENTE;tipo_acidente;tipo_acidente
+si_bol;2020;si-bol-2020.csv;5;DESC_TIPO_ACIDENTE;desc_tipo_acidente;desc_tipo_acidente
+si_bol;2020;si-bol-2020.csv;6;COD_TEMPO;cod_tempo;cod_tempo
+si_bol;2020;si-bol-2020.csv;7;DESC_TEMPO;desc_tempo;desc_tempo
+si_bol;2020;si-bol-2020.csv;8;COD_PAVIMENTO;cod_pavimento;cod_pavimento
+si_bol;2020;si-bol-2020.csv;9;PAVIMENTO;pavimento;pavimento
+si_bol;2020;si-bol-2020.csv;10;COD_REGIONAL;cod_regional;cod_regional
+si_bol;2020;si-bol-2020.csv;11;DESC_REGIONAL;desc_regional;desc_regional
+si_bol;2020;si-bol-2020.csv;12;ORIGEM_BOLETIM;origem_boletim;origem_boletim
+si_bol;2020;si-bol-2020.csv;13;LOCAL_SINALIZADO;local_sinalizado;local_sinalizado
+si_bol;2020;si-bol-2020.csv;14;VELOCIDADE_PERMITIDA;velocidade_permitida;velocidade_permitida
+si_bol;2020;si-bol-2020.csv;15;COORDENADA_X;coordenada_x;coordenada_x
+si_bol;2020;si-bol-2020.csv;16;COORDENADA_Y;coordenada_y;coordenada_y
+si_bol;2020;si-bol-2020.csv;17;HORA_INFORMADA;hora_informada;hora_informada
+si_bol;2020;si-bol-2020.csv;18;INDICADOR_FATALIDADE;indicador_fatalidade;indicador_fatalidade
+si_bol;2020;si-bol-2020.csv;19;VALOR_UPS;valor_ups;valor_ups
+si_bol;2020;si-bol-2020.csv;20;DESCRIÇÃO_UPS;descricao_ups;descricao_ups
+si_bol;2020;si-bol-2020.csv;21;DATA_ALTERACAO_SMSA;data_alteracao_smsa;data_alteracao_smsa
+si_bol;2020;si-bol-2020.csv;22;VALOR_UPS_ANTIGA;valor_ups_antiga;valor_ups_antiga
+si_bol;2020;si-bol-2020.csv;23;DESCRIÇÃO_UPS_ANTIGA;descricao_ups_antiga;descricao_ups_antiga
+si_bol;2021;si-bol-2021.csv;1;NUMERO_BOLETIM;numero_boletim;numero_boletim
+si_bol;2021;si-bol-2021.csv;2;DATA HORA_BOLETIM;data_hora_boletim;data_hora_boletim
+si_bol;2021;si-bol-2021.csv;3;DATA_INCLUSAO;data_inclusao;data_inclusao
+si_bol;2021;si-bol-2021.csv;4;TIPO_ACIDENTE;tipo_acidente;tipo_acidente
+si_bol;2021;si-bol-2021.csv;5;DESC_TIPO_ACIDENTE;desc_tipo_acidente;desc_tipo_acidente
+si_bol;2021;si-bol-2021.csv;6;COD_TEMPO;cod_tempo;cod_tempo
+si_bol;2021;si-bol-2021.csv;7;DESC_TEMPO;desc_tempo;desc_tempo
+si_bol;2021;si-bol-2021.csv;8;COD_PAVIMENTO;cod_pavimento;cod_pavimento
+si_bol;2021;si-bol-2021.csv;9;PAVIMENTO;pavimento;pavimento
+si_bol;2021;si-bol-2021.csv;10;COD_REGIONAL;cod_regional;cod_regional
+si_bol;2021;si-bol-2021.csv;11;DESC_REGIONAL;desc_regional;desc_regional
+si_bol;2021;si-bol-2021.csv;12;ORIGEM_BOLETIM;origem_boletim;origem_boletim
+si_bol;2021;si-bol-2021.csv;13;LOCAL_SINALIZADO;local_sinalizado;local_sinalizado
+si_bol;2021;si-bol-2021.csv;14;VELOCIDADE_PERMITIDA;velocidade_permitida;velocidade_permitida
+si_bol;2021;si-bol-2021.csv;15;COORDENADA_X;coordenada_x;coordenada_x
+si_bol;2021;si-bol-2021.csv;16;COORDENADA_Y;coordenada_y;coordenada_y
+si_bol;2021;si-bol-2021.csv;17;HORA_INFORMADA;hora_informada;hora_informada
+si_bol;2021;si-bol-2021.csv;18;INDICADOR_FATALIDADE;indicador_fatalidade;indicador_fatalidade
+si_bol;2021;si-bol-2021.csv;19;VALOR_UPS;valor_ups;valor_ups
+si_bol;2021;si-bol-2021.csv;20;DESCRIÇÃO_UPS;descricao_ups;descricao_ups
+si_bol;2021;si-bol-2021.csv;21;DATA_ALTERACAO_SMSA;data_alteracao_smsa;data_alteracao_smsa
+si_bol;2021;si-bol-2021.csv;22;VALOR_UPS_ANTIGA;valor_ups_antiga;valor_ups_antiga
+si_bol;2021;si-bol-2021.csv;23;DESCRIÇÃO_UPS_ANTIGA;descricao_ups_antiga;descricao_ups_antiga
+si_bol;2022;si-bol-2022.csv;1;NUMERO_BOLETIM;numero_boletim;numero_boletim
+si_bol;2022;si-bol-2022.csv;2;DATA HORA_BOLETIM;data_hora_boletim;data_hora_boletim
+si_bol;2022;si-bol-2022.csv;3;DATA_INCLUSAO;data_inclusao;data_inclusao
+si_bol;2022;si-bol-2022.csv;4;TIPO_ACIDENTE;tipo_acidente;tipo_acidente
+si_bol;2022;si-bol-2022.csv;5;DESC_TIPO_ACIDENTE;desc_tipo_acidente;desc_tipo_acidente
+si_bol;2022;si-bol-2022.csv;6;COD_TEMPO;cod_tempo;cod_tempo
+si_bol;2022;si-bol-2022.csv;7;DESC_TEMPO;desc_tempo;desc_tempo
+si_bol;2022;si-bol-2022.csv;8;COD_PAVIMENTO;cod_pavimento;cod_pavimento
+si_bol;2022;si-bol-2022.csv;9;PAVIMENTO;pavimento;pavimento
+si_bol;2022;si-bol-2022.csv;10;COD_REGIONAL;cod_regional;cod_regional
+si_bol;2022;si-bol-2022.csv;11;DESC_REGIONAL;desc_regional;desc_regional
+si_bol;2022;si-bol-2022.csv;12;ORIGEM_BOLETIM;origem_boletim;origem_boletim
+si_bol;2022;si-bol-2022.csv;13;LOCAL_SINALIZADO;local_sinalizado;local_sinalizado
+si_bol;2022;si-bol-2022.csv;14;VELOCIDADE_PERMITIDA;velocidade_permitida;velocidade_permitida
+si_bol;2022;si-bol-2022.csv;15;COORDENADA_X;coordenada_x;coordenada_x
+si_bol;2022;si-bol-2022.csv;16;COORDENADA_Y;coordenada_y;coordenada_y
+si_bol;2022;si-bol-2022.csv;17;HORA_INFORMADA;hora_informada;hora_informada
+si_bol;2022;si-bol-2022.csv;18;INDICADOR_FATALIDADE;indicador_fatalidade;indicador_fatalidade
+si_bol;2022;si-bol-2022.csv;19;VALOR_UPS;valor_ups;valor_ups
+si_bol;2022;si-bol-2022.csv;20;DESCRIÇÃO_UPS;descricao_ups;descricao_ups
+si_bol;2022;si-bol-2022.csv;21;DATA_ALTERACAO_SMSA;data_alteracao_smsa;data_alteracao_smsa
+si_bol;2022;si-bol-2022.csv;22;VALOR_UPS_ANTIGA;valor_ups_antiga;valor_ups_antiga
+si_bol;2022;si-bol-2022.csv;23;DESCRIÇÃO_UPS_ANTIGA;descricao_ups_antiga;descricao_ups_antiga
+si_bol;2023;si-bol-2023.csv;1;NUMERO_BOLETIM;numero_boletim;numero_boletim
+si_bol;2023;si-bol-2023.csv;2;DATA HORA_BOLETIM;data_hora_boletim;data_hora_boletim
+si_bol;2023;si-bol-2023.csv;3;DATA_INCLUSAO;data_inclusao;data_inclusao
+si_bol;2023;si-bol-2023.csv;4;TIPO_ACIDENTE;tipo_acidente;tipo_acidente
+si_bol;2023;si-bol-2023.csv;5;DESC_TIPO_ACIDENTE;desc_tipo_acidente;desc_tipo_acidente
+si_bol;2023;si-bol-2023.csv;6;COD_TEMPO;cod_tempo;cod_tempo
+si_bol;2023;si-bol-2023.csv;7;DESC_TEMPO;desc_tempo;desc_tempo
+si_bol;2023;si-bol-2023.csv;8;COD_PAVIMENTO;cod_pavimento;cod_pavimento
+si_bol;2023;si-bol-2023.csv;9;PAVIMENTO;pavimento;pavimento
+si_bol;2023;si-bol-2023.csv;10;COD_REGIONAL;cod_regional;cod_regional
+si_bol;2023;si-bol-2023.csv;11;DESC_REGIONAL;desc_regional;desc_regional
+si_bol;2023;si-bol-2023.csv;12;ORIGEM_BOLETIM;origem_boletim;origem_boletim
+si_bol;2023;si-bol-2023.csv;13;LOCAL_SINALIZADO;local_sinalizado;local_sinalizado
+si_bol;2023;si-bol-2023.csv;14;VELOCIDADE_PERMITIDA;velocidade_permitida;velocidade_permitida
+si_bol;2023;si-bol-2023.csv;15;COORDENADA_X;coordenada_x;coordenada_x
+si_bol;2023;si-bol-2023.csv;16;COORDENADA_Y;coordenada_y;coordenada_y
+si_bol;2023;si-bol-2023.csv;17;HORA_INFORMADA;hora_informada;hora_informada
+si_bol;2023;si-bol-2023.csv;18;INDICADOR_FATALIDADE;indicador_fatalidade;indicador_fatalidade
+si_bol;2023;si-bol-2023.csv;19;VALOR_UPS;valor_ups;valor_ups
+si_bol;2023;si-bol-2023.csv;20;DESCRIÇÃO_UPS;descricao_ups;descricao_ups
+si_bol;2023;si-bol-2023.csv;21;DATA_ALTERACAO_SMSA;data_alteracao_smsa;data_alteracao_smsa
+si_bol;2023;si-bol-2023.csv;22;VALOR_UPS_ANTIGA;valor_ups_antiga;valor_ups_antiga
+si_bol;2023;si-bol-2023.csv;23;DESCRIÇÃO_UPS_ANTIGA;descricao_ups_antiga;descricao_ups_antiga
+si_bol;2024;si-bol-2024.csv;1;NUMERO_BOLETIM;numero_boletim;numero_boletim
+si_bol;2024;si-bol-2024.csv;2;DATA HORA_BOLETIM;data_hora_boletim;data_hora_boletim
+si_bol;2024;si-bol-2024.csv;3;DATA_INCLUSAO;data_inclusao;data_inclusao
+si_bol;2024;si-bol-2024.csv;4;TIPO_ACIDENTE;tipo_acidente;tipo_acidente
+si_bol;2024;si-bol-2024.csv;5;DESC_TIPO_ACIDENTE;desc_tipo_acidente;desc_tipo_acidente
+si_bol;2024;si-bol-2024.csv;6;COD_TEMPO;cod_tempo;cod_tempo
+si_bol;2024;si-bol-2024.csv;7;DESC_TEMPO;desc_tempo;desc_tempo
+si_bol;2024;si-bol-2024.csv;8;COD_PAVIMENTO;cod_pavimento;cod_pavimento
+si_bol;2024;si-bol-2024.csv;9;PAVIMENTO;pavimento;pavimento
+si_bol;2024;si-bol-2024.csv;10;COD_REGIONAL;cod_regional;cod_regional
+si_bol;2024;si-bol-2024.csv;11;DESC_REGIONAL;desc_regional;desc_regional
+si_bol;2024;si-bol-2024.csv;12;ORIGEM_BOLETIM;origem_boletim;origem_boletim
+si_bol;2024;si-bol-2024.csv;13;LOCAL_SINALIZADO;local_sinalizado;local_sinalizado
+si_bol;2024;si-bol-2024.csv;14;VELOCIDADE_PERMITIDA;velocidade_permitida;velocidade_permitida
+si_bol;2024;si-bol-2024.csv;15;COORDENADA_X;coordenada_x;coordenada_x
+si_bol;2024;si-bol-2024.csv;16;COORDENADA_Y;coordenada_y;coordenada_y
+si_bol;2024;si-bol-2024.csv;17;HORA_INFORMADA;hora_informada;hora_informada
+si_bol;2024;si-bol-2024.csv;18;INDICADOR_FATALIDADE;indicador_fatalidade;indicador_fatalidade
+si_bol;2024;si-bol-2024.csv;19;VALOR_UPS;valor_ups;valor_ups
+si_bol;2024;si-bol-2024.csv;20;DESCRIÇÃO_UPS;descricao_ups;descricao_ups
+si_bol;2024;si-bol-2024.csv;21;DATA_ALTERACAO_SMSA;data_alteracao_smsa;data_alteracao_smsa
+si_bol;2024;si-bol-2024.csv;22;VALOR_UPS_ANTIGA;valor_ups_antiga;valor_ups_antiga
+si_bol;2024;si-bol-2024.csv;23;DESCRIÇÃO_UPS_ANTIGA;descricao_ups_antiga;descricao_ups_antiga
+si_log;2011;si-log-2011.csv;1;numero_boletim;numero_boletim;numero_boletim
+si_log;2011;si-log-2011.csv;2;data_boletim;data_boletim;data_boletim
+si_log;2011;si-log-2011.csv;3;numero_municipio;numero_municipio;numero_municipio
+si_log;2011;si-log-2011.csv;4;nome_municipio;nome_municipio;nome_municipio
+si_log;2011;si-log-2011.csv;5;sequencia_logradouros;sequencia_logradouros;sequencia_logradouro
+si_log;2011;si-log-2011.csv;6;numero_logradouro;numero_logradouro;numero_logradouro
+si_log;2011;si-log-2011.csv;7;tipo_logradouro;tipo_logradouro;tipo_logradouro
+si_log;2011;si-log-2011.csv;8;nome_logradouro;nome_logradouro;nome_logradouro
+si_log;2011;si-log-2011.csv;9;tipo_logradouro_anterior;tipo_logradouro_anterior;tipo_logradouro_anterior
+si_log;2011;si-log-2011.csv;10;nome_logradoro_anterior;nome_logradoro_anterior;nome_logradouro_anterior
+si_log;2011;si-log-2011.csv;11;Numero_bairro;numero_bairro;numero_bairro
+si_log;2011;si-log-2011.csv;12;nome_bairro;nome_bairro;nome_bairro
+si_log;2011;si-log-2011.csv;13;tipo_bairro;tipo_bairro;tipo_bairro
+si_log;2011;si-log-2011.csv;14;descricao_tipo_bairro;descricao_tipo_bairro;descricao_tipo_bairro
+si_log;2011;si-log-2011.csv;15;numero_imovel;numero_imovel;numero_imovel
+si_log;2011;si-log-2011.csv;16;numero_imovel_proximo;numero_imovel_proximo;numero_imovel_proximo
+si_log;2012;si-log-2012.csv;1;numero_boletim;numero_boletim;numero_boletim
+si_log;2012;si-log-2012.csv;2;data_boletim;data_boletim;data_boletim
+si_log;2012;si-log-2012.csv;3;numero_municipio;numero_municipio;numero_municipio
+si_log;2012;si-log-2012.csv;4;nome_municipio;nome_municipio;nome_municipio
+si_log;2012;si-log-2012.csv;5;sequencia_logradouros;sequencia_logradouros;sequencia_logradouro
+si_log;2012;si-log-2012.csv;6;numero_logradouro;numero_logradouro;numero_logradouro
+si_log;2012;si-log-2012.csv;7;tipo_logradouro;tipo_logradouro;tipo_logradouro
+si_log;2012;si-log-2012.csv;8;nome_logradouro;nome_logradouro;nome_logradouro
+si_log;2012;si-log-2012.csv;9;tipo_logradouro_anterior;tipo_logradouro_anterior;tipo_logradouro_anterior
+si_log;2012;si-log-2012.csv;10;nome_logradoro_anterior;nome_logradoro_anterior;nome_logradouro_anterior
+si_log;2012;si-log-2012.csv;11;Numero_bairro;numero_bairro;numero_bairro
+si_log;2012;si-log-2012.csv;12;nome_bairro;nome_bairro;nome_bairro
+si_log;2012;si-log-2012.csv;13;tipo_bairro;tipo_bairro;tipo_bairro
+si_log;2012;si-log-2012.csv;14;descricao_tipo_bairro;descricao_tipo_bairro;descricao_tipo_bairro
+si_log;2012;si-log-2012.csv;15;numero_imovel;numero_imovel;numero_imovel
+si_log;2012;si-log-2012.csv;16;numero_imovel_proximo;numero_imovel_proximo;numero_imovel_proximo
+si_log;2013;si-log-2013.csv;1;numero_boletim;numero_boletim;numero_boletim
+si_log;2013;si-log-2013.csv;2;data_boletim;data_boletim;data_boletim
+si_log;2013;si-log-2013.csv;3;numero_municipio;numero_municipio;numero_municipio
+si_log;2013;si-log-2013.csv;4;nome_municipio;nome_municipio;nome_municipio
+si_log;2013;si-log-2013.csv;5;sequencia_logradouros;sequencia_logradouros;sequencia_logradouro
+si_log;2013;si-log-2013.csv;6;numero_logradouro;numero_logradouro;numero_logradouro
+si_log;2013;si-log-2013.csv;7;tipo_logradouro;tipo_logradouro;tipo_logradouro
+si_log;2013;si-log-2013.csv;8;nome_logradouro;nome_logradouro;nome_logradouro
+si_log;2013;si-log-2013.csv;9;tipo_logradouro_anterior;tipo_logradouro_anterior;tipo_logradouro_anterior
+si_log;2013;si-log-2013.csv;10;nome_logradoro_anterior;nome_logradoro_anterior;nome_logradouro_anterior
+si_log;2013;si-log-2013.csv;11;Numero_bairro;numero_bairro;numero_bairro
+si_log;2013;si-log-2013.csv;12;nome_bairro;nome_bairro;nome_bairro
+si_log;2013;si-log-2013.csv;13;tipo_bairro;tipo_bairro;tipo_bairro
+si_log;2013;si-log-2013.csv;14;descricao_tipo_bairro;descricao_tipo_bairro;descricao_tipo_bairro
+si_log;2013;si-log-2013.csv;15;numero_imovel;numero_imovel;numero_imovel
+si_log;2013;si-log-2013.csv;16;numero_imovel_proximo;numero_imovel_proximo;numero_imovel_proximo
+si_log;2014;si-log-2014.csv;1;numero_boletim;numero_boletim;numero_boletim
+si_log;2014;si-log-2014.csv;2;data_boletim;data_boletim;data_boletim
+si_log;2014;si-log-2014.csv;3;numero_municipio;numero_municipio;numero_municipio
+si_log;2014;si-log-2014.csv;4;nome_municipio;nome_municipio;nome_municipio
+si_log;2014;si-log-2014.csv;5;sequencia_logradouros;sequencia_logradouros;sequencia_logradouro
+si_log;2014;si-log-2014.csv;6;numero_logradouro;numero_logradouro;numero_logradouro
+si_log;2014;si-log-2014.csv;7;tipo_logradouro;tipo_logradouro;tipo_logradouro
+si_log;2014;si-log-2014.csv;8;nome_logradouro;nome_logradouro;nome_logradouro
+si_log;2014;si-log-2014.csv;9;tipo_logradouro_anterior;tipo_logradouro_anterior;tipo_logradouro_anterior
+si_log;2014;si-log-2014.csv;10;nome_logradoro_anterior;nome_logradoro_anterior;nome_logradouro_anterior
+si_log;2014;si-log-2014.csv;11;Numero_bairro;numero_bairro;numero_bairro
+si_log;2014;si-log-2014.csv;12;nome_bairro;nome_bairro;nome_bairro
+si_log;2014;si-log-2014.csv;13;tipo_bairro;tipo_bairro;tipo_bairro
+si_log;2014;si-log-2014.csv;14;descricao_tipo_bairro;descricao_tipo_bairro;descricao_tipo_bairro
+si_log;2014;si-log-2014.csv;15;numero_imovel;numero_imovel;numero_imovel
+si_log;2014;si-log-2014.csv;16;numero_imovel_proximo;numero_imovel_proximo;numero_imovel_proximo
+si_log;2015;si-log-2015.csv;1;numero_boletim;numero_boletim;numero_boletim
+si_log;2015;si-log-2015.csv;2;data_boletim;data_boletim;data_boletim
+si_log;2015;si-log-2015.csv;3;numero_municipio;numero_municipio;numero_municipio
+si_log;2015;si-log-2015.csv;4;nome_municipio;nome_municipio;nome_municipio
+si_log;2015;si-log-2015.csv;5;sequencia_logradouros;sequencia_logradouros;sequencia_logradouro
+si_log;2015;si-log-2015.csv;6;numero_logradouro;numero_logradouro;numero_logradouro
+si_log;2015;si-log-2015.csv;7;tipo_logradouro;tipo_logradouro;tipo_logradouro
+si_log;2015;si-log-2015.csv;8;nome_logradouro;nome_logradouro;nome_logradouro
+si_log;2015;si-log-2015.csv;9;tipo_logradouro_anterior;tipo_logradouro_anterior;tipo_logradouro_anterior
+si_log;2015;si-log-2015.csv;10;nome_logradoro_anterior;nome_logradoro_anterior;nome_logradouro_anterior
+si_log;2015;si-log-2015.csv;11;Numero_bairro;numero_bairro;numero_bairro
+si_log;2015;si-log-2015.csv;12;nome_bairro;nome_bairro;nome_bairro
+si_log;2015;si-log-2015.csv;13;tipo_bairro;tipo_bairro;tipo_bairro
+si_log;2015;si-log-2015.csv;14;descricao_tipo_bairro;descricao_tipo_bairro;descricao_tipo_bairro
+si_log;2015;si-log-2015.csv;15;numero_imovel;numero_imovel;numero_imovel
+si_log;2015;si-log-2015.csv;16;numero_imovel_proximo;numero_imovel_proximo;numero_imovel_proximo
+si_log;2016;si-log-2016.csv;1;Nº_boletim;no_boletim;numero_boletim
+si_log;2016;si-log-2016.csv;2;data_boletim;data_boletim;data_boletim
+si_log;2016;si-log-2016.csv;3;Nº_municipio;no_municipio;numero_municipio
+si_log;2016;si-log-2016.csv;4;nome_municipio;nome_municipio;nome_municipio
+si_log;2016;si-log-2016.csv;5;seq_logradouros;seq_logradouros;sequencia_logradouro
+si_log;2016;si-log-2016.csv;6;Nº_logradouro;no_logradouro;numero_logradouro
+si_log;2016;si-log-2016.csv;7;tipo_logradouro;tipo_logradouro;tipo_logradouro
+si_log;2016;si-log-2016.csv;8;nome_logradouro;nome_logradouro;nome_logradouro
+si_log;2016;si-log-2016.csv;9;tipo_logradouro_anterior;tipo_logradouro_anterior;tipo_logradouro_anterior
+si_log;2016;si-log-2016.csv;10;nome_logradoro_anterior;nome_logradoro_anterior;nome_logradouro_anterior
+si_log;2016;si-log-2016.csv;11;Nº_bairro;no_bairro;numero_bairro
+si_log;2016;si-log-2016.csv;12;nome_bairro;nome_bairro;nome_bairro
+si_log;2016;si-log-2016.csv;13;tipo_bairro;tipo_bairro;tipo_bairro
+si_log;2016;si-log-2016.csv;14;descricao_tipo_bairro;descricao_tipo_bairro;descricao_tipo_bairro
+si_log;2016;si-log-2016.csv;15;Nº_imovel;no_imovel;numero_imovel
+si_log;2016;si-log-2016.csv;16;Nº_imovel_proximo;no_imovel_proximo;numero_imovel_proximo
+si_log;2017;si-log-2017.csv;1;Nº_boletim;no_boletim;numero_boletim
+si_log;2017;si-log-2017.csv;2;data_boletim;data_boletim;data_boletim
+si_log;2017;si-log-2017.csv;3;Nº_municipio;no_municipio;numero_municipio
+si_log;2017;si-log-2017.csv;4;nome_municipio;nome_municipio;nome_municipio
+si_log;2017;si-log-2017.csv;5;seq_logradouros;seq_logradouros;sequencia_logradouro
+si_log;2017;si-log-2017.csv;6;Nº_logradouro;no_logradouro;numero_logradouro
+si_log;2017;si-log-2017.csv;7;tipo_logradouro;tipo_logradouro;tipo_logradouro
+si_log;2017;si-log-2017.csv;8;nome_logradouro;nome_logradouro;nome_logradouro
+si_log;2017;si-log-2017.csv;9;tipo_logradouro_anterior;tipo_logradouro_anterior;tipo_logradouro_anterior
+si_log;2017;si-log-2017.csv;10;nome_logradoro_anterior;nome_logradoro_anterior;nome_logradouro_anterior
+si_log;2017;si-log-2017.csv;11;Nº_bairro;no_bairro;numero_bairro
+si_log;2017;si-log-2017.csv;12;nome_bairro;nome_bairro;nome_bairro
+si_log;2017;si-log-2017.csv;13;tipo_bairro;tipo_bairro;tipo_bairro
+si_log;2017;si-log-2017.csv;14;descricao_tipo_bairro;descricao_tipo_bairro;descricao_tipo_bairro
+si_log;2017;si-log-2017.csv;15;Nº_imovel;no_imovel;numero_imovel
+si_log;2017;si-log-2017.csv;16;Nº_imovel_proximo;no_imovel_proximo;numero_imovel_proximo
+si_log;2018;si-log-2018.csv;1;Nº_boletim;no_boletim;numero_boletim
+si_log;2018;si-log-2018.csv;2;data_boletim;data_boletim;data_boletim
+si_log;2018;si-log-2018.csv;3;Nº_municipio;no_municipio;numero_municipio
+si_log;2018;si-log-2018.csv;4;nome_municipio;nome_municipio;nome_municipio
+si_log;2018;si-log-2018.csv;5;seq_logradouros;seq_logradouros;sequencia_logradouro
+si_log;2018;si-log-2018.csv;6;Nº_logradouro;no_logradouro;numero_logradouro
+si_log;2018;si-log-2018.csv;7;tipo_logradouro;tipo_logradouro;tipo_logradouro
+si_log;2018;si-log-2018.csv;8;nome_logradouro;nome_logradouro;nome_logradouro
+si_log;2018;si-log-2018.csv;9;tipo_logradouro_anterior;tipo_logradouro_anterior;tipo_logradouro_anterior
+si_log;2018;si-log-2018.csv;10;nome_logradoro_anterior;nome_logradoro_anterior;nome_logradouro_anterior
+si_log;2018;si-log-2018.csv;11;Nº_bairro;no_bairro;numero_bairro
+si_log;2018;si-log-2018.csv;12;nome_bairro;nome_bairro;nome_bairro
+si_log;2018;si-log-2018.csv;13;tipo_bairro;tipo_bairro;tipo_bairro
+si_log;2018;si-log-2018.csv;14;descricao_tipo_bairro;descricao_tipo_bairro;descricao_tipo_bairro
+si_log;2018;si-log-2018.csv;15;Nº_imovel;no_imovel;numero_imovel
+si_log;2018;si-log-2018.csv;16;Nº_imovel_proximo;no_imovel_proximo;numero_imovel_proximo
+si_log;2019;si-log-2019.csv;1;Nº_boletim;no_boletim;numero_boletim
+si_log;2019;si-log-2019.csv;2;data_boletim;data_boletim;data_boletim
+si_log;2019;si-log-2019.csv;3;Nº_municipio;no_municipio;numero_municipio
+si_log;2019;si-log-2019.csv;4;nome_municipio;nome_municipio;nome_municipio
+si_log;2019;si-log-2019.csv;5;seq_logradouros;seq_logradouros;sequencia_logradouro
+si_log;2019;si-log-2019.csv;6;Nº_logradouro;no_logradouro;numero_logradouro
+si_log;2019;si-log-2019.csv;7;tipo_logradouro;tipo_logradouro;tipo_logradouro
+si_log;2019;si-log-2019.csv;8;nome_logradouro;nome_logradouro;nome_logradouro
+si_log;2019;si-log-2019.csv;9;tipo_logradouro_anterior;tipo_logradouro_anterior;tipo_logradouro_anterior
+si_log;2019;si-log-2019.csv;10;nome_logradouro_anterior;nome_logradouro_anterior;nome_logradouro_anterior
+si_log;2019;si-log-2019.csv;11;Nº_bairro;no_bairro;numero_bairro
+si_log;2019;si-log-2019.csv;12;nome_bairro;nome_bairro;nome_bairro
+si_log;2019;si-log-2019.csv;13;tipo_bairro;tipo_bairro;tipo_bairro
+si_log;2019;si-log-2019.csv;14;descricao_tipo_bairro;descricao_tipo_bairro;descricao_tipo_bairro
+si_log;2019;si-log-2019.csv;15;Nº_imovel;no_imovel;numero_imovel
+si_log;2019;si-log-2019.csv;16;Nº_imovel_proximo;no_imovel_proximo;numero_imovel_proximo
+si_log;2020;si-log-2020.csv;1;Nº_boletim;no_boletim;numero_boletim
+si_log;2020;si-log-2020.csv;2;data_boletim;data_boletim;data_boletim
+si_log;2020;si-log-2020.csv;3;Nº_municipio;no_municipio;numero_municipio
+si_log;2020;si-log-2020.csv;4;nome_municipio;nome_municipio;nome_municipio
+si_log;2020;si-log-2020.csv;5;seq_logradouros;seq_logradouros;sequencia_logradouro
+si_log;2020;si-log-2020.csv;6;Nº_logradouro;no_logradouro;numero_logradouro
+si_log;2020;si-log-2020.csv;7;tipo_logradouro;tipo_logradouro;tipo_logradouro
+si_log;2020;si-log-2020.csv;8;nome_logradouro;nome_logradouro;nome_logradouro
+si_log;2020;si-log-2020.csv;9;tipo_logradouro_anterior;tipo_logradouro_anterior;tipo_logradouro_anterior
+si_log;2020;si-log-2020.csv;10;nome_logradouro_anterior;nome_logradouro_anterior;nome_logradouro_anterior
+si_log;2020;si-log-2020.csv;11;Nº_bairro;no_bairro;numero_bairro
+si_log;2020;si-log-2020.csv;12;nome_bairro;nome_bairro;nome_bairro
+si_log;2020;si-log-2020.csv;13;tipo_bairro;tipo_bairro;tipo_bairro
+si_log;2020;si-log-2020.csv;14;descricao_tipo_bairro;descricao_tipo_bairro;descricao_tipo_bairro
+si_log;2020;si-log-2020.csv;15;Nº_imovel;no_imovel;numero_imovel
+si_log;2020;si-log-2020.csv;16;Nº_imovel_proximo;no_imovel_proximo;numero_imovel_proximo
+si_log;2021;si-log-2021.csv;1;Nº_boletim;no_boletim;numero_boletim
+si_log;2021;si-log-2021.csv;2;data_boletim;data_boletim;data_boletim
+si_log;2021;si-log-2021.csv;3;Nº_municipio;no_municipio;numero_municipio
+si_log;2021;si-log-2021.csv;4;nome_municipio;nome_municipio;nome_municipio
+si_log;2021;si-log-2021.csv;5;seq_logradouros;seq_logradouros;sequencia_logradouro
+si_log;2021;si-log-2021.csv;6;Nº_logradouro;no_logradouro;numero_logradouro
+si_log;2021;si-log-2021.csv;7;tipo_logradouro;tipo_logradouro;tipo_logradouro
+si_log;2021;si-log-2021.csv;8;nome_logradouro;nome_logradouro;nome_logradouro
+si_log;2021;si-log-2021.csv;9;tipo_logradouro_anterior;tipo_logradouro_anterior;tipo_logradouro_anterior
+si_log;2021;si-log-2021.csv;10;nome_logradoro_anterior;nome_logradoro_anterior;nome_logradouro_anterior
+si_log;2021;si-log-2021.csv;11;Nº_bairro;no_bairro;numero_bairro
+si_log;2021;si-log-2021.csv;12;nome_bairro;nome_bairro;nome_bairro
+si_log;2021;si-log-2021.csv;13;tipo_bairro;tipo_bairro;tipo_bairro
+si_log;2021;si-log-2021.csv;14;descricao_tipo_bairro;descricao_tipo_bairro;descricao_tipo_bairro
+si_log;2021;si-log-2021.csv;15;Nº_imovel;no_imovel;numero_imovel
+si_log;2021;si-log-2021.csv;16;Nº_imovel_proximo;no_imovel_proximo;numero_imovel_proximo
+si_log;2022;si-log-2022.csv;1;Nº_boletim;no_boletim;numero_boletim
+si_log;2022;si-log-2022.csv;2;data_boletim;data_boletim;data_boletim
+si_log;2022;si-log-2022.csv;3;Nº_municipio;no_municipio;numero_municipio
+si_log;2022;si-log-2022.csv;4;nome_municipio;nome_municipio;nome_municipio
+si_log;2022;si-log-2022.csv;5;seq_logradouros;seq_logradouros;sequencia_logradouro
+si_log;2022;si-log-2022.csv;6;Nº_logradouro;no_logradouro;numero_logradouro
+si_log;2022;si-log-2022.csv;7;tipo_logradouro;tipo_logradouro;tipo_logradouro
+si_log;2022;si-log-2022.csv;8;nome_logradouro;nome_logradouro;nome_logradouro
+si_log;2022;si-log-2022.csv;9;tipo_logradouro_anterior;tipo_logradouro_anterior;tipo_logradouro_anterior
+si_log;2022;si-log-2022.csv;10;nome_logradoro_anterior;nome_logradoro_anterior;nome_logradouro_anterior
+si_log;2022;si-log-2022.csv;11;Nº_bairro;no_bairro;numero_bairro
+si_log;2022;si-log-2022.csv;12;nome_bairro;nome_bairro;nome_bairro
+si_log;2022;si-log-2022.csv;13;tipo_bairro;tipo_bairro;tipo_bairro
+si_log;2022;si-log-2022.csv;14;descricao_tipo_bairro;descricao_tipo_bairro;descricao_tipo_bairro
+si_log;2022;si-log-2022.csv;15;Nº_imovel;no_imovel;numero_imovel
+si_log;2022;si-log-2022.csv;16;Nº_imovel_proximo;no_imovel_proximo;numero_imovel_proximo
+si_log;2023;si-log-2023.csv;1;Nº_boletim;no_boletim;numero_boletim
+si_log;2023;si-log-2023.csv;2;data_boletim;data_boletim;data_boletim
+si_log;2023;si-log-2023.csv;3;Nº_municipio;no_municipio;numero_municipio
+si_log;2023;si-log-2023.csv;4;nome_municipio;nome_municipio;nome_municipio
+si_log;2023;si-log-2023.csv;5;seq_logradouros;seq_logradouros;sequencia_logradouro
+si_log;2023;si-log-2023.csv;6;Nº_logradouro;no_logradouro;numero_logradouro
+si_log;2023;si-log-2023.csv;7;tipo_logradouro;tipo_logradouro;tipo_logradouro
+si_log;2023;si-log-2023.csv;8;nome_logradouro;nome_logradouro;nome_logradouro
+si_log;2023;si-log-2023.csv;9;tipo_logradouro_anterior;tipo_logradouro_anterior;tipo_logradouro_anterior
+si_log;2023;si-log-2023.csv;10;nome_logradoro_anterior;nome_logradoro_anterior;nome_logradouro_anterior
+si_log;2023;si-log-2023.csv;11;Nº_bairro;no_bairro;numero_bairro
+si_log;2023;si-log-2023.csv;12;nome_bairro;nome_bairro;nome_bairro
+si_log;2023;si-log-2023.csv;13;tipo_bairro;tipo_bairro;tipo_bairro
+si_log;2023;si-log-2023.csv;14;descricao_tipo_bairro;descricao_tipo_bairro;descricao_tipo_bairro
+si_log;2023;si-log-2023.csv;15;Nº_imovel;no_imovel;numero_imovel
+si_log;2023;si-log-2023.csv;16;Nº_imovel_proximo;no_imovel_proximo;numero_imovel_proximo
+si_log;2024;si-log-2024.csv;1;Nº_boletim;no_boletim;numero_boletim
+si_log;2024;si-log-2024.csv;2;data_boletim;data_boletim;data_boletim
+si_log;2024;si-log-2024.csv;3;Nº_municipio;no_municipio;numero_municipio
+si_log;2024;si-log-2024.csv;4;nome_municipio;nome_municipio;nome_municipio
+si_log;2024;si-log-2024.csv;5;seq_logradouros;seq_logradouros;sequencia_logradouro
+si_log;2024;si-log-2024.csv;6;Nº_logradouro;no_logradouro;numero_logradouro
+si_log;2024;si-log-2024.csv;7;tipo_logradouro;tipo_logradouro;tipo_logradouro
+si_log;2024;si-log-2024.csv;8;nome_logradouro;nome_logradouro;nome_logradouro
+si_log;2024;si-log-2024.csv;9;tipo_logradouro_anterior;tipo_logradouro_anterior;tipo_logradouro_anterior
+si_log;2024;si-log-2024.csv;10;nome_logradoro_anterior;nome_logradoro_anterior;nome_logradouro_anterior
+si_log;2024;si-log-2024.csv;11;Nº_bairro;no_bairro;numero_bairro
+si_log;2024;si-log-2024.csv;12;nome_bairro;nome_bairro;nome_bairro
+si_log;2024;si-log-2024.csv;13;tipo_bairro;tipo_bairro;tipo_bairro
+si_log;2024;si-log-2024.csv;14;descricao_tipo_bairro;descricao_tipo_bairro;descricao_tipo_bairro
+si_log;2024;si-log-2024.csv;15;Nº_imovel;no_imovel;numero_imovel
+si_log;2024;si-log-2024.csv;16;Nº_imovel_proximo;no_imovel_proximo;numero_imovel_proximo
+si_veic;2011;si-veic-2011.csv;1;numero_boletim;numero_boletim;numero_boletim
+si_veic;2011;si-veic-2011.csv;2;data_hora_boletim;data_hora_boletim;data_hora_boletim
+si_veic;2011;si-veic-2011.csv;3;sequencial_veiculo;sequencial_veiculo;sequencial_veiculo
+si_veic;2011;si-veic-2011.csv;4;codigo_categoria;codigo_categoria;codigo_categoria
+si_veic;2011;si-veic-2011.csv;5;descricao_categoria;descricao_categoria;descricao_categoria
+si_veic;2011;si-veic-2011.csv;6;codigo_especie;codigo_especie;codigo_especie
+si_veic;2011;si-veic-2011.csv;7;descricao_especie;descricao_especie;descricao_especie
+si_veic;2011;si-veic-2011.csv;8;codigo_situacao;codigo_situacao;codigo_situacao
+si_veic;2011;si-veic-2011.csv;9;descricao_situacao;descricao_situacao;descricao_situacao
+si_veic;2011;si-veic-2011.csv;10;tipo_socorro;tipo_socorro;tipo_socorro
+si_veic;2011;si-veic-2011.csv;11;descricao_tipo_socorro;descricao_tipo_socorro;descricao_tipo_socorro
+si_veic;2012;si-veic-2012.csv;1;numero_boletim;numero_boletim;numero_boletim
+si_veic;2012;si-veic-2012.csv;2;data_hora_boletim;data_hora_boletim;data_hora_boletim
+si_veic;2012;si-veic-2012.csv;3;sequencial_veiculo;sequencial_veiculo;sequencial_veiculo
+si_veic;2012;si-veic-2012.csv;4;codigo_categoria;codigo_categoria;codigo_categoria
+si_veic;2012;si-veic-2012.csv;5;descricao_categoria;descricao_categoria;descricao_categoria
+si_veic;2012;si-veic-2012.csv;6;codigo_especie;codigo_especie;codigo_especie
+si_veic;2012;si-veic-2012.csv;7;descricao_especie;descricao_especie;descricao_especie
+si_veic;2012;si-veic-2012.csv;8;codigo_situacao;codigo_situacao;codigo_situacao
+si_veic;2012;si-veic-2012.csv;9;descricao_situacao;descricao_situacao;descricao_situacao
+si_veic;2012;si-veic-2012.csv;10;tipo_socorro;tipo_socorro;tipo_socorro
+si_veic;2012;si-veic-2012.csv;11;descricao_tipo_socorro;descricao_tipo_socorro;descricao_tipo_socorro
+si_veic;2013;si-veic-2013.csv;1;numero_boletim;numero_boletim;numero_boletim
+si_veic;2013;si-veic-2013.csv;2;data_hora_boletim;data_hora_boletim;data_hora_boletim
+si_veic;2013;si-veic-2013.csv;3;sequencial_veiculo;sequencial_veiculo;sequencial_veiculo
+si_veic;2013;si-veic-2013.csv;4;codigo_categoria;codigo_categoria;codigo_categoria
+si_veic;2013;si-veic-2013.csv;5;descricao_categoria;descricao_categoria;descricao_categoria
+si_veic;2013;si-veic-2013.csv;6;codigo_especie;codigo_especie;codigo_especie
+si_veic;2013;si-veic-2013.csv;7;descricao_especie;descricao_especie;descricao_especie
+si_veic;2013;si-veic-2013.csv;8;codigo_situacao;codigo_situacao;codigo_situacao
+si_veic;2013;si-veic-2013.csv;9;descricao_situacao;descricao_situacao;descricao_situacao
+si_veic;2013;si-veic-2013.csv;10;tipo_socorro;tipo_socorro;tipo_socorro
+si_veic;2013;si-veic-2013.csv;11;descricao_tipo_socorro;descricao_tipo_socorro;descricao_tipo_socorro
+si_veic;2014;si-veic-2014.csv;1;numero_boletim;numero_boletim;numero_boletim
+si_veic;2014;si-veic-2014.csv;2;data_hora_boletim;data_hora_boletim;data_hora_boletim
+si_veic;2014;si-veic-2014.csv;3;sequencial_veiculo;sequencial_veiculo;sequencial_veiculo
+si_veic;2014;si-veic-2014.csv;4;codigo_categoria;codigo_categoria;codigo_categoria
+si_veic;2014;si-veic-2014.csv;5;descricao_categoria;descricao_categoria;descricao_categoria
+si_veic;2014;si-veic-2014.csv;6;codigo_especie;codigo_especie;codigo_especie
+si_veic;2014;si-veic-2014.csv;7;descricao_especie;descricao_especie;descricao_especie
+si_veic;2014;si-veic-2014.csv;8;codigo_situacao;codigo_situacao;codigo_situacao
+si_veic;2014;si-veic-2014.csv;9;descricao_situacao;descricao_situacao;descricao_situacao
+si_veic;2014;si-veic-2014.csv;10;tipo_socorro;tipo_socorro;tipo_socorro
+si_veic;2014;si-veic-2014.csv;11;descricao_tipo_socorro;descricao_tipo_socorro;descricao_tipo_socorro
+si_veic;2015;si-veic-2015.csv;1;numero_boletim;numero_boletim;numero_boletim
+si_veic;2015;si-veic-2015.csv;2;data_hora_boletim;data_hora_boletim;data_hora_boletim
+si_veic;2015;si-veic-2015.csv;3;sequencial_veiculo;sequencial_veiculo;sequencial_veiculo
+si_veic;2015;si-veic-2015.csv;4;codigo_categoria;codigo_categoria;codigo_categoria
+si_veic;2015;si-veic-2015.csv;5;descricao_categoria;descricao_categoria;descricao_categoria
+si_veic;2015;si-veic-2015.csv;6;codigo_especie;codigo_especie;codigo_especie
+si_veic;2015;si-veic-2015.csv;7;descricao_especie;descricao_especie;descricao_especie
+si_veic;2015;si-veic-2015.csv;8;codigo_situacao;codigo_situacao;codigo_situacao
+si_veic;2015;si-veic-2015.csv;9;descricao_situacao;descricao_situacao;descricao_situacao
+si_veic;2015;si-veic-2015.csv;10;tipo_socorro;tipo_socorro;tipo_socorro
+si_veic;2015;si-veic-2015.csv;11;descricao_tipo_socorro;descricao_tipo_socorro;descricao_tipo_socorro
+si_veic;2016;si-veic-2016.csv;1;Nº_boletim;no_boletim;numero_boletim
+si_veic;2016;si-veic-2016.csv;2;data_hora_boletim;data_hora_boletim;data_hora_boletim
+si_veic;2016;si-veic-2016.csv;3;seq_veic;seq_veic;sequencial_veiculo
+si_veic;2016;si-veic-2016.csv;4;cod_categ;cod_categ;codigo_categoria
+si_veic;2016;si-veic-2016.csv;5;descricao_categoria;descricao_categoria;descricao_categoria
+si_veic;2016;si-veic-2016.csv;6;cod_especie;cod_especie;codigo_especie
+si_veic;2016;si-veic-2016.csv;7;descricao_especie;descricao_especie;descricao_especie
+si_veic;2016;si-veic-2016.csv;8;cod_situacao;cod_situacao;codigo_situacao
+si_veic;2016;si-veic-2016.csv;9;desc_situacao;desc_situacao;descricao_situacao
+si_veic;2016;si-veic-2016.csv;10;tipo_socorro;tipo_socorro;tipo_socorro
+si_veic;2016;si-veic-2016.csv;11;desc_tipo_socorro;desc_tipo_socorro;descricao_tipo_socorro
+si_veic;2017;si-veic-2017.csv;1;Nº_boletim;no_boletim;numero_boletim
+si_veic;2017;si-veic-2017.csv;2;data_hora_boletim;data_hora_boletim;data_hora_boletim
+si_veic;2017;si-veic-2017.csv;3;seq_veic;seq_veic;sequencial_veiculo
+si_veic;2017;si-veic-2017.csv;4;cod_categ;cod_categ;codigo_categoria
+si_veic;2017;si-veic-2017.csv;5;descricao_categoria;descricao_categoria;descricao_categoria
+si_veic;2017;si-veic-2017.csv;6;cod_especie;cod_especie;codigo_especie
+si_veic;2017;si-veic-2017.csv;7;descricao_especie;descricao_especie;descricao_especie
+si_veic;2017;si-veic-2017.csv;8;cod_situacao;cod_situacao;codigo_situacao
+si_veic;2017;si-veic-2017.csv;9;desc_situacao;desc_situacao;descricao_situacao
+si_veic;2017;si-veic-2017.csv;10;tipo_socorro;tipo_socorro;tipo_socorro
+si_veic;2017;si-veic-2017.csv;11;desc_tipo_socorro;desc_tipo_socorro;descricao_tipo_socorro
+si_veic;2018;si-veic-2018.csv;1;Nº_boletim;no_boletim;numero_boletim
+si_veic;2018;si-veic-2018.csv;2;data_hora_boletim;data_hora_boletim;data_hora_boletim
+si_veic;2018;si-veic-2018.csv;3;seq_veic;seq_veic;sequencial_veiculo
+si_veic;2018;si-veic-2018.csv;4;cod_categ;cod_categ;codigo_categoria
+si_veic;2018;si-veic-2018.csv;5;descricao_categoria;descricao_categoria;descricao_categoria
+si_veic;2018;si-veic-2018.csv;6;cod_especie;cod_especie;codigo_especie
+si_veic;2018;si-veic-2018.csv;7;descricao_especie;descricao_especie;descricao_especie
+si_veic;2018;si-veic-2018.csv;8;cod_situacao;cod_situacao;codigo_situacao
+si_veic;2018;si-veic-2018.csv;9;desc_situacao;desc_situacao;descricao_situacao
+si_veic;2018;si-veic-2018.csv;10;tipo_socorro;tipo_socorro;tipo_socorro
+si_veic;2018;si-veic-2018.csv;11;desc_tipo_socorro;desc_tipo_socorro;descricao_tipo_socorro
+si_veic;2019;si-veic-2019.csv;1;Nº_boletim;no_boletim;numero_boletim
+si_veic;2019;si-veic-2019.csv;2;data_hora_boletim;data_hora_boletim;data_hora_boletim
+si_veic;2019;si-veic-2019.csv;3;seq_veic;seq_veic;sequencial_veiculo
+si_veic;2019;si-veic-2019.csv;4;cod_categ;cod_categ;codigo_categoria
+si_veic;2019;si-veic-2019.csv;5;descricao_categoria;descricao_categoria;descricao_categoria
+si_veic;2019;si-veic-2019.csv;6;cod_especie;cod_especie;codigo_especie
+si_veic;2019;si-veic-2019.csv;7;descricao_especie;descricao_especie;descricao_especie
+si_veic;2019;si-veic-2019.csv;8;cod_situacao;cod_situacao;codigo_situacao
+si_veic;2019;si-veic-2019.csv;9;desc_situacao;desc_situacao;descricao_situacao
+si_veic;2019;si-veic-2019.csv;10;tipo_socorro;tipo_socorro;tipo_socorro
+si_veic;2019;si-veic-2019.csv;11;desc_tipo_socorro;desc_tipo_socorro;descricao_tipo_socorro
+si_veic;2020;si-veic-2020.csv;1;Nº_boletim;no_boletim;numero_boletim
+si_veic;2020;si-veic-2020.csv;2;data_hora_boletim;data_hora_boletim;data_hora_boletim
+si_veic;2020;si-veic-2020.csv;3;seq_veic;seq_veic;sequencial_veiculo
+si_veic;2020;si-veic-2020.csv;4;cod_categ;cod_categ;codigo_categoria
+si_veic;2020;si-veic-2020.csv;5;descricao_categoria;descricao_categoria;descricao_categoria
+si_veic;2020;si-veic-2020.csv;6;cod_especie;cod_especie;codigo_especie
+si_veic;2020;si-veic-2020.csv;7;descricao_especie;descricao_especie;descricao_especie
+si_veic;2020;si-veic-2020.csv;8;cod_situacao;cod_situacao;codigo_situacao
+si_veic;2020;si-veic-2020.csv;9;desc_situacao;desc_situacao;descricao_situacao
+si_veic;2020;si-veic-2020.csv;10;tipo_socorro;tipo_socorro;tipo_socorro
+si_veic;2020;si-veic-2020.csv;11;desc_tipo_socorro;desc_tipo_socorro;descricao_tipo_socorro
+si_veic;2021;si-veic-2021.csv;1;Nº_boletim;no_boletim;numero_boletim
+si_veic;2021;si-veic-2021.csv;2;data_hora_boletim;data_hora_boletim;data_hora_boletim
+si_veic;2021;si-veic-2021.csv;3;seq_veic;seq_veic;sequencial_veiculo
+si_veic;2021;si-veic-2021.csv;4;cod_categ;cod_categ;codigo_categoria
+si_veic;2021;si-veic-2021.csv;5;descricao_categoria;descricao_categoria;descricao_categoria
+si_veic;2021;si-veic-2021.csv;6;cod_especie;cod_especie;codigo_especie
+si_veic;2021;si-veic-2021.csv;7;descricao_especie;descricao_especie;descricao_especie
+si_veic;2021;si-veic-2021.csv;8;cod_situacao;cod_situacao;codigo_situacao
+si_veic;2021;si-veic-2021.csv;9;desc_situacao;desc_situacao;descricao_situacao
+si_veic;2021;si-veic-2021.csv;10;tipo_socorro;tipo_socorro;tipo_socorro
+si_veic;2021;si-veic-2021.csv;11;desc_tipo_socorro;desc_tipo_socorro;descricao_tipo_socorro
+si_veic;2022;si-veic-2022.csv;1;Nº_boletim;no_boletim;numero_boletim
+si_veic;2022;si-veic-2022.csv;2;data_hora_boletim;data_hora_boletim;data_hora_boletim
+si_veic;2022;si-veic-2022.csv;3;seq_veic;seq_veic;sequencial_veiculo
+si_veic;2022;si-veic-2022.csv;4;cod_categ;cod_categ;codigo_categoria
+si_veic;2022;si-veic-2022.csv;5;descricao_categoria;descricao_categoria;descricao_categoria
+si_veic;2022;si-veic-2022.csv;6;cod_especie;cod_especie;codigo_especie
+si_veic;2022;si-veic-2022.csv;7;descricao_especie;descricao_especie;descricao_especie
+si_veic;2022;si-veic-2022.csv;8;cod_situacao;cod_situacao;codigo_situacao
+si_veic;2022;si-veic-2022.csv;9;desc_situacao;desc_situacao;descricao_situacao
+si_veic;2022;si-veic-2022.csv;10;tipo_socorro;tipo_socorro;tipo_socorro
+si_veic;2022;si-veic-2022.csv;11;desc_tipo_socorro;desc_tipo_socorro;descricao_tipo_socorro
+si_veic;2023;si-veic-2023.csv;1;Nº_boletim;no_boletim;numero_boletim
+si_veic;2023;si-veic-2023.csv;2;data_hora_boletim;data_hora_boletim;data_hora_boletim
+si_veic;2023;si-veic-2023.csv;3;seq_veic;seq_veic;sequencial_veiculo
+si_veic;2023;si-veic-2023.csv;4;cod_categ;cod_categ;codigo_categoria
+si_veic;2023;si-veic-2023.csv;5;descricao_categoria;descricao_categoria;descricao_categoria
+si_veic;2023;si-veic-2023.csv;6;cod_especie;cod_especie;codigo_especie
+si_veic;2023;si-veic-2023.csv;7;descricao_especie;descricao_especie;descricao_especie
+si_veic;2023;si-veic-2023.csv;8;cod_situacao;cod_situacao;codigo_situacao
+si_veic;2023;si-veic-2023.csv;9;desc_situacao;desc_situacao;descricao_situacao
+si_veic;2023;si-veic-2023.csv;10;tipo_socorro;tipo_socorro;tipo_socorro
+si_veic;2023;si-veic-2023.csv;11;desc_tipo_socorro;desc_tipo_socorro;descricao_tipo_socorro
+si_veic;2024;si-veic-2024.csv;1;Nº_boletim;no_boletim;numero_boletim
+si_veic;2024;si-veic-2024.csv;2;data_hora_boletim;data_hora_boletim;data_hora_boletim
+si_veic;2024;si-veic-2024.csv;3;seq_veic;seq_veic;sequencial_veiculo
+si_veic;2024;si-veic-2024.csv;4;cod_categ;cod_categ;codigo_categoria
+si_veic;2024;si-veic-2024.csv;5;descricao_categoria;descricao_categoria;descricao_categoria
+si_veic;2024;si-veic-2024.csv;6;cod_especie;cod_especie;codigo_especie
+si_veic;2024;si-veic-2024.csv;7;descricao_especie;descricao_especie;descricao_especie
+si_veic;2024;si-veic-2024.csv;8;cod_situacao;cod_situacao;codigo_situacao
+si_veic;2024;si-veic-2024.csv;9;desc_situacao;desc_situacao;descricao_situacao
+si_veic;2024;si-veic-2024.csv;10;tipo_socorro;tipo_socorro;tipo_socorro
+si_veic;2024;si-veic-2024.csv;11;desc_tipo_socorro;desc_tipo_socorro;descricao_tipo_socorro
+si_env;2011;si_env-2011.csv;1;num_boletim;num_boletim;numero_boletim
+si_env;2011;si_env-2011.csv;2;data_hora_boletim;data_hora_boletim;data_hora_boletim
+si_env;2011;si_env-2011.csv;3;numero_envolvido;numero_envolvido;numero_envolvido
+si_env;2011;si_env-2011.csv;4;condutor;condutor;condutor
+si_env;2011;si_env-2011.csv;5;codigo_severidade;codigo_severidade;codigo_severidade
+si_env;2011;si_env-2011.csv;6;desc_severidade;desc_severidade;desc_severidade
+si_env;2011;si_env-2011.csv;7;sexo;sexo;sexo
+si_env;2011;si_env-2011.csv;8;cinto_seguranca;cinto_seguranca;cinto_seguranca
+si_env;2011;si_env-2011.csv;9;Embreagues;embreagues;embriaguez
+si_env;2011;si_env-2011.csv;10;Idade;idade;idade
+si_env;2011;si_env-2011.csv;11;nascimento;nascimento;nascimento
+si_env;2011;si_env-2011.csv;12;categoria_habilitacao;categoria_habilitacao;categoria_habilitacao
+si_env;2011;si_env-2011.csv;13;descricao_habilitacao;descricao_habilitacao;descricao_habilitacao
+si_env;2011;si_env-2011.csv;14;declaracao_obito;declaracao_obito;declaracao_obito
+si_env;2011;si_env-2011.csv;15;cod_severidade_antiga;cod_severidade_antiga;cod_severidade_antiga
+si_env;2011;si_env-2011.csv;16;especie_veiculo;especie_veiculo;especie_veiculo
+si_env;2012;si_env-2012.csv;1;num_boletim;num_boletim;numero_boletim
+si_env;2012;si_env-2012.csv;2;data_hora_boletim;data_hora_boletim;data_hora_boletim
+si_env;2012;si_env-2012.csv;3;numero_envolvido;numero_envolvido;numero_envolvido
+si_env;2012;si_env-2012.csv;4;condutor;condutor;condutor
+si_env;2012;si_env-2012.csv;5;codigo_severidade;codigo_severidade;codigo_severidade
+si_env;2012;si_env-2012.csv;6;desc_severidade;desc_severidade;desc_severidade
+si_env;2012;si_env-2012.csv;7;sexo;sexo;sexo
+si_env;2012;si_env-2012.csv;8;cinto_seguranca;cinto_seguranca;cinto_seguranca
+si_env;2012;si_env-2012.csv;9;Embreagues;embreagues;embriaguez
+si_env;2012;si_env-2012.csv;10;Idade;idade;idade
+si_env;2012;si_env-2012.csv;11;nascimento;nascimento;nascimento
+si_env;2012;si_env-2012.csv;12;categoria_habilitacao;categoria_habilitacao;categoria_habilitacao
+si_env;2012;si_env-2012.csv;13;descricao_habilitacao;descricao_habilitacao;descricao_habilitacao
+si_env;2012;si_env-2012.csv;14;declaracao_obito;declaracao_obito;declaracao_obito
+si_env;2012;si_env-2012.csv;15;cod_severidade_antiga;cod_severidade_antiga;cod_severidade_antiga
+si_env;2012;si_env-2012.csv;16;especie_veiculo;especie_veiculo;especie_veiculo
+si_env;2013;si_env-2013.csv;1;num_boletim;num_boletim;numero_boletim
+si_env;2013;si_env-2013.csv;2;data_hora_boletim;data_hora_boletim;data_hora_boletim
+si_env;2013;si_env-2013.csv;3;numero_envolvido;numero_envolvido;numero_envolvido
+si_env;2013;si_env-2013.csv;4;condutor;condutor;condutor
+si_env;2013;si_env-2013.csv;5;codigo_severidade;codigo_severidade;codigo_severidade
+si_env;2013;si_env-2013.csv;6;desc_severidade;desc_severidade;desc_severidade
+si_env;2013;si_env-2013.csv;7;sexo;sexo;sexo
+si_env;2013;si_env-2013.csv;8;cinto_seguranca;cinto_seguranca;cinto_seguranca
+si_env;2013;si_env-2013.csv;9;Embreagues;embreagues;embriaguez
+si_env;2013;si_env-2013.csv;10;Idade;idade;idade
+si_env;2013;si_env-2013.csv;11;nascimento;nascimento;nascimento
+si_env;2013;si_env-2013.csv;12;categoria_habilitacao;categoria_habilitacao;categoria_habilitacao
+si_env;2013;si_env-2013.csv;13;descricao_habilitacao;descricao_habilitacao;descricao_habilitacao
+si_env;2013;si_env-2013.csv;14;declaracao_obito;declaracao_obito;declaracao_obito
+si_env;2013;si_env-2013.csv;15;cod_severidade_antiga;cod_severidade_antiga;cod_severidade_antiga
+si_env;2013;si_env-2013.csv;16;especie_veiculo;especie_veiculo;especie_veiculo
+si_env;2014;si_env-2014.csv;1;num_boletim;num_boletim;numero_boletim
+si_env;2014;si_env-2014.csv;2;data_hora_boletim;data_hora_boletim;data_hora_boletim
+si_env;2014;si_env-2014.csv;3;numero_envolvido;numero_envolvido;numero_envolvido
+si_env;2014;si_env-2014.csv;4;condutor;condutor;condutor
+si_env;2014;si_env-2014.csv;5;codigo_severidade;codigo_severidade;codigo_severidade
+si_env;2014;si_env-2014.csv;6;desc_severidade;desc_severidade;desc_severidade
+si_env;2014;si_env-2014.csv;7;sexo;sexo;sexo
+si_env;2014;si_env-2014.csv;8;cinto_seguranca;cinto_seguranca;cinto_seguranca
+si_env;2014;si_env-2014.csv;9;Embreagues;embreagues;embriaguez
+si_env;2014;si_env-2014.csv;10;Idade;idade;idade
+si_env;2014;si_env-2014.csv;11;nascimento;nascimento;nascimento
+si_env;2014;si_env-2014.csv;12;categoria_habilitacao;categoria_habilitacao;categoria_habilitacao
+si_env;2014;si_env-2014.csv;13;descricao_habilitacao;descricao_habilitacao;descricao_habilitacao
+si_env;2014;si_env-2014.csv;14;declaracao_obito;declaracao_obito;declaracao_obito
+si_env;2014;si_env-2014.csv;15;cod_severidade_antiga;cod_severidade_antiga;cod_severidade_antiga
+si_env;2014;si_env-2014.csv;16;especie_veiculo;especie_veiculo;especie_veiculo
+si_env;2015;si_env-2015.csv;1;num_boletim;num_boletim;numero_boletim
+si_env;2015;si_env-2015.csv;2;data_hora_boletim;data_hora_boletim;data_hora_boletim
+si_env;2015;si_env-2015.csv;3;numero_envolvido;numero_envolvido;numero_envolvido
+si_env;2015;si_env-2015.csv;4;condutor;condutor;condutor
+si_env;2015;si_env-2015.csv;5;codigo_severidade;codigo_severidade;codigo_severidade
+si_env;2015;si_env-2015.csv;6;desc_severidade;desc_severidade;desc_severidade
+si_env;2015;si_env-2015.csv;7;sexo;sexo;sexo
+si_env;2015;si_env-2015.csv;8;cinto_seguranca;cinto_seguranca;cinto_seguranca
+si_env;2015;si_env-2015.csv;9;Embreagues;embreagues;embriaguez
+si_env;2015;si_env-2015.csv;10;Idade;idade;idade
+si_env;2015;si_env-2015.csv;11;nascimento;nascimento;nascimento
+si_env;2015;si_env-2015.csv;12;categoria_habilitacao;categoria_habilitacao;categoria_habilitacao
+si_env;2015;si_env-2015.csv;13;descricao_habilitacao;descricao_habilitacao;descricao_habilitacao
+si_env;2015;si_env-2015.csv;14;declaracao_obito;declaracao_obito;declaracao_obito
+si_env;2015;si_env-2015.csv;15;cod_severidade_antiga;cod_severidade_antiga;cod_severidade_antiga
+si_env;2015;si_env-2015.csv;16;especie_veiculo;especie_veiculo;especie_veiculo
+si_env;2015;si_env-2015.csv;17;indicador_pedestre;indicador_pedestre;pedestre
+si_env;2015;si_env-2015.csv;18;indicador_passageiro;indicador_passageiro;passageiro
+si_env;2015;si_env-2015.csv;19;indicador_usa_capacete;indicador_usa_capacete;usa_capacete
+si_env;2015;si_env-2015.csv;20;;(vazio);(ignorar)
+si_env;2016;si_env-2016.csv;1;num_boletim;num_boletim;numero_boletim
+si_env;2016;si_env-2016.csv;2;data_hora_boletim;data_hora_boletim;data_hora_boletim
+si_env;2016;si_env-2016.csv;3;Nº_envolvido;no_envolvido;numero_envolvido
+si_env;2016;si_env-2016.csv;4;condutor;condutor;condutor
+si_env;2016;si_env-2016.csv;5;cod_severidade;cod_severidade;codigo_severidade
+si_env;2016;si_env-2016.csv;6;desc_severidade;desc_severidade;desc_severidade
+si_env;2016;si_env-2016.csv;7;sexo;sexo;sexo
+si_env;2016;si_env-2016.csv;8;cinto_seguranca;cinto_seguranca;cinto_seguranca
+si_env;2016;si_env-2016.csv;9;Embreagues;embreagues;embriaguez
+si_env;2016;si_env-2016.csv;10;Idade;idade;idade
+si_env;2016;si_env-2016.csv;11;nascimento;nascimento;nascimento
+si_env;2016;si_env-2016.csv;12;categoria_habilitacao;categoria_habilitacao;categoria_habilitacao
+si_env;2016;si_env-2016.csv;13;descricao_habilitacao;descricao_habilitacao;descricao_habilitacao
+si_env;2016;si_env-2016.csv;14;declaracao_obito;declaracao_obito;declaracao_obito
+si_env;2016;si_env-2016.csv;15;cod_severidade_antiga;cod_severidade_antiga;cod_severidade_antiga
+si_env;2016;si_env-2016.csv;16;especie_veiculo;especie_veiculo;especie_veiculo
+si_env;2016;si_env-2016.csv;17;pedestre;pedestre;pedestre
+si_env;2016;si_env-2016.csv;18;passageiro;passageiro;passageiro
+si_env;2017;si_env-2017.csv;1;num_boletim;num_boletim;numero_boletim
+si_env;2017;si_env-2017.csv;2;data_hora_boletim;data_hora_boletim;data_hora_boletim
+si_env;2017;si_env-2017.csv;3;Nº_envolvido;no_envolvido;numero_envolvido
+si_env;2017;si_env-2017.csv;4;condutor;condutor;condutor
+si_env;2017;si_env-2017.csv;5;cod_severidade;cod_severidade;codigo_severidade
+si_env;2017;si_env-2017.csv;6;desc_severidade;desc_severidade;desc_severidade
+si_env;2017;si_env-2017.csv;7;sexo;sexo;sexo
+si_env;2017;si_env-2017.csv;8;cinto_seguranca;cinto_seguranca;cinto_seguranca
+si_env;2017;si_env-2017.csv;9;Embreagues;embreagues;embriaguez
+si_env;2017;si_env-2017.csv;10;Idade;idade;idade
+si_env;2017;si_env-2017.csv;11;nascimento;nascimento;nascimento
+si_env;2017;si_env-2017.csv;12;categoria_habilitacao;categoria_habilitacao;categoria_habilitacao
+si_env;2017;si_env-2017.csv;13;descricao_habilitacao;descricao_habilitacao;descricao_habilitacao
+si_env;2017;si_env-2017.csv;14;declaracao_obito;declaracao_obito;declaracao_obito
+si_env;2017;si_env-2017.csv;15;cod_severidade_antiga;cod_severidade_antiga;cod_severidade_antiga
+si_env;2017;si_env-2017.csv;16;especie_veiculo;especie_veiculo;especie_veiculo
+si_env;2017;si_env-2017.csv;17;pedestre;pedestre;pedestre
+si_env;2017;si_env-2017.csv;18;passageiro;passageiro;passageiro
+si_env;2018;si_env-2018.csv;1;Nº_boletim;no_boletim;numero_boletim
+si_env;2018;si_env-2018.csv;2;data_hora_boletim;data_hora_boletim;data_hora_boletim
+si_env;2018;si_env-2018.csv;3;Nº_envolvido;no_envolvido;numero_envolvido
+si_env;2018;si_env-2018.csv;4;condutor;condutor;condutor
+si_env;2018;si_env-2018.csv;5;cod_severidade;cod_severidade;codigo_severidade
+si_env;2018;si_env-2018.csv;6;desc_severidade;desc_severidade;desc_severidade
+si_env;2018;si_env-2018.csv;7;sexo;sexo;sexo
+si_env;2018;si_env-2018.csv;8;cinto_seguranca;cinto_seguranca;cinto_seguranca
+si_env;2018;si_env-2018.csv;9;Embreagues;embreagues;embriaguez
+si_env;2018;si_env-2018.csv;10;Idade;idade;idade
+si_env;2018;si_env-2018.csv;11;nascimento;nascimento;nascimento
+si_env;2018;si_env-2018.csv;12;categoria_habilitacao;categoria_habilitacao;categoria_habilitacao
+si_env;2018;si_env-2018.csv;13;descricao_habilitacao;descricao_habilitacao;descricao_habilitacao
+si_env;2018;si_env-2018.csv;14;declaracao_obito;declaracao_obito;declaracao_obito
+si_env;2018;si_env-2018.csv;15;cod_severidade_antiga;cod_severidade_antiga;cod_severidade_antiga
+si_env;2018;si_env-2018.csv;16;especie_veiculo;especie_veiculo;especie_veiculo
+si_env;2018;si_env-2018.csv;17;pedestre;pedestre;pedestre
+si_env;2018;si_env-2018.csv;18;passageiro;passageiro;passageiro
+si_env;2019;si_env-2019.csv;1;num_boletim;num_boletim;numero_boletim
+si_env;2019;si_env-2019.csv;2;data_hora_boletim;data_hora_boletim;data_hora_boletim
+si_env;2019;si_env-2019.csv;3;Nº_envolvido;no_envolvido;numero_envolvido
+si_env;2019;si_env-2019.csv;4;condutor;condutor;condutor
+si_env;2019;si_env-2019.csv;5;cod_severidade;cod_severidade;codigo_severidade
+si_env;2019;si_env-2019.csv;6;desc_severidade;desc_severidade;desc_severidade
+si_env;2019;si_env-2019.csv;7;sexo;sexo;sexo
+si_env;2019;si_env-2019.csv;8;cinto_seguranca;cinto_seguranca;cinto_seguranca
+si_env;2019;si_env-2019.csv;9;Embreagues;embreagues;embriaguez
+si_env;2019;si_env-2019.csv;10;Idade;idade;idade
+si_env;2019;si_env-2019.csv;11;nascimento;nascimento;nascimento
+si_env;2019;si_env-2019.csv;12;categoria_habilitacao;categoria_habilitacao;categoria_habilitacao
+si_env;2019;si_env-2019.csv;13;descricao_habilitacao;descricao_habilitacao;descricao_habilitacao
+si_env;2019;si_env-2019.csv;14;declaracao_obito;declaracao_obito;declaracao_obito
+si_env;2019;si_env-2019.csv;15;cod_severidade_antiga;cod_severidade_antiga;cod_severidade_antiga
+si_env;2019;si_env-2019.csv;16;especie_veiculo;especie_veiculo;especie_veiculo
+si_env;2019;si_env-2019.csv;17;pedestre;pedestre;pedestre
+si_env;2019;si_env-2019.csv;18;passageiro;passageiro;passageiro
+si_env;2020;si_env-2020.csv;1;num_boletim;num_boletim;numero_boletim
+si_env;2020;si_env-2020.csv;2;data_hora_boletim;data_hora_boletim;data_hora_boletim
+si_env;2020;si_env-2020.csv;3;Nº_envolvido;no_envolvido;numero_envolvido
+si_env;2020;si_env-2020.csv;4;condutor;condutor;condutor
+si_env;2020;si_env-2020.csv;5;cod_severidade;cod_severidade;codigo_severidade
+si_env;2020;si_env-2020.csv;6;desc_severidade;desc_severidade;desc_severidade
+si_env;2020;si_env-2020.csv;7;sexo;sexo;sexo
+si_env;2020;si_env-2020.csv;8;cinto_seguranca;cinto_seguranca;cinto_seguranca
+si_env;2020;si_env-2020.csv;9;Embreagues;embreagues;embriaguez
+si_env;2020;si_env-2020.csv;10;Idade;idade;idade
+si_env;2020;si_env-2020.csv;11;nascimento;nascimento;nascimento
+si_env;2020;si_env-2020.csv;12;categoria_habilitacao;categoria_habilitacao;categoria_habilitacao
+si_env;2020;si_env-2020.csv;13;descricao_habilitacao;descricao_habilitacao;descricao_habilitacao
+si_env;2020;si_env-2020.csv;14;declaracao_obito;declaracao_obito;declaracao_obito
+si_env;2020;si_env-2020.csv;15;cod_severidade_antiga;cod_severidade_antiga;cod_severidade_antiga
+si_env;2020;si_env-2020.csv;16;especie_veiculo;especie_veiculo;especie_veiculo
+si_env;2020;si_env-2020.csv;17;pedestre;pedestre;pedestre
+si_env;2020;si_env-2020.csv;18;passageiro;passageiro;passageiro
+si_env;2021;si_env-2021.csv;1;Nº_boletim;no_boletim;numero_boletim
+si_env;2021;si_env-2021.csv;2;data_hora_boletim;data_hora_boletim;data_hora_boletim
+si_env;2021;si_env-2021.csv;3;Nº_envolvido;no_envolvido;numero_envolvido
+si_env;2021;si_env-2021.csv;4;condutor;condutor;condutor
+si_env;2021;si_env-2021.csv;5;cod_severidade;cod_severidade;codigo_severidade
+si_env;2021;si_env-2021.csv;6;desc_severidade;desc_severidade;desc_severidade
+si_env;2021;si_env-2021.csv;7;sexo;sexo;sexo
+si_env;2021;si_env-2021.csv;8;cinto_seguranca;cinto_seguranca;cinto_seguranca
+si_env;2021;si_env-2021.csv;9;Embreagues;embreagues;embriaguez
+si_env;2021;si_env-2021.csv;10;Idade;idade;idade
+si_env;2021;si_env-2021.csv;11;nascimento;nascimento;nascimento
+si_env;2021;si_env-2021.csv;12;categoria_habilitacao;categoria_habilitacao;categoria_habilitacao
+si_env;2021;si_env-2021.csv;13;descricao_habilitacao;descricao_habilitacao;descricao_habilitacao
+si_env;2021;si_env-2021.csv;14;declaracao_obito;declaracao_obito;declaracao_obito
+si_env;2021;si_env-2021.csv;15;cod_severidade_antiga;cod_severidade_antiga;cod_severidade_antiga
+si_env;2021;si_env-2021.csv;16;especie_veiculo;especie_veiculo;especie_veiculo
+si_env;2021;si_env-2021.csv;17;pedestre;pedestre;pedestre
+si_env;2021;si_env-2021.csv;18;passageiro;passageiro;passageiro
+si_env;2022;si_env-2022.csv;1;Nº_boletim;no_boletim;numero_boletim
+si_env;2022;si_env-2022.csv;2;data_hora_boletim;data_hora_boletim;data_hora_boletim
+si_env;2022;si_env-2022.csv;3;Nº_envolvido;no_envolvido;numero_envolvido
+si_env;2022;si_env-2022.csv;4;condutor;condutor;condutor
+si_env;2022;si_env-2022.csv;5;cod_severidade;cod_severidade;codigo_severidade
+si_env;2022;si_env-2022.csv;6;desc_severidade;desc_severidade;desc_severidade
+si_env;2022;si_env-2022.csv;7;sexo;sexo;sexo
+si_env;2022;si_env-2022.csv;8;cinto_seguranca;cinto_seguranca;cinto_seguranca
+si_env;2022;si_env-2022.csv;9;Embreagues;embreagues;embriaguez
+si_env;2022;si_env-2022.csv;10;Idade;idade;idade
+si_env;2022;si_env-2022.csv;11;nascimento;nascimento;nascimento
+si_env;2022;si_env-2022.csv;12;categoria_habilitacao;categoria_habilitacao;categoria_habilitacao
+si_env;2022;si_env-2022.csv;13;descricao_habilitacao;descricao_habilitacao;descricao_habilitacao
+si_env;2022;si_env-2022.csv;14;declaracao_obito;declaracao_obito;declaracao_obito
+si_env;2022;si_env-2022.csv;15;cod_severidade_antiga;cod_severidade_antiga;cod_severidade_antiga
+si_env;2022;si_env-2022.csv;16;especie_veiculo;especie_veiculo;especie_veiculo
+si_env;2022;si_env-2022.csv;17;pedestre;pedestre;pedestre
+si_env;2022;si_env-2022.csv;18;passageiro;passageiro;passageiro
+si_env;2023;si_env-2023.csv;1;Nº_boletim;no_boletim;numero_boletim
+si_env;2023;si_env-2023.csv;2;data_hora_boletim;data_hora_boletim;data_hora_boletim
+si_env;2023;si_env-2023.csv;3;Nº_envolvido;no_envolvido;numero_envolvido
+si_env;2023;si_env-2023.csv;4;condutor;condutor;condutor
+si_env;2023;si_env-2023.csv;5;cod_severidade;cod_severidade;codigo_severidade
+si_env;2023;si_env-2023.csv;6;desc_severidade;desc_severidade;desc_severidade
+si_env;2023;si_env-2023.csv;7;sexo;sexo;sexo
+si_env;2023;si_env-2023.csv;8;cinto_seguranca;cinto_seguranca;cinto_seguranca
+si_env;2023;si_env-2023.csv;9;Embreagues;embreagues;embriaguez
+si_env;2023;si_env-2023.csv;10;Idade;idade;idade
+si_env;2023;si_env-2023.csv;11;nascimento;nascimento;nascimento
+si_env;2023;si_env-2023.csv;12;categoria_habilitacao;categoria_habilitacao;categoria_habilitacao
+si_env;2023;si_env-2023.csv;13;descricao_habilitacao;descricao_habilitacao;descricao_habilitacao
+si_env;2023;si_env-2023.csv;14;declaracao_obito;declaracao_obito;declaracao_obito
+si_env;2023;si_env-2023.csv;15;cod_severidade_antiga;cod_severidade_antiga;cod_severidade_antiga
+si_env;2023;si_env-2023.csv;16;especie_veiculo;especie_veiculo;especie_veiculo
+si_env;2023;si_env-2023.csv;17;pedestre;pedestre;pedestre
+si_env;2023;si_env-2023.csv;18;passageiro;passageiro;passageiro
+si_env;2024;si_env-2024.csv;1;Nº_boletim;no_boletim;numero_boletim
+si_env;2024;si_env-2024.csv;2;data_hora_boletim;data_hora_boletim;data_hora_boletim
+si_env;2024;si_env-2024.csv;3;Nº_envolvido;no_envolvido;numero_envolvido
+si_env;2024;si_env-2024.csv;4;condutor;condutor;condutor
+si_env;2024;si_env-2024.csv;5;cod_severidade;cod_severidade;codigo_severidade
+si_env;2024;si_env-2024.csv;6;desc_severidade;desc_severidade;desc_severidade
+si_env;2024;si_env-2024.csv;7;sexo;sexo;sexo
+si_env;2024;si_env-2024.csv;8;cinto_seguranca;cinto_seguranca;cinto_seguranca
+si_env;2024;si_env-2024.csv;9;Embreagues;embreagues;embriaguez
+si_env;2024;si_env-2024.csv;10;Idade;idade;idade
+si_env;2024;si_env-2024.csv;11;nascimento;nascimento;nascimento
+si_env;2024;si_env-2024.csv;12;categoria_habilitacao;categoria_habilitacao;categoria_habilitacao
+si_env;2024;si_env-2024.csv;13;descricao_habilitacao;descricao_habilitacao;descricao_habilitacao
+si_env;2024;si_env-2024.csv;14;declaracao_obito;declaracao_obito;declaracao_obito
+si_env;2024;si_env-2024.csv;15;cod_severidade_antiga;cod_severidade_antiga;cod_severidade_antiga
+si_env;2024;si_env-2024.csv;16;especie_veiculo;especie_veiculo;especie_veiculo
+si_env;2024;si_env-2024.csv;17;pedestre;pedestre;pedestre
+si_env;2024;si_env-2024.csv;18;passageiro;passageiro;passageiro
+inmet;2011;INMET_SE_MG_A521_PAMPULHA_01-01-2011_A_31-12-2011.CSV;1;DATA (YYYY-MM-DD);data_(yyyy-mm-dd);data_medicao
+inmet;2011;INMET_SE_MG_A521_PAMPULHA_01-01-2011_A_31-12-2011.CSV;2;HORA (UTC);hora_(utc);hora_utc
+inmet;2011;INMET_SE_MG_A521_PAMPULHA_01-01-2011_A_31-12-2011.CSV;3;PRECIPITAÇÃO TOTAL, HORÁRIO (mm);precipitacao_total,_horario_(mm);precipitacao_mm
+inmet;2011;INMET_SE_MG_A521_PAMPULHA_01-01-2011_A_31-12-2011.CSV;4;PRESSAO ATMOSFERICA AO NIVEL DA ESTACAO, HORARIA (mB);pressao_atmosferica_ao_nivel_da_estacao,_horaria_(mb);pressao_estacao_mb
+inmet;2011;INMET_SE_MG_A521_PAMPULHA_01-01-2011_A_31-12-2011.CSV;5;PRESSÃO ATMOSFERICA MAX.NA HORA ANT. (AUT) (mB);pressao_atmosferica_max.na_hora_ant._(aut)_(mb);pressao_max_mb
+inmet;2011;INMET_SE_MG_A521_PAMPULHA_01-01-2011_A_31-12-2011.CSV;6;PRESSÃO ATMOSFERICA MIN. NA HORA ANT. (AUT) (mB);pressao_atmosferica_min._na_hora_ant._(aut)_(mb);pressao_min_mb
+inmet;2011;INMET_SE_MG_A521_PAMPULHA_01-01-2011_A_31-12-2011.CSV;7;RADIACAO GLOBAL (KJ/m²);radiacao_global_(kj/m2);radiacao_global_kj_m2
+inmet;2011;INMET_SE_MG_A521_PAMPULHA_01-01-2011_A_31-12-2011.CSV;8;TEMPERATURA DO AR - BULBO SECO, HORARIA (°C);temperatura_do_ar_-_bulbo_seco,_horaria_(oc);temperatura_ar_c
+inmet;2011;INMET_SE_MG_A521_PAMPULHA_01-01-2011_A_31-12-2011.CSV;9;TEMPERATURA DO PONTO DE ORVALHO (°C);temperatura_do_ponto_de_orvalho_(oc);temperatura_orvalho_c
+inmet;2011;INMET_SE_MG_A521_PAMPULHA_01-01-2011_A_31-12-2011.CSV;10;TEMPERATURA MÁXIMA NA HORA ANT. (AUT) (°C);temperatura_maxima_na_hora_ant._(aut)_(oc);temperatura_max_c
+inmet;2011;INMET_SE_MG_A521_PAMPULHA_01-01-2011_A_31-12-2011.CSV;11;TEMPERATURA MÍNIMA NA HORA ANT. (AUT) (°C);temperatura_minima_na_hora_ant._(aut)_(oc);temperatura_min_c
+inmet;2011;INMET_SE_MG_A521_PAMPULHA_01-01-2011_A_31-12-2011.CSV;12;TEMPERATURA ORVALHO MAX. NA HORA ANT. (AUT) (°C);temperatura_orvalho_max._na_hora_ant._(aut)_(oc);temperatura_orvalho_max_c
+inmet;2011;INMET_SE_MG_A521_PAMPULHA_01-01-2011_A_31-12-2011.CSV;13;TEMPERATURA ORVALHO MIN. NA HORA ANT. (AUT) (°C);temperatura_orvalho_min._na_hora_ant._(aut)_(oc);temperatura_orvalho_min_c
+inmet;2011;INMET_SE_MG_A521_PAMPULHA_01-01-2011_A_31-12-2011.CSV;14;UMIDADE REL. MAX. NA HORA ANT. (AUT) (%);umidade_rel._max._na_hora_ant._(aut)_(%);umidade_max_pct
+inmet;2011;INMET_SE_MG_A521_PAMPULHA_01-01-2011_A_31-12-2011.CSV;15;UMIDADE REL. MIN. NA HORA ANT. (AUT) (%);umidade_rel._min._na_hora_ant._(aut)_(%);umidade_min_pct
+inmet;2011;INMET_SE_MG_A521_PAMPULHA_01-01-2011_A_31-12-2011.CSV;16;UMIDADE RELATIVA DO AR, HORARIA (%);umidade_relativa_do_ar,_horaria_(%);umidade_relativa_pct
+inmet;2011;INMET_SE_MG_A521_PAMPULHA_01-01-2011_A_31-12-2011.CSV;17;VENTO, DIREÇÃO HORARIA (gr) (° (gr));vento,_direcao_horaria_(gr)_(o_(gr));vento_direcao_graus
+inmet;2011;INMET_SE_MG_A521_PAMPULHA_01-01-2011_A_31-12-2011.CSV;18;VENTO, RAJADA MAXIMA (m/s);vento,_rajada_maxima_(m/s);vento_rajada_ms
+inmet;2011;INMET_SE_MG_A521_PAMPULHA_01-01-2011_A_31-12-2011.CSV;19;VENTO, VELOCIDADE HORARIA (m/s);vento,_velocidade_horaria_(m/s);vento_velocidade_ms
+inmet;2011;INMET_SE_MG_A521_PAMPULHA_01-01-2011_A_31-12-2011.CSV;20;;(vazio);(ignorar)
+inmet;2012;INMET_SE_MG_A521_PAMPULHA_01-01-2012_A_31-12-2012.CSV;1;DATA (YYYY-MM-DD);data_(yyyy-mm-dd);data_medicao
+inmet;2012;INMET_SE_MG_A521_PAMPULHA_01-01-2012_A_31-12-2012.CSV;2;HORA (UTC);hora_(utc);hora_utc
+inmet;2012;INMET_SE_MG_A521_PAMPULHA_01-01-2012_A_31-12-2012.CSV;3;PRECIPITAÇÃO TOTAL, HORÁRIO (mm);precipitacao_total,_horario_(mm);precipitacao_mm
+inmet;2012;INMET_SE_MG_A521_PAMPULHA_01-01-2012_A_31-12-2012.CSV;4;PRESSAO ATMOSFERICA AO NIVEL DA ESTACAO, HORARIA (mB);pressao_atmosferica_ao_nivel_da_estacao,_horaria_(mb);pressao_estacao_mb
+inmet;2012;INMET_SE_MG_A521_PAMPULHA_01-01-2012_A_31-12-2012.CSV;5;PRESSÃO ATMOSFERICA MAX.NA HORA ANT. (AUT) (mB);pressao_atmosferica_max.na_hora_ant._(aut)_(mb);pressao_max_mb
+inmet;2012;INMET_SE_MG_A521_PAMPULHA_01-01-2012_A_31-12-2012.CSV;6;PRESSÃO ATMOSFERICA MIN. NA HORA ANT. (AUT) (mB);pressao_atmosferica_min._na_hora_ant._(aut)_(mb);pressao_min_mb
+inmet;2012;INMET_SE_MG_A521_PAMPULHA_01-01-2012_A_31-12-2012.CSV;7;RADIACAO GLOBAL (KJ/m²);radiacao_global_(kj/m2);radiacao_global_kj_m2
+inmet;2012;INMET_SE_MG_A521_PAMPULHA_01-01-2012_A_31-12-2012.CSV;8;TEMPERATURA DO AR - BULBO SECO, HORARIA (°C);temperatura_do_ar_-_bulbo_seco,_horaria_(oc);temperatura_ar_c
+inmet;2012;INMET_SE_MG_A521_PAMPULHA_01-01-2012_A_31-12-2012.CSV;9;TEMPERATURA DO PONTO DE ORVALHO (°C);temperatura_do_ponto_de_orvalho_(oc);temperatura_orvalho_c
+inmet;2012;INMET_SE_MG_A521_PAMPULHA_01-01-2012_A_31-12-2012.CSV;10;TEMPERATURA MÁXIMA NA HORA ANT. (AUT) (°C);temperatura_maxima_na_hora_ant._(aut)_(oc);temperatura_max_c
+inmet;2012;INMET_SE_MG_A521_PAMPULHA_01-01-2012_A_31-12-2012.CSV;11;TEMPERATURA MÍNIMA NA HORA ANT. (AUT) (°C);temperatura_minima_na_hora_ant._(aut)_(oc);temperatura_min_c
+inmet;2012;INMET_SE_MG_A521_PAMPULHA_01-01-2012_A_31-12-2012.CSV;12;TEMPERATURA ORVALHO MAX. NA HORA ANT. (AUT) (°C);temperatura_orvalho_max._na_hora_ant._(aut)_(oc);temperatura_orvalho_max_c
+inmet;2012;INMET_SE_MG_A521_PAMPULHA_01-01-2012_A_31-12-2012.CSV;13;TEMPERATURA ORVALHO MIN. NA HORA ANT. (AUT) (°C);temperatura_orvalho_min._na_hora_ant._(aut)_(oc);temperatura_orvalho_min_c
+inmet;2012;INMET_SE_MG_A521_PAMPULHA_01-01-2012_A_31-12-2012.CSV;14;UMIDADE REL. MAX. NA HORA ANT. (AUT) (%);umidade_rel._max._na_hora_ant._(aut)_(%);umidade_max_pct
+inmet;2012;INMET_SE_MG_A521_PAMPULHA_01-01-2012_A_31-12-2012.CSV;15;UMIDADE REL. MIN. NA HORA ANT. (AUT) (%);umidade_rel._min._na_hora_ant._(aut)_(%);umidade_min_pct
+inmet;2012;INMET_SE_MG_A521_PAMPULHA_01-01-2012_A_31-12-2012.CSV;16;UMIDADE RELATIVA DO AR, HORARIA (%);umidade_relativa_do_ar,_horaria_(%);umidade_relativa_pct
+inmet;2012;INMET_SE_MG_A521_PAMPULHA_01-01-2012_A_31-12-2012.CSV;17;VENTO, DIREÇÃO HORARIA (gr) (° (gr));vento,_direcao_horaria_(gr)_(o_(gr));vento_direcao_graus
+inmet;2012;INMET_SE_MG_A521_PAMPULHA_01-01-2012_A_31-12-2012.CSV;18;VENTO, RAJADA MAXIMA (m/s);vento,_rajada_maxima_(m/s);vento_rajada_ms
+inmet;2012;INMET_SE_MG_A521_PAMPULHA_01-01-2012_A_31-12-2012.CSV;19;VENTO, VELOCIDADE HORARIA (m/s);vento,_velocidade_horaria_(m/s);vento_velocidade_ms
+inmet;2012;INMET_SE_MG_A521_PAMPULHA_01-01-2012_A_31-12-2012.CSV;20;;(vazio);(ignorar)
+inmet;2013;INMET_SE_MG_A521_PAMPULHA_01-01-2013_A_31-12-2013.CSV;1;DATA (YYYY-MM-DD);data_(yyyy-mm-dd);data_medicao
+inmet;2013;INMET_SE_MG_A521_PAMPULHA_01-01-2013_A_31-12-2013.CSV;2;HORA (UTC);hora_(utc);hora_utc
+inmet;2013;INMET_SE_MG_A521_PAMPULHA_01-01-2013_A_31-12-2013.CSV;3;PRECIPITAÇÃO TOTAL, HORÁRIO (mm);precipitacao_total,_horario_(mm);precipitacao_mm
+inmet;2013;INMET_SE_MG_A521_PAMPULHA_01-01-2013_A_31-12-2013.CSV;4;PRESSAO ATMOSFERICA AO NIVEL DA ESTACAO, HORARIA (mB);pressao_atmosferica_ao_nivel_da_estacao,_horaria_(mb);pressao_estacao_mb
+inmet;2013;INMET_SE_MG_A521_PAMPULHA_01-01-2013_A_31-12-2013.CSV;5;PRESSÃO ATMOSFERICA MAX.NA HORA ANT. (AUT) (mB);pressao_atmosferica_max.na_hora_ant._(aut)_(mb);pressao_max_mb
+inmet;2013;INMET_SE_MG_A521_PAMPULHA_01-01-2013_A_31-12-2013.CSV;6;PRESSÃO ATMOSFERICA MIN. NA HORA ANT. (AUT) (mB);pressao_atmosferica_min._na_hora_ant._(aut)_(mb);pressao_min_mb
+inmet;2013;INMET_SE_MG_A521_PAMPULHA_01-01-2013_A_31-12-2013.CSV;7;RADIACAO GLOBAL (KJ/m²);radiacao_global_(kj/m2);radiacao_global_kj_m2
+inmet;2013;INMET_SE_MG_A521_PAMPULHA_01-01-2013_A_31-12-2013.CSV;8;TEMPERATURA DO AR - BULBO SECO, HORARIA (°C);temperatura_do_ar_-_bulbo_seco,_horaria_(oc);temperatura_ar_c
+inmet;2013;INMET_SE_MG_A521_PAMPULHA_01-01-2013_A_31-12-2013.CSV;9;TEMPERATURA DO PONTO DE ORVALHO (°C);temperatura_do_ponto_de_orvalho_(oc);temperatura_orvalho_c
+inmet;2013;INMET_SE_MG_A521_PAMPULHA_01-01-2013_A_31-12-2013.CSV;10;TEMPERATURA MÁXIMA NA HORA ANT. (AUT) (°C);temperatura_maxima_na_hora_ant._(aut)_(oc);temperatura_max_c
+inmet;2013;INMET_SE_MG_A521_PAMPULHA_01-01-2013_A_31-12-2013.CSV;11;TEMPERATURA MÍNIMA NA HORA ANT. (AUT) (°C);temperatura_minima_na_hora_ant._(aut)_(oc);temperatura_min_c
+inmet;2013;INMET_SE_MG_A521_PAMPULHA_01-01-2013_A_31-12-2013.CSV;12;TEMPERATURA ORVALHO MAX. NA HORA ANT. (AUT) (°C);temperatura_orvalho_max._na_hora_ant._(aut)_(oc);temperatura_orvalho_max_c
+inmet;2013;INMET_SE_MG_A521_PAMPULHA_01-01-2013_A_31-12-2013.CSV;13;TEMPERATURA ORVALHO MIN. NA HORA ANT. (AUT) (°C);temperatura_orvalho_min._na_hora_ant._(aut)_(oc);temperatura_orvalho_min_c
+inmet;2013;INMET_SE_MG_A521_PAMPULHA_01-01-2013_A_31-12-2013.CSV;14;UMIDADE REL. MAX. NA HORA ANT. (AUT) (%);umidade_rel._max._na_hora_ant._(aut)_(%);umidade_max_pct
+inmet;2013;INMET_SE_MG_A521_PAMPULHA_01-01-2013_A_31-12-2013.CSV;15;UMIDADE REL. MIN. NA HORA ANT. (AUT) (%);umidade_rel._min._na_hora_ant._(aut)_(%);umidade_min_pct
+inmet;2013;INMET_SE_MG_A521_PAMPULHA_01-01-2013_A_31-12-2013.CSV;16;UMIDADE RELATIVA DO AR, HORARIA (%);umidade_relativa_do_ar,_horaria_(%);umidade_relativa_pct
+inmet;2013;INMET_SE_MG_A521_PAMPULHA_01-01-2013_A_31-12-2013.CSV;17;VENTO, DIREÇÃO HORARIA (gr) (° (gr));vento,_direcao_horaria_(gr)_(o_(gr));vento_direcao_graus
+inmet;2013;INMET_SE_MG_A521_PAMPULHA_01-01-2013_A_31-12-2013.CSV;18;VENTO, RAJADA MAXIMA (m/s);vento,_rajada_maxima_(m/s);vento_rajada_ms
+inmet;2013;INMET_SE_MG_A521_PAMPULHA_01-01-2013_A_31-12-2013.CSV;19;VENTO, VELOCIDADE HORARIA (m/s);vento,_velocidade_horaria_(m/s);vento_velocidade_ms
+inmet;2013;INMET_SE_MG_A521_PAMPULHA_01-01-2013_A_31-12-2013.CSV;20;;(vazio);(ignorar)
+inmet;2013;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_27-12-2013_A_31-12-2013.CSV;1;DATA (YYYY-MM-DD);data_(yyyy-mm-dd);data_medicao
+inmet;2013;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_27-12-2013_A_31-12-2013.CSV;2;HORA (UTC);hora_(utc);hora_utc
+inmet;2013;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_27-12-2013_A_31-12-2013.CSV;3;PRECIPITAÇÃO TOTAL, HORÁRIO (mm);precipitacao_total,_horario_(mm);precipitacao_mm
+inmet;2013;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_27-12-2013_A_31-12-2013.CSV;4;PRESSAO ATMOSFERICA AO NIVEL DA ESTACAO, HORARIA (mB);pressao_atmosferica_ao_nivel_da_estacao,_horaria_(mb);pressao_estacao_mb
+inmet;2013;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_27-12-2013_A_31-12-2013.CSV;5;PRESSÃO ATMOSFERICA MAX.NA HORA ANT. (AUT) (mB);pressao_atmosferica_max.na_hora_ant._(aut)_(mb);pressao_max_mb
+inmet;2013;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_27-12-2013_A_31-12-2013.CSV;6;PRESSÃO ATMOSFERICA MIN. NA HORA ANT. (AUT) (mB);pressao_atmosferica_min._na_hora_ant._(aut)_(mb);pressao_min_mb
+inmet;2013;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_27-12-2013_A_31-12-2013.CSV;7;RADIACAO GLOBAL (KJ/m²);radiacao_global_(kj/m2);radiacao_global_kj_m2
+inmet;2013;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_27-12-2013_A_31-12-2013.CSV;8;TEMPERATURA DO AR - BULBO SECO, HORARIA (°C);temperatura_do_ar_-_bulbo_seco,_horaria_(oc);temperatura_ar_c
+inmet;2013;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_27-12-2013_A_31-12-2013.CSV;9;TEMPERATURA DO PONTO DE ORVALHO (°C);temperatura_do_ponto_de_orvalho_(oc);temperatura_orvalho_c
+inmet;2013;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_27-12-2013_A_31-12-2013.CSV;10;TEMPERATURA MÁXIMA NA HORA ANT. (AUT) (°C);temperatura_maxima_na_hora_ant._(aut)_(oc);temperatura_max_c
+inmet;2013;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_27-12-2013_A_31-12-2013.CSV;11;TEMPERATURA MÍNIMA NA HORA ANT. (AUT) (°C);temperatura_minima_na_hora_ant._(aut)_(oc);temperatura_min_c
+inmet;2013;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_27-12-2013_A_31-12-2013.CSV;12;TEMPERATURA ORVALHO MAX. NA HORA ANT. (AUT) (°C);temperatura_orvalho_max._na_hora_ant._(aut)_(oc);temperatura_orvalho_max_c
+inmet;2013;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_27-12-2013_A_31-12-2013.CSV;13;TEMPERATURA ORVALHO MIN. NA HORA ANT. (AUT) (°C);temperatura_orvalho_min._na_hora_ant._(aut)_(oc);temperatura_orvalho_min_c
+inmet;2013;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_27-12-2013_A_31-12-2013.CSV;14;UMIDADE REL. MAX. NA HORA ANT. (AUT) (%);umidade_rel._max._na_hora_ant._(aut)_(%);umidade_max_pct
+inmet;2013;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_27-12-2013_A_31-12-2013.CSV;15;UMIDADE REL. MIN. NA HORA ANT. (AUT) (%);umidade_rel._min._na_hora_ant._(aut)_(%);umidade_min_pct
+inmet;2013;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_27-12-2013_A_31-12-2013.CSV;16;UMIDADE RELATIVA DO AR, HORARIA (%);umidade_relativa_do_ar,_horaria_(%);umidade_relativa_pct
+inmet;2013;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_27-12-2013_A_31-12-2013.CSV;17;VENTO, DIREÇÃO HORARIA (gr) (° (gr));vento,_direcao_horaria_(gr)_(o_(gr));vento_direcao_graus
+inmet;2013;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_27-12-2013_A_31-12-2013.CSV;18;VENTO, RAJADA MAXIMA (m/s);vento,_rajada_maxima_(m/s);vento_rajada_ms
+inmet;2013;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_27-12-2013_A_31-12-2013.CSV;19;VENTO, VELOCIDADE HORARIA (m/s);vento,_velocidade_horaria_(m/s);vento_velocidade_ms
+inmet;2013;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_27-12-2013_A_31-12-2013.CSV;20;;(vazio);(ignorar)
+inmet;2014;INMET_SE_MG_A521_PAMPULHA_01-01-2014_A_31-12-2014.CSV;1;DATA (YYYY-MM-DD);data_(yyyy-mm-dd);data_medicao
+inmet;2014;INMET_SE_MG_A521_PAMPULHA_01-01-2014_A_31-12-2014.CSV;2;HORA (UTC);hora_(utc);hora_utc
+inmet;2014;INMET_SE_MG_A521_PAMPULHA_01-01-2014_A_31-12-2014.CSV;3;PRECIPITAÇÃO TOTAL, HORÁRIO (mm);precipitacao_total,_horario_(mm);precipitacao_mm
+inmet;2014;INMET_SE_MG_A521_PAMPULHA_01-01-2014_A_31-12-2014.CSV;4;PRESSAO ATMOSFERICA AO NIVEL DA ESTACAO, HORARIA (mB);pressao_atmosferica_ao_nivel_da_estacao,_horaria_(mb);pressao_estacao_mb
+inmet;2014;INMET_SE_MG_A521_PAMPULHA_01-01-2014_A_31-12-2014.CSV;5;PRESSÃO ATMOSFERICA MAX.NA HORA ANT. (AUT) (mB);pressao_atmosferica_max.na_hora_ant._(aut)_(mb);pressao_max_mb
+inmet;2014;INMET_SE_MG_A521_PAMPULHA_01-01-2014_A_31-12-2014.CSV;6;PRESSÃO ATMOSFERICA MIN. NA HORA ANT. (AUT) (mB);pressao_atmosferica_min._na_hora_ant._(aut)_(mb);pressao_min_mb
+inmet;2014;INMET_SE_MG_A521_PAMPULHA_01-01-2014_A_31-12-2014.CSV;7;RADIACAO GLOBAL (KJ/m²);radiacao_global_(kj/m2);radiacao_global_kj_m2
+inmet;2014;INMET_SE_MG_A521_PAMPULHA_01-01-2014_A_31-12-2014.CSV;8;TEMPERATURA DO AR - BULBO SECO, HORARIA (°C);temperatura_do_ar_-_bulbo_seco,_horaria_(oc);temperatura_ar_c
+inmet;2014;INMET_SE_MG_A521_PAMPULHA_01-01-2014_A_31-12-2014.CSV;9;TEMPERATURA DO PONTO DE ORVALHO (°C);temperatura_do_ponto_de_orvalho_(oc);temperatura_orvalho_c
+inmet;2014;INMET_SE_MG_A521_PAMPULHA_01-01-2014_A_31-12-2014.CSV;10;TEMPERATURA MÁXIMA NA HORA ANT. (AUT) (°C);temperatura_maxima_na_hora_ant._(aut)_(oc);temperatura_max_c
+inmet;2014;INMET_SE_MG_A521_PAMPULHA_01-01-2014_A_31-12-2014.CSV;11;TEMPERATURA MÍNIMA NA HORA ANT. (AUT) (°C);temperatura_minima_na_hora_ant._(aut)_(oc);temperatura_min_c
+inmet;2014;INMET_SE_MG_A521_PAMPULHA_01-01-2014_A_31-12-2014.CSV;12;TEMPERATURA ORVALHO MAX. NA HORA ANT. (AUT) (°C);temperatura_orvalho_max._na_hora_ant._(aut)_(oc);temperatura_orvalho_max_c
+inmet;2014;INMET_SE_MG_A521_PAMPULHA_01-01-2014_A_31-12-2014.CSV;13;TEMPERATURA ORVALHO MIN. NA HORA ANT. (AUT) (°C);temperatura_orvalho_min._na_hora_ant._(aut)_(oc);temperatura_orvalho_min_c
+inmet;2014;INMET_SE_MG_A521_PAMPULHA_01-01-2014_A_31-12-2014.CSV;14;UMIDADE REL. MAX. NA HORA ANT. (AUT) (%);umidade_rel._max._na_hora_ant._(aut)_(%);umidade_max_pct
+inmet;2014;INMET_SE_MG_A521_PAMPULHA_01-01-2014_A_31-12-2014.CSV;15;UMIDADE REL. MIN. NA HORA ANT. (AUT) (%);umidade_rel._min._na_hora_ant._(aut)_(%);umidade_min_pct
+inmet;2014;INMET_SE_MG_A521_PAMPULHA_01-01-2014_A_31-12-2014.CSV;16;UMIDADE RELATIVA DO AR, HORARIA (%);umidade_relativa_do_ar,_horaria_(%);umidade_relativa_pct
+inmet;2014;INMET_SE_MG_A521_PAMPULHA_01-01-2014_A_31-12-2014.CSV;17;VENTO, DIREÇÃO HORARIA (gr) (° (gr));vento,_direcao_horaria_(gr)_(o_(gr));vento_direcao_graus
+inmet;2014;INMET_SE_MG_A521_PAMPULHA_01-01-2014_A_31-12-2014.CSV;18;VENTO, RAJADA MAXIMA (m/s);vento,_rajada_maxima_(m/s);vento_rajada_ms
+inmet;2014;INMET_SE_MG_A521_PAMPULHA_01-01-2014_A_31-12-2014.CSV;19;VENTO, VELOCIDADE HORARIA (m/s);vento,_velocidade_horaria_(m/s);vento_velocidade_ms
+inmet;2014;INMET_SE_MG_A521_PAMPULHA_01-01-2014_A_31-12-2014.CSV;20;;(vazio);(ignorar)
+inmet;2014;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2014_A_31-12-2014.CSV;1;DATA (YYYY-MM-DD);data_(yyyy-mm-dd);data_medicao
+inmet;2014;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2014_A_31-12-2014.CSV;2;HORA (UTC);hora_(utc);hora_utc
+inmet;2014;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2014_A_31-12-2014.CSV;3;PRECIPITAÇÃO TOTAL, HORÁRIO (mm);precipitacao_total,_horario_(mm);precipitacao_mm
+inmet;2014;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2014_A_31-12-2014.CSV;4;PRESSAO ATMOSFERICA AO NIVEL DA ESTACAO, HORARIA (mB);pressao_atmosferica_ao_nivel_da_estacao,_horaria_(mb);pressao_estacao_mb
+inmet;2014;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2014_A_31-12-2014.CSV;5;PRESSÃO ATMOSFERICA MAX.NA HORA ANT. (AUT) (mB);pressao_atmosferica_max.na_hora_ant._(aut)_(mb);pressao_max_mb
+inmet;2014;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2014_A_31-12-2014.CSV;6;PRESSÃO ATMOSFERICA MIN. NA HORA ANT. (AUT) (mB);pressao_atmosferica_min._na_hora_ant._(aut)_(mb);pressao_min_mb
+inmet;2014;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2014_A_31-12-2014.CSV;7;RADIACAO GLOBAL (KJ/m²);radiacao_global_(kj/m2);radiacao_global_kj_m2
+inmet;2014;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2014_A_31-12-2014.CSV;8;TEMPERATURA DO AR - BULBO SECO, HORARIA (°C);temperatura_do_ar_-_bulbo_seco,_horaria_(oc);temperatura_ar_c
+inmet;2014;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2014_A_31-12-2014.CSV;9;TEMPERATURA DO PONTO DE ORVALHO (°C);temperatura_do_ponto_de_orvalho_(oc);temperatura_orvalho_c
+inmet;2014;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2014_A_31-12-2014.CSV;10;TEMPERATURA MÁXIMA NA HORA ANT. (AUT) (°C);temperatura_maxima_na_hora_ant._(aut)_(oc);temperatura_max_c
+inmet;2014;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2014_A_31-12-2014.CSV;11;TEMPERATURA MÍNIMA NA HORA ANT. (AUT) (°C);temperatura_minima_na_hora_ant._(aut)_(oc);temperatura_min_c
+inmet;2014;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2014_A_31-12-2014.CSV;12;TEMPERATURA ORVALHO MAX. NA HORA ANT. (AUT) (°C);temperatura_orvalho_max._na_hora_ant._(aut)_(oc);temperatura_orvalho_max_c
+inmet;2014;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2014_A_31-12-2014.CSV;13;TEMPERATURA ORVALHO MIN. NA HORA ANT. (AUT) (°C);temperatura_orvalho_min._na_hora_ant._(aut)_(oc);temperatura_orvalho_min_c
+inmet;2014;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2014_A_31-12-2014.CSV;14;UMIDADE REL. MAX. NA HORA ANT. (AUT) (%);umidade_rel._max._na_hora_ant._(aut)_(%);umidade_max_pct
+inmet;2014;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2014_A_31-12-2014.CSV;15;UMIDADE REL. MIN. NA HORA ANT. (AUT) (%);umidade_rel._min._na_hora_ant._(aut)_(%);umidade_min_pct
+inmet;2014;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2014_A_31-12-2014.CSV;16;UMIDADE RELATIVA DO AR, HORARIA (%);umidade_relativa_do_ar,_horaria_(%);umidade_relativa_pct
+inmet;2014;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2014_A_31-12-2014.CSV;17;VENTO, DIREÇÃO HORARIA (gr) (° (gr));vento,_direcao_horaria_(gr)_(o_(gr));vento_direcao_graus
+inmet;2014;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2014_A_31-12-2014.CSV;18;VENTO, RAJADA MAXIMA (m/s);vento,_rajada_maxima_(m/s);vento_rajada_ms
+inmet;2014;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2014_A_31-12-2014.CSV;19;VENTO, VELOCIDADE HORARIA (m/s);vento,_velocidade_horaria_(m/s);vento_velocidade_ms
+inmet;2014;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2014_A_31-12-2014.CSV;20;;(vazio);(ignorar)
+inmet;2015;INMET_SE_MG_A521_PAMPULHA_01-01-2015_A_31-12-2015.CSV;1;DATA (YYYY-MM-DD);data_(yyyy-mm-dd);data_medicao
+inmet;2015;INMET_SE_MG_A521_PAMPULHA_01-01-2015_A_31-12-2015.CSV;2;HORA (UTC);hora_(utc);hora_utc
+inmet;2015;INMET_SE_MG_A521_PAMPULHA_01-01-2015_A_31-12-2015.CSV;3;PRECIPITAÇÃO TOTAL, HORÁRIO (mm);precipitacao_total,_horario_(mm);precipitacao_mm
+inmet;2015;INMET_SE_MG_A521_PAMPULHA_01-01-2015_A_31-12-2015.CSV;4;PRESSAO ATMOSFERICA AO NIVEL DA ESTACAO, HORARIA (mB);pressao_atmosferica_ao_nivel_da_estacao,_horaria_(mb);pressao_estacao_mb
+inmet;2015;INMET_SE_MG_A521_PAMPULHA_01-01-2015_A_31-12-2015.CSV;5;PRESSÃO ATMOSFERICA MAX.NA HORA ANT. (AUT) (mB);pressao_atmosferica_max.na_hora_ant._(aut)_(mb);pressao_max_mb
+inmet;2015;INMET_SE_MG_A521_PAMPULHA_01-01-2015_A_31-12-2015.CSV;6;PRESSÃO ATMOSFERICA MIN. NA HORA ANT. (AUT) (mB);pressao_atmosferica_min._na_hora_ant._(aut)_(mb);pressao_min_mb
+inmet;2015;INMET_SE_MG_A521_PAMPULHA_01-01-2015_A_31-12-2015.CSV;7;RADIACAO GLOBAL (KJ/m²);radiacao_global_(kj/m2);radiacao_global_kj_m2
+inmet;2015;INMET_SE_MG_A521_PAMPULHA_01-01-2015_A_31-12-2015.CSV;8;TEMPERATURA DO AR - BULBO SECO, HORARIA (°C);temperatura_do_ar_-_bulbo_seco,_horaria_(oc);temperatura_ar_c
+inmet;2015;INMET_SE_MG_A521_PAMPULHA_01-01-2015_A_31-12-2015.CSV;9;TEMPERATURA DO PONTO DE ORVALHO (°C);temperatura_do_ponto_de_orvalho_(oc);temperatura_orvalho_c
+inmet;2015;INMET_SE_MG_A521_PAMPULHA_01-01-2015_A_31-12-2015.CSV;10;TEMPERATURA MÁXIMA NA HORA ANT. (AUT) (°C);temperatura_maxima_na_hora_ant._(aut)_(oc);temperatura_max_c
+inmet;2015;INMET_SE_MG_A521_PAMPULHA_01-01-2015_A_31-12-2015.CSV;11;TEMPERATURA MÍNIMA NA HORA ANT. (AUT) (°C);temperatura_minima_na_hora_ant._(aut)_(oc);temperatura_min_c
+inmet;2015;INMET_SE_MG_A521_PAMPULHA_01-01-2015_A_31-12-2015.CSV;12;TEMPERATURA ORVALHO MAX. NA HORA ANT. (AUT) (°C);temperatura_orvalho_max._na_hora_ant._(aut)_(oc);temperatura_orvalho_max_c
+inmet;2015;INMET_SE_MG_A521_PAMPULHA_01-01-2015_A_31-12-2015.CSV;13;TEMPERATURA ORVALHO MIN. NA HORA ANT. (AUT) (°C);temperatura_orvalho_min._na_hora_ant._(aut)_(oc);temperatura_orvalho_min_c
+inmet;2015;INMET_SE_MG_A521_PAMPULHA_01-01-2015_A_31-12-2015.CSV;14;UMIDADE REL. MAX. NA HORA ANT. (AUT) (%);umidade_rel._max._na_hora_ant._(aut)_(%);umidade_max_pct
+inmet;2015;INMET_SE_MG_A521_PAMPULHA_01-01-2015_A_31-12-2015.CSV;15;UMIDADE REL. MIN. NA HORA ANT. (AUT) (%);umidade_rel._min._na_hora_ant._(aut)_(%);umidade_min_pct
+inmet;2015;INMET_SE_MG_A521_PAMPULHA_01-01-2015_A_31-12-2015.CSV;16;UMIDADE RELATIVA DO AR, HORARIA (%);umidade_relativa_do_ar,_horaria_(%);umidade_relativa_pct
+inmet;2015;INMET_SE_MG_A521_PAMPULHA_01-01-2015_A_31-12-2015.CSV;17;VENTO, DIREÇÃO HORARIA (gr) (° (gr));vento,_direcao_horaria_(gr)_(o_(gr));vento_direcao_graus
+inmet;2015;INMET_SE_MG_A521_PAMPULHA_01-01-2015_A_31-12-2015.CSV;18;VENTO, RAJADA MAXIMA (m/s);vento,_rajada_maxima_(m/s);vento_rajada_ms
+inmet;2015;INMET_SE_MG_A521_PAMPULHA_01-01-2015_A_31-12-2015.CSV;19;VENTO, VELOCIDADE HORARIA (m/s);vento,_velocidade_horaria_(m/s);vento_velocidade_ms
+inmet;2015;INMET_SE_MG_A521_PAMPULHA_01-01-2015_A_31-12-2015.CSV;20;;(vazio);(ignorar)
+inmet;2015;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2015_A_31-12-2015.CSV;1;DATA (YYYY-MM-DD);data_(yyyy-mm-dd);data_medicao
+inmet;2015;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2015_A_31-12-2015.CSV;2;HORA (UTC);hora_(utc);hora_utc
+inmet;2015;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2015_A_31-12-2015.CSV;3;PRECIPITAÇÃO TOTAL, HORÁRIO (mm);precipitacao_total,_horario_(mm);precipitacao_mm
+inmet;2015;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2015_A_31-12-2015.CSV;4;PRESSAO ATMOSFERICA AO NIVEL DA ESTACAO, HORARIA (mB);pressao_atmosferica_ao_nivel_da_estacao,_horaria_(mb);pressao_estacao_mb
+inmet;2015;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2015_A_31-12-2015.CSV;5;PRESSÃO ATMOSFERICA MAX.NA HORA ANT. (AUT) (mB);pressao_atmosferica_max.na_hora_ant._(aut)_(mb);pressao_max_mb
+inmet;2015;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2015_A_31-12-2015.CSV;6;PRESSÃO ATMOSFERICA MIN. NA HORA ANT. (AUT) (mB);pressao_atmosferica_min._na_hora_ant._(aut)_(mb);pressao_min_mb
+inmet;2015;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2015_A_31-12-2015.CSV;7;RADIACAO GLOBAL (KJ/m²);radiacao_global_(kj/m2);radiacao_global_kj_m2
+inmet;2015;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2015_A_31-12-2015.CSV;8;TEMPERATURA DO AR - BULBO SECO, HORARIA (°C);temperatura_do_ar_-_bulbo_seco,_horaria_(oc);temperatura_ar_c
+inmet;2015;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2015_A_31-12-2015.CSV;9;TEMPERATURA DO PONTO DE ORVALHO (°C);temperatura_do_ponto_de_orvalho_(oc);temperatura_orvalho_c
+inmet;2015;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2015_A_31-12-2015.CSV;10;TEMPERATURA MÁXIMA NA HORA ANT. (AUT) (°C);temperatura_maxima_na_hora_ant._(aut)_(oc);temperatura_max_c
+inmet;2015;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2015_A_31-12-2015.CSV;11;TEMPERATURA MÍNIMA NA HORA ANT. (AUT) (°C);temperatura_minima_na_hora_ant._(aut)_(oc);temperatura_min_c
+inmet;2015;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2015_A_31-12-2015.CSV;12;TEMPERATURA ORVALHO MAX. NA HORA ANT. (AUT) (°C);temperatura_orvalho_max._na_hora_ant._(aut)_(oc);temperatura_orvalho_max_c
+inmet;2015;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2015_A_31-12-2015.CSV;13;TEMPERATURA ORVALHO MIN. NA HORA ANT. (AUT) (°C);temperatura_orvalho_min._na_hora_ant._(aut)_(oc);temperatura_orvalho_min_c
+inmet;2015;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2015_A_31-12-2015.CSV;14;UMIDADE REL. MAX. NA HORA ANT. (AUT) (%);umidade_rel._max._na_hora_ant._(aut)_(%);umidade_max_pct
+inmet;2015;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2015_A_31-12-2015.CSV;15;UMIDADE REL. MIN. NA HORA ANT. (AUT) (%);umidade_rel._min._na_hora_ant._(aut)_(%);umidade_min_pct
+inmet;2015;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2015_A_31-12-2015.CSV;16;UMIDADE RELATIVA DO AR, HORARIA (%);umidade_relativa_do_ar,_horaria_(%);umidade_relativa_pct
+inmet;2015;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2015_A_31-12-2015.CSV;17;VENTO, DIREÇÃO HORARIA (gr) (° (gr));vento,_direcao_horaria_(gr)_(o_(gr));vento_direcao_graus
+inmet;2015;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2015_A_31-12-2015.CSV;18;VENTO, RAJADA MAXIMA (m/s);vento,_rajada_maxima_(m/s);vento_rajada_ms
+inmet;2015;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2015_A_31-12-2015.CSV;19;VENTO, VELOCIDADE HORARIA (m/s);vento,_velocidade_horaria_(m/s);vento_velocidade_ms
+inmet;2015;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2015_A_31-12-2015.CSV;20;;(vazio);(ignorar)
+inmet;2016;INMET_SE_MG_A521_PAMPULHA_01-01-2016_A_31-12-2016.CSV;1;DATA (YYYY-MM-DD);data_(yyyy-mm-dd);data_medicao
+inmet;2016;INMET_SE_MG_A521_PAMPULHA_01-01-2016_A_31-12-2016.CSV;2;HORA (UTC);hora_(utc);hora_utc
+inmet;2016;INMET_SE_MG_A521_PAMPULHA_01-01-2016_A_31-12-2016.CSV;3;PRECIPITAÇÃO TOTAL, HORÁRIO (mm);precipitacao_total,_horario_(mm);precipitacao_mm
+inmet;2016;INMET_SE_MG_A521_PAMPULHA_01-01-2016_A_31-12-2016.CSV;4;PRESSAO ATMOSFERICA AO NIVEL DA ESTACAO, HORARIA (mB);pressao_atmosferica_ao_nivel_da_estacao,_horaria_(mb);pressao_estacao_mb
+inmet;2016;INMET_SE_MG_A521_PAMPULHA_01-01-2016_A_31-12-2016.CSV;5;PRESSÃO ATMOSFERICA MAX.NA HORA ANT. (AUT) (mB);pressao_atmosferica_max.na_hora_ant._(aut)_(mb);pressao_max_mb
+inmet;2016;INMET_SE_MG_A521_PAMPULHA_01-01-2016_A_31-12-2016.CSV;6;PRESSÃO ATMOSFERICA MIN. NA HORA ANT. (AUT) (mB);pressao_atmosferica_min._na_hora_ant._(aut)_(mb);pressao_min_mb
+inmet;2016;INMET_SE_MG_A521_PAMPULHA_01-01-2016_A_31-12-2016.CSV;7;RADIACAO GLOBAL (KJ/m²);radiacao_global_(kj/m2);radiacao_global_kj_m2
+inmet;2016;INMET_SE_MG_A521_PAMPULHA_01-01-2016_A_31-12-2016.CSV;8;TEMPERATURA DO AR - BULBO SECO, HORARIA (°C);temperatura_do_ar_-_bulbo_seco,_horaria_(oc);temperatura_ar_c
+inmet;2016;INMET_SE_MG_A521_PAMPULHA_01-01-2016_A_31-12-2016.CSV;9;TEMPERATURA DO PONTO DE ORVALHO (°C);temperatura_do_ponto_de_orvalho_(oc);temperatura_orvalho_c
+inmet;2016;INMET_SE_MG_A521_PAMPULHA_01-01-2016_A_31-12-2016.CSV;10;TEMPERATURA MÁXIMA NA HORA ANT. (AUT) (°C);temperatura_maxima_na_hora_ant._(aut)_(oc);temperatura_max_c
+inmet;2016;INMET_SE_MG_A521_PAMPULHA_01-01-2016_A_31-12-2016.CSV;11;TEMPERATURA MÍNIMA NA HORA ANT. (AUT) (°C);temperatura_minima_na_hora_ant._(aut)_(oc);temperatura_min_c
+inmet;2016;INMET_SE_MG_A521_PAMPULHA_01-01-2016_A_31-12-2016.CSV;12;TEMPERATURA ORVALHO MAX. NA HORA ANT. (AUT) (°C);temperatura_orvalho_max._na_hora_ant._(aut)_(oc);temperatura_orvalho_max_c
+inmet;2016;INMET_SE_MG_A521_PAMPULHA_01-01-2016_A_31-12-2016.CSV;13;TEMPERATURA ORVALHO MIN. NA HORA ANT. (AUT) (°C);temperatura_orvalho_min._na_hora_ant._(aut)_(oc);temperatura_orvalho_min_c
+inmet;2016;INMET_SE_MG_A521_PAMPULHA_01-01-2016_A_31-12-2016.CSV;14;UMIDADE REL. MAX. NA HORA ANT. (AUT) (%);umidade_rel._max._na_hora_ant._(aut)_(%);umidade_max_pct
+inmet;2016;INMET_SE_MG_A521_PAMPULHA_01-01-2016_A_31-12-2016.CSV;15;UMIDADE REL. MIN. NA HORA ANT. (AUT) (%);umidade_rel._min._na_hora_ant._(aut)_(%);umidade_min_pct
+inmet;2016;INMET_SE_MG_A521_PAMPULHA_01-01-2016_A_31-12-2016.CSV;16;UMIDADE RELATIVA DO AR, HORARIA (%);umidade_relativa_do_ar,_horaria_(%);umidade_relativa_pct
+inmet;2016;INMET_SE_MG_A521_PAMPULHA_01-01-2016_A_31-12-2016.CSV;17;VENTO, DIREÇÃO HORARIA (gr) (° (gr));vento,_direcao_horaria_(gr)_(o_(gr));vento_direcao_graus
+inmet;2016;INMET_SE_MG_A521_PAMPULHA_01-01-2016_A_31-12-2016.CSV;18;VENTO, RAJADA MAXIMA (m/s);vento,_rajada_maxima_(m/s);vento_rajada_ms
+inmet;2016;INMET_SE_MG_A521_PAMPULHA_01-01-2016_A_31-12-2016.CSV;19;VENTO, VELOCIDADE HORARIA (m/s);vento,_velocidade_horaria_(m/s);vento_velocidade_ms
+inmet;2016;INMET_SE_MG_A521_PAMPULHA_01-01-2016_A_31-12-2016.CSV;20;;(vazio);(ignorar)
+inmet;2016;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2016_A_31-12-2016.CSV;1;DATA (YYYY-MM-DD);data_(yyyy-mm-dd);data_medicao
+inmet;2016;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2016_A_31-12-2016.CSV;2;HORA (UTC);hora_(utc);hora_utc
+inmet;2016;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2016_A_31-12-2016.CSV;3;PRECIPITAÇÃO TOTAL, HORÁRIO (mm);precipitacao_total,_horario_(mm);precipitacao_mm
+inmet;2016;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2016_A_31-12-2016.CSV;4;PRESSAO ATMOSFERICA AO NIVEL DA ESTACAO, HORARIA (mB);pressao_atmosferica_ao_nivel_da_estacao,_horaria_(mb);pressao_estacao_mb
+inmet;2016;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2016_A_31-12-2016.CSV;5;PRESSÃO ATMOSFERICA MAX.NA HORA ANT. (AUT) (mB);pressao_atmosferica_max.na_hora_ant._(aut)_(mb);pressao_max_mb
+inmet;2016;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2016_A_31-12-2016.CSV;6;PRESSÃO ATMOSFERICA MIN. NA HORA ANT. (AUT) (mB);pressao_atmosferica_min._na_hora_ant._(aut)_(mb);pressao_min_mb
+inmet;2016;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2016_A_31-12-2016.CSV;7;RADIACAO GLOBAL (KJ/m²);radiacao_global_(kj/m2);radiacao_global_kj_m2
+inmet;2016;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2016_A_31-12-2016.CSV;8;TEMPERATURA DO AR - BULBO SECO, HORARIA (°C);temperatura_do_ar_-_bulbo_seco,_horaria_(oc);temperatura_ar_c
+inmet;2016;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2016_A_31-12-2016.CSV;9;TEMPERATURA DO PONTO DE ORVALHO (°C);temperatura_do_ponto_de_orvalho_(oc);temperatura_orvalho_c
+inmet;2016;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2016_A_31-12-2016.CSV;10;TEMPERATURA MÁXIMA NA HORA ANT. (AUT) (°C);temperatura_maxima_na_hora_ant._(aut)_(oc);temperatura_max_c
+inmet;2016;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2016_A_31-12-2016.CSV;11;TEMPERATURA MÍNIMA NA HORA ANT. (AUT) (°C);temperatura_minima_na_hora_ant._(aut)_(oc);temperatura_min_c
+inmet;2016;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2016_A_31-12-2016.CSV;12;TEMPERATURA ORVALHO MAX. NA HORA ANT. (AUT) (°C);temperatura_orvalho_max._na_hora_ant._(aut)_(oc);temperatura_orvalho_max_c
+inmet;2016;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2016_A_31-12-2016.CSV;13;TEMPERATURA ORVALHO MIN. NA HORA ANT. (AUT) (°C);temperatura_orvalho_min._na_hora_ant._(aut)_(oc);temperatura_orvalho_min_c
+inmet;2016;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2016_A_31-12-2016.CSV;14;UMIDADE REL. MAX. NA HORA ANT. (AUT) (%);umidade_rel._max._na_hora_ant._(aut)_(%);umidade_max_pct
+inmet;2016;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2016_A_31-12-2016.CSV;15;UMIDADE REL. MIN. NA HORA ANT. (AUT) (%);umidade_rel._min._na_hora_ant._(aut)_(%);umidade_min_pct
+inmet;2016;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2016_A_31-12-2016.CSV;16;UMIDADE RELATIVA DO AR, HORARIA (%);umidade_relativa_do_ar,_horaria_(%);umidade_relativa_pct
+inmet;2016;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2016_A_31-12-2016.CSV;17;VENTO, DIREÇÃO HORARIA (gr) (° (gr));vento,_direcao_horaria_(gr)_(o_(gr));vento_direcao_graus
+inmet;2016;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2016_A_31-12-2016.CSV;18;VENTO, RAJADA MAXIMA (m/s);vento,_rajada_maxima_(m/s);vento_rajada_ms
+inmet;2016;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2016_A_31-12-2016.CSV;19;VENTO, VELOCIDADE HORARIA (m/s);vento,_velocidade_horaria_(m/s);vento_velocidade_ms
+inmet;2016;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2016_A_31-12-2016.CSV;20;;(vazio);(ignorar)
+inmet;2017;INMET_SE_MG_A521_PAMPULHA_01-01-2017_A_31-12-2017.CSV;1;DATA (YYYY-MM-DD);data_(yyyy-mm-dd);data_medicao
+inmet;2017;INMET_SE_MG_A521_PAMPULHA_01-01-2017_A_31-12-2017.CSV;2;HORA (UTC);hora_(utc);hora_utc
+inmet;2017;INMET_SE_MG_A521_PAMPULHA_01-01-2017_A_31-12-2017.CSV;3;PRECIPITAÇÃO TOTAL, HORÁRIO (mm);precipitacao_total,_horario_(mm);precipitacao_mm
+inmet;2017;INMET_SE_MG_A521_PAMPULHA_01-01-2017_A_31-12-2017.CSV;4;PRESSAO ATMOSFERICA AO NIVEL DA ESTACAO, HORARIA (mB);pressao_atmosferica_ao_nivel_da_estacao,_horaria_(mb);pressao_estacao_mb
+inmet;2017;INMET_SE_MG_A521_PAMPULHA_01-01-2017_A_31-12-2017.CSV;5;PRESSÃO ATMOSFERICA MAX.NA HORA ANT. (AUT) (mB);pressao_atmosferica_max.na_hora_ant._(aut)_(mb);pressao_max_mb
+inmet;2017;INMET_SE_MG_A521_PAMPULHA_01-01-2017_A_31-12-2017.CSV;6;PRESSÃO ATMOSFERICA MIN. NA HORA ANT. (AUT) (mB);pressao_atmosferica_min._na_hora_ant._(aut)_(mb);pressao_min_mb
+inmet;2017;INMET_SE_MG_A521_PAMPULHA_01-01-2017_A_31-12-2017.CSV;7;RADIACAO GLOBAL (KJ/m²);radiacao_global_(kj/m2);radiacao_global_kj_m2
+inmet;2017;INMET_SE_MG_A521_PAMPULHA_01-01-2017_A_31-12-2017.CSV;8;TEMPERATURA DO AR - BULBO SECO, HORARIA (°C);temperatura_do_ar_-_bulbo_seco,_horaria_(oc);temperatura_ar_c
+inmet;2017;INMET_SE_MG_A521_PAMPULHA_01-01-2017_A_31-12-2017.CSV;9;TEMPERATURA DO PONTO DE ORVALHO (°C);temperatura_do_ponto_de_orvalho_(oc);temperatura_orvalho_c
+inmet;2017;INMET_SE_MG_A521_PAMPULHA_01-01-2017_A_31-12-2017.CSV;10;TEMPERATURA MÁXIMA NA HORA ANT. (AUT) (°C);temperatura_maxima_na_hora_ant._(aut)_(oc);temperatura_max_c
+inmet;2017;INMET_SE_MG_A521_PAMPULHA_01-01-2017_A_31-12-2017.CSV;11;TEMPERATURA MÍNIMA NA HORA ANT. (AUT) (°C);temperatura_minima_na_hora_ant._(aut)_(oc);temperatura_min_c
+inmet;2017;INMET_SE_MG_A521_PAMPULHA_01-01-2017_A_31-12-2017.CSV;12;TEMPERATURA ORVALHO MAX. NA HORA ANT. (AUT) (°C);temperatura_orvalho_max._na_hora_ant._(aut)_(oc);temperatura_orvalho_max_c
+inmet;2017;INMET_SE_MG_A521_PAMPULHA_01-01-2017_A_31-12-2017.CSV;13;TEMPERATURA ORVALHO MIN. NA HORA ANT. (AUT) (°C);temperatura_orvalho_min._na_hora_ant._(aut)_(oc);temperatura_orvalho_min_c
+inmet;2017;INMET_SE_MG_A521_PAMPULHA_01-01-2017_A_31-12-2017.CSV;14;UMIDADE REL. MAX. NA HORA ANT. (AUT) (%);umidade_rel._max._na_hora_ant._(aut)_(%);umidade_max_pct
+inmet;2017;INMET_SE_MG_A521_PAMPULHA_01-01-2017_A_31-12-2017.CSV;15;UMIDADE REL. MIN. NA HORA ANT. (AUT) (%);umidade_rel._min._na_hora_ant._(aut)_(%);umidade_min_pct
+inmet;2017;INMET_SE_MG_A521_PAMPULHA_01-01-2017_A_31-12-2017.CSV;16;UMIDADE RELATIVA DO AR, HORARIA (%);umidade_relativa_do_ar,_horaria_(%);umidade_relativa_pct
+inmet;2017;INMET_SE_MG_A521_PAMPULHA_01-01-2017_A_31-12-2017.CSV;17;VENTO, DIREÇÃO HORARIA (gr) (° (gr));vento,_direcao_horaria_(gr)_(o_(gr));vento_direcao_graus
+inmet;2017;INMET_SE_MG_A521_PAMPULHA_01-01-2017_A_31-12-2017.CSV;18;VENTO, RAJADA MAXIMA (m/s);vento,_rajada_maxima_(m/s);vento_rajada_ms
+inmet;2017;INMET_SE_MG_A521_PAMPULHA_01-01-2017_A_31-12-2017.CSV;19;VENTO, VELOCIDADE HORARIA (m/s);vento,_velocidade_horaria_(m/s);vento_velocidade_ms
+inmet;2017;INMET_SE_MG_A521_PAMPULHA_01-01-2017_A_31-12-2017.CSV;20;;(vazio);(ignorar)
+inmet;2017;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2017_A_31-12-2017.CSV;1;DATA (YYYY-MM-DD);data_(yyyy-mm-dd);data_medicao
+inmet;2017;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2017_A_31-12-2017.CSV;2;HORA (UTC);hora_(utc);hora_utc
+inmet;2017;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2017_A_31-12-2017.CSV;3;PRECIPITAÇÃO TOTAL, HORÁRIO (mm);precipitacao_total,_horario_(mm);precipitacao_mm
+inmet;2017;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2017_A_31-12-2017.CSV;4;PRESSAO ATMOSFERICA AO NIVEL DA ESTACAO, HORARIA (mB);pressao_atmosferica_ao_nivel_da_estacao,_horaria_(mb);pressao_estacao_mb
+inmet;2017;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2017_A_31-12-2017.CSV;5;PRESSÃO ATMOSFERICA MAX.NA HORA ANT. (AUT) (mB);pressao_atmosferica_max.na_hora_ant._(aut)_(mb);pressao_max_mb
+inmet;2017;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2017_A_31-12-2017.CSV;6;PRESSÃO ATMOSFERICA MIN. NA HORA ANT. (AUT) (mB);pressao_atmosferica_min._na_hora_ant._(aut)_(mb);pressao_min_mb
+inmet;2017;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2017_A_31-12-2017.CSV;7;RADIACAO GLOBAL (KJ/m²);radiacao_global_(kj/m2);radiacao_global_kj_m2
+inmet;2017;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2017_A_31-12-2017.CSV;8;TEMPERATURA DO AR - BULBO SECO, HORARIA (°C);temperatura_do_ar_-_bulbo_seco,_horaria_(oc);temperatura_ar_c
+inmet;2017;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2017_A_31-12-2017.CSV;9;TEMPERATURA DO PONTO DE ORVALHO (°C);temperatura_do_ponto_de_orvalho_(oc);temperatura_orvalho_c
+inmet;2017;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2017_A_31-12-2017.CSV;10;TEMPERATURA MÁXIMA NA HORA ANT. (AUT) (°C);temperatura_maxima_na_hora_ant._(aut)_(oc);temperatura_max_c
+inmet;2017;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2017_A_31-12-2017.CSV;11;TEMPERATURA MÍNIMA NA HORA ANT. (AUT) (°C);temperatura_minima_na_hora_ant._(aut)_(oc);temperatura_min_c
+inmet;2017;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2017_A_31-12-2017.CSV;12;TEMPERATURA ORVALHO MAX. NA HORA ANT. (AUT) (°C);temperatura_orvalho_max._na_hora_ant._(aut)_(oc);temperatura_orvalho_max_c
+inmet;2017;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2017_A_31-12-2017.CSV;13;TEMPERATURA ORVALHO MIN. NA HORA ANT. (AUT) (°C);temperatura_orvalho_min._na_hora_ant._(aut)_(oc);temperatura_orvalho_min_c
+inmet;2017;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2017_A_31-12-2017.CSV;14;UMIDADE REL. MAX. NA HORA ANT. (AUT) (%);umidade_rel._max._na_hora_ant._(aut)_(%);umidade_max_pct
+inmet;2017;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2017_A_31-12-2017.CSV;15;UMIDADE REL. MIN. NA HORA ANT. (AUT) (%);umidade_rel._min._na_hora_ant._(aut)_(%);umidade_min_pct
+inmet;2017;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2017_A_31-12-2017.CSV;16;UMIDADE RELATIVA DO AR, HORARIA (%);umidade_relativa_do_ar,_horaria_(%);umidade_relativa_pct
+inmet;2017;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2017_A_31-12-2017.CSV;17;VENTO, DIREÇÃO HORARIA (gr) (° (gr));vento,_direcao_horaria_(gr)_(o_(gr));vento_direcao_graus
+inmet;2017;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2017_A_31-12-2017.CSV;18;VENTO, RAJADA MAXIMA (m/s);vento,_rajada_maxima_(m/s);vento_rajada_ms
+inmet;2017;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2017_A_31-12-2017.CSV;19;VENTO, VELOCIDADE HORARIA (m/s);vento,_velocidade_horaria_(m/s);vento_velocidade_ms
+inmet;2017;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2017_A_31-12-2017.CSV;20;;(vazio);(ignorar)
+inmet;2018;INMET_SE_MG_A521_PAMPULHA_01-01-2018_A_31-12-2018.CSV;1;DATA (YYYY-MM-DD);data_(yyyy-mm-dd);data_medicao
+inmet;2018;INMET_SE_MG_A521_PAMPULHA_01-01-2018_A_31-12-2018.CSV;2;HORA (UTC);hora_(utc);hora_utc
+inmet;2018;INMET_SE_MG_A521_PAMPULHA_01-01-2018_A_31-12-2018.CSV;3;PRECIPITAÇÃO TOTAL, HORÁRIO (mm);precipitacao_total,_horario_(mm);precipitacao_mm
+inmet;2018;INMET_SE_MG_A521_PAMPULHA_01-01-2018_A_31-12-2018.CSV;4;PRESSAO ATMOSFERICA AO NIVEL DA ESTACAO, HORARIA (mB);pressao_atmosferica_ao_nivel_da_estacao,_horaria_(mb);pressao_estacao_mb
+inmet;2018;INMET_SE_MG_A521_PAMPULHA_01-01-2018_A_31-12-2018.CSV;5;PRESSÃO ATMOSFERICA MAX.NA HORA ANT. (AUT) (mB);pressao_atmosferica_max.na_hora_ant._(aut)_(mb);pressao_max_mb
+inmet;2018;INMET_SE_MG_A521_PAMPULHA_01-01-2018_A_31-12-2018.CSV;6;PRESSÃO ATMOSFERICA MIN. NA HORA ANT. (AUT) (mB);pressao_atmosferica_min._na_hora_ant._(aut)_(mb);pressao_min_mb
+inmet;2018;INMET_SE_MG_A521_PAMPULHA_01-01-2018_A_31-12-2018.CSV;7;RADIACAO GLOBAL (KJ/m²);radiacao_global_(kj/m2);radiacao_global_kj_m2
+inmet;2018;INMET_SE_MG_A521_PAMPULHA_01-01-2018_A_31-12-2018.CSV;8;TEMPERATURA DO AR - BULBO SECO, HORARIA (°C);temperatura_do_ar_-_bulbo_seco,_horaria_(oc);temperatura_ar_c
+inmet;2018;INMET_SE_MG_A521_PAMPULHA_01-01-2018_A_31-12-2018.CSV;9;TEMPERATURA DO PONTO DE ORVALHO (°C);temperatura_do_ponto_de_orvalho_(oc);temperatura_orvalho_c
+inmet;2018;INMET_SE_MG_A521_PAMPULHA_01-01-2018_A_31-12-2018.CSV;10;TEMPERATURA MÁXIMA NA HORA ANT. (AUT) (°C);temperatura_maxima_na_hora_ant._(aut)_(oc);temperatura_max_c
+inmet;2018;INMET_SE_MG_A521_PAMPULHA_01-01-2018_A_31-12-2018.CSV;11;TEMPERATURA MÍNIMA NA HORA ANT. (AUT) (°C);temperatura_minima_na_hora_ant._(aut)_(oc);temperatura_min_c
+inmet;2018;INMET_SE_MG_A521_PAMPULHA_01-01-2018_A_31-12-2018.CSV;12;TEMPERATURA ORVALHO MAX. NA HORA ANT. (AUT) (°C);temperatura_orvalho_max._na_hora_ant._(aut)_(oc);temperatura_orvalho_max_c
+inmet;2018;INMET_SE_MG_A521_PAMPULHA_01-01-2018_A_31-12-2018.CSV;13;TEMPERATURA ORVALHO MIN. NA HORA ANT. (AUT) (°C);temperatura_orvalho_min._na_hora_ant._(aut)_(oc);temperatura_orvalho_min_c
+inmet;2018;INMET_SE_MG_A521_PAMPULHA_01-01-2018_A_31-12-2018.CSV;14;UMIDADE REL. MAX. NA HORA ANT. (AUT) (%);umidade_rel._max._na_hora_ant._(aut)_(%);umidade_max_pct
+inmet;2018;INMET_SE_MG_A521_PAMPULHA_01-01-2018_A_31-12-2018.CSV;15;UMIDADE REL. MIN. NA HORA ANT. (AUT) (%);umidade_rel._min._na_hora_ant._(aut)_(%);umidade_min_pct
+inmet;2018;INMET_SE_MG_A521_PAMPULHA_01-01-2018_A_31-12-2018.CSV;16;UMIDADE RELATIVA DO AR, HORARIA (%);umidade_relativa_do_ar,_horaria_(%);umidade_relativa_pct
+inmet;2018;INMET_SE_MG_A521_PAMPULHA_01-01-2018_A_31-12-2018.CSV;17;VENTO, DIREÇÃO HORARIA (gr) (° (gr));vento,_direcao_horaria_(gr)_(o_(gr));vento_direcao_graus
+inmet;2018;INMET_SE_MG_A521_PAMPULHA_01-01-2018_A_31-12-2018.CSV;18;VENTO, RAJADA MAXIMA (m/s);vento,_rajada_maxima_(m/s);vento_rajada_ms
+inmet;2018;INMET_SE_MG_A521_PAMPULHA_01-01-2018_A_31-12-2018.CSV;19;VENTO, VELOCIDADE HORARIA (m/s);vento,_velocidade_horaria_(m/s);vento_velocidade_ms
+inmet;2018;INMET_SE_MG_A521_PAMPULHA_01-01-2018_A_31-12-2018.CSV;20;;(vazio);(ignorar)
+inmet;2018;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2018_A_31-12-2018.CSV;1;DATA (YYYY-MM-DD);data_(yyyy-mm-dd);data_medicao
+inmet;2018;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2018_A_31-12-2018.CSV;2;HORA (UTC);hora_(utc);hora_utc
+inmet;2018;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2018_A_31-12-2018.CSV;3;PRECIPITAÇÃO TOTAL, HORÁRIO (mm);precipitacao_total,_horario_(mm);precipitacao_mm
+inmet;2018;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2018_A_31-12-2018.CSV;4;PRESSAO ATMOSFERICA AO NIVEL DA ESTACAO, HORARIA (mB);pressao_atmosferica_ao_nivel_da_estacao,_horaria_(mb);pressao_estacao_mb
+inmet;2018;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2018_A_31-12-2018.CSV;5;PRESSÃO ATMOSFERICA MAX.NA HORA ANT. (AUT) (mB);pressao_atmosferica_max.na_hora_ant._(aut)_(mb);pressao_max_mb
+inmet;2018;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2018_A_31-12-2018.CSV;6;PRESSÃO ATMOSFERICA MIN. NA HORA ANT. (AUT) (mB);pressao_atmosferica_min._na_hora_ant._(aut)_(mb);pressao_min_mb
+inmet;2018;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2018_A_31-12-2018.CSV;7;RADIACAO GLOBAL (KJ/m²);radiacao_global_(kj/m2);radiacao_global_kj_m2
+inmet;2018;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2018_A_31-12-2018.CSV;8;TEMPERATURA DO AR - BULBO SECO, HORARIA (°C);temperatura_do_ar_-_bulbo_seco,_horaria_(oc);temperatura_ar_c
+inmet;2018;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2018_A_31-12-2018.CSV;9;TEMPERATURA DO PONTO DE ORVALHO (°C);temperatura_do_ponto_de_orvalho_(oc);temperatura_orvalho_c
+inmet;2018;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2018_A_31-12-2018.CSV;10;TEMPERATURA MÁXIMA NA HORA ANT. (AUT) (°C);temperatura_maxima_na_hora_ant._(aut)_(oc);temperatura_max_c
+inmet;2018;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2018_A_31-12-2018.CSV;11;TEMPERATURA MÍNIMA NA HORA ANT. (AUT) (°C);temperatura_minima_na_hora_ant._(aut)_(oc);temperatura_min_c
+inmet;2018;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2018_A_31-12-2018.CSV;12;TEMPERATURA ORVALHO MAX. NA HORA ANT. (AUT) (°C);temperatura_orvalho_max._na_hora_ant._(aut)_(oc);temperatura_orvalho_max_c
+inmet;2018;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2018_A_31-12-2018.CSV;13;TEMPERATURA ORVALHO MIN. NA HORA ANT. (AUT) (°C);temperatura_orvalho_min._na_hora_ant._(aut)_(oc);temperatura_orvalho_min_c
+inmet;2018;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2018_A_31-12-2018.CSV;14;UMIDADE REL. MAX. NA HORA ANT. (AUT) (%);umidade_rel._max._na_hora_ant._(aut)_(%);umidade_max_pct
+inmet;2018;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2018_A_31-12-2018.CSV;15;UMIDADE REL. MIN. NA HORA ANT. (AUT) (%);umidade_rel._min._na_hora_ant._(aut)_(%);umidade_min_pct
+inmet;2018;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2018_A_31-12-2018.CSV;16;UMIDADE RELATIVA DO AR, HORARIA (%);umidade_relativa_do_ar,_horaria_(%);umidade_relativa_pct
+inmet;2018;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2018_A_31-12-2018.CSV;17;VENTO, DIREÇÃO HORARIA (gr) (° (gr));vento,_direcao_horaria_(gr)_(o_(gr));vento_direcao_graus
+inmet;2018;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2018_A_31-12-2018.CSV;18;VENTO, RAJADA MAXIMA (m/s);vento,_rajada_maxima_(m/s);vento_rajada_ms
+inmet;2018;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2018_A_31-12-2018.CSV;19;VENTO, VELOCIDADE HORARIA (m/s);vento,_velocidade_horaria_(m/s);vento_velocidade_ms
+inmet;2018;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2018_A_31-12-2018.CSV;20;;(vazio);(ignorar)
+inmet;2019;INMET_SE_MG_A521_PAMPULHA_01-01-2019_A_31-12-2019.CSV;1;Data;data;data_medicao
+inmet;2019;INMET_SE_MG_A521_PAMPULHA_01-01-2019_A_31-12-2019.CSV;2;Hora UTC;hora_utc;hora_utc
+inmet;2019;INMET_SE_MG_A521_PAMPULHA_01-01-2019_A_31-12-2019.CSV;3;PRECIPITAÇÃO TOTAL, HORÁRIO (mm);precipitacao_total,_horario_(mm);precipitacao_mm
+inmet;2019;INMET_SE_MG_A521_PAMPULHA_01-01-2019_A_31-12-2019.CSV;4;PRESSAO ATMOSFERICA AO NIVEL DA ESTACAO, HORARIA (mB);pressao_atmosferica_ao_nivel_da_estacao,_horaria_(mb);pressao_estacao_mb
+inmet;2019;INMET_SE_MG_A521_PAMPULHA_01-01-2019_A_31-12-2019.CSV;5;PRESSÃO ATMOSFERICA MAX.NA HORA ANT. (AUT) (mB);pressao_atmosferica_max.na_hora_ant._(aut)_(mb);pressao_max_mb
+inmet;2019;INMET_SE_MG_A521_PAMPULHA_01-01-2019_A_31-12-2019.CSV;6;PRESSÃO ATMOSFERICA MIN. NA HORA ANT. (AUT) (mB);pressao_atmosferica_min._na_hora_ant._(aut)_(mb);pressao_min_mb
+inmet;2019;INMET_SE_MG_A521_PAMPULHA_01-01-2019_A_31-12-2019.CSV;7;RADIACAO GLOBAL (KJ/m²);radiacao_global_(kj/m2);radiacao_global_kj_m2
+inmet;2019;INMET_SE_MG_A521_PAMPULHA_01-01-2019_A_31-12-2019.CSV;8;TEMPERATURA DO AR - BULBO SECO, HORARIA (°C);temperatura_do_ar_-_bulbo_seco,_horaria_(oc);temperatura_ar_c
+inmet;2019;INMET_SE_MG_A521_PAMPULHA_01-01-2019_A_31-12-2019.CSV;9;TEMPERATURA DO PONTO DE ORVALHO (°C);temperatura_do_ponto_de_orvalho_(oc);temperatura_orvalho_c
+inmet;2019;INMET_SE_MG_A521_PAMPULHA_01-01-2019_A_31-12-2019.CSV;10;TEMPERATURA MÁXIMA NA HORA ANT. (AUT) (°C);temperatura_maxima_na_hora_ant._(aut)_(oc);temperatura_max_c
+inmet;2019;INMET_SE_MG_A521_PAMPULHA_01-01-2019_A_31-12-2019.CSV;11;TEMPERATURA MÍNIMA NA HORA ANT. (AUT) (°C);temperatura_minima_na_hora_ant._(aut)_(oc);temperatura_min_c
+inmet;2019;INMET_SE_MG_A521_PAMPULHA_01-01-2019_A_31-12-2019.CSV;12;TEMPERATURA ORVALHO MAX. NA HORA ANT. (AUT) (°C);temperatura_orvalho_max._na_hora_ant._(aut)_(oc);temperatura_orvalho_max_c
+inmet;2019;INMET_SE_MG_A521_PAMPULHA_01-01-2019_A_31-12-2019.CSV;13;TEMPERATURA ORVALHO MIN. NA HORA ANT. (AUT) (°C);temperatura_orvalho_min._na_hora_ant._(aut)_(oc);temperatura_orvalho_min_c
+inmet;2019;INMET_SE_MG_A521_PAMPULHA_01-01-2019_A_31-12-2019.CSV;14;UMIDADE REL. MAX. NA HORA ANT. (AUT) (%);umidade_rel._max._na_hora_ant._(aut)_(%);umidade_max_pct
+inmet;2019;INMET_SE_MG_A521_PAMPULHA_01-01-2019_A_31-12-2019.CSV;15;UMIDADE REL. MIN. NA HORA ANT. (AUT) (%);umidade_rel._min._na_hora_ant._(aut)_(%);umidade_min_pct
+inmet;2019;INMET_SE_MG_A521_PAMPULHA_01-01-2019_A_31-12-2019.CSV;16;UMIDADE RELATIVA DO AR, HORARIA (%);umidade_relativa_do_ar,_horaria_(%);umidade_relativa_pct
+inmet;2019;INMET_SE_MG_A521_PAMPULHA_01-01-2019_A_31-12-2019.CSV;17;VENTO, DIREÇÃO HORARIA (gr) (° (gr));vento,_direcao_horaria_(gr)_(o_(gr));vento_direcao_graus
+inmet;2019;INMET_SE_MG_A521_PAMPULHA_01-01-2019_A_31-12-2019.CSV;18;VENTO, RAJADA MAXIMA (m/s);vento,_rajada_maxima_(m/s);vento_rajada_ms
+inmet;2019;INMET_SE_MG_A521_PAMPULHA_01-01-2019_A_31-12-2019.CSV;19;VENTO, VELOCIDADE HORARIA (m/s);vento,_velocidade_horaria_(m/s);vento_velocidade_ms
+inmet;2019;INMET_SE_MG_A521_PAMPULHA_01-01-2019_A_31-12-2019.CSV;20;;(vazio);(ignorar)
+inmet;2019;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2019_A_31-12-2019.CSV;1;Data;data;data_medicao
+inmet;2019;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2019_A_31-12-2019.CSV;2;Hora UTC;hora_utc;hora_utc
+inmet;2019;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2019_A_31-12-2019.CSV;3;PRECIPITAÇÃO TOTAL, HORÁRIO (mm);precipitacao_total,_horario_(mm);precipitacao_mm
+inmet;2019;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2019_A_31-12-2019.CSV;4;PRESSAO ATMOSFERICA AO NIVEL DA ESTACAO, HORARIA (mB);pressao_atmosferica_ao_nivel_da_estacao,_horaria_(mb);pressao_estacao_mb
+inmet;2019;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2019_A_31-12-2019.CSV;5;PRESSÃO ATMOSFERICA MAX.NA HORA ANT. (AUT) (mB);pressao_atmosferica_max.na_hora_ant._(aut)_(mb);pressao_max_mb
+inmet;2019;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2019_A_31-12-2019.CSV;6;PRESSÃO ATMOSFERICA MIN. NA HORA ANT. (AUT) (mB);pressao_atmosferica_min._na_hora_ant._(aut)_(mb);pressao_min_mb
+inmet;2019;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2019_A_31-12-2019.CSV;7;RADIACAO GLOBAL (KJ/m²);radiacao_global_(kj/m2);radiacao_global_kj_m2
+inmet;2019;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2019_A_31-12-2019.CSV;8;TEMPERATURA DO AR - BULBO SECO, HORARIA (°C);temperatura_do_ar_-_bulbo_seco,_horaria_(oc);temperatura_ar_c
+inmet;2019;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2019_A_31-12-2019.CSV;9;TEMPERATURA DO PONTO DE ORVALHO (°C);temperatura_do_ponto_de_orvalho_(oc);temperatura_orvalho_c
+inmet;2019;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2019_A_31-12-2019.CSV;10;TEMPERATURA MÁXIMA NA HORA ANT. (AUT) (°C);temperatura_maxima_na_hora_ant._(aut)_(oc);temperatura_max_c
+inmet;2019;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2019_A_31-12-2019.CSV;11;TEMPERATURA MÍNIMA NA HORA ANT. (AUT) (°C);temperatura_minima_na_hora_ant._(aut)_(oc);temperatura_min_c
+inmet;2019;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2019_A_31-12-2019.CSV;12;TEMPERATURA ORVALHO MAX. NA HORA ANT. (AUT) (°C);temperatura_orvalho_max._na_hora_ant._(aut)_(oc);temperatura_orvalho_max_c
+inmet;2019;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2019_A_31-12-2019.CSV;13;TEMPERATURA ORVALHO MIN. NA HORA ANT. (AUT) (°C);temperatura_orvalho_min._na_hora_ant._(aut)_(oc);temperatura_orvalho_min_c
+inmet;2019;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2019_A_31-12-2019.CSV;14;UMIDADE REL. MAX. NA HORA ANT. (AUT) (%);umidade_rel._max._na_hora_ant._(aut)_(%);umidade_max_pct
+inmet;2019;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2019_A_31-12-2019.CSV;15;UMIDADE REL. MIN. NA HORA ANT. (AUT) (%);umidade_rel._min._na_hora_ant._(aut)_(%);umidade_min_pct
+inmet;2019;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2019_A_31-12-2019.CSV;16;UMIDADE RELATIVA DO AR, HORARIA (%);umidade_relativa_do_ar,_horaria_(%);umidade_relativa_pct
+inmet;2019;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2019_A_31-12-2019.CSV;17;VENTO, DIREÇÃO HORARIA (gr) (° (gr));vento,_direcao_horaria_(gr)_(o_(gr));vento_direcao_graus
+inmet;2019;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2019_A_31-12-2019.CSV;18;VENTO, RAJADA MAXIMA (m/s);vento,_rajada_maxima_(m/s);vento_rajada_ms
+inmet;2019;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2019_A_31-12-2019.CSV;19;VENTO, VELOCIDADE HORARIA (m/s);vento,_velocidade_horaria_(m/s);vento_velocidade_ms
+inmet;2019;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2019_A_31-12-2019.CSV;20;;(vazio);(ignorar)
+inmet;2020;INMET_SE_MG_A521_PAMPULHA_01-01-2020_A_31-12-2020.CSV;1;Data;data;data_medicao
+inmet;2020;INMET_SE_MG_A521_PAMPULHA_01-01-2020_A_31-12-2020.CSV;2;Hora UTC;hora_utc;hora_utc
+inmet;2020;INMET_SE_MG_A521_PAMPULHA_01-01-2020_A_31-12-2020.CSV;3;PRECIPITAÇÃO TOTAL, HORÁRIO (mm);precipitacao_total,_horario_(mm);precipitacao_mm
+inmet;2020;INMET_SE_MG_A521_PAMPULHA_01-01-2020_A_31-12-2020.CSV;4;PRESSAO ATMOSFERICA AO NIVEL DA ESTACAO, HORARIA (mB);pressao_atmosferica_ao_nivel_da_estacao,_horaria_(mb);pressao_estacao_mb
+inmet;2020;INMET_SE_MG_A521_PAMPULHA_01-01-2020_A_31-12-2020.CSV;5;PRESSÃO ATMOSFERICA MAX.NA HORA ANT. (AUT) (mB);pressao_atmosferica_max.na_hora_ant._(aut)_(mb);pressao_max_mb
+inmet;2020;INMET_SE_MG_A521_PAMPULHA_01-01-2020_A_31-12-2020.CSV;6;PRESSÃO ATMOSFERICA MIN. NA HORA ANT. (AUT) (mB);pressao_atmosferica_min._na_hora_ant._(aut)_(mb);pressao_min_mb
+inmet;2020;INMET_SE_MG_A521_PAMPULHA_01-01-2020_A_31-12-2020.CSV;7;RADIACAO GLOBAL (Kj/m²);radiacao_global_(kj/m2);radiacao_global_kj_m2
+inmet;2020;INMET_SE_MG_A521_PAMPULHA_01-01-2020_A_31-12-2020.CSV;8;TEMPERATURA DO AR - BULBO SECO, HORARIA (°C);temperatura_do_ar_-_bulbo_seco,_horaria_(oc);temperatura_ar_c
+inmet;2020;INMET_SE_MG_A521_PAMPULHA_01-01-2020_A_31-12-2020.CSV;9;TEMPERATURA DO PONTO DE ORVALHO (°C);temperatura_do_ponto_de_orvalho_(oc);temperatura_orvalho_c
+inmet;2020;INMET_SE_MG_A521_PAMPULHA_01-01-2020_A_31-12-2020.CSV;10;TEMPERATURA MÁXIMA NA HORA ANT. (AUT) (°C);temperatura_maxima_na_hora_ant._(aut)_(oc);temperatura_max_c
+inmet;2020;INMET_SE_MG_A521_PAMPULHA_01-01-2020_A_31-12-2020.CSV;11;TEMPERATURA MÍNIMA NA HORA ANT. (AUT) (°C);temperatura_minima_na_hora_ant._(aut)_(oc);temperatura_min_c
+inmet;2020;INMET_SE_MG_A521_PAMPULHA_01-01-2020_A_31-12-2020.CSV;12;TEMPERATURA ORVALHO MAX. NA HORA ANT. (AUT) (°C);temperatura_orvalho_max._na_hora_ant._(aut)_(oc);temperatura_orvalho_max_c
+inmet;2020;INMET_SE_MG_A521_PAMPULHA_01-01-2020_A_31-12-2020.CSV;13;TEMPERATURA ORVALHO MIN. NA HORA ANT. (AUT) (°C);temperatura_orvalho_min._na_hora_ant._(aut)_(oc);temperatura_orvalho_min_c
+inmet;2020;INMET_SE_MG_A521_PAMPULHA_01-01-2020_A_31-12-2020.CSV;14;UMIDADE REL. MAX. NA HORA ANT. (AUT) (%);umidade_rel._max._na_hora_ant._(aut)_(%);umidade_max_pct
+inmet;2020;INMET_SE_MG_A521_PAMPULHA_01-01-2020_A_31-12-2020.CSV;15;UMIDADE REL. MIN. NA HORA ANT. (AUT) (%);umidade_rel._min._na_hora_ant._(aut)_(%);umidade_min_pct
+inmet;2020;INMET_SE_MG_A521_PAMPULHA_01-01-2020_A_31-12-2020.CSV;16;UMIDADE RELATIVA DO AR, HORARIA (%);umidade_relativa_do_ar,_horaria_(%);umidade_relativa_pct
+inmet;2020;INMET_SE_MG_A521_PAMPULHA_01-01-2020_A_31-12-2020.CSV;17;VENTO, DIREÇÃO HORARIA (gr) (° (gr));vento,_direcao_horaria_(gr)_(o_(gr));vento_direcao_graus
+inmet;2020;INMET_SE_MG_A521_PAMPULHA_01-01-2020_A_31-12-2020.CSV;18;VENTO, RAJADA MAXIMA (m/s);vento,_rajada_maxima_(m/s);vento_rajada_ms
+inmet;2020;INMET_SE_MG_A521_PAMPULHA_01-01-2020_A_31-12-2020.CSV;19;VENTO, VELOCIDADE HORARIA (m/s);vento,_velocidade_horaria_(m/s);vento_velocidade_ms
+inmet;2020;INMET_SE_MG_A521_PAMPULHA_01-01-2020_A_31-12-2020.CSV;20;;(vazio);(ignorar)
+inmet;2020;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2020_A_31-12-2020.CSV;1;Data;data;data_medicao
+inmet;2020;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2020_A_31-12-2020.CSV;2;Hora UTC;hora_utc;hora_utc
+inmet;2020;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2020_A_31-12-2020.CSV;3;PRECIPITAÇÃO TOTAL, HORÁRIO (mm);precipitacao_total,_horario_(mm);precipitacao_mm
+inmet;2020;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2020_A_31-12-2020.CSV;4;PRESSAO ATMOSFERICA AO NIVEL DA ESTACAO, HORARIA (mB);pressao_atmosferica_ao_nivel_da_estacao,_horaria_(mb);pressao_estacao_mb
+inmet;2020;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2020_A_31-12-2020.CSV;5;PRESSÃO ATMOSFERICA MAX.NA HORA ANT. (AUT) (mB);pressao_atmosferica_max.na_hora_ant._(aut)_(mb);pressao_max_mb
+inmet;2020;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2020_A_31-12-2020.CSV;6;PRESSÃO ATMOSFERICA MIN. NA HORA ANT. (AUT) (mB);pressao_atmosferica_min._na_hora_ant._(aut)_(mb);pressao_min_mb
+inmet;2020;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2020_A_31-12-2020.CSV;7;RADIACAO GLOBAL (Kj/m²);radiacao_global_(kj/m2);radiacao_global_kj_m2
+inmet;2020;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2020_A_31-12-2020.CSV;8;TEMPERATURA DO AR - BULBO SECO, HORARIA (°C);temperatura_do_ar_-_bulbo_seco,_horaria_(oc);temperatura_ar_c
+inmet;2020;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2020_A_31-12-2020.CSV;9;TEMPERATURA DO PONTO DE ORVALHO (°C);temperatura_do_ponto_de_orvalho_(oc);temperatura_orvalho_c
+inmet;2020;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2020_A_31-12-2020.CSV;10;TEMPERATURA MÁXIMA NA HORA ANT. (AUT) (°C);temperatura_maxima_na_hora_ant._(aut)_(oc);temperatura_max_c
+inmet;2020;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2020_A_31-12-2020.CSV;11;TEMPERATURA MÍNIMA NA HORA ANT. (AUT) (°C);temperatura_minima_na_hora_ant._(aut)_(oc);temperatura_min_c
+inmet;2020;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2020_A_31-12-2020.CSV;12;TEMPERATURA ORVALHO MAX. NA HORA ANT. (AUT) (°C);temperatura_orvalho_max._na_hora_ant._(aut)_(oc);temperatura_orvalho_max_c
+inmet;2020;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2020_A_31-12-2020.CSV;13;TEMPERATURA ORVALHO MIN. NA HORA ANT. (AUT) (°C);temperatura_orvalho_min._na_hora_ant._(aut)_(oc);temperatura_orvalho_min_c
+inmet;2020;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2020_A_31-12-2020.CSV;14;UMIDADE REL. MAX. NA HORA ANT. (AUT) (%);umidade_rel._max._na_hora_ant._(aut)_(%);umidade_max_pct
+inmet;2020;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2020_A_31-12-2020.CSV;15;UMIDADE REL. MIN. NA HORA ANT. (AUT) (%);umidade_rel._min._na_hora_ant._(aut)_(%);umidade_min_pct
+inmet;2020;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2020_A_31-12-2020.CSV;16;UMIDADE RELATIVA DO AR, HORARIA (%);umidade_relativa_do_ar,_horaria_(%);umidade_relativa_pct
+inmet;2020;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2020_A_31-12-2020.CSV;17;VENTO, DIREÇÃO HORARIA (gr) (° (gr));vento,_direcao_horaria_(gr)_(o_(gr));vento_direcao_graus
+inmet;2020;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2020_A_31-12-2020.CSV;18;VENTO, RAJADA MAXIMA (m/s);vento,_rajada_maxima_(m/s);vento_rajada_ms
+inmet;2020;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2020_A_31-12-2020.CSV;19;VENTO, VELOCIDADE HORARIA (m/s);vento,_velocidade_horaria_(m/s);vento_velocidade_ms
+inmet;2020;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2020_A_31-12-2020.CSV;20;;(vazio);(ignorar)
+inmet;2021;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2021_A_31-12-2021.CSV;1;Data;data;data_medicao
+inmet;2021;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2021_A_31-12-2021.CSV;2;Hora UTC;hora_utc;hora_utc
+inmet;2021;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2021_A_31-12-2021.CSV;3;PRECIPITAÇÃO TOTAL, HORÁRIO (mm);precipitacao_total,_horario_(mm);precipitacao_mm
+inmet;2021;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2021_A_31-12-2021.CSV;4;PRESSAO ATMOSFERICA AO NIVEL DA ESTACAO, HORARIA (mB);pressao_atmosferica_ao_nivel_da_estacao,_horaria_(mb);pressao_estacao_mb
+inmet;2021;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2021_A_31-12-2021.CSV;5;PRESSÃO ATMOSFERICA MAX.NA HORA ANT. (AUT) (mB);pressao_atmosferica_max.na_hora_ant._(aut)_(mb);pressao_max_mb
+inmet;2021;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2021_A_31-12-2021.CSV;6;PRESSÃO ATMOSFERICA MIN. NA HORA ANT. (AUT) (mB);pressao_atmosferica_min._na_hora_ant._(aut)_(mb);pressao_min_mb
+inmet;2021;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2021_A_31-12-2021.CSV;7;RADIACAO GLOBAL (Kj/m²);radiacao_global_(kj/m2);radiacao_global_kj_m2
+inmet;2021;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2021_A_31-12-2021.CSV;8;TEMPERATURA DO AR - BULBO SECO, HORARIA (°C);temperatura_do_ar_-_bulbo_seco,_horaria_(oc);temperatura_ar_c
+inmet;2021;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2021_A_31-12-2021.CSV;9;TEMPERATURA DO PONTO DE ORVALHO (°C);temperatura_do_ponto_de_orvalho_(oc);temperatura_orvalho_c
+inmet;2021;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2021_A_31-12-2021.CSV;10;TEMPERATURA MÁXIMA NA HORA ANT. (AUT) (°C);temperatura_maxima_na_hora_ant._(aut)_(oc);temperatura_max_c
+inmet;2021;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2021_A_31-12-2021.CSV;11;TEMPERATURA MÍNIMA NA HORA ANT. (AUT) (°C);temperatura_minima_na_hora_ant._(aut)_(oc);temperatura_min_c
+inmet;2021;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2021_A_31-12-2021.CSV;12;TEMPERATURA ORVALHO MAX. NA HORA ANT. (AUT) (°C);temperatura_orvalho_max._na_hora_ant._(aut)_(oc);temperatura_orvalho_max_c
+inmet;2021;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2021_A_31-12-2021.CSV;13;TEMPERATURA ORVALHO MIN. NA HORA ANT. (AUT) (°C);temperatura_orvalho_min._na_hora_ant._(aut)_(oc);temperatura_orvalho_min_c
+inmet;2021;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2021_A_31-12-2021.CSV;14;UMIDADE REL. MAX. NA HORA ANT. (AUT) (%);umidade_rel._max._na_hora_ant._(aut)_(%);umidade_max_pct
+inmet;2021;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2021_A_31-12-2021.CSV;15;UMIDADE REL. MIN. NA HORA ANT. (AUT) (%);umidade_rel._min._na_hora_ant._(aut)_(%);umidade_min_pct
+inmet;2021;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2021_A_31-12-2021.CSV;16;UMIDADE RELATIVA DO AR, HORARIA (%);umidade_relativa_do_ar,_horaria_(%);umidade_relativa_pct
+inmet;2021;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2021_A_31-12-2021.CSV;17;VENTO, DIREÇÃO HORARIA (gr) (° (gr));vento,_direcao_horaria_(gr)_(o_(gr));vento_direcao_graus
+inmet;2021;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2021_A_31-12-2021.CSV;18;VENTO, RAJADA MAXIMA (m/s);vento,_rajada_maxima_(m/s);vento_rajada_ms
+inmet;2021;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2021_A_31-12-2021.CSV;19;VENTO, VELOCIDADE HORARIA (m/s);vento,_velocidade_horaria_(m/s);vento_velocidade_ms
+inmet;2021;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2021_A_31-12-2021.CSV;20;;(vazio);(ignorar)
+inmet;2021;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2021_A_31-12-2021.CSV;1;Data;data;data_medicao
+inmet;2021;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2021_A_31-12-2021.CSV;2;Hora UTC;hora_utc;hora_utc
+inmet;2021;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2021_A_31-12-2021.CSV;3;PRECIPITAÇÃO TOTAL, HORÁRIO (mm);precipitacao_total,_horario_(mm);precipitacao_mm
+inmet;2021;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2021_A_31-12-2021.CSV;4;PRESSAO ATMOSFERICA AO NIVEL DA ESTACAO, HORARIA (mB);pressao_atmosferica_ao_nivel_da_estacao,_horaria_(mb);pressao_estacao_mb
+inmet;2021;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2021_A_31-12-2021.CSV;5;PRESSÃO ATMOSFERICA MAX.NA HORA ANT. (AUT) (mB);pressao_atmosferica_max.na_hora_ant._(aut)_(mb);pressao_max_mb
+inmet;2021;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2021_A_31-12-2021.CSV;6;PRESSÃO ATMOSFERICA MIN. NA HORA ANT. (AUT) (mB);pressao_atmosferica_min._na_hora_ant._(aut)_(mb);pressao_min_mb
+inmet;2021;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2021_A_31-12-2021.CSV;7;RADIACAO GLOBAL (Kj/m²);radiacao_global_(kj/m2);radiacao_global_kj_m2
+inmet;2021;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2021_A_31-12-2021.CSV;8;TEMPERATURA DO AR - BULBO SECO, HORARIA (°C);temperatura_do_ar_-_bulbo_seco,_horaria_(oc);temperatura_ar_c
+inmet;2021;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2021_A_31-12-2021.CSV;9;TEMPERATURA DO PONTO DE ORVALHO (°C);temperatura_do_ponto_de_orvalho_(oc);temperatura_orvalho_c
+inmet;2021;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2021_A_31-12-2021.CSV;10;TEMPERATURA MÁXIMA NA HORA ANT. (AUT) (°C);temperatura_maxima_na_hora_ant._(aut)_(oc);temperatura_max_c
+inmet;2021;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2021_A_31-12-2021.CSV;11;TEMPERATURA MÍNIMA NA HORA ANT. (AUT) (°C);temperatura_minima_na_hora_ant._(aut)_(oc);temperatura_min_c
+inmet;2021;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2021_A_31-12-2021.CSV;12;TEMPERATURA ORVALHO MAX. NA HORA ANT. (AUT) (°C);temperatura_orvalho_max._na_hora_ant._(aut)_(oc);temperatura_orvalho_max_c
+inmet;2021;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2021_A_31-12-2021.CSV;13;TEMPERATURA ORVALHO MIN. NA HORA ANT. (AUT) (°C);temperatura_orvalho_min._na_hora_ant._(aut)_(oc);temperatura_orvalho_min_c
+inmet;2021;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2021_A_31-12-2021.CSV;14;UMIDADE REL. MAX. NA HORA ANT. (AUT) (%);umidade_rel._max._na_hora_ant._(aut)_(%);umidade_max_pct
+inmet;2021;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2021_A_31-12-2021.CSV;15;UMIDADE REL. MIN. NA HORA ANT. (AUT) (%);umidade_rel._min._na_hora_ant._(aut)_(%);umidade_min_pct
+inmet;2021;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2021_A_31-12-2021.CSV;16;UMIDADE RELATIVA DO AR, HORARIA (%);umidade_relativa_do_ar,_horaria_(%);umidade_relativa_pct
+inmet;2021;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2021_A_31-12-2021.CSV;17;VENTO, DIREÇÃO HORARIA (gr) (° (gr));vento,_direcao_horaria_(gr)_(o_(gr));vento_direcao_graus
+inmet;2021;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2021_A_31-12-2021.CSV;18;VENTO, RAJADA MAXIMA (m/s);vento,_rajada_maxima_(m/s);vento_rajada_ms
+inmet;2021;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2021_A_31-12-2021.CSV;19;VENTO, VELOCIDADE HORARIA (m/s);vento,_velocidade_horaria_(m/s);vento_velocidade_ms
+inmet;2021;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2021_A_31-12-2021.CSV;20;;(vazio);(ignorar)
+inmet;2022;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2022_A_31-12-2022.CSV;1;Data;data;data_medicao
+inmet;2022;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2022_A_31-12-2022.CSV;2;Hora UTC;hora_utc;hora_utc
+inmet;2022;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2022_A_31-12-2022.CSV;3;PRECIPITAÇÃO TOTAL, HORÁRIO (mm);precipitacao_total,_horario_(mm);precipitacao_mm
+inmet;2022;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2022_A_31-12-2022.CSV;4;PRESSAO ATMOSFERICA AO NIVEL DA ESTACAO, HORARIA (mB);pressao_atmosferica_ao_nivel_da_estacao,_horaria_(mb);pressao_estacao_mb
+inmet;2022;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2022_A_31-12-2022.CSV;5;PRESSÃO ATMOSFERICA MAX.NA HORA ANT. (AUT) (mB);pressao_atmosferica_max.na_hora_ant._(aut)_(mb);pressao_max_mb
+inmet;2022;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2022_A_31-12-2022.CSV;6;PRESSÃO ATMOSFERICA MIN. NA HORA ANT. (AUT) (mB);pressao_atmosferica_min._na_hora_ant._(aut)_(mb);pressao_min_mb
+inmet;2022;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2022_A_31-12-2022.CSV;7;RADIACAO GLOBAL (Kj/m²);radiacao_global_(kj/m2);radiacao_global_kj_m2
+inmet;2022;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2022_A_31-12-2022.CSV;8;TEMPERATURA DO AR - BULBO SECO, HORARIA (°C);temperatura_do_ar_-_bulbo_seco,_horaria_(oc);temperatura_ar_c
+inmet;2022;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2022_A_31-12-2022.CSV;9;TEMPERATURA DO PONTO DE ORVALHO (°C);temperatura_do_ponto_de_orvalho_(oc);temperatura_orvalho_c
+inmet;2022;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2022_A_31-12-2022.CSV;10;TEMPERATURA MÁXIMA NA HORA ANT. (AUT) (°C);temperatura_maxima_na_hora_ant._(aut)_(oc);temperatura_max_c
+inmet;2022;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2022_A_31-12-2022.CSV;11;TEMPERATURA MÍNIMA NA HORA ANT. (AUT) (°C);temperatura_minima_na_hora_ant._(aut)_(oc);temperatura_min_c
+inmet;2022;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2022_A_31-12-2022.CSV;12;TEMPERATURA ORVALHO MAX. NA HORA ANT. (AUT) (°C);temperatura_orvalho_max._na_hora_ant._(aut)_(oc);temperatura_orvalho_max_c
+inmet;2022;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2022_A_31-12-2022.CSV;13;TEMPERATURA ORVALHO MIN. NA HORA ANT. (AUT) (°C);temperatura_orvalho_min._na_hora_ant._(aut)_(oc);temperatura_orvalho_min_c
+inmet;2022;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2022_A_31-12-2022.CSV;14;UMIDADE REL. MAX. NA HORA ANT. (AUT) (%);umidade_rel._max._na_hora_ant._(aut)_(%);umidade_max_pct
+inmet;2022;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2022_A_31-12-2022.CSV;15;UMIDADE REL. MIN. NA HORA ANT. (AUT) (%);umidade_rel._min._na_hora_ant._(aut)_(%);umidade_min_pct
+inmet;2022;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2022_A_31-12-2022.CSV;16;UMIDADE RELATIVA DO AR, HORARIA (%);umidade_relativa_do_ar,_horaria_(%);umidade_relativa_pct
+inmet;2022;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2022_A_31-12-2022.CSV;17;VENTO, DIREÇÃO HORARIA (gr) (° (gr));vento,_direcao_horaria_(gr)_(o_(gr));vento_direcao_graus
+inmet;2022;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2022_A_31-12-2022.CSV;18;VENTO, RAJADA MAXIMA (m/s);vento,_rajada_maxima_(m/s);vento_rajada_ms
+inmet;2022;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2022_A_31-12-2022.CSV;19;VENTO, VELOCIDADE HORARIA (m/s);vento,_velocidade_horaria_(m/s);vento_velocidade_ms
+inmet;2022;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2022_A_31-12-2022.CSV;20;;(vazio);(ignorar)
+inmet;2022;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2022_A_31-12-2022.CSV;1;Data;data;data_medicao
+inmet;2022;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2022_A_31-12-2022.CSV;2;Hora UTC;hora_utc;hora_utc
+inmet;2022;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2022_A_31-12-2022.CSV;3;PRECIPITAÇÃO TOTAL, HORÁRIO (mm);precipitacao_total,_horario_(mm);precipitacao_mm
+inmet;2022;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2022_A_31-12-2022.CSV;4;PRESSAO ATMOSFERICA AO NIVEL DA ESTACAO, HORARIA (mB);pressao_atmosferica_ao_nivel_da_estacao,_horaria_(mb);pressao_estacao_mb
+inmet;2022;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2022_A_31-12-2022.CSV;5;PRESSÃO ATMOSFERICA MAX.NA HORA ANT. (AUT) (mB);pressao_atmosferica_max.na_hora_ant._(aut)_(mb);pressao_max_mb
+inmet;2022;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2022_A_31-12-2022.CSV;6;PRESSÃO ATMOSFERICA MIN. NA HORA ANT. (AUT) (mB);pressao_atmosferica_min._na_hora_ant._(aut)_(mb);pressao_min_mb
+inmet;2022;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2022_A_31-12-2022.CSV;7;RADIACAO GLOBAL (Kj/m²);radiacao_global_(kj/m2);radiacao_global_kj_m2
+inmet;2022;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2022_A_31-12-2022.CSV;8;TEMPERATURA DO AR - BULBO SECO, HORARIA (°C);temperatura_do_ar_-_bulbo_seco,_horaria_(oc);temperatura_ar_c
+inmet;2022;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2022_A_31-12-2022.CSV;9;TEMPERATURA DO PONTO DE ORVALHO (°C);temperatura_do_ponto_de_orvalho_(oc);temperatura_orvalho_c
+inmet;2022;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2022_A_31-12-2022.CSV;10;TEMPERATURA MÁXIMA NA HORA ANT. (AUT) (°C);temperatura_maxima_na_hora_ant._(aut)_(oc);temperatura_max_c
+inmet;2022;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2022_A_31-12-2022.CSV;11;TEMPERATURA MÍNIMA NA HORA ANT. (AUT) (°C);temperatura_minima_na_hora_ant._(aut)_(oc);temperatura_min_c
+inmet;2022;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2022_A_31-12-2022.CSV;12;TEMPERATURA ORVALHO MAX. NA HORA ANT. (AUT) (°C);temperatura_orvalho_max._na_hora_ant._(aut)_(oc);temperatura_orvalho_max_c
+inmet;2022;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2022_A_31-12-2022.CSV;13;TEMPERATURA ORVALHO MIN. NA HORA ANT. (AUT) (°C);temperatura_orvalho_min._na_hora_ant._(aut)_(oc);temperatura_orvalho_min_c
+inmet;2022;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2022_A_31-12-2022.CSV;14;UMIDADE REL. MAX. NA HORA ANT. (AUT) (%);umidade_rel._max._na_hora_ant._(aut)_(%);umidade_max_pct
+inmet;2022;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2022_A_31-12-2022.CSV;15;UMIDADE REL. MIN. NA HORA ANT. (AUT) (%);umidade_rel._min._na_hora_ant._(aut)_(%);umidade_min_pct
+inmet;2022;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2022_A_31-12-2022.CSV;16;UMIDADE RELATIVA DO AR, HORARIA (%);umidade_relativa_do_ar,_horaria_(%);umidade_relativa_pct
+inmet;2022;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2022_A_31-12-2022.CSV;17;VENTO, DIREÇÃO HORARIA (gr) (° (gr));vento,_direcao_horaria_(gr)_(o_(gr));vento_direcao_graus
+inmet;2022;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2022_A_31-12-2022.CSV;18;VENTO, RAJADA MAXIMA (m/s);vento,_rajada_maxima_(m/s);vento_rajada_ms
+inmet;2022;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2022_A_31-12-2022.CSV;19;VENTO, VELOCIDADE HORARIA (m/s);vento,_velocidade_horaria_(m/s);vento_velocidade_ms
+inmet;2022;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2022_A_31-12-2022.CSV;20;;(vazio);(ignorar)
+inmet;2023;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2023_A_31-12-2023.CSV;1;Data;data;data_medicao
+inmet;2023;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2023_A_31-12-2023.CSV;2;Hora UTC;hora_utc;hora_utc
+inmet;2023;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2023_A_31-12-2023.CSV;3;PRECIPITAÇÃO TOTAL, HORÁRIO (mm);precipitacao_total,_horario_(mm);precipitacao_mm
+inmet;2023;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2023_A_31-12-2023.CSV;4;PRESSAO ATMOSFERICA AO NIVEL DA ESTACAO, HORARIA (mB);pressao_atmosferica_ao_nivel_da_estacao,_horaria_(mb);pressao_estacao_mb
+inmet;2023;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2023_A_31-12-2023.CSV;5;PRESSÃO ATMOSFERICA MAX.NA HORA ANT. (AUT) (mB);pressao_atmosferica_max.na_hora_ant._(aut)_(mb);pressao_max_mb
+inmet;2023;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2023_A_31-12-2023.CSV;6;PRESSÃO ATMOSFERICA MIN. NA HORA ANT. (AUT) (mB);pressao_atmosferica_min._na_hora_ant._(aut)_(mb);pressao_min_mb
+inmet;2023;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2023_A_31-12-2023.CSV;7;RADIACAO GLOBAL (Kj/m²);radiacao_global_(kj/m2);radiacao_global_kj_m2
+inmet;2023;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2023_A_31-12-2023.CSV;8;TEMPERATURA DO AR - BULBO SECO, HORARIA (°C);temperatura_do_ar_-_bulbo_seco,_horaria_(oc);temperatura_ar_c
+inmet;2023;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2023_A_31-12-2023.CSV;9;TEMPERATURA DO PONTO DE ORVALHO (°C);temperatura_do_ponto_de_orvalho_(oc);temperatura_orvalho_c
+inmet;2023;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2023_A_31-12-2023.CSV;10;TEMPERATURA MÁXIMA NA HORA ANT. (AUT) (°C);temperatura_maxima_na_hora_ant._(aut)_(oc);temperatura_max_c
+inmet;2023;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2023_A_31-12-2023.CSV;11;TEMPERATURA MÍNIMA NA HORA ANT. (AUT) (°C);temperatura_minima_na_hora_ant._(aut)_(oc);temperatura_min_c
+inmet;2023;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2023_A_31-12-2023.CSV;12;TEMPERATURA ORVALHO MAX. NA HORA ANT. (AUT) (°C);temperatura_orvalho_max._na_hora_ant._(aut)_(oc);temperatura_orvalho_max_c
+inmet;2023;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2023_A_31-12-2023.CSV;13;TEMPERATURA ORVALHO MIN. NA HORA ANT. (AUT) (°C);temperatura_orvalho_min._na_hora_ant._(aut)_(oc);temperatura_orvalho_min_c
+inmet;2023;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2023_A_31-12-2023.CSV;14;UMIDADE REL. MAX. NA HORA ANT. (AUT) (%);umidade_rel._max._na_hora_ant._(aut)_(%);umidade_max_pct
+inmet;2023;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2023_A_31-12-2023.CSV;15;UMIDADE REL. MIN. NA HORA ANT. (AUT) (%);umidade_rel._min._na_hora_ant._(aut)_(%);umidade_min_pct
+inmet;2023;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2023_A_31-12-2023.CSV;16;UMIDADE RELATIVA DO AR, HORARIA (%);umidade_relativa_do_ar,_horaria_(%);umidade_relativa_pct
+inmet;2023;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2023_A_31-12-2023.CSV;17;VENTO, DIREÇÃO HORARIA (gr) (° (gr));vento,_direcao_horaria_(gr)_(o_(gr));vento_direcao_graus
+inmet;2023;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2023_A_31-12-2023.CSV;18;VENTO, RAJADA MAXIMA (m/s);vento,_rajada_maxima_(m/s);vento_rajada_ms
+inmet;2023;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2023_A_31-12-2023.CSV;19;VENTO, VELOCIDADE HORARIA (m/s);vento,_velocidade_horaria_(m/s);vento_velocidade_ms
+inmet;2023;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2023_A_31-12-2023.CSV;20;;(vazio);(ignorar)
+inmet;2023;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2023_A_31-12-2023.CSV;1;Data;data;data_medicao
+inmet;2023;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2023_A_31-12-2023.CSV;2;Hora UTC;hora_utc;hora_utc
+inmet;2023;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2023_A_31-12-2023.CSV;3;PRECIPITAÇÃO TOTAL, HORÁRIO (mm);precipitacao_total,_horario_(mm);precipitacao_mm
+inmet;2023;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2023_A_31-12-2023.CSV;4;PRESSAO ATMOSFERICA AO NIVEL DA ESTACAO, HORARIA (mB);pressao_atmosferica_ao_nivel_da_estacao,_horaria_(mb);pressao_estacao_mb
+inmet;2023;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2023_A_31-12-2023.CSV;5;PRESSÃO ATMOSFERICA MAX.NA HORA ANT. (AUT) (mB);pressao_atmosferica_max.na_hora_ant._(aut)_(mb);pressao_max_mb
+inmet;2023;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2023_A_31-12-2023.CSV;6;PRESSÃO ATMOSFERICA MIN. NA HORA ANT. (AUT) (mB);pressao_atmosferica_min._na_hora_ant._(aut)_(mb);pressao_min_mb
+inmet;2023;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2023_A_31-12-2023.CSV;7;RADIACAO GLOBAL (Kj/m²);radiacao_global_(kj/m2);radiacao_global_kj_m2
+inmet;2023;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2023_A_31-12-2023.CSV;8;TEMPERATURA DO AR - BULBO SECO, HORARIA (°C);temperatura_do_ar_-_bulbo_seco,_horaria_(oc);temperatura_ar_c
+inmet;2023;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2023_A_31-12-2023.CSV;9;TEMPERATURA DO PONTO DE ORVALHO (°C);temperatura_do_ponto_de_orvalho_(oc);temperatura_orvalho_c
+inmet;2023;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2023_A_31-12-2023.CSV;10;TEMPERATURA MÁXIMA NA HORA ANT. (AUT) (°C);temperatura_maxima_na_hora_ant._(aut)_(oc);temperatura_max_c
+inmet;2023;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2023_A_31-12-2023.CSV;11;TEMPERATURA MÍNIMA NA HORA ANT. (AUT) (°C);temperatura_minima_na_hora_ant._(aut)_(oc);temperatura_min_c
+inmet;2023;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2023_A_31-12-2023.CSV;12;TEMPERATURA ORVALHO MAX. NA HORA ANT. (AUT) (°C);temperatura_orvalho_max._na_hora_ant._(aut)_(oc);temperatura_orvalho_max_c
+inmet;2023;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2023_A_31-12-2023.CSV;13;TEMPERATURA ORVALHO MIN. NA HORA ANT. (AUT) (°C);temperatura_orvalho_min._na_hora_ant._(aut)_(oc);temperatura_orvalho_min_c
+inmet;2023;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2023_A_31-12-2023.CSV;14;UMIDADE REL. MAX. NA HORA ANT. (AUT) (%);umidade_rel._max._na_hora_ant._(aut)_(%);umidade_max_pct
+inmet;2023;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2023_A_31-12-2023.CSV;15;UMIDADE REL. MIN. NA HORA ANT. (AUT) (%);umidade_rel._min._na_hora_ant._(aut)_(%);umidade_min_pct
+inmet;2023;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2023_A_31-12-2023.CSV;16;UMIDADE RELATIVA DO AR, HORARIA (%);umidade_relativa_do_ar,_horaria_(%);umidade_relativa_pct
+inmet;2023;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2023_A_31-12-2023.CSV;17;VENTO, DIREÇÃO HORARIA (gr) (° (gr));vento,_direcao_horaria_(gr)_(o_(gr));vento_direcao_graus
+inmet;2023;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2023_A_31-12-2023.CSV;18;VENTO, RAJADA MAXIMA (m/s);vento,_rajada_maxima_(m/s);vento_rajada_ms
+inmet;2023;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2023_A_31-12-2023.CSV;19;VENTO, VELOCIDADE HORARIA (m/s);vento,_velocidade_horaria_(m/s);vento_velocidade_ms
+inmet;2023;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2023_A_31-12-2023.CSV;20;;(vazio);(ignorar)
+inmet;2024;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2024_A_31-12-2024.CSV;1;Data;data;data_medicao
+inmet;2024;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2024_A_31-12-2024.CSV;2;Hora UTC;hora_utc;hora_utc
+inmet;2024;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2024_A_31-12-2024.CSV;3;PRECIPITAÇÃO TOTAL, HORÁRIO (mm);precipitacao_total,_horario_(mm);precipitacao_mm
+inmet;2024;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2024_A_31-12-2024.CSV;4;PRESSAO ATMOSFERICA AO NIVEL DA ESTACAO, HORARIA (mB);pressao_atmosferica_ao_nivel_da_estacao,_horaria_(mb);pressao_estacao_mb
+inmet;2024;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2024_A_31-12-2024.CSV;5;PRESSÃO ATMOSFERICA MAX.NA HORA ANT. (AUT) (mB);pressao_atmosferica_max.na_hora_ant._(aut)_(mb);pressao_max_mb
+inmet;2024;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2024_A_31-12-2024.CSV;6;PRESSÃO ATMOSFERICA MIN. NA HORA ANT. (AUT) (mB);pressao_atmosferica_min._na_hora_ant._(aut)_(mb);pressao_min_mb
+inmet;2024;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2024_A_31-12-2024.CSV;7;RADIACAO GLOBAL (Kj/m²);radiacao_global_(kj/m2);radiacao_global_kj_m2
+inmet;2024;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2024_A_31-12-2024.CSV;8;TEMPERATURA DO AR - BULBO SECO, HORARIA (°C);temperatura_do_ar_-_bulbo_seco,_horaria_(oc);temperatura_ar_c
+inmet;2024;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2024_A_31-12-2024.CSV;9;TEMPERATURA DO PONTO DE ORVALHO (°C);temperatura_do_ponto_de_orvalho_(oc);temperatura_orvalho_c
+inmet;2024;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2024_A_31-12-2024.CSV;10;TEMPERATURA MÁXIMA NA HORA ANT. (AUT) (°C);temperatura_maxima_na_hora_ant._(aut)_(oc);temperatura_max_c
+inmet;2024;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2024_A_31-12-2024.CSV;11;TEMPERATURA MÍNIMA NA HORA ANT. (AUT) (°C);temperatura_minima_na_hora_ant._(aut)_(oc);temperatura_min_c
+inmet;2024;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2024_A_31-12-2024.CSV;12;TEMPERATURA ORVALHO MAX. NA HORA ANT. (AUT) (°C);temperatura_orvalho_max._na_hora_ant._(aut)_(oc);temperatura_orvalho_max_c
+inmet;2024;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2024_A_31-12-2024.CSV;13;TEMPERATURA ORVALHO MIN. NA HORA ANT. (AUT) (°C);temperatura_orvalho_min._na_hora_ant._(aut)_(oc);temperatura_orvalho_min_c
+inmet;2024;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2024_A_31-12-2024.CSV;14;UMIDADE REL. MAX. NA HORA ANT. (AUT) (%);umidade_rel._max._na_hora_ant._(aut)_(%);umidade_max_pct
+inmet;2024;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2024_A_31-12-2024.CSV;15;UMIDADE REL. MIN. NA HORA ANT. (AUT) (%);umidade_rel._min._na_hora_ant._(aut)_(%);umidade_min_pct
+inmet;2024;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2024_A_31-12-2024.CSV;16;UMIDADE RELATIVA DO AR, HORARIA (%);umidade_relativa_do_ar,_horaria_(%);umidade_relativa_pct
+inmet;2024;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2024_A_31-12-2024.CSV;17;VENTO, DIREÇÃO HORARIA (gr) (° (gr));vento,_direcao_horaria_(gr)_(o_(gr));vento_direcao_graus
+inmet;2024;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2024_A_31-12-2024.CSV;18;VENTO, RAJADA MAXIMA (m/s);vento,_rajada_maxima_(m/s);vento_rajada_ms
+inmet;2024;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2024_A_31-12-2024.CSV;19;VENTO, VELOCIDADE HORARIA (m/s);vento,_velocidade_horaria_(m/s);vento_velocidade_ms
+inmet;2024;INMET_SE_MG_A521_BELO HORIZONTE (PAMPULHA)_01-01-2024_A_31-12-2024.CSV;20;;(vazio);(ignorar)
+inmet;2024;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2024_A_31-12-2024.CSV;1;Data;data;data_medicao
+inmet;2024;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2024_A_31-12-2024.CSV;2;Hora UTC;hora_utc;hora_utc
+inmet;2024;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2024_A_31-12-2024.CSV;3;PRECIPITAÇÃO TOTAL, HORÁRIO (mm);precipitacao_total,_horario_(mm);precipitacao_mm
+inmet;2024;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2024_A_31-12-2024.CSV;4;PRESSAO ATMOSFERICA AO NIVEL DA ESTACAO, HORARIA (mB);pressao_atmosferica_ao_nivel_da_estacao,_horaria_(mb);pressao_estacao_mb
+inmet;2024;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2024_A_31-12-2024.CSV;5;PRESSÃO ATMOSFERICA MAX.NA HORA ANT. (AUT) (mB);pressao_atmosferica_max.na_hora_ant._(aut)_(mb);pressao_max_mb
+inmet;2024;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2024_A_31-12-2024.CSV;6;PRESSÃO ATMOSFERICA MIN. NA HORA ANT. (AUT) (mB);pressao_atmosferica_min._na_hora_ant._(aut)_(mb);pressao_min_mb
+inmet;2024;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2024_A_31-12-2024.CSV;7;RADIACAO GLOBAL (Kj/m²);radiacao_global_(kj/m2);radiacao_global_kj_m2
+inmet;2024;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2024_A_31-12-2024.CSV;8;TEMPERATURA DO AR - BULBO SECO, HORARIA (°C);temperatura_do_ar_-_bulbo_seco,_horaria_(oc);temperatura_ar_c
+inmet;2024;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2024_A_31-12-2024.CSV;9;TEMPERATURA DO PONTO DE ORVALHO (°C);temperatura_do_ponto_de_orvalho_(oc);temperatura_orvalho_c
+inmet;2024;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2024_A_31-12-2024.CSV;10;TEMPERATURA MÁXIMA NA HORA ANT. (AUT) (°C);temperatura_maxima_na_hora_ant._(aut)_(oc);temperatura_max_c
+inmet;2024;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2024_A_31-12-2024.CSV;11;TEMPERATURA MÍNIMA NA HORA ANT. (AUT) (°C);temperatura_minima_na_hora_ant._(aut)_(oc);temperatura_min_c
+inmet;2024;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2024_A_31-12-2024.CSV;12;TEMPERATURA ORVALHO MAX. NA HORA ANT. (AUT) (°C);temperatura_orvalho_max._na_hora_ant._(aut)_(oc);temperatura_orvalho_max_c
+inmet;2024;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2024_A_31-12-2024.CSV;13;TEMPERATURA ORVALHO MIN. NA HORA ANT. (AUT) (°C);temperatura_orvalho_min._na_hora_ant._(aut)_(oc);temperatura_orvalho_min_c
+inmet;2024;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2024_A_31-12-2024.CSV;14;UMIDADE REL. MAX. NA HORA ANT. (AUT) (%);umidade_rel._max._na_hora_ant._(aut)_(%);umidade_max_pct
+inmet;2024;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2024_A_31-12-2024.CSV;15;UMIDADE REL. MIN. NA HORA ANT. (AUT) (%);umidade_rel._min._na_hora_ant._(aut)_(%);umidade_min_pct
+inmet;2024;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2024_A_31-12-2024.CSV;16;UMIDADE RELATIVA DO AR, HORARIA (%);umidade_relativa_do_ar,_horaria_(%);umidade_relativa_pct
+inmet;2024;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2024_A_31-12-2024.CSV;17;VENTO, DIREÇÃO HORARIA (gr) (° (gr));vento,_direcao_horaria_(gr)_(o_(gr));vento_direcao_graus
+inmet;2024;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2024_A_31-12-2024.CSV;18;VENTO, RAJADA MAXIMA (m/s);vento,_rajada_maxima_(m/s);vento_rajada_ms
+inmet;2024;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2024_A_31-12-2024.CSV;19;VENTO, VELOCIDADE HORARIA (m/s);vento,_velocidade_horaria_(m/s);vento_velocidade_ms
+inmet;2024;INMET_SE_MG_F501_BELO HORIZONTE - CERCADINHO_01-01-2024_A_31-12-2024.CSV;20;;(vazio);(ignorar)
